@@ -171,4 +171,14 @@
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   )
 
+(use-package git-gutter+
+  :pin melpa-stable
+  :ensure t
+  :bind (("<f9> g" . git-gutter+-mode))
+  :config (progn
+            (define-key git-gutter+-mode-map (kbd "C-x n") 'git-gutter+-next-hunk)
+            (define-key git-gutter+-mode-map (kbd "C-x p") 'git-gutter+-previous-hunk)
+            (define-key git-gutter+-mode-map (kbd "C-x r") 'git-gutter+-revert-hunks))
+  :diminish (git-gutter+-mode . "gg"))
+
 (provide 'init-ide-base)
