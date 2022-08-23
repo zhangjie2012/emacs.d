@@ -1,0 +1,44 @@
+#+TITLE: my emacs config
+
+* 背景
+
+基于老的配置文件：https://gitlab.com/JerryZhang2012/emacs.d
+
+10 年+ Emacs 用户，作为唯一编辑器，做过 C++、Python、Web（Javascript/React）、Go 等开发。
+
+基于之前的各种耗费时间的经历，决定最后折腾一次，再也不在 Emacs 耗费太多精力。
+
+* 目标
+
+贴近原生的最小化 Emacs 配置，实用、稳定、不花里胡哨、少折腾为核心思路。
+
+* Package 选型
+
+- 少用 package
+- 使用 =use-package= 全局管理插件
+- 尽可能使用 package 的 stable 版本
+- 使用大而全的 package，不用一堆的小而美
+
+* 配置：core
+
+- =init-base= 原生 emacs 的一些基础配置，包含编码，工具栏展示，自动保存等等
+- =init-ui= 主题、mode-line 相关
+- =init-modernization= 去掉原生的一套，让 Emacs 更加现代化
+- =init-ide-base= 让 Emacs 变成一个 IDE，选型：
+  + =projectile= 工程管理
+  + =company-mode= 自动补全
+  + =lsp= Language Server Protocol
+  + =flycheck= 语法检测
+- =init-ide-go= Go
+- =init-ide-web= Web Dev
+- =init-ide-python= Python
+- =init-config= 常见配置文件
+- =init-document= 文档 mode，markdown + orgmode
+
+* 文档
+
+https://www.zhangjiee.com/topic/emacs/index.html
+
+* 其他说明
+
+仅通过 Emacs 27 测试，适用于 Linux TUI。Windows GUI 有独立的一个分支。
