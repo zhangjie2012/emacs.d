@@ -84,4 +84,25 @@
   (global-set-key (kbd "M-s n") 'display-fill-column-indicator-mode)
 )
 
+(use-package cnfonts
+  :if window-system
+  :pin melpa
+  :ensure t
+  :init
+  ;; https://github.com/tumashu/cnfonts/issues/138
+  ;; (setq cnfonts-use-face-font-rescale t)
+  (setq cnfonts-use-system-type t)
+  :config
+  (cnfonts-mode 1)
+  ;; https://stackoverflow.com/questions/1817257/how-to-determine-operating-system-in-elisp
+  (if (eq system-type 'darwin)
+	  (cnfonts--select-profile "profile1"))
+  (if (eq system-type 'windows-nt)
+	  (cnfonts--select-profile "profile2"))
+  (if (eq system-type 'gnu/linux)
+	  (cnfonts--select-profile "profile3"))
+  (define-key cnfonts-mode-map (kbd "C--") #'cnfonts-decrease-fontsize)
+  (define-key cnfonts-mode-map (kbd "C-=") #'cnfonts-increase-fontsize)
+  )
+
 (provide 'init-ui)
