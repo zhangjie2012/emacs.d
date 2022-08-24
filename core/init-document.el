@@ -71,12 +71,12 @@
 	 )
    )
 
-  ;; (use-package org-bullets
-  ;;   :pin melpa
-  ;;   :ensure t
-  ;;   :init
-  ;;   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-  ;;   )
+  (use-package org-bullets
+    :pin melpa
+    :ensure t
+    :init
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+    )
 
   (use-package toc-org
 	:pin melpa
