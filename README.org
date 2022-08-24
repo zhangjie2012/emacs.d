@@ -1,4 +1,14 @@
-#+TITLE: my emacs config
+#+TITLE: Emacs config
+
+* 适配
+
+- Emacs 版本：27.x（25.x,26.x 没测试过，28.x 确定不行）
+- 系统：
+  + WSL2 TUI *OK*
+  + Windows GUI *OK*
+  + Linux/MacOS TUI+GUI *没测过，大概率可行*
+
+GUI 通过 [[https://github.com/tumashu/cnfonts][cnfonts]] 实现中英文等宽对齐，当前配置使用字体是 [[https://github.com/tonsky/FiraCode][Fira Code]] + [[https://github.com/lxgw/LxgwWenKai][霞鹜文楷]]。
 
 * 背景
 
@@ -38,7 +48,3 @@
 * 文档
 
 https://www.zhangjiee.com/topic/emacs/index.html
-
-* 其他说明
-
-仅通过 Emacs 27 测试，适用于 Linux TUI。Windows GUI 有独立的一个分支。
