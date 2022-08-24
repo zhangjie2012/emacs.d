@@ -105,10 +105,10 @@
         '(
           ;; notes component
           ("site-orgs"
-           :base-directory "~/github/site-org"
+           :base-directory "~/site/org"
            :base-extension "org"
            :html-link-home "index.html"
-           :publishing-directory "~/github/site-html"
+           :publishing-directory "~/site-html"
            :recursive t
            :publishing-function org-html-publish-to-html
            :headline-levels 5
@@ -118,7 +118,7 @@
            )
           ;; static component
           ("site-static"
-           :base-directory "~/github/site-org/static"
+           :base-directory "~/site/static"
            :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
            :publishing-directory "~/site-html/static/"
            :recursive t
