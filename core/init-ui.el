@@ -27,6 +27,9 @@
      (t . (background 1.0)))
    )
 
+  ;; https://gitlab.com/protesilaos/modus-themes/-/issues/226
+  (setq compilation-message-face nil)
+
   (modus-themes-load-themes)
   :bind ("<f5>" . modus-themes-toggle)
   :config
