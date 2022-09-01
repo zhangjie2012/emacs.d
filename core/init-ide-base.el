@@ -68,6 +68,8 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
   (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+  (setq company-tooltip-align-annotations t)
+  (setq company-tooltip-flip-when-above t)
   )
 
 (use-package lsp-mode
@@ -120,7 +122,6 @@
 	)
   :config
   (setq lsp-log-io nil)
-
   (push "[/\\\\]googleapis$" lsp-file-watch-ignored)
   )
 
