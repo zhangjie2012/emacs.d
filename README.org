@@ -382,7 +382,7 @@ orgmode 9.2 之后不再直接支持 =<s [Tab]= 的快捷方式插入代码块�
   + [[https://emacsthemes.com/][Emacs Themes]]：主题集合
   + [[http://oremacs.com/][oremacs]]
   + [[https://protesilaos.com/dotemacs/][dotemacs]] 完善的 Emacs 配置 Wiki
-- 开箱急用的配置：
+- 开箱即用的配置：
   - [[https://github.com/purcell/emacs.d][purcell/emacs.d]]：久负盛名
   - [[https://github.com/redguardtoo/emacs.d][redguardtoo/emacs.d]]
   - [[https://github.com/hlissner/doom-emacs][hlissner/doom-emacs]]
