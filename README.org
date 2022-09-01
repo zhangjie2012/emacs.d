@@ -6,6 +6,7 @@
 - [[#目标][目标]]
 - [[#package-选型][Package 选型]]
 - [[#配置core][配置：core]]
+- [[#core-cheat-sheet][core cheat sheet]]
 - [[#文档][文档]]
 - [[#faq][FAQ]]
   - [[#org-文档如何展示目录][Org 文档如何展示目录？]]
@@ -55,6 +56,39 @@ GUI 通过 [[https://github.com/tumashu/cnfonts][cnfonts]] 实现中英文等宽
 - =init-ide-python= Python
 - =init-config= 常见配置文件
 - =init-document= 文档 mode，markdown + orgmode
+
+* core cheat sheet
+
+- =C-s= 本文件搜索
+- =<F5>= 切换 dark/light 主题
+- =<f8>= project 操作前缀
+- =<f9> 1= 关闭其他窗口（只保留当前一个）
+- =<f9> 2= 水平切分窗口
+- =<f9> 3= 垂直切分窗口
+- =<f9> c= 打开 eshell
+- =<f9> d= 打开 dired，目录操作
+- =<f9> <f9>= 对当前 buffer 执行语法检测（flycheck buffer）
+- =<f9> g= 打开/关闭 git gutter
+- =<f9> l= 列数当前 buffer 的所有语法错误
+- =<f9> s h= lsp-toggle-symbol-highlight
+- =<f9> s s= 重启 lsp
+- =<f9> t f= org-footnote-new
+- =<f9> t l= org-toggle-link-display
+- =<f9> w= save buffer，取代 =C-x s=
+- =M-?= find references
+- =M--= =M-n= =M-p= 当前单词高亮，上下跳转
+- =M-.= =M-,= 跳转到定义、返回
+- =M-m= 选中扩展
+- =M-o= 窗口切换
+- =M-s i= 跳转到单词
+- =M-s j= 跳转到行
+- =M-s k= 拷贝指定行
+- =M-s l= 显示/隐藏行号
+- =M-s [= =M-s ]= 在项目中搜索，前者使用 =rg= ，后者使用 =git-grep=
+- =M-s ;= multiple cursors
+- =M-s r= 显示/隐藏相对行号
+- =M-s s= 选中当前单词
+- =M-*= 匹配括号起始、结束跳转
 
 * 文档
 
