@@ -6,6 +6,7 @@
 - [[#安装][安装]]
   - [[#emacs-安装][Emacs 安装]]
   - [[#配置安装][配置安装]]
+- [[#screenshots][screenshots]]
 - [[#适配][适配]]
 - [[#package-选型][Package 选型]]
   - [[#当前使用的][当前使用的]]
@@ -118,6 +119,13 @@ git clone https://github.com/zhangjie2012/emacs.d.git ~/.emacs.d
 - 编码，更多见下方 IDE：
   - 语法检测 flycheck [[https://www.flycheck.org/en/latest/languages.html#flycheck-languages][Supported languages]]
   - 统一使用 lsp，需要安装对应语言的 [[https://emacs-lsp.github.io/lsp-mode/page/languages/][Languages]]
+
+
+* screenshots
+
+[[file:screenshots/go-ide.png][Go IDE]]
+
+[[file:screenshots/orgmode.png][Orgmode]]
 
 * 适配
 
