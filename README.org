@@ -1,6 +1,7 @@
 #+TITLE: Emacs config
 
 * Table Of Content                                                      :TOC:
+- [[#安装][安装]]
 - [[#适配][适配]]
 - [[#背景][背景]]
 - [[#目标][目标]]
@@ -11,6 +12,36 @@
 - [[#faq][FAQ]]
   - [[#org-文档如何展示目录][Org 文档如何展示目录？]]
   - [[#写-go-代码时如何禁用注释中自动补全][写 Go 代码时如何禁用注释中自动补全？]]
+
+* 安装
+
+#+begin_src
+git clone https://github.com/zhangjie2012/emacs.d.git ~/.emacs.d
+#+end_src
+
+直接打开 Emacs 自动安装依赖包。package 源在国内无法访问，需要使用代理 =http_proxy=http://127.0.0.1:7890 emacs= 。
+
+或者使用清华的源替换掉 =package-archives= ：
+
+#+begin_src elisp
+  (setq package-archives
+        '(
+          ("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+          ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+          ("melpa-stable" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/stable-melpa/")
+          ("nongnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/")
+          )
+        )
+#+end_src
+
+如果遇到安装问题执行 =M-x package-refresh-content= 重启 Emacs。
+
+二进制依赖：
+
+- [[https://github.com/BurntSushi/ripgrep][ripgrep]] 搜索使用
+- 编码：
+  - 语法检测 flycheck [[https://www.flycheck.org/en/latest/languages.html#flycheck-languages][Supported languages]]
+  - 统一使用 lsp，需要安装对应语言的 [[https://emacs-lsp.github.io/lsp-mode/page/languages/][Languages]]
 
 * 适配
 
