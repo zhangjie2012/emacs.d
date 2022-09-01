@@ -123,9 +123,13 @@ git clone https://github.com/zhangjie2012/emacs.d.git ~/.emacs.d
 
 * screenshots
 
-[[file:screenshots/go-ide.png][Go IDE]]
+Go IDE（WSL2 下，事实上我不使用暗色主题，可以通过 f5 切换）：
 
-[[file:screenshots/orgmode.png][Orgmode]]
+[[file:screenshots/go-ide.png]]
+
+Orgmode（Windows GUI）：
+
+[[file:screenshots/orgmode.png]]
 
 * 适配
 
