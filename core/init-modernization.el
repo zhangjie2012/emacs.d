@@ -71,19 +71,6 @@
   :bind (("M-s ;" . mc/mark-all-symbols-like-this-in-defun))
   )
 
-(use-package expand-region
-  :pin melpa-stable
-  :ensure t
-  :bind (("M-m" . er/expand-region)
-		 ("M-s s" . er/mark-symbol)
-		 ("M-s p" . er/mark-outside-pairs)
-		 ("M-s P" . er/mark-inside-pairs)
-		 ("M-s q" . er/mark-outside-quotes)
-		 ("M-s m" . er/mark-comment)
-		 ("M-s Q" . er/mark-inside-quotes)
-		 ("M-s f" . er/mark-defun))
-  )
-
 (use-package highlight-symbol
   :pin melpa-stable
   :ensure t
