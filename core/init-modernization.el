@@ -34,6 +34,7 @@
 		 ("M-x" . counsel-M-x)
 		 ("M-y" . counsel-yank-pop)
 		 ("C-x C-f" . counsel-find-file)
+		 ("<f9> m" . counsel-semantic-or-imenu)
 		 )
   :config
   (setq counsel-rg-base-command "rg -i --max-columns 240 --no-heading --with-filename --line-number %s")
