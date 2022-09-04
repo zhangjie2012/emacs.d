@@ -174,7 +174,15 @@ lint 工具：
 https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/
 
 #+begin_src sh
-  pip install 'python-lsp-server[all]'
+  python3 -m pip install 'python-lsp-server[all]'
+#+end_src
+
+注意：Ubuntu 下不使用 =sudo= 会默认安装至 =~/.local/bin= 下，所以需要讲路径添加到环境变量中。
+
+lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
+
+#+begin_src sh
+  python3 -m pip install flake8
 #+end_src
 
 * 5、文件结构

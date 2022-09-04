@@ -163,6 +163,7 @@
   ;; 指定配置文件
   (setq flycheck-eslint-args '("-c" "/home/zhangjie/.eslintrc.json"))
 
+  ;; Python
   (setq flycheck-python-flake8-executable "flake8")
   (setq flycheck-flake8rc "~/.flake8")
   (setq flycheck-indication-mode nil)
