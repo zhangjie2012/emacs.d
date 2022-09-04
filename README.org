@@ -185,6 +185,8 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
   python3 -m pip install flake8
 #+end_src
 
+配置文件：https://github.com/zhangjie2012/dotfiles/blob/master/_flake8
+
 * 5、文件结构
 
 - =init-base= 原生 emacs 的一些基础配置，包含编码，工具栏展示，自动保存等等
