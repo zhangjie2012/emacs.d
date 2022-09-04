@@ -40,6 +40,15 @@
   (setq counsel-rg-base-command "rg -i --max-columns 240 --no-heading --with-filename --line-number %s")
   )
 
+(use-package ivy-rich
+  :pin melpa
+  :ensure t
+  :config
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
+  (setq ivy-rich-path-style 'abbrev)
+  (ivy-rich-mode 1)
+  )
+
 (use-package ace-window
   :pin melpa-stable
   :ensure t
