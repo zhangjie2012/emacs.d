@@ -84,7 +84,6 @@
 		 ("<f9> s d" . lsp-describe-thing-at-point)
 		 ("<f9> s i" . lsp-find-implementation)
 		 ("<f9> s h" . lsp-toggle-symbol-highlight)
-		 ("M-i" . lsp-smart-buffer)
 		 :map lsp-signature-mode
 		 ("<f9> s p" . lsp-signature-previous)
 		 ("<f9> s n" . lsp-signature-next)
@@ -110,14 +109,6 @@
    ;; python
    lsp-pyls-server-command 'pyls
    )
-  (defun lsp-smart-buffer ()
-	"call lsp tool chains, smart make buffer"
-	(interactive)
-	(flycheck-buffer)
-	(lsp-format-buffer)
-	(lsp-organize-imports)
-	(save-buffer)
-	)
   :config
   (setq lsp-log-io nil)
   (push "[/\\\\]googleapis$" lsp-file-watch-ignored)
@@ -164,6 +155,7 @@
   ;; Python
   (setq flycheck-python-flake8-executable "flake8")
   (setq flycheck-flake8rc "~/.flake8")
+
   (setq flycheck-indication-mode nil)
   :config
   ;; just mode enable check

@@ -23,6 +23,13 @@
 	(define-key go-mode-map (kbd "<f9> t t") 'go-test-current-test)
 	(define-key go-mode-map (kbd "<f9> t p") 'go-test-current-project)
 	)
+
+  (defun lsp-go-install-save-hooks ()
+	(add-hook 'before-save-hook #'flycheck-buffer)
+	(add-hook 'before-save-hook #'lsp-organize-imports t t)
+	(add-hook 'before-save-hook #'lsp-format-buffer t t)
+	)
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
   )
 
 (use-package flycheck-golangci-lint
