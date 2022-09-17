@@ -60,6 +60,15 @@
   (doom-modeline-mode 1)
   )
 
+(use-package beacon
+  :pin melpa-stable
+  :ensure t
+  :config
+  (beacon-mode 1)
+  (setq beacon-push-mark 35)
+  (setq beacon-color "#666600")
+  )
+
 (use-package rainbow-delimiters
   :pin melpa-stable
   :ensure t
@@ -67,7 +76,7 @@
   )
 
 ;; line number
-;; (set-face-foreground 'line-number "darkgrey")
+(set-face-foreground 'line-number "darkgrey")
 (global-set-key (kbd "M-s l") 'display-line-numbers-mode)
 
 (use-package linum-relative
