@@ -33,6 +33,8 @@
 (require 'init-ide-go)
 (require 'init-ide-web)
 (require 'init-ide-python)
+;; rss feed
+(require 'init-feed)
 
 (setq custom-file "~/.emacs.d/custom.el")
 (when (file-exists-p custom-file)

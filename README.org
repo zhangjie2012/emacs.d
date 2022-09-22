@@ -109,8 +109,6 @@ alias em="env TERM=xterm-256color emacs -nw"
 
 ** 4.2 配置安装
 
-
-
 #+begin_src
 git clone https://github.com/zhangjie2012/emacs.d.git ~/.emacs.d
 #+end_src
@@ -213,6 +211,7 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 - =<f9> 3= 垂直切分窗口
 - =<f9> c= 打开 eshell
 - =<f9> d= 打开 dired，目录操作
+- =<f9> q= 打开 effeed，按下 =G= 更新
 - =<f9> <f9>= 对当前 buffer 执行语法检测（flycheck buffer）
 - =<f9> g= 打开/关闭 git gutter
 - =<f9> l= 列数当前 buffer 的所有语法错误
@@ -247,9 +246,11 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 |--------------------+--------------------------------------+----------------------------------------------------------------------|
 | [[https://github.com/abo-abo/ace-window][ace-window]]         | 多窗口切换                           | 以前一直用 [[https://github.com/deb0ch/emacs-winum][emacs-winum]]                                               |
 | [[https://github.com/abo-abo/avy][avy]]                | 光标快速定位（按照字符、单词、行等） | 以前用的是 [[https://github.com/winterTTr/ace-jump-mode][ace-jump]]                                                  |
+| [[https://github.com/Malabarba/beacon][beacon]]             | 光标提醒                             |                                                                      |
 | [[https://github.com/tumashu/cnfonts][cnfonts]]            | 中英文等宽排版                       |                                                                      |
 | [[https://github.com/company-mode/company-mode][company-mode]]       | 模块化补全框架（支持各种语言）       | 相同的还有 auto-complete，但它没有 company 精准。编码必备。          |
 | [[https://github.com/seagle0128/doom-modeline][doom-modeline]]      | modeline 看起来漂亮一些              | 依赖 [[https://github.com/domtronn/all-the-icons.el][all-the-icons]] _Icon GUI 才可用_                                 |
+| [[https://github.com/skeeto/elfeed][elfeed]]             | Web Feed Reader                      |                                                                      |
 | [[https://github.com/magnars/expand-region.el][expand-region]]      | 快速选中文本                         | 比如我常用 =M-s s= 选中一个单词，用 =M-s p= 选中括号内内容，然后复制 |
 | [[https://www.flycheck.org/en/latest/][Flycheck]]           | 强大的语法检查框架                   | 需要编程语言的 lint 工具配合，比如 eslint、golint。编码必备。        |
 | [[https://github.com/nonsequitur/git-gutter-plus][git-gutter+]]        | 提示当前 buffer 改动部分             | 用 ~+~ 和 ~=~ 等显示出来                                             |
