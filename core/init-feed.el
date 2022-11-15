@@ -33,6 +33,7 @@
 		  ("https://2d2d.io/feed.xml" it)
 		  ("https://jimmysong.io/blog/index.xml" cloudnative)
 		  ("https://frostming.com/feed.xml" python)
+		  ("https://manateelazycat.github.io/feed.xml" emacs)
 		  ))
   )
 
