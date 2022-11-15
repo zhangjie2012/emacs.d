@@ -30,8 +30,9 @@
 		  ("https://skyao.io/index.xml" blog_cn)
 		  ("https://www.flysnow.org/index.xml" blog_cn)
 		  ("https://www.morling.dev/blog/index.xml" blog_en)
-		  ("https://2d2d.io/feed.xml" IT)
+		  ("https://2d2d.io/feed.xml" it)
 		  ("https://jimmysong.io/blog/index.xml" cloudnative)
+		  ("https://frostming.com/feed.xml" python)
 		  ))
   )
 
