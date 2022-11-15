@@ -35,7 +35,7 @@
 		;; org-hide-emphasis-markers t
 		org-startup-folded t
 		org-startup-with-inline-images t
-		org-image-actual-width '(450))
+		org-image-actual-width '(1024))
   :config
   ;; GTD setting
   (require 'org-inlinetask)
