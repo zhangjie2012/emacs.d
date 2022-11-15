@@ -89,28 +89,33 @@
 		 ("<f9> s n" . lsp-signature-next)
 		 )
   :init
+  ;; config from https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
+  (setq
+   lsp-enable-symbol-highlighting nil
+   lsp-ui-doc-enable t
+   lsp-ui-doc-show-with-cursor nil
+   lsp-lens-enable t
+   lsp-headerline-breadcrumb-enable nil
+   lsp-ui-sideline-enable nil
+   lsp-modeline-code-actions-enable t
+   lsp-signature-render-documentation nil
+   lsp-completion-show-detail t
+   lsp-completion-show-kind t
+   )
+  ;; other
   (setq
    lsp-completion-enable t
-   lsp-completion-enable-additional-text-edit nil
-   lsp-completion-show-detail t
-   ;; lsp-enable-snippet nil
+   lsp-log-io nil
    lsp-diagnostic-package :none
-   ;; lsp-diagnostics-provider :flycheck
    lsp-eldoc-render-all nil
    lsp-enable-folding nil
    lsp-enable-links nil
-   lsp-enable-symbol-highlighting nil
-   lsp-headerline-breadcrumb-enable nil
-   lsp-lens-enable nil
-   lsp-modeline-diagnostics-enable nil
    lsp-restart 'auto-restart
-   lsp-signature-render-documentation nil
-
+   ;; lsp-enable-snippet nil
    ;; python
    lsp-pyls-server-command 'pyls
    )
   :config
-  (setq lsp-log-io nil)
   (push "[/\\\\]googleapis$" lsp-file-watch-ignored)
   )
 
