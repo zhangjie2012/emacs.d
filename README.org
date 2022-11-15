@@ -115,8 +115,8 @@ alias em="env TERM=xterm-256color emacs -nw"
 
 ** 4.2 配置安装
 
-#+begin_src
-git clone https://github.com/zhangjie2012/emacs.d.git ~/.emacs.d
+#+begin_src sh
+  git clone https://github.com/zhangjie2012/emacs.d.git ~/.emacs.d
 #+end_src
 
 直接打开 Emacs 自动安装依赖包。package 源在国内无法访问，需要使用代理 =http_proxy=http://127.0.0.1:7890 emacs= 。
@@ -417,15 +417,15 @@ lsp-mode 的功能比较多，官方提供了 [[https://emacs-lsp.github.io/lsp-
   - [[https://github.com/hlissner/doom-emacs][hlissner/doom-emacs]]
   - [[https://protesilaos.com/dotemacs/][Emacs initialisation file (dotemacs)]]: wiki + 配置
   - [[http://www.emacs-bootstrap.com/][emacs-bootstrap]]: 动态生成 Emacs 配置
-- [[file:../../../blog/2019/build-site-with-org-mode.org][使用 org-mode 搭建网站]]   /我写的/
+- [[https://www.zhangjiee.com/blog/2019/emacs-slide.html][使用 org-mode 搭建网站]]   /我写的/
 - 视频：
   - [[https://cestlaz.github.io/stories/emacs/][Using Emacs Series]]：cestlaz 的使用 Emacs 系列，偏向于插件介绍
   - [[http://emacsrocks.com/][emacsrocks]] 很多短视频，偏向于插件介绍
   - [[https://www-users.cs.umn.edu/~kauffman/tooltime/][ToolTime]] 前两节是讲 Emacs 的，理论+实践，有视频还有配套的 PPT，一般的资料都是讲什么用，而这个课程讲了为什么是这样，由浅入深；非常推荐。
 - [[https://github.com/lujun9972/emacs-document][文章集合]]
 - 我自己写的：
-  - <2019-06-17 Mon> [[file:../../blog/2019/emacs-is-fun-1.org][Emacs 心路历程（上）]]、[[file:../../blog/2019/emacs-is-fun-2.org][Emacs 心路历程（下）]] 感悟
-  - <2014-12-01 Mon> [[file:../../blog/2014/emacs-simple-tutorial.org][Emacs 简易教程]] 内容比较旧了，已经不再维护
+  - <2019-06-17 Mon> [[https://www.zhangjiee.com/blog/2019/emacs-is-fun-1.html][Emacs 心路历程（上）]]、[[https://www.zhangjiee.com/blog/2019/emacs-is-fun-2.html][Emacs 心路历程（下）]] 感悟
+  - <2014-12-01 Mon> [[https://www.zhangjiee.com/blog/2014/emacs-simple-tutorial.html][Emacs 简易教程]] 内容比较旧了，已经不再维护
 
 * Footnotes
 
