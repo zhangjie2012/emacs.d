@@ -94,7 +94,7 @@
    lsp-enable-symbol-highlighting nil
    lsp-ui-doc-enable t
    lsp-ui-doc-show-with-cursor nil
-   lsp-lens-enable t
+   lsp-lens-enable nil
    lsp-headerline-breadcrumb-enable nil
    lsp-ui-sideline-enable nil
    lsp-modeline-code-actions-enable t
