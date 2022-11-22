@@ -36,6 +36,7 @@
 		  ("https://www.qikqiak.com/index.xml" docker kubernetes)
           ("https://kubernetes.io/feed.xml" cloudnative kubernetes)
 		  ("https://planet.emacslife.com/atom.xml" emacs)
+		  ("https://hechao.li/feed.xml" blog_en)
 		  ))
   )
 
