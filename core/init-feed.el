@@ -39,6 +39,7 @@
 		  ("https://hechao.li/feed.xml" blog_en)
 		  ("https://iximiuz.com/feed.rss" blog_en)
 		  ("https://www.mikeperham.com/index.xml" blog_en)
+          ("https://mrkaran.dev/atom.xml" blog_en)
 		  ))
   )
 
