@@ -246,6 +246,7 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 - =M-s r= 显示/隐藏相对行号
 - =M-s s= 选中当前单词
 - =M-*= 匹配括号起始、结束跳转
+- =C-M-j= 变量/函数命名在几种命名之间转换: =underscore->UPCASE->CamelCase->...=
 
 * 7、Packages
 

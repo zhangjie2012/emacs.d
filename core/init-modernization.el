@@ -108,6 +108,25 @@
              (";" . dired-subtree-remove))
   )
 
+(use-package string-inflection
+  :pin melpa-stable
+  :ensure t
+  :bind (:map prog-mode-map
+              ("C-M-j" . my-string-inflection-cycle-auto))
+  :init
+  (defun my-string-inflection-cycle-auto ()
+	"switching by major-mode"
+	(interactive)
+	(cond
+	 ((eq major-mode 'emacs-lisp-mode)
+      (string-inflection-all-cycle))
+	 ((eq major-mode 'python-mode)
+      (string-inflection-python-style-cycle))
+	 ((eq major-mode 'go-mode) ;; golang use java style
+      (string-inflection-java-style-cycle))
+	 (t (string-inflection-all-cycle))))  ;; default
+  )
+
 ;; -----------------------------------------------------------------------------
 
 (defvar current-date-time-format "%Y-%m-%d %H:%M:%S"
