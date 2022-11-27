@@ -167,8 +167,8 @@ alias em="env TERM=xterm-256color emacs -nw"
 
 lint 工具：
 
-#+begin_src sh
-  curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.46.1
+#+begin_src sh1
+  curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.50.1
 #+end_src
 
 配置文件在：https://github.com/zhangjie2012/dotfiles/blob/master/_golangci.yaml
