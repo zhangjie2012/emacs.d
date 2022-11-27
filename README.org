@@ -38,6 +38,7 @@ Orgmode（Windows GUI）：
   - [[#为什么选择-lsp][为什么选择 LSP？]]
   - [[#项目管理][项目管理？]]
   - [[#写-go-代码时如何禁用注释中自动补全][写 Go 代码时如何禁用注释中自动补全？]]
+  - [[#英文-ubuntu-下输入法无法切换中文][英文 Ubuntu 下输入法无法切换中文？]]
 - [[#9其他资料][9、其他资料]]
 - [[#footnotes][Footnotes]]
 
@@ -395,6 +396,15 @@ lsp-mode 的功能比较多，官方提供了 [[https://emacs-lsp.github.io/lsp-
 
 事实上，[[https://github.com/emacs-lsp/lsp-mode/blob/master/clients/lsp-go.el#L327][lsp-go]] 中有控制，但没有暴露出去。我简单粗暴的把 lsp-go.el 中的 =completion-in-comments= 设置为了 =nil= ，
 然后删掉 =lsp-go.elc= 文件。
+
+** 英文 Ubuntu 下输入法无法切换中文？
+
+核心解决思路是加上（据说是 fctix 的 bug） =env LC_CTYPE=zh_CN.UTF-8= 环境变量。解决办法：
+
+1. GUI 修改 =/usr/share/application/emacs.desktop= 中的启动命令 ~Exec=env LC_CTYPE=zh_CN.UTF-8 /usr/bin/emacs %F~
+2. TUI 就简单了，直接在 =.bashrc= 加个 =alias=
+
+具体可以见这个帖子：https://emacs-china.org/t/topic/974/20 ，正如 scutdk 所说，修改系统全局的 locale 可能带来其他问题。
 
 * 9、其他资料
 
