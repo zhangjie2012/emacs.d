@@ -50,7 +50,7 @@
   )
 
 (use-package company
-  :pin melpa-stable
+  :pin melpa
   :ensure t
   :hook ((prog-mode-hook . company-mode)
 		 (protobuf-mode-hook . company-mode))
@@ -68,6 +68,12 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
   (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+  )
+
+(use-package company-box
+  :pin melpa
+  :ensure t
+  :hook (company-mode . company-box-mode)
   )
 
 (use-package lsp-mode
