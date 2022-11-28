@@ -1,10 +1,10 @@
 #+TITLE: Emacs config
 
-Go IDE（WSL2 下，事实上我不使用暗色主题，可以通过 f5 切换）：
+Go IDE
 
 [[file:screenshots/go-ide.png]]
 
-Orgmode（Windows GUI）：
+Orgmode
 
 [[file:screenshots/orgmode.png]]
 
