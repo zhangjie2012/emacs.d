@@ -19,7 +19,7 @@
   )
 
 (use-package all-the-icons-dired
-  :pin melpa-stable
+  :pin melpa
   :ensure
   :init (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
   )
