@@ -410,32 +410,33 @@ lsp-mode 的功能比较多，官方提供了 [[https://emacs-lsp.github.io/lsp-
 
 有点乱，参差不齐：
 
-- [[file:../../../blog/2019/emacs-slide.org][Emacs 基于 org-reveal 做幻灯片]] /我写的/
-- GTD 相关文章：
-  - [[https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html][Orgmode for GTD]]
-  - [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][How I use Emacs and Org-mode to implement GTD]]
-- [[https://devhints.io/org-mode][org-mode cheatsheet]]
-- 博客 & Github
-  + [[https://github.com/emacs-tw/awesome-emacs][awesome-emacs]]
-  + [[https://planet.emacslife.com/][Planet Emacslife]]：Emacs 百科全书，大杂烩
-  + [[https://emacsthemes.com/][Emacs Themes]]：主题集合
-  + [[http://oremacs.com/][oremacs]]
-  + [[https://protesilaos.com/dotemacs/][dotemacs]] 完善的 Emacs 配置 Wiki
 - 开箱即用的配置：
   - [[https://github.com/purcell/emacs.d][purcell/emacs.d]]：久负盛名
   - [[https://github.com/redguardtoo/emacs.d][redguardtoo/emacs.d]]
   - [[https://github.com/hlissner/doom-emacs][hlissner/doom-emacs]]
   - [[https://protesilaos.com/dotemacs/][Emacs initialisation file (dotemacs)]]: wiki + 配置
   - [[http://www.emacs-bootstrap.com/][emacs-bootstrap]]: 动态生成 Emacs 配置
-- [[https://www.zhangjiee.com/blog/2019/emacs-slide.html][使用 org-mode 搭建网站]]   /我写的/
+  - [[https://github.com/lujun9972/emacs-document][文章集合]]
+- 博客 & Github
+  + [[https://github.com/emacs-tw/awesome-emacs][awesome-emacs]]
+  + [[https://planet.emacslife.com/][Planet Emacslife]]：Emacs 百科全书，大杂烩
+  + [[https://emacsthemes.com/][Emacs Themes]]：主题集合
+  + [[http://oremacs.com/][oremacs]]
+  + [[https://protesilaos.com/dotemacs/][dotemacs]] 完善的 Emacs 配置 Wiki
+  + [[https://manateelazycat.github.io/emacs/2022/11/07/how-i-use-emacs.html][我平常是怎么使用 Emacs 的？]]
+- GTD 相关文章：
+  - [[https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html][Orgmode for GTD]]
+  - [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][How I use Emacs and Org-mode to implement GTD]]
+  - [[https://devhints.io/org-mode][org-mode cheatsheet]]
 - 视频：
   - [[https://cestlaz.github.io/stories/emacs/][Using Emacs Series]]：cestlaz 的使用 Emacs 系列，偏向于插件介绍
   - [[http://emacsrocks.com/][emacsrocks]] 很多短视频，偏向于插件介绍
   - [[https://www-users.cs.umn.edu/~kauffman/tooltime/][ToolTime]] 前两节是讲 Emacs 的，理论+实践，有视频还有配套的 PPT，一般的资料都是讲什么用，而这个课程讲了为什么是这样，由浅入深；非常推荐。
-- [[https://github.com/lujun9972/emacs-document][文章集合]]
 - 我自己写的：
   - <2019-06-17 Mon> [[https://www.zhangjiee.com/blog/2019/emacs-is-fun-1.html][Emacs 心路历程（上）]]、[[https://www.zhangjiee.com/blog/2019/emacs-is-fun-2.html][Emacs 心路历程（下）]] 感悟
   - <2014-12-01 Mon> [[https://www.zhangjiee.com/blog/2014/emacs-simple-tutorial.html][Emacs 简易教程]] 内容比较旧了，已经不再维护
+  - [[file:../../../blog/2019/emacs-slide.org][Emacs 基于 org-reveal 做幻灯片]]
+  - [[https://www.zhangjiee.com/blog/2019/emacs-slide.html][使用 org-mode 搭建网站]]
 
 * Footnotes
 
