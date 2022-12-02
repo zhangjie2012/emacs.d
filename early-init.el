@@ -6,7 +6,8 @@
   (setq package-enable-at-startup nil))
 
 (setq gc-cons-threshold-original gc-cons-threshold)
-(setq gc-cons-threshold (* 1024 1024 100))
+(setq gc-cons-threshold (* 1024 1024 100))  ;; 100mb
+(setq read-process-output-max (* 1024 1024))  ;; 1mb
 
 (setq file-name-handler-alist-original file-name-handler-alist)
 (setq file-name-handler-alist nil)
