@@ -1,8 +1,10 @@
 (use-package projectile
   :pin melpa-stable
   :ensure t
-  :bind-keymap (("<f8>" . projectile-command-map))
-  :bind (:map projectile-command-map
+  :bind (:map projectile-mode-map
+              ("<f8>" . projectile-command-map)
+              ("C-c p" . projectile-command-map)
+			  :map projectile-command-map
 			  ("F" . projectile-find-file-other-window)
 			  ("w" . projectile-find-file-in-known-projects)
 			  ("D" . projectile-dired-other-window)
@@ -41,11 +43,11 @@
 
   :init
   (use-package counsel-projectile
-    :pin melpa
-    :ensure t
-    :config
-    (counsel-projectile-mode 1)
-    )
+	:pin melpa
+	:ensure t
+	:config
+	(counsel-projectile-mode 1)
+	)
   ;; (projectile-mode +1)
   )
 
@@ -67,6 +69,8 @@
   (setq company-echo-delay 0)
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
+  (setq company-tooltip-align-annotations t)
+  (setq company-show-quick-access 'right)
   (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
   )
 
