@@ -69,16 +69,25 @@
   (setq company-echo-delay 0)
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
-  (setq company-tooltip-align-annotations t)
-  (setq company-show-quick-access 'right)
+  (setq company-tooltip-align-annotations nil)
+  ;; (setq company-tooltip-limit 6)
+  ;; (setq company-show-quick-access t)
+  ;; (setq company-show-quick-access 'left)
   (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-  )
 
-(use-package company-box
-  :pin melpa
-  :ensure t
-  :hook (company-mode . company-box-mode)
+  :config
+  (use-package company-box
+	:pin melpa
+	:ensure t
+	:hook ((prog-mode-hook . company-box-mode))
+	:init
+	(setq
+	 company-box-doc-enable nil
+	 company-box-scrollbar nil
+	 ;; company-box-icons-alist 'company-box-icons-all-the-icons
+	 )
   )
+)
 
 (use-package lsp-mode
   :pin melpa-stable
