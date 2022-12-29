@@ -4,7 +4,7 @@
   :ensure t
   :init
   (setq elfeed-use-curl t)
-  (setq elfeed-curl-extra-arguments '("-x" "http://127.0.0.1:12333"))
+  (setq elfeed-curl-extra-arguments '("-x" "http://127.0.0.1:1087"))
   (setq elfeed-search-filter "@1-months-ago +unread")
   (setq elfeed-sort-order 'descending)
   (setq elfeed-search-clipboard-type 'CLIPBOARD)
@@ -18,7 +18,6 @@
   (setq elfeed-feeds
         '(
           ("https://2d2d.io/feed.xml" it)
-          ("https://betterdev.link/rss.xml" weekly)
           ("https://blog.codingnow.com/atom.xml" blog_cn)
           ("https://cestlaz.github.io/rss.xml" emacs)
           ("https://cprss.s3.amazonaws.com/golangweekly.com.xml" weekly)
@@ -43,6 +42,7 @@
           ("https://www.brendangregg.com/blog/rss.xml" blog_en)
           ("https://www.raychase.net/feed" blog_cn)
           ("https://coolshell.cn/feed" blog_cn)
+		  ("https://threedots.tech/index.xml" go)
           ))
   )
 
