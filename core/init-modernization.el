@@ -131,7 +131,6 @@
 (use-package exec-path-from-shell
   :pin melpa
   :ensure t
-  :defer 0.5
   :config
   (when (and window-system
              (memq window-system '(mac ns x)))
