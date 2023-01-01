@@ -7,10 +7,10 @@
 		("nongnu" . "https://elpa.nongnu.org/nongnu/")
 		))
 
-;; (setq url-proxy-services
-;;       '(("no_proxy" . "^\\(localhost\\|10.*\\)")
-;;         ("http" . "127.0.0.1:12333")
-;;         ("https" . "127.0.0.1:12333")))
+(setq url-proxy-services
+      '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+        ("http" . "127.0.0.1:1087")
+        ("https" . "127.0.0.1:1087")))
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
