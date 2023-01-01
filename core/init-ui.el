@@ -24,42 +24,14 @@
   :init (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
   )
 
-(use-package modus-themes
-  :pin melpa-stable
+(use-package doom-themes
+  :pin melpa
   :ensure t
-  :init
-  (setq
-   modus-themes-fringes 'subtle
-   modus-themes-lang-checkers '(intense)
-   modus-themes-syntax nil
-   modus-themes-hl-line '(accented)
-   modus-themes-deuteranopia nil
-   modus-themes-subtle-line-numbers nil
-   modus-themes-paren-match '(bold intense)
-   modus-themes-prompts nil
-   modus-themes-region '(bg-only no-extend)
-   modus-themes-diffs 'fg-only-deuteranopia
-   modus-themes-org-blocks 'gray-background
-   modus-themes-mode-line '(accented borderless)
-   modus-themes-links nil
-   modus-themes-box-buttons '(variable-pitch flat faint 0.9)
-   modus-themes-completions '((matches . (extrabold))
-                              (selection . (semibold accented))
-                              (popup . (accented intense)))
-   ;; modus-themes-mixed-fonts t
-   modus-themes-headings ; this is an alist: read the manual or its doc string
-   '((1 . (overline background 1.15))
-     (2 . (rainbow background 1.0))
-     (t . (background 1.0)))
-   )
-
-  ;; https://gitlab.com/protesilaos/modus-themes/-/issues/226
-  (setq compilation-message-face nil)
-
-  (modus-themes-load-themes)
-  :bind ("<f5>" . modus-themes-toggle)
   :config
-  (modus-themes-load-operandi)
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic nil)
+  (load-theme 'doom-one-light t)
+  (doom-themes-org-config)
   )
 
 (use-package doom-modeline
@@ -102,7 +74,7 @@
   )
 
 ;; line number
-(set-face-foreground 'line-number "darkgrey")
+;; (set-face-foreground 'line-number "darkgrey")
 (global-set-key (kbd "M-s l") 'display-line-numbers-mode)
 
 (use-package linum-relative
