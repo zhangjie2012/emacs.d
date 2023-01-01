@@ -75,18 +75,18 @@
   ;; (setq company-show-quick-access 'left)
   (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
 
-  :config
-  (use-package company-box
-	:pin melpa
-	:ensure t
-	:hook ((prog-mode-hook . company-box-mode))
-	:init
-	(setq
-	 company-box-doc-enable nil
-	 company-box-scrollbar nil
-	 ;; company-box-icons-alist 'company-box-icons-all-the-icons
-	 )
-  )
+  ;; :config
+  ;; (use-package company-box
+  ;; 	:pin melpa
+  ;; 	:ensure t
+  ;; 	:hook ((prog-mode-hook . company-box-mode))
+  ;; 	:init
+  ;; 	(setq
+  ;; 	 company-box-doc-enable nil
+  ;; 	 company-box-scrollbar nil
+  ;; 	 ;; company-box-icons-alist 'company-box-icons-all-the-icons
+  ;; 	 )
+  ;; )
 )
 
 (use-package lsp-mode
