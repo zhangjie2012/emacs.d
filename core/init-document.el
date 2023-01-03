@@ -41,12 +41,16 @@
   (require 'org-inlinetask)
   (setq org-todo-keywords
 		'((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "CANCELED(d)")))
-
   (setq org-todo-keyword-faces
 		'(("TODO" . org-todo)
 		  ("BLOCK" . org-wait)
 		  ("DONE" . org-done)
 		  ("CANCELED" . "darkgrey")))
+  (setq org-agenda-files '("~/personal-area/todo.org"))
+  (setq org-agenda-time-grid (quote (((daily today require-timed)
+                                      (800 1000 1200 1400 1600 1800 2000)
+                                      "......" "----------------"))))
+
 
   (require 'org-tempo)
 
