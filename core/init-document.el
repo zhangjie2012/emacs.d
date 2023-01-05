@@ -24,8 +24,6 @@
 		 ("<f9> t t" . org-capture)
 		 ("<f9> t m" . org-show-todo-tree)
 		 ("<f9> t h" . org-show-all)
-		 ;; ("M-[". org-previous-visible-heading)
-		 ;; ("M-]". org-next-visible-heading)
 		 )
   :init
   (setq org-adapt-indentation nil
@@ -54,7 +52,10 @@
 		org-agenda-include-diary nil
 		org-agenda-block-separator nil
 		org-agenda-compact-blocks t
-		org-agenda-start-with-log-mode t)
+		org-agenda-start-with-log-mode t
+		org-agenda-start-on-weekday 1
+		org-agenda-span 28
+		)
   (setq org-agenda-breadcrumbs-separator " ❱ "
 		org-agenda-current-time-string "⏰ ┈┈┈┈┈┈┈┈┈┈┈ now"
 		org-agenda-time-grid '((weekly today require-timed)
