@@ -20,8 +20,8 @@
   :bind (("<f9> t l" . org-toggle-link-display)
 		 ("<f9> t f" . org-footnote-new)
 		 ("<f9> t i" . org-toggle-inline-images)
-		 ("<f9> t a" . org-agenda)
 		 ("<f9> t t" . org-capture)
+		 ("<f9> t a" . org-agenda)
 		 ("<f9> t m" . org-show-todo-tree)
 		 ("<f9> t h" . org-show-all)
 		 )
@@ -35,6 +35,8 @@
 		org-startup-with-inline-images t
 		org-image-actual-width '(1024))
 
+  (setq org-agenda-files '("~/personal-area/todo.org"))
+  :config
   ;; GTD setting
   (require 'org-inlinetask)
   (setq org-todo-keywords
@@ -44,33 +46,31 @@
           ("WAIT" . "burlywood")
           ("DONE" . "darkcyan")
 		  ("CANCELED" . "darkgrey")))
-  ;; agenda
-  (setq org-agenda-files '("~/personal-area/todo.org"))
-  (setq org-agenda-skip-scheduled-if-done t
-		org-agenda-skip-deadline-if-done t
-		org-agenda-include-deadlines t
-		org-agenda-include-diary nil
-		org-agenda-block-separator nil
-		org-agenda-compact-blocks t
-		org-agenda-start-with-log-mode t
-		org-agenda-start-on-weekday 1
-		org-agenda-span 28
-		)
+  (setq
+   ;; org-agenda-skip-scheduled-if-done t
+   ;; org-agenda-skip-deadline-if-done t
+   org-agenda-include-deadlines t
+   org-agenda-include-diary nil
+   org-agenda-block-separator nil
+   org-agenda-compact-blocks t
+   org-agenda-start-with-log-mode t
+   org-agenda-start-on-weekday 1
+   org-agenda-span 28
+   )
   (setq org-agenda-breadcrumbs-separator " ❱ "
 		org-agenda-current-time-string "⏰ ┈┈┈┈┈┈┈┈┈┈┈ now"
 		org-agenda-time-grid '((weekly today require-timed)
-                               (800 1000 1200 1400 1600 1800 2000)
-                               "---" "┈┈┈┈┈┈┈┈┈┈┈┈┈")
+							   (800 1000 1200 1400 1600 1800 2000)
+							   "---" "┈┈┈┈┈┈┈┈┈┈┈┈┈")
 		org-agenda-prefix-format '((agenda . "%i %-12:c%?-12t%b% s")
-                                   (todo . " %i %-12:c")
-                                   (tags . " %i %-12:c")
-                                   (search . " %i %-12:c")))
+								   (todo . " %i %-12:c")
+								   (tags . " %i %-12:c")
+								   (search . " %i %-12:c")))
   (setq org-agenda-format-date (lambda (date) (concat "\n" (make-string (window-width) 9472)
-                                                      "\n"
-                                                      (org-agenda-format-date-aligned date))))
+													  "\n"
+													  (org-agenda-format-date-aligned date))))
   (setq org-cycle-separator-lines 2)
 
-  :config
   (require 'org-tempo)
 
   (use-package ob-go
@@ -111,6 +111,8 @@
 	(add-hook 'org-mode-hook 'toc-org-mode)
 	)
   )
+
+
 
 ;; blog
 (use-package ox-publish
