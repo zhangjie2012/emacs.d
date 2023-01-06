@@ -61,5 +61,6 @@
 (setq display-time-default-load-average nil
 	  display-time-format "%H:%M")
 (display-time-mode t)
+(display-battery-mode 1)
 
 (provide 'init-base)
