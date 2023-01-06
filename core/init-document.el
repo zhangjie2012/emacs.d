@@ -73,6 +73,8 @@
 
   (require 'org-tempo)
 
+  (require 'org-indent)
+
   (use-package ob-go
 	:pin melpa
 	:ensure t
