@@ -40,12 +40,12 @@
   ;; GTD setting
   (require 'org-inlinetask)
   (setq org-todo-keywords
-		'((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "CANCELED(d)")))
+		'((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "DEPR(r)")))
   (setq org-todo-keyword-faces
-		'(("TODO" . "coral")
-          ("WAIT" . "burlywood")
-          ("DONE" . "darkcyan")
-		  ("CANCELED" . "darkgrey")))
+		'(("TODO" . "orangered")
+          ("WAIT" . "darkgoldenrod")
+          ("DONE" . "lightgreen")
+		  ("DEPR" . "darkgrey")))
   (setq
    ;; org-agenda-skip-scheduled-if-done t
    ;; org-agenda-skip-deadline-if-done t
@@ -113,8 +113,6 @@
 	(add-hook 'org-mode-hook 'toc-org-mode)
 	)
   )
-
-
 
 ;; blog
 (use-package ox-publish
