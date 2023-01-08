@@ -24,14 +24,20 @@
   :init (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
   )
 
-(use-package doom-themes
+(use-package zenburn-theme
   :pin melpa
-  :ensure t
+  :ensure
+  :init
+  (setq zenburn-override-colors-alist
+		'(("zenburn-bg+05" . "#282828")
+          ("zenburn-bg+1"  . "#2F2F2F")
+          ("zenburn-bg+2"  . "#3F3F3F")
+          ("zenburn-bg+3"  . "#4F4F4F")))
   :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic nil)
-  (load-theme 'doom-one-light t)
-  (doom-themes-org-config)
+  ;; (setq zenburn-use-variable-pitch t)
+  ;; (setq zenburn-scale-org-headlines t)
+  ;; (setq zenburn-scale-outline-headlines t)
+  (load-theme 'zenburn t)
   )
 
 (use-package doom-modeline
@@ -46,7 +52,6 @@
   ;; (set-face-foreground 'doom-modeline-project-parent-dir "systemBrownColor")
   ;; (set-face-foreground 'doom-modeline-project-dir "white")
   ;; (set-face-foreground 'doom-modeline-buffer-file "systemBrownColor")
-
   (setq doom-modeline-buffer-modification-icon nil)
   (setq doom-modeline-project-detection 'projectile)
   (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
@@ -54,12 +59,11 @@
   (setq doom-modeline-window-width-limit fill-column)
   (setq doom-modeline-minor-modes nil)
   (setq doom-modeline-indent-info t)
-
   (doom-modeline-mode 1)
   )
 
 (use-package beacon
-  :pin melpa-stable
+  :pin melpa
   :ensure t
   :config
   (beacon-mode 1)
@@ -100,7 +104,7 @@
   :ensure t
   :init
   ;; https://github.com/tumashu/cnfonts/issues/138
-  ;; (setq cnfonts-use-face-font-rescale t)
+  (setq cnfonts-use-face-font-rescale t)
   (setq cnfonts-use-system-type t)
   :config
   (cnfonts-mode 1)
