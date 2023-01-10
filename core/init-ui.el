@@ -38,7 +38,7 @@
   :pin melpa-stable
   :ensure t
   :config
-  ;; (set-face-foreground 'doom-modeline-buffer-modified "brightyellow")
+  (set-face-foreground 'doom-modeline-buffer-modified "orangered")
   ;; (set-face-foreground 'doom-modeline-buffer-major-mode "systemBrownColor")
   ;; (set-face-foreground 'doom-modeline-buffer-minor-mode "systemBrownColor")
   ;; (set-face-foreground 'doom-modeline-project-dir "systemBrownColor")
