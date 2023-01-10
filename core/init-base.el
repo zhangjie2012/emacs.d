@@ -59,7 +59,8 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (setq display-time-default-load-average nil
-	  display-time-format "%H:%M")
+	  display-time-format "%m-%d %H:%M"
+	  )
 (display-time-mode t)
 (display-battery-mode 1)
 

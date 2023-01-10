@@ -27,14 +27,8 @@
 (use-package zenburn-theme
   :pin melpa
   :ensure
-  :init
-  (setq zenburn-override-colors-alist
-		'(("zenburn-bg+05" . "#282828")
-          ("zenburn-bg+1"  . "#2F2F2F")
-          ("zenburn-bg+2"  . "#3F3F3F")
-          ("zenburn-bg+3"  . "#4F4F4F")))
   :config
-  ;; (setq zenburn-use-variable-pitch t)
+  (setq zenburn-use-variable-pitch t)
   ;; (setq zenburn-scale-org-headlines t)
   ;; (setq zenburn-scale-outline-headlines t)
   (load-theme 'zenburn t)
