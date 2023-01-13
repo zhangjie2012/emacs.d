@@ -28,8 +28,8 @@
   :pin melpa
   :ensure
   :config
-  (setq zenburn-use-variable-pitch t)
-  ;; (setq zenburn-scale-org-headlines t)
+  ;; (setq zenburn-use-variable-pitch t)
+  (setq zenburn-scale-org-headlines t)
   ;; (setq zenburn-scale-outline-headlines t)
   (load-theme 'zenburn t)
   )
