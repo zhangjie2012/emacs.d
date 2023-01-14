@@ -33,9 +33,13 @@
 		;; org-hide-emphasis-markers t
 		org-startup-folded t
 		org-startup-with-inline-images t
-		org-image-actual-width '(1024))
+		org-image-actual-width '(1024)
+		org-capture-templates nil
+		)
 
   (setq org-agenda-files '("~/personal-area/todo.org"))
+  (setq org-default-notes-file "~/personal-area/todo.org")
+
   :config
   ;; GTD setting
   (require 'org-inlinetask)
@@ -67,13 +71,13 @@
       '(("v" "A better agenda view"
          ((tags "PRIORITY=\"A\""
                 ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                 (org-agenda-overriding-header "=>HIGH-PRIORITY")))
+                 (org-agenda-overriding-header "* HIGH-PRIORITY:")))
           (tags "PRIORITY=\"B\""
                 ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                 (org-agenda-overriding-header "=>MEDIUM-PRIORITY")))
+                 (org-agenda-overriding-header "* MEDIUM-PRIORITY:")))
           (tags "PRIORITY=\"C\""
                 ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                 (org-agenda-overriding-header "=>LOW-PRIORITY")))
+                 (org-agenda-overriding-header "* LOW-PRIORITY:")))
           ;; (tags "customtag"
           ;;       ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
           ;;        (org-agenda-overriding-header "OTHER:")))
@@ -92,6 +96,11 @@
 													  "\n"
 													  (org-agenda-format-date-aligned date))))
   (setq org-cycle-separator-lines 2)
+
+  (add-to-list 'org-capture-templates
+               '("t" "Task" entry
+				 (file "~/personal-area/todo.org")
+				 "* TODO %?\n"))
 
   (require 'org-tempo)
 
