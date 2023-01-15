@@ -24,21 +24,21 @@
   :init (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
   )
 
-(use-package zenburn-theme
+(use-package doom-themes
   :pin melpa
-  :ensure
+  :ensure t
   :config
-  ;; (setq zenburn-use-variable-pitch t)
-  (setq zenburn-scale-org-headlines t)
-  ;; (setq zenburn-scale-outline-headlines t)
-  (load-theme 'zenburn t)
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic nil)
+  (load-theme 'doom-one-light t)
+  (doom-themes-org-config)
   )
 
 (use-package doom-modeline
   :pin melpa-stable
   :ensure t
   :config
-  (set-face-foreground 'doom-modeline-buffer-modified "orangered")
+  ;; (set-face-foreground 'doom-modeline-buffer-modified "orangered")
   ;; (set-face-foreground 'doom-modeline-buffer-major-mode "systemBrownColor")
   ;; (set-face-foreground 'doom-modeline-buffer-minor-mode "systemBrownColor")
   ;; (set-face-foreground 'doom-modeline-project-dir "systemBrownColor")
