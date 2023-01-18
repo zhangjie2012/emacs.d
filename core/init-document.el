@@ -24,6 +24,8 @@
 		 ("<f9> t a" . org-agenda)
 		 ("<f9> t m" . org-show-todo-tree)
 		 ("<f9> t h" . org-show-all)
+		 ("M-[" . org-previous-visible-heading)
+		 ("M-]" . org-next-visible-heading)
 		 )
   :init
   (setq org-adapt-indentation nil
