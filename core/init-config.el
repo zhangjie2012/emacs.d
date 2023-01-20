@@ -10,6 +10,17 @@
 			(lambda () (c-add-style "my-style" my-protobuf-style t)))
   )
 
+(use-package thrift
+  :pin melpa
+  :ensure t
+  :init
+  (add-hook 'thrift-mode-hook
+			(lambda () (setq tab-width 4
+							 indent-line-function 'insert-tab
+							 indent-tabs-mode nil
+							 )))
+  )
+
 (use-package yaml-mode
   :pin melpa-stable
   :ensure t
