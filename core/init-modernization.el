@@ -141,6 +141,18 @@
 	)
   )
 
+(use-package youdao-dictionary
+  :pin melpa
+  :ensure t
+  :bind (
+		 ("<f9> f" . youdao-dictionary-search-at-point+)
+		 ("<f9> F" . youdao-dictionary-search-from-input)
+		 )
+  :config
+  (setq url-automatic-caching t)
+  (setq youdao-dictionary-use-chinese-word-segmentation t)
+  )
+
 ;; -----------------------------------------------------------------------------
 
 (defvar current-date-time-format "%Y-%m-%d %H:%M:%S"
