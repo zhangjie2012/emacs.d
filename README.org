@@ -247,7 +247,9 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 - =M-s s= 选中当前单词
 - =M-*= 匹配括号起始、结束跳转
 - =C-M-j= 变量/函数命名在几种命名之间转换: =underscore->UPCASE->CamelCase->...=
-
+- =dired-subtree=
+  + =i= 打开子目录
+  + =;= 折叠子目录
 * 7、Packages
 
 ** 7.1 当前使用的
