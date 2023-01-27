@@ -49,20 +49,21 @@
   (setq doom-modeline-buffer-modification-icon nil)
   (setq doom-modeline-project-detection 'projectile)
   (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
-  (setq doom-modeline-env-version t)
+  (setq doom-modeline-env-version nil)
   (setq doom-modeline-window-width-limit fill-column)
   (setq doom-modeline-minor-modes nil)
-  (setq doom-modeline-indent-info t)
+  (setq doom-modeline-indent-info nil)
   (doom-modeline-mode 1)
   )
 
 (use-package beacon
   :pin melpa
   :ensure t
-  :config
-  (beacon-mode 1)
-  (setq beacon-push-mark 35)
-  (setq beacon-color "#666600")
+  :bind (("<f12>" . beacon-blink))
+  ;; :config
+  ;; (beacon-mode 1)
+  ;; (setq beacon-push-mark 35)
+  ;; (setq beacon-color "#666600")
   )
 
 (use-package rainbow-delimiters
