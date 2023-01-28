@@ -1,11 +1,18 @@
 (use-package go-mode
-  :pin melpa-stable
+  :pin melpa
   :ensure t
   :mode "\\.go\\'"
   :interpreter "go"
   :config
+  (defun lsp-go-install-save-hooks ()
+	(add-hook 'before-save-hook #'flycheck-buffer)
+	(add-hook 'before-save-hook #'lsp-organize-imports t t)
+	(add-hook 'before-save-hook #'lsp-format-buffer t t)
+	)
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
   (use-package go-tag
-	:pin melpa-stable
+	:pin melpa
 	:ensure t
 	:init
 	(setq go-tag-args (list "-transform" "snakecase"))
@@ -14,7 +21,7 @@
 	  (define-key go-mode-map (kbd "C-c T") #'go-tag-remove))
 	)
   (use-package gotest
-	:pin melpa-stable
+	:pin melpa
 	:ensure t
 	:init
 	(setq go-test-verbose t)
@@ -23,13 +30,6 @@
 	(define-key go-mode-map (kbd "<f9> t t") 'go-test-current-test)
 	(define-key go-mode-map (kbd "<f9> t p") 'go-test-current-project)
 	)
-
-  (defun lsp-go-install-save-hooks ()
-	(add-hook 'before-save-hook #'flycheck-buffer)
-	(add-hook 'before-save-hook #'lsp-organize-imports t t)
-	(add-hook 'before-save-hook #'lsp-format-buffer t t)
-	)
-  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
   )
 
 (use-package flycheck-golangci-lint

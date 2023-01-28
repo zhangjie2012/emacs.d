@@ -144,6 +144,7 @@
   :commands lsp-ui-mode
   :hook (lsp-mode-hook . lsp-ui-mode)
   :bind (("<f9> s c" . lsp-ui-flycheck-list)
+		 ("<f9> s m" . lsp-ui-imenu)
 		 :map lsp-mode-map
 		 ("M-." . lsp-ui-peek-find-definitions)
 		 ("M-?" . lsp-ui-peek-find-references))

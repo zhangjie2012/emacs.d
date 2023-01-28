@@ -13,6 +13,7 @@
 (use-package thrift
   :pin melpa
   :ensure t
+  :defer t
   :init
   (add-hook 'thrift-mode-hook
 			(lambda () (setq tab-width 4
