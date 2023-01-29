@@ -63,12 +63,12 @@ Orgmode
 
 - Emacs 版本：27.x
 - 系统：
-  + WSL2 TUI *OK*
-  + Windows GUI *OK*
-  + Ubuntu 22.04 *OK*
-  + MacOS *TODO*
+  + [X] WSL2 TUI
+  + [X] Windows GUI
+  + [X] Ubuntu GUI 22.04
+  + [X] MacOS GUI 
 
-GUI 通过 [[https://github.com/tumashu/cnfonts][cnfonts]] 实现中英文等宽对齐，当前配置使用字体是 [[https://github.com/tonsky/FiraCode][Fira Code]] + [[https://github.com/lxgw/LxgwWenKai][霞鹜文楷]]。
+GUI 通过 [[https://github.com/tumashu/cnfonts][cnfonts]] 实现中英文等宽对齐，当前配置使用字体是 [[https://github.com/adobe-fonts/source-code-pro][Source Code Pro]] + [[https://github.com/lxgw/LxgwWenKai][霞鹜文楷]]。
 
 * 4、安装
 
@@ -123,7 +123,7 @@ alias em="env TERM=xterm-256color emacs -nw"
 
 或者使用清华的源替换掉 =package-archives= ：
 
-#+begin_src elisp
+#+begin_src emacs-lisp
   (setq package-archives
         '(
           ("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
@@ -232,6 +232,7 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 - =<f9> t f= org-footnote-new
 - =<f9> t l= org-toggle-link-display
 - =<f9> w= save buffer，取代 =C-x s=
+- =<f12>= 找到光标
 - =M-?= find references
 - =M--= =M-n= =M-p= 当前单词高亮，上下跳转
 - =M-.= =M-,= 跳转到定义、返回
@@ -250,6 +251,7 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 - =dired-subtree=
   + =i= 打开子目录
   + =;= 折叠子目录
+
 * 7、Packages
 
 ** 7.1 当前使用的
@@ -259,6 +261,7 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 |--------------------+--------------------------------------+----------------------------------------------------------------------|
 | 插件名称           | 插件介绍                             | 备注                                                                 |
 |--------------------+--------------------------------------+----------------------------------------------------------------------|
+| [[https://github.com/domtronn/all-the-icons.el][all-the-icons]]      | 展示 icon                            |                                                                      |
 | [[https://github.com/abo-abo/ace-window][ace-window]]         | 多窗口切换                           | 以前一直用 [[https://github.com/deb0ch/emacs-winum][emacs-winum]]                                               |
 | [[https://github.com/abo-abo/avy][avy]]                | 光标快速定位（按照字符、单词、行等） | 以前用的是 [[https://github.com/winterTTr/ace-jump-mode][ace-jump]]                                                  |
 | [[https://github.com/Malabarba/beacon][beacon]]             | 光标提醒                             |                                                                      |
