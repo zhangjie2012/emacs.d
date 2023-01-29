@@ -11,7 +11,7 @@ Orgmode
 * Table Of Content                                                      :TOC_3:
 - [[#1背景][1、背景]]
 - [[#2目标][2、目标]]
-- [[#3适配说明][3、适配说明]]
+- [[#3说明][3、说明]]
 - [[#4安装][4、安装]]
   - [[#41-emacs-安装][4.1 Emacs 安装]]
     - [[#源码][源码]]
@@ -48,8 +48,6 @@ Orgmode
 
 10 年+ Emacs 用户，作为唯一编辑器，做过 C++、Python、Web（Javascript/React）、Go 等开发。
 
-基于之前的各种耗费时间的经历，决定最后折腾一次，再也不在 Emacs 耗费太多精力。
-
 * 2、目标
 
 贴近原生的最小化 Emacs 配置，实用、稳定、不花里胡哨、少折腾为核心思路。
@@ -59,16 +57,18 @@ Orgmode
 - 尽可能使用 package 的 stable 版本
 - 使用大而全的 package，不用一堆的小而美
 
-* 3、适配说明
+* 3、说明
 
 - Emacs 版本：27.x
 - 系统：
   + [X] WSL2 TUI
   + [X] Windows GUI
   + [X] Ubuntu GUI 22.04
-  + [X] MacOS GUI 
+  + [X] MacOS GUI
 
 GUI 通过 [[https://github.com/tumashu/cnfonts][cnfonts]] 实现中英文等宽对齐，当前配置使用字体是 [[https://github.com/adobe-fonts/source-code-pro][Source Code Pro]] + [[https://github.com/lxgw/LxgwWenKai][霞鹜文楷]]。
+
+=main= 为稳定版本， =unstable= 是实验性版本。
 
 * 4、安装
 
