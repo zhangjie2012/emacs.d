@@ -24,35 +24,39 @@
   :init (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
   )
 
-(use-package doom-themes
+;; https://protesilaos.com/emacs/modus-themes
+(use-package modus-themes
   :pin melpa
   :ensure t
+  :demand t
   :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic nil)
-  (load-theme 'doom-one-light t)
-  (doom-themes-org-config)
+  (setq modus-themes-italic-constructs nil
+        modus-themes-bold-constructs nil
+		modus-themes-org-blocks 'gray-background
+		modus-themes-mixed-fonts t
+		modus-themes-headings
+		'((1 . (1.1))
+          (2 . (1.05))
+          (t . (1.0)))
+		)
+  (setq modus-themes-common-palette-overrides
+		'(
+		  (border-mode-line-active unspecified)
+          (border-mode-line-inactive unspecified)
+		  (fringe unspecified)
+		  (bg-hover bg-yellow-intense)
+		  )
+		)
+  (load-theme 'modus-operandi :no-confirm)
+  :bind ("<f5>" . modus-themes-toggle)
   )
 
 (use-package doom-modeline
   :pin melpa-stable
   :ensure t
   :config
-  ;; (set-face-foreground 'doom-modeline-buffer-modified "orangered")
-  ;; (set-face-foreground 'doom-modeline-buffer-major-mode "systemBrownColor")
-  ;; (set-face-foreground 'doom-modeline-buffer-minor-mode "systemBrownColor")
-  ;; (set-face-foreground 'doom-modeline-project-dir "systemBrownColor")
-  ;; (set-face-foreground 'doom-modeline-project-root-dir "systemBrownColor")
-  ;; (set-face-foreground 'doom-modeline-project-parent-dir "systemBrownColor")
-  ;; (set-face-foreground 'doom-modeline-project-dir "white")
-  ;; (set-face-foreground 'doom-modeline-buffer-file "systemBrownColor")
   (setq doom-modeline-buffer-modification-icon nil)
   (setq doom-modeline-project-detection 'projectile)
-  (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
-  (setq doom-modeline-env-version nil)
-  (setq doom-modeline-window-width-limit fill-column)
-  (setq doom-modeline-minor-modes nil)
-  (setq doom-modeline-indent-info nil)
   (doom-modeline-mode 1)
   )
 
