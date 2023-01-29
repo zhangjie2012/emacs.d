@@ -133,9 +133,9 @@
 	:pin melpa
 	:ensure t
 	:init
-	(setq org-superstar-configure-like-org-bullets t
-		  org-superstar-special-todo-items nil
-		  )
+	(setq org-superstar-special-todo-items nil
+		  org-superstar-prettify-item-bullets nil
+          )
 	(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 	)
 
