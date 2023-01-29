@@ -1,6 +1,5 @@
-
 (use-package web-mode
-  :pin melpa-stable
+  :pin melpa
   :ensure t
   :defer t
   :init

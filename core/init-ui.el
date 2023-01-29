@@ -1,26 +1,23 @@
 (use-package all-the-icons
-  :pin melpa-stable
+  :pin melpa
   :ensure t
   :if (display-graphic-p)
   :init
   (setq inhibit-compacting-font-caches t)
   )
 
-(use-package all-the-icons-ivy-rich
-  :pin melpa-stable
+(use-package all-the-icons-completion
+  :pin melpa
   :ensure t
-  :init (all-the-icons-ivy-rich-mode 1)
+  :if (display-graphic-p)
   :config
-  (setq all-the-icons-ivy-rich-icon t)
-  (setq all-the-icons-ivy-rich-color-icon t)
-  (setq all-the-icons-ivy-rich-icon-size 1.0)
-  (setq all-the-icons-ivy-rich-project t)
-  (setq inhibit-compacting-font-caches t)
+  (all-the-icons-completion-mode)
   )
 
 (use-package all-the-icons-dired
   :pin melpa
-  :ensure
+  :ensure t
+  :if (display-graphic-p)
   :init (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
   )
 

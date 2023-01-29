@@ -1,3 +1,72 @@
+(use-package projectile
+  :pin melpa-stable
+  :ensure t
+  :bind (:map projectile-mode-map
+              ("<f8>" . projectile-command-map)
+              ("C-c p" . projectile-command-map)
+			  :map projectile-command-map
+			  ("F" . projectile-find-file-other-window)
+			  ("w" . projectile-find-file-in-known-projects)
+			  ("D" . projectile-dired-other-window)
+			  ("k" . projectile-kill-buffers)
+			  ("v" . projectile-vc)
+			  ("b" . projectile-switch-to-buffer)
+			  )
+  :config
+  ;; 打开项目缓存, 否则大的项目每次构建会比较慢
+  ;; 你可以通过下面两个名称来清除缓存
+  ;; - projectile-purge-file-from-cache
+  ;; - projectile-purge-dir-from-cache
+  (setq projectile-enable-caching t)
+  ;; projectile 有三种构建索引的方式: native, hybird, alien
+  ;;   native 使用 Emacs lisp 实现, hybird/alien 使用外部命令类似 find, git 来实现
+  ;;   alien 优化了 hybird 的性能: 它不会对外部命令返回的结果做任何处理和排序, 以获得最好的性能
+  ;;   使用外部命令的话, 类似 .gitignore 会自动生效
+  ;; 注意: alien 会忽略 .projectile 文件
+  (setq projectile-indexing-method 'alien)
+  ;; 在每个目录下都可用(即使没有项目文件)
+  (setq projectile-require-project-root 'prompt)
+  ;; 对结果进行排序(active buffer + recently opened)
+  (setq projectile-sort-order 'recentf-active)
+  (setq projectile-completion-system 'ivy)
+
+  ;; fix windows system "projectile-find-file" throw
+  ;; 'tr' is not recognized as an internal or external command ...
+  ;; via: https://github.com/bbatsov/projectile/issues/1302
+  (setq projectile-git-submodule-command nil)
+  (defun project-find-go-module (dir)
+	(when-let ((root (locate-dominating-file dir "go.mod")))
+      (cons 'go-module root)))
+
+  (cl-defmethod project-root ((project (head go-module)))
+	(cdr project))
+
+  :init
+  (projectile-mode +1)
+  )
+
+(use-package company
+  :pin melpa
+  :ensure t
+  :hook ((prog-mode-hook . company-mode)
+		 (protobuf-mode-hook . company-mode))
+  :bind (:map company-active-map
+			  ("M-n" . nil)
+			  ("M-p" . nil)
+			  ("C-n" . company-select-next)
+			  ("C-p" . company-select-previous)
+			  )
+  :init
+  ;; markdown-mode, eshell-mode ignore complete
+  (setq company-global-modes '(not markdown-mode gfm-mode eshell-mode))
+  (setq company-transformers '(company-sort-by-occurrence))
+  (setq company-echo-delay 0)
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1)
+  (setq company-tooltip-align-annotations nil)
+  (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+)
+
 (use-package avy
   :pin melpa-stable
   :ensure t
@@ -8,45 +77,52 @@
   (setq avy-background t)
   )
 
-(use-package ivy
-  :pin melpa-stable
+(use-package vertico
+  :pin gnu
   :ensure t
-  :bind (("C-x b" . ivy-switch-buffer)
-		 ("<f6>" . ivy-resume))
   :init
-  (setq ivy-use-virtual-buffers nil)
-  (setq ivy-count-format "(%d-%d) ")
-  (setq enable-recursive-minibuffers t)
-  :config
-  (ivy-mode 1)
+  (vertico-mode)
   )
 
-(use-package swiper
-  :pin melpa-stable
+(use-package orderless
+  :pin gnu
   :ensure t
-  :bind (("C-s" . swiper)))
-
-(use-package counsel
-  :pin melpa-stable
-  :ensure t
-  :bind (("M-s [" . counsel-rg)
-		 ("M-s ]" . counsel-git-grep)
-		 ("M-x" . counsel-M-x)
-		 ("M-y" . counsel-yank-pop)
-		 ("C-x C-f" . counsel-find-file)
-		 ("<f9> m" . counsel-semantic-or-imenu)
-		 )
-  :config
-  (setq counsel-rg-base-command "rg -i --max-columns 240 --no-heading --with-filename --line-number %s")
+  :init
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion))))
   )
 
-(use-package ivy-rich
+(use-package marginalia
+  :pin gnu
+  :ensure t
+  :init
+  (add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
+  (marginalia-mode)
+  )
+
+(use-package consult
   :pin melpa
   :ensure t
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+  :bind (
+		 ("C-x b" . consult-buffer)
+		 ("M-y" . consult-yank-pop)
+		 ("<f9> m" . consult-imenu)
+		 ("M-s [" . consult-ripgrep)
+		 ("M-s ]" . consult-git-grep)
+		 ("C-s" . consult-line)
+		 )
+  :init
+  (setq register-preview-delay 0.5
+        register-preview-function #'consult-register-format)
+  (advice-add #'register-preview :override #'consult-register-window)
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
+  (setq consult-preview-key (kbd "M-."))
   :config
-  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
-  (setq ivy-rich-path-style 'abbrev)
-  (ivy-rich-mode 1)
+  (autoload 'projectile-project-root "projectile")
+  (setq consult-project-function (lambda (_) (projectile-project-root)))
   )
 
 (use-package ace-window
