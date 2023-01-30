@@ -1,7 +1,11 @@
 (use-package python
-  :pin melpa-stable
+  :pin melpa
   :ensure t
   :mode "\\.py'"
+  :hook ((python-mode-hook . lsp-deferred)
+		 (python-mode-hook . flycheck-mode)
+		 (python-mode-hook . company-mode)
+		 )
   :init
   (setq python-shell-interpreter "python3")
   (set-variable 'py-indent-offset 4)

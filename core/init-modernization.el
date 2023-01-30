@@ -28,7 +28,7 @@
   (setq projectile-require-project-root 'prompt)
   ;; 对结果进行排序(active buffer + recently opened)
   (setq projectile-sort-order 'recentf-active)
-  (setq projectile-completion-system 'ivy)
+  ;; (setq projectile-completion-system 'ivy)
 
   ;; fix windows system "projectile-find-file" throw
   ;; 'tr' is not recognized as an internal or external command ...
@@ -44,28 +44,6 @@
   :init
   (projectile-mode +1)
   )
-
-(use-package company
-  :pin melpa
-  :ensure t
-  :hook ((prog-mode-hook . company-mode)
-		 (protobuf-mode-hook . company-mode))
-  :bind (:map company-active-map
-			  ("M-n" . nil)
-			  ("M-p" . nil)
-			  ("C-n" . company-select-next)
-			  ("C-p" . company-select-previous)
-			  )
-  :init
-  ;; markdown-mode, eshell-mode ignore complete
-  (setq company-global-modes '(not markdown-mode gfm-mode eshell-mode))
-  (setq company-transformers '(company-sort-by-occurrence))
-  (setq company-echo-delay 0)
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 1)
-  (setq company-tooltip-align-annotations nil)
-  (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-)
 
 (use-package avy
   :pin melpa-stable
@@ -125,6 +103,26 @@
   (setq consult-project-function (lambda (_) (projectile-project-root)))
   )
 
+(use-package embark
+  :pin gnu
+  :ensure t
+  :bind (("C-." . embark-act)
+		 ("C-;" . embark-dwim)
+		 ("C-h B" . embark-bindings))
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command)
+  :config
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+(use-package embark-consult
+  :pin gnu
+  :ensure t
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
 (use-package ace-window
   :pin melpa-stable
   :ensure t
@@ -158,7 +156,7 @@
   )
 
 (use-package highlight-symbol
-  :pin melpa-stable
+  :pin melpa
   :ensure t
   :bind (("M--" . highlight-symbol-at-point)
 		 ("M-n" . highlight-symbol-next)
@@ -184,39 +182,6 @@
              (";" . dired-subtree-remove))
   )
 
-(use-package string-inflection
-  :pin melpa-stable
-  :ensure t
-  :bind (:map prog-mode-map
-              ("C-M-j" . my-string-inflection-cycle-auto))
-  :init
-  (defun my-string-inflection-cycle-auto ()
-	"switching by major-mode"
-	(interactive)
-	(cond
-	 ((eq major-mode 'emacs-lisp-mode)
-      (string-inflection-all-cycle))
-	 ((eq major-mode 'python-mode)
-      (string-inflection-python-style-cycle))
-	 ((eq major-mode 'go-mode) ;; golang use java style
-      (string-inflection-java-style-cycle))
-	 (t (string-inflection-all-cycle))))  ;; default
-  )
-
-;; https://github.com/purcell/exec-path-from-shell/issues/36
-(use-package exec-path-from-shell
-  :pin melpa
-  :ensure t
-  :config
-  (when (and window-system
-             (memq window-system '(mac ns x)))
-	(exec-path-from-shell-initialize)
-	(exec-path-from-shell-copy-env "GOPATH")
-	(progn (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO"))
-			 (add-to-list 'exec-path-from-shell-variables var)))
-	)
-  )
-
 (use-package youdao-dictionary
   :pin melpa
   :ensure t
@@ -228,6 +193,33 @@
   (setq url-automatic-caching t)
   (setq youdao-dictionary-use-chinese-word-segmentation t)
   )
+
+(use-package rainbow-delimiters
+  :pin melpa-stable
+  :ensure t
+  :hook (prog-mode-hook . rainbow-delimiters-mode)
+  )
+
+;; line number
+;; (set-face-foreground 'line-number "darkgrey")
+(global-set-key (kbd "M-s l") 'display-line-numbers-mode)
+
+(use-package linum-relative
+  :pin melpa-stable
+  :ensure t
+  :bind (("M-s r" . linum-relative-toggle))
+  :config
+  (setq linum-relative-backend 'display-line-numbers-mode)
+  )
+
+(use-package display-fill-column-indicator
+  :pin manual
+  :custom
+  (display-fill-column-indicator-column 120)
+  (display-fill-column-indicator-character ?\u2502)
+  :config
+  (global-set-key (kbd "M-s n") 'display-fill-column-indicator-mode)
+)
 
 ;; -----------------------------------------------------------------------------
 
