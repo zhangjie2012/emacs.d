@@ -75,7 +75,6 @@
   :pin gnu
   :ensure t
   :init
-  (add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
   (marginalia-mode)
   )
 
