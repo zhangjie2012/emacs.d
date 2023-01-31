@@ -36,8 +36,7 @@
 		org-startup-folded t
 		org-startup-with-inline-images t
 		org-image-actual-width '(1024)
-		org-capture-templates nil
-		)
+		org-capture-templates nil)
 
   (setq org-agenda-files '("~/personal-area/todo.org"))
   (setq org-default-notes-file "~/personal-area/todo.org")
@@ -51,40 +50,41 @@
 		'(("TODO" . "orangered")
           ("WAIT" . "darkgoldenrod")
           ("DONE" . "lightgreen")
-		  ("DEPR" . "darkgrey")))
-  (setq
-   ;; org-agenda-skip-scheduled-if-done t
-   ;; org-agenda-skip-deadline-if-done t
-   org-agenda-include-deadlines t
-   org-agenda-include-diary nil
-   org-agenda-compact-blocks t
-   org-agenda-start-with-log-mode t
-   org-agenda-start-on-weekday 1
-   org-agenda-span 28
-   )
-  (setq
-   org-priority-faces
-   '((?A :foreground "#ff6c6b" :weight bold)
-     (?B :foreground "#98be65" :weight bold)
-     (?C :foreground "darkgrey" :weight bold))
-   org-agenda-block-separator 8411
-   )
+		  ("DEPR" . "darkgrey"))
+		)
+
+  (setq org-agenda-include-deadlines t
+		org-agenda-include-diary nil
+		org-agenda-compact-blocks t
+		org-agenda-start-with-log-mode t
+		org-agenda-start-on-weekday 1
+		org-agenda-span 28
+		;; org-agenda-skip-scheduled-if-done t
+		;; org-agenda-skip-deadline-if-done t
+		)
+  (setq org-priority-faces
+		'((?A :foreground "#ff6c6b" :weight bold)
+		  (?B :foreground "#98be65" :weight bold)
+		  (?C :foreground "darkgrey" :weight bold)
+		  )
+		;; org-agenda-block-separator 8411
+		)
   (setq org-agenda-custom-commands
-      '(("v" "A better agenda view"
-         ((tags "PRIORITY=\"A\""
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                 (org-agenda-overriding-header "* HIGH-PRIORITY:")))
-          (tags "PRIORITY=\"B\""
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                 (org-agenda-overriding-header "* MEDIUM-PRIORITY:")))
-          (tags "PRIORITY=\"C\""
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                 (org-agenda-overriding-header "* LOW-PRIORITY:")))
-          ;; (tags "customtag"
-          ;;       ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-          ;;        (org-agenda-overriding-header "OTHER:")))
-          (agenda "")
-          (alltodo "")))))
+		'(("v" "A better agenda view"
+           ((tags "PRIORITY=\"A\""
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                   (org-agenda-overriding-header "* HIGH-PRIORITY:")))
+			(tags "PRIORITY=\"B\""
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                   (org-agenda-overriding-header "* MEDIUM-PRIORITY:")))
+			(tags "PRIORITY=\"C\""
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                   (org-agenda-overriding-header "* LOW-PRIORITY:")))
+			;; (tags "customtag"
+			;;       ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+			;;        (org-agenda-overriding-header "OTHER:")))
+			(agenda "")
+			(alltodo "")))))
   (setq org-agenda-breadcrumbs-separator " ❱ "
 		org-agenda-current-time-string "⏰ ┈┈┈┈┈┈┈┈┈┈┈ now"
 		org-agenda-time-grid '((weekly today require-timed)

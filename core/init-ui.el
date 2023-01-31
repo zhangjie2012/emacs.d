@@ -7,10 +7,9 @@
   (setq modus-themes-italic-constructs nil
         modus-themes-bold-constructs nil
 		modus-themes-org-blocks 'gray-background
-		;; modus-themes-mixed-fonts t
 		modus-themes-headings
-		'((1 . (1.2))
-          (2 . (1.1))
+		'((1 . (1.25))
+          (2 . (1.15))
 		  (3 . (1.05))
           (t . (1.0)))
 		)
@@ -23,9 +22,12 @@
 
 		  (fg-heading-1 blue-warmer)
 		  (bg-heading-1 bg-blue-nuanced)
-          (fg-heading-2 yellow-cooler)
+		  ;; (overline-heading-1 blue-faint)
+
+          (fg-heading-2 yellow-warmer)
 		  (bg-heading-2 bg-yellow-nuanced)
-          (fg-heading-3 cyan-cooler)
+
+          (fg-heading-3 cyan-warmer)
 		  (bg-heading-3 bg-cyan-nuanced)
 
 		  (underline-link border)
@@ -41,8 +43,11 @@
   :pin melpa-stable
   :ensure t
   :config
-  (setq doom-modeline-buffer-modification-icon nil)
-  (setq doom-modeline-project-detection 'projectile)
+  (setq doom-modeline-buffer-modification-icon nil
+		doom-modeline-project-detection 'projectile
+		doom-modeline-buffer-file-name-style 'truncate-upto-root
+		)
+
   (doom-modeline-mode 1)
   )
 
@@ -71,10 +76,10 @@
   :pin melpa
   :ensure t
   :bind (("<f12>" . beacon-blink))
-  ;; :config
+  :config
   ;; (beacon-mode 1)
-  ;; (setq beacon-push-mark 35)
-  ;; (setq beacon-color "#666600")
+  (setq beacon-push-mark 35)
+  (setq beacon-color "#FF8247")
   )
 
 (provide 'init-ui)
