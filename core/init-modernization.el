@@ -55,6 +55,7 @@
   (setq avy-background t)
   )
 
+;; vertico + orderless 对 minibuffer 增强
 (use-package vertico
   :pin gnu
   :ensure t
@@ -66,9 +67,7 @@
   :pin gnu
   :ensure t
   :init
-  (setq completion-styles '(orderless basic)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion))))
+  (setq completion-styles '(orderless))
   )
 
 (use-package marginalia
@@ -76,6 +75,15 @@
   :ensure t
   :init
   (marginalia-mode)
+  )
+
+(use-package embark
+  :pin gnu
+  :ensure t
+  :bind (("C-." . embark-act)
+		 ("C-;" . embark-dwim))
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command)
   )
 
 (use-package consult
@@ -101,20 +109,6 @@
   (autoload 'projectile-project-root "projectile")
   (setq consult-project-function (lambda (_) (projectile-project-root)))
   )
-
-(use-package embark
-  :pin gnu
-  :ensure t
-  :bind (("C-." . embark-act)
-		 ("C-;" . embark-dwim)
-		 ("C-h B" . embark-bindings))
-  :init
-  (setq prefix-help-command #'embark-prefix-help-command)
-  :config
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                 nil
-                 (window-parameters (mode-line-format . none)))))
 
 (use-package embark-consult
   :pin gnu
