@@ -45,10 +45,14 @@
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
 
-(setq inhibit-startup-echo-area-message t)
-(setq inhibit-startup-message t)
-(setq indicate-empty-lines t)
-(setq show-trailing-whitespace t)
+(setq inhibit-startup-echo-area-message t
+	  inhibit-startup-message t
+	  indicate-empty-lines t
+	  show-trailing-whitespace t
+	  read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t
+      completion-ignore-case t)
+
 (show-paren-mode t)
 (tool-bar-mode -1)
 (set-scroll-bar-mode nil)
