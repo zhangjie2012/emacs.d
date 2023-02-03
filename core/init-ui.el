@@ -45,9 +45,8 @@
   :config
   (setq doom-modeline-buffer-modification-icon nil
 		doom-modeline-project-detection 'projectile
-		doom-modeline-buffer-file-name-style 'truncate-upto-root
+		doom-modeline-buffer-file-name-style 'truncate-upto-project
 		)
-
   (doom-modeline-mode 1)
   )
 
