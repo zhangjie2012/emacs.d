@@ -35,8 +35,9 @@
 		org-startup-with-inline-images t
 		org-image-actual-width '(1024)
 		org-capture-templates nil)
-  (setq org-agenda-files '("~/personal-area/todo.org"))
-  (setq org-default-notes-file "~/personal-area/todo.org")
+
+  (setq org-agenda-files '("~/gtd"))
+  (setq org-default-notes-file "~/gtd/entry.org")
 
   :config
   ;; GTD setting
@@ -56,8 +57,12 @@
 		org-agenda-start-with-log-mode t
 		org-agenda-start-on-weekday 1
 		org-agenda-span 28
-		;; org-agenda-skip-scheduled-if-done t
-		;; org-agenda-skip-deadline-if-done t
+		org-deadline-warning-days 7
+		org-use-speed-commands t
+		org-agenda-skip-deadline-prewarning-if-scheduled t
+		org-agenda-skip-scheduled-delay-if-deadline t
+		org-agenda-skip-scheduled-if-done t
+		org-agenda-skip-deadline-if-done t
 		)
   (setq org-priority-faces
 		'((?A :foreground "#ff6c6b" :weight bold)
@@ -66,7 +71,7 @@
 		  )
 		)
   (setq org-agenda-custom-commands
-		'(("v" "A better agenda view"
+		'(("g" "global overview"
            ((tags "PRIORITY=\"A\""
                   ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
                    (org-agenda-overriding-header "* HIGH-PRIORITY:")))
@@ -93,7 +98,7 @@
 
   (add-to-list 'org-capture-templates
                '("t" "Task" entry
-				 (file "~/personal-area/todo.org")
+				 (file "~/gtd/entry.org")
 				 "* TODO %?\n"))
 
   (require 'org-tempo)
