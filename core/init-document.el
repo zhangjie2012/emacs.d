@@ -1,5 +1,4 @@
 (use-package markdown-mode
-  :pin melpa-stable
   :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
@@ -8,7 +7,6 @@
   )
 
 (use-package htmlize
-  :pin melpa
   :ensure t
   :defer t
   )
@@ -106,7 +104,6 @@
   (require 'org-indent)
 
   (use-package ob-go
-	:pin melpa
 	:ensure t
 	)
 
@@ -127,7 +124,6 @@
    )
 
   (use-package org-superstar
-	:pin melpa
 	:ensure t
 	:init
 	(setq org-superstar-special-todo-items nil
@@ -137,7 +133,6 @@
 	)
 
   (use-package toc-org
-	:pin melpa
 	:ensure t
 	:init
 	(add-hook 'org-mode-hook 'toc-org-mode)
@@ -146,7 +141,6 @@
 
 ;; blog
 (use-package ox-publish
-  :pin melpa
   :defer t
   :init
   (setq org-html-validation-link nil)

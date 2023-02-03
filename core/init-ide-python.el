@@ -1,5 +1,4 @@
 (use-package python
-  :pin melpa
   :ensure t
   :mode "\\.py'"
   :hook ((python-mode-hook . lsp-deferred)

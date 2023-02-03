@@ -1,6 +1,5 @@
 ;; https://protesilaos.com/emacs/modus-themes
 (use-package modus-themes
-  :pin melpa
   :ensure t
   :demand t
   :config
@@ -44,7 +43,6 @@
   )
 
 (use-package doom-modeline
-  :pin melpa
   :ensure t
   :config
   (setq doom-modeline-buffer-modification-icon nil
@@ -56,7 +54,6 @@
 
 (use-package cnfonts
   :if window-system
-  :pin melpa
   :ensure t
   :init
   ;; https://github.com/tumashu/cnfonts/issues/138
@@ -76,7 +73,6 @@
   )
 
 (use-package beacon
-  :pin melpa
   :ensure t
   :bind (("<f12>" . beacon-blink))
   :config

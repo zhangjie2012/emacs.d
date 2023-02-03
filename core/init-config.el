@@ -1,5 +1,4 @@
 (use-package protobuf-mode
-  :pin melpa-stable
   :ensure t
   :mode "\\.proto\\'"
   :init
@@ -11,7 +10,6 @@
   )
 
 (use-package thrift
-  :pin melpa
   :ensure t
   :defer t
   :init
@@ -23,7 +21,6 @@
   )
 
 (use-package yaml-mode
-  :pin melpa-stable
   :ensure t
   :mode "\\.yml'"
   :init
@@ -33,25 +30,21 @@
   )
 
 (use-package lua-mode
-  :pin melpa-stable
   :ensure t
   :mode "\\.lua\\'"
   )
 
 (use-package dockerfile-mode
-  :pin melpa-stable
   :ensure t
   :mode "Dockerfile\\'"
   )
 
 (use-package nginx-mode
-  :pin melpa-stable
   :ensure t
   :defer t
   )
 
 (use-package sql-indent
-  :pin gnu
   :ensure t
   :hook (sql-mode . sqlind-minor-mode)
   )

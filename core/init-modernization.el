@@ -1,5 +1,4 @@
 (use-package projectile
-  :pin melpa-stable
   :ensure t
   :bind (:map projectile-mode-map
               ("<f8>" . projectile-command-map)
@@ -43,7 +42,6 @@
 
   :init
   (use-package counsel-projectile
-    :pin melpa
     :ensure t
     :config
     (counsel-projectile-mode 1)
@@ -53,7 +51,6 @@
   )
 
 (use-package avy
-  :pin melpa-stable
   :ensure t
   :bind (("M-s i" . avy-goto-word-1)
          ("M-s j" . avy-goto-line)
@@ -63,7 +60,6 @@
   )
 
 (use-package ivy
-  :pin melpa
   :ensure t
   :bind (("C-x b" . ivy-switch-buffer)
 		 ("<f6>" . ivy-resume))
@@ -76,7 +72,6 @@
   )
 
 (use-package ivy-rich
-  :pin melpa
   :ensure t
   :init
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
@@ -85,12 +80,10 @@
   )
 
 (use-package swiper
-  :pin melpa
   :ensure t
   :bind (("C-s" . swiper)))
 
 (use-package counsel
-  :pin melpa
   :ensure t
   :bind (("M-s [" . counsel-rg)
 		 ("M-s ]" . counsel-git-grep)
@@ -105,7 +98,6 @@
   )
 
 (use-package embark
-  :pin gnu
   :ensure t
   :bind (("C-." . embark-act)
 		 ("C-;" . embark-dwim))
@@ -114,7 +106,6 @@
   )
 
 (use-package ace-window
-  :pin melpa-stable
   :ensure t
   :bind (("M-o" . ace-window)
 		 ("M-s t" . ace-swap-window))
@@ -127,7 +118,6 @@
   )
 
 (use-package expand-region
-  :pin melpa-stable
   :ensure t
   :bind (("M-m" . er/expand-region)
 		 ("M-s s" . er/mark-symbol)
@@ -140,13 +130,11 @@
   )
 
 (use-package multiple-cursors
-  :pin melpa-stable
   :ensure t
   :bind (("M-s ;" . mc/mark-all-symbols-like-this-in-defun))
   )
 
 (use-package highlight-symbol
-  :pin melpa
   :ensure t
   :bind (("M--" . highlight-symbol-at-point)
 		 ("M-n" . highlight-symbol-next)
@@ -154,7 +142,6 @@
   )
 
 (use-package which-key
-  :pin melpa-stable
   :ensure t
   :hook (prog-mode-hook . which-key-mode)
   :init
@@ -162,7 +149,6 @@
   )
 
 (use-package dired-subtree
-  :pin melpa
   :ensure t
   :init
   (setq dired-subtree-use-backgrounds nil)
@@ -173,7 +159,6 @@
   )
 
 (use-package youdao-dictionary
-  :pin melpa
   :ensure t
   :bind (
 		 ("<f9> f" . youdao-dictionary-search-at-point+)
@@ -185,7 +170,6 @@
   )
 
 (use-package rainbow-delimiters
-  :pin melpa-stable
   :ensure t
   :hook (prog-mode-hook . rainbow-delimiters-mode)
   )
@@ -195,7 +179,6 @@
 (global-set-key (kbd "M-s l") 'display-line-numbers-mode)
 
 (use-package linum-relative
-  :pin melpa-stable
   :ensure t
   :bind (("M-s r" . linum-relative-toggle))
   :config

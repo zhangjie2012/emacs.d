@@ -17,9 +17,9 @@
   (package-install 'use-package))
 
 (eval-and-compile
-  (setq use-package-verbose t)
-  (setq use-package-always-pin t)
-  (setq use-package-compute-statistics nil)
+  ;; (setq use-package-verbose t)
+  ;; (setq use-package-always-pin nil)
+  ;; (setq use-package-compute-statistics nil)
   (setq use-package-hook-name-suffix nil)
   )
 

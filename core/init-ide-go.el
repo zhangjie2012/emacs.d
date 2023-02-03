@@ -1,5 +1,4 @@
 (use-package flycheck-golangci-lint
-  :pin melpa
   :ensure t
   :defer t
   :init
@@ -14,7 +13,6 @@
   )
 
 (use-package go-mode
-  :pin melpa
   :ensure t
   :hook ((go-mode-hook . lsp-deferred)
 		 (go-mode-hook . company-mode)
@@ -38,7 +36,6 @@
   (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
   (use-package go-tag
-	:pin melpa
 	:ensure t
 	:init
 	(setq go-tag-args (list "-transform" "snakecase"))
@@ -48,7 +45,6 @@
 	)
 
   (use-package gotest
-	:pin melpa
 	:ensure t
 	:init
 	(setq go-test-verbose t)

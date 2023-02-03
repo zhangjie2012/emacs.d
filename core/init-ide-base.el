@@ -1,5 +1,4 @@
 (use-package string-inflection
-  :pin melpa-stable
   :ensure t
   :bind (:map prog-mode-map
               ("C-M-j" . my-string-inflection-cycle-auto))
@@ -19,7 +18,6 @@
 
 ;; https://github.com/purcell/exec-path-from-shell/issues/36
 (use-package exec-path-from-shell
-  :pin melpa
   :ensure t
   :defer 0.5
   :config
@@ -33,7 +31,6 @@
   )
 
 (use-package lsp-mode
-  :pin melpa
   :ensure t
   :hook ((lsp-mode-hook . lsp-enable-which-key-integration))
   :bind (("<f9> s s" . lsp-workspace-restart)
@@ -64,7 +61,6 @@
   )
 
 (use-package lsp-ui
-  :pin melpa
   :ensure t
   :commands lsp-ui-mode
   :hook (lsp-mode-hook . lsp-ui-mode)
@@ -81,7 +77,6 @@
   )
 
 (use-package company
-  :pin melpa
   :ensure t
   :hook ((emacs-lisp-mode-hook . (lambda ()
 								   (setq-local company-backends '(company-elisp))))
@@ -100,52 +95,7 @@
 		company-minimum-prefix-length 1)
   )
 
-;; (use-package lsp-mode
-;;   :pin melpa-stable
-;;   :ensure t
-;;   :hook
-;;   ;; (emacs-lisp-mode-hook . lsp-deferred)
-;;   (python-mode-hook . lsp-deferred)
-;;   ;; (rjsx-mode . lsp) ; so slow
-;;   (go-mode-hook . lsp-deferred)
-;;   :commands lsp
-;;   :bind (("<f9> s s" . lsp-workspace-restart)
-;; 		 ("<f9> s r" . lsp-find-references)
-;; 		 ("<f9> s d" . lsp-describe-thing-at-point)
-;; 		 ("<f9> s i" . lsp-find-implementation)
-;; 		 ("<f9> s h" . lsp-toggle-symbol-highlight)
-;; 		 :map lsp-signature-mode
-;; 		 ("<f9> s p" . lsp-signature-previous)
-;; 		 ("<f9> s n" . lsp-signature-next)
-;; 		 )
-;;   :init
-;;   ;; config from https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
-;;   (setq lsp-enable-symbol-highlighting nil
-;; 		lsp-ui-doc-enable t
-;; 		lsp-ui-doc-show-with-cursor nil
-;; 		lsp-lens-enable nil
-;; 		lsp-headerline-breadcrumb-enable nil
-;; 		lsp-ui-sideline-enable nil
-;; 		lsp-modeline-code-actions-enable t
-;; 		lsp-signature-render-documentation nil
-;; 		lsp-completion-show-detail t
-;; 		lsp-completion-show-kind t
-;; 		)
-;;   ;; other
-;;   (setq lsp-diagnostic-package :none
-;; 		lsp-enable-folding nil
-;; 		lsp-enable-links nil
-;; 		lsp-restart 'auto-restart
-;; 		;; lsp-enable-snippet nil
-;; 		;; python
-;; 		lsp-pyls-server-command 'pyls
-;; 		)
-;;   :config
-;;   (push "[/\\\\]googleapis$" lsp-file-watch-ignored)
-;;   )
-
 (use-package flycheck
-  :pin melpa-stable
   :ensure t
   ;; :hook (prog-mode-hook . flycheck-mode)
   :bind (("<f9> <f9>" . flycheck-buffer)
@@ -176,7 +126,6 @@
   )
 
 (use-package git-gutter+
-  :pin melpa-stable
   :ensure t
   :bind (("<f9> g" . git-gutter+-mode))
   :config (progn

@@ -1,5 +1,4 @@
 (use-package elfeed
-  :pin melpa-stable
   :bind ("<f9> q" . elfeed)
   :ensure t
   :init
