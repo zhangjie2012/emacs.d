@@ -9,25 +9,26 @@ Orgmode
 [[file:screenshots/orgmode.png]]
 
 * Table Of Content                                                      :TOC_3:
-- [[#1背景][1、背景]]
-- [[#2目标][2、目标]]
-- [[#3说明][3、说明]]
-- [[#4安装][4、安装]]
-  - [[#41-emacs-安装][4.1 Emacs 安装]]
+- [[#背景][背景]]
+- [[#目标][目标]]
+- [[#说明][说明]]
+- [[#安装][安装]]
+  - [[#emacs-安装][Emacs 安装]]
     - [[#源码][源码]]
     - [[#ubuntu-2204][Ubuntu 22.04]]
     - [[#macoswindows][MacOS/Windows]]
-  - [[#42-配置安装][4.2 配置安装]]
-  - [[#43-开发环境][4.3 开发环境]]
+  - [[#配置安装][配置安装]]
+  - [[#开发环境][开发环境]]
     - [[#web][Web]]
     - [[#go][Go]]
     - [[#python][Python]]
-- [[#5文件结构][5、文件结构]]
-- [[#6常用快捷键cheat-sheet][6、常用快捷键（cheat sheet）]]
-- [[#7packages][7、Packages]]
-  - [[#71-当前使用的][7.1 当前使用的]]
-  - [[#72-以前用过的][7.2 以前用过的]]
-- [[#8faq][8、FAQ]]
+- [[#文件结构][文件结构]]
+- [[#常用快捷键cheat-sheet][常用快捷键（cheat sheet）]]
+  - [[#org][org]]
+- [[#packages][packages]]
+  - [[#当前使用的][当前使用的]]
+  - [[#以前用过的][以前用过的]]
+- [[#faq][FAQ]]
   - [[#emacs-启动速度太慢怎么办][Emacs 启动速度太慢怎么办？]]
   - [[#org-_--不被转义成下标和上标][Org =_= =^= 不被转义成下标和上标？]]
   - [[#org-92-后继续使用-s-tab-快捷插入][Org 9.2 后继续使用 =<s [Tab]= 快捷插入？]]
@@ -39,16 +40,16 @@ Orgmode
   - [[#项目管理][项目管理？]]
   - [[#写-go-代码时如何禁用注释中自动补全][写 Go 代码时如何禁用注释中自动补全？]]
   - [[#英文-ubuntu-下输入法无法切换中文][英文 Ubuntu 下输入法无法切换中文？]]
-- [[#9其他资料][9、其他资料]]
+- [[#其他资料][其他资料]]
 - [[#footnotes][Footnotes]]
 
-* 1、背景
+* 背景
 
 基于老的配置文件：https://gitlab.com/JerryZhang2012/emacs.d
 
 10 年+ Emacs 用户，作为唯一编辑器，做过 C++、Python、Web（Javascript/React）、Go 等开发。
 
-* 2、目标
+* 目标
 
 贴近原生的最小化 Emacs 配置，实用、稳定、不花里胡哨、少折腾为核心思路。
 
@@ -57,7 +58,7 @@ Orgmode
 - 尽可能使用 package 的 stable 版本
 - 使用大而全的 package，不用一堆的小而美
 
-* 3、说明
+* 说明
 
 - Emacs 版本：27.x
 - 系统：
@@ -70,9 +71,9 @@ GUI 通过 [[https://github.com/tumashu/cnfonts][cnfonts]] 实现中英文等宽
 
 =main= 为稳定版本， =unstable= 是实验性版本。
 
-* 4、安装
+* 安装
 
-** 4.1 Emacs 安装
+** Emacs 安装
 
 推荐使用 Emacs 27，较新又稳定。
 
@@ -113,7 +114,7 @@ alias em="env TERM=xterm-256color emacs -nw"
 
 注意：Windows 下配置文件用户目录下的 =/AppData/Roaming= 下（AppData 是隐藏的）。
 
-** 4.2 配置安装
+** 配置安装
 
 #+begin_src sh
   git clone https://github.com/zhangjie2012/emacs.d.git ~/.emacs.d
@@ -143,7 +144,7 @@ alias em="env TERM=xterm-256color emacs -nw"
   - 语法检测 flycheck [[https://www.flycheck.org/en/latest/languages.html#flycheck-languages][Supported languages]]
   - 统一使用 lsp，需要安装对应语言的 [[https://emacs-lsp.github.io/lsp-mode/page/languages/][Languages]]
 
-** 4.3 开发环境
+** 开发环境
 
 基于 [[https://langserver.org/][LSP]]，客户端使用 [[https://github.com/emacs-lsp/lsp-mode][lsp-mode]]，也有很多人使用 [[https://github.com/joaotavora/eglot][eglot]]。
 
@@ -197,7 +198,7 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 
 配置文件：https://github.com/zhangjie2012/dotfiles/blob/master/_flake8
 
-* 5、文件结构
+* 文件结构
 
 - =init-base= 原生 emacs 的一些基础配置，包含编码，工具栏展示，自动保存等等
 - =init-ui= 主题、mode-line 相关
@@ -213,7 +214,7 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 - =init-config= 常见配置文件
 - =init-document= 文档 mode，markdown + orgmode
 
-* 6、常用快捷键（cheat sheet）
+* 常用快捷键（cheat sheet）
 
 - =C-s= 本文件搜索
 - =<F5>= 切换 dark/light 主题
@@ -252,9 +253,22 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
   + =i= 打开子目录
   + =;= 折叠子目录
 
-* 7、Packages
+** org
 
-** 7.1 当前使用的
+|-------------+-------------------------------------+--------|
+| 快捷键      | 说明                                | 频率   |
+|-------------+-------------------------------------+--------|
+| =<f9> t a=  | =org-agenda=                        | *high* |
+| =<f9> t t=  | =org-capture=                       | middle |
+| =<f9> t l=  | =org-toggle-link-display=           |        |
+| =<f9> t f=  | =org-footnote-new=                  |        |
+| =<f9> t i=  | =org-toggle-inline-images=          |        |
+| =M-[= =M-]= | =org-previous/next-visible-heading= | middle |
+|-------------+-------------------------------------+--------|
+
+* packages
+
+** 当前使用的
 
 Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/awesome-emacs][awesome-emacs]] 是按照分类整理的。下面列一下我正在使用的插件以及一些说明：
 
@@ -284,7 +298,7 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 | [[https://github.com/justbur/emacs-which-key][which-key]]          | 快捷键绑定提示                       |                                                                      |
 |--------------------+--------------------------------------+----------------------------------------------------------------------|
 
-** 7.2 以前用过的
+** 以前用过的
 
 一些尝试过，但是不再使用的 package：
 
@@ -300,7 +314,7 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 - [[https://github.com/milkypostman/powerline][powerline]] 用了一段时间，后来用 doom-modeline 替换掉了
 - [[https://github.com/joaotavora/yasnippet][yasnippet]] 代码片段，以前写 C++ 的时候常用，现在不咋用了
 
-* 8、FAQ
+* FAQ
 
 ** Emacs 启动速度太慢怎么办？
 
@@ -411,7 +425,7 @@ lsp-mode 的功能比较多，官方提供了 [[https://emacs-lsp.github.io/lsp-
 
 具体可以见这个帖子：https://emacs-china.org/t/topic/974/20 ，正如 scutdk 所说，修改系统全局的 locale 可能带来其他问题。
 
-* 9、其他资料
+* 其他资料
 
 有点乱，参差不齐：
 
