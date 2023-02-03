@@ -33,6 +33,10 @@
 		  (underline-link border)
           (underline-link-visited border)
           (underline-link-symbolic border)
+
+		  (underline-err yellow-intense)
+          (underline-warning magenta-intense)
+          (underline-note green-intense)
 		  )
 		)
   (load-theme 'modus-operandi :no-confirm)
@@ -40,7 +44,7 @@
   )
 
 (use-package doom-modeline
-  :pin melpa-stable
+  :pin melpa
   :ensure t
   :config
   (setq doom-modeline-buffer-modification-icon nil

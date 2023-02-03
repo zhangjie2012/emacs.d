@@ -28,7 +28,7 @@
   (setq projectile-require-project-root 'prompt)
   ;; 对结果进行排序(active buffer + recently opened)
   (setq projectile-sort-order 'recentf-active)
-  ;; (setq projectile-completion-system 'ivy)
+  (setq projectile-completion-system 'ivy)
 
   ;; fix windows system "projectile-find-file" throw
   ;; 'tr' is not recognized as an internal or external command ...
@@ -42,7 +42,14 @@
 	(cdr project))
 
   :init
-  (projectile-mode +1)
+  (use-package counsel-projectile
+    :pin melpa
+    :ensure t
+    :config
+    (counsel-projectile-mode 1)
+    )
+
+  ;; (projectile-mode +1)
   )
 
 (use-package avy
@@ -55,28 +62,46 @@
   (setq avy-background t)
   )
 
-;; vertico + orderless 对 minibuffer 增强
-(use-package orderless
-  :pin gnu
+(use-package ivy
+  :pin melpa
   :ensure t
+  :bind (("C-x b" . ivy-switch-buffer)
+		 ("<f6>" . ivy-resume))
   :init
-  (setq completion-styles '(orderless basic))
+  (setq ivy-use-virtual-buffers nil)
+  (setq ivy-count-format "(%d-%d) ")
+  (setq enable-recursive-minibuffers t)
+  :config
+  (ivy-mode 1)
   )
 
-(use-package vertico
-  :pin gnu
+(use-package ivy-rich
+  :pin melpa
   :ensure t
   :init
-  (setq vertico-scroll-margin 0
-		vertico-resize nil)
-  (vertico-mode)
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
+  :config
+  (ivy-rich-mode 1)
   )
 
-(use-package marginalia
-  :pin gnu
+(use-package swiper
+  :pin melpa
   :ensure t
-  :init
-  (marginalia-mode)
+  :bind (("C-s" . swiper)))
+
+(use-package counsel
+  :pin melpa
+  :ensure t
+  :bind (("M-s [" . counsel-rg)
+		 ("M-s ]" . counsel-git-grep)
+		 ("M-x" . counsel-M-x)
+		 ("<f9> x" . counsel-M-x)
+		 ("M-y" . counsel-yank-pop)
+		 ("<f9> f" . counsel-find-file)
+		 ("C-x C-f" . counsel-find-file)
+		 )
+  :config
+  (setq counsel-rg-base-command "rg -i --max-columns 240 --no-heading --with-filename --line-number %s")
   )
 
 (use-package embark
@@ -87,45 +112,6 @@
   :init
   (setq prefix-help-command #'embark-prefix-help-command)
   )
-
-(use-package consult
-  :pin melpa
-  :ensure t
-  :hook (completion-list-mode . consult-preview-at-point-mode)
-  :bind (
-		 ("C-x b" . consult-buffer)
-		 ("M-y" . consult-yank-pop)
-		 ("<f9> m" . consult-imenu)
-		 ("M-s [" . consult-ripgrep)
-		 ("M-s ]" . consult-git-grep)
-		 ("C-s" . consult-line)
-		 )
-  :init
-  (setq register-preview-delay 0.5
-        register-preview-function #'consult-register-format)
-  (advice-add #'register-preview :override #'consult-register-window)
-  (setq xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref)
-  (setq consult-preview-key (kbd "M-."))
-  (setq consult-buffer-sources
-		'(consult--source-hidden-buffer
-		  consult--source-modified-buffer
-		  consult--source-buffer
-		  consult--source-recent-file
-		  ;; consult--source-file-register
-		  ;; consult--source-bookmark
-		  consult--source-project-buffer
-		  consult--source-project-recent-file))
-  :config
-  (autoload 'projectile-project-root "projectile")
-  (setq consult-project-function (lambda (_) (projectile-project-root)))
-  )
-
-(use-package embark-consult
-  :pin gnu
-  :ensure t
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package ace-window
   :pin melpa-stable
