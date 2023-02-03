@@ -56,18 +56,20 @@
   )
 
 ;; vertico + orderless 对 minibuffer 增强
-(use-package vertico
-  :pin gnu
-  :ensure t
-  :init
-  (vertico-mode)
-  )
-
 (use-package orderless
   :pin gnu
   :ensure t
   :init
-  (setq completion-styles '(orderless))
+  (setq completion-styles '(orderless basic))
+  )
+
+(use-package vertico
+  :pin gnu
+  :ensure t
+  :init
+  (setq vertico-scroll-margin 0
+		vertico-resize nil)
+  (vertico-mode)
   )
 
 (use-package marginalia
@@ -105,6 +107,15 @@
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
   (setq consult-preview-key (kbd "M-."))
+  (setq consult-buffer-sources
+		'(consult--source-hidden-buffer
+		  consult--source-modified-buffer
+		  consult--source-buffer
+		  consult--source-recent-file
+		  ;; consult--source-file-register
+		  ;; consult--source-bookmark
+		  consult--source-project-buffer
+		  consult--source-project-recent-file))
   :config
   (autoload 'projectile-project-root "projectile")
   (setq consult-project-function (lambda (_) (projectile-project-root)))
@@ -212,7 +223,7 @@
   (display-fill-column-indicator-character ?\u2502)
   :config
   (global-set-key (kbd "M-s n") 'display-fill-column-indicator-mode)
-)
+  )
 
 ;; -----------------------------------------------------------------------------
 
@@ -247,6 +258,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 (global-set-key (kbd "<f9> i") 'insert-current-date-time)
 (global-set-key (kbd "<f9> d") 'dired-jump)
 (global-set-key (kbd "<f9> w") 'save-buffer)
+(global-set-key (kbd "<f6>") 'show-file-name)
 (global-set-key (kbd "<f10>") 'toggle-frame-fullscreen)
 (global-set-key (kbd "C-2") 'set-mark-command) ;; actual is C-@
 

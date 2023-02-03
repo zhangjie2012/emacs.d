@@ -30,14 +30,12 @@
 		  (unusedwrite . t)
 		  (unusedparams . t)
 		  ))
-  ;; $GOPATH/bin
-  ;; (add-to-list 'exec-path "~/go/bin")
-  ;; (setq gofmt-command "goimports")
-  (defun my-go-mode-hook()
-	(add-hook 'before-save-hook 'gofmt-before-save)
-	(add-hook 'before-save-hook 'flycheck-buffer)
+  (defun lsp-go-install-save-hooks ()
+	(add-hook 'before-save-hook #'flycheck-buffer)
+	(add-hook 'before-save-hook #'lsp-organize-imports t t)
+	(add-hook 'before-save-hook #'lsp-format-buffer t t)
 	)
-  (add-hook 'go-mode-hook 'my-go-mode-hook)
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
   (use-package go-tag
 	:pin melpa
