@@ -22,8 +22,6 @@
 		 ("<f9> t i" . org-toggle-inline-images)
 		 ("<f9> t t" . org-capture)
 		 ("<f9> t a" . org-agenda)
-		 ("<f9> t m" . org-show-todo-tree)
-		 ("<f9> t h" . org-show-all)
 		 ("M-[" . org-previous-visible-heading)
 		 ("M-]" . org-next-visible-heading)
 		 )
@@ -37,7 +35,6 @@
 		org-startup-with-inline-images t
 		org-image-actual-width '(1024)
 		org-capture-templates nil)
-
   (setq org-agenda-files '("~/personal-area/todo.org"))
   (setq org-default-notes-file "~/personal-area/todo.org")
 
@@ -67,7 +64,6 @@
 		  (?B :foreground "#98be65" :weight bold)
 		  (?C :foreground "darkgrey" :weight bold)
 		  )
-		;; org-agenda-block-separator 8411
 		)
   (setq org-agenda-custom-commands
 		'(("v" "A better agenda view"
@@ -79,12 +75,8 @@
                    (org-agenda-overriding-header "* MEDIUM-PRIORITY:")))
 			(tags "PRIORITY=\"C\""
                   ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                   (org-agenda-overriding-header "* LOW-PRIORITY:")))
-			;; (tags "customtag"
-			;;       ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-			;;        (org-agenda-overriding-header "OTHER:")))
-			(agenda "")
-			(alltodo "")))))
+                   (org-agenda-overriding-header "* LOW-PRIORITY:")))))))
+
   (setq org-agenda-breadcrumbs-separator " ❱ "
 		org-agenda-current-time-string "⏰ ┈┈┈┈┈┈┈┈┈┈┈ now"
 		org-agenda-time-grid '((weekly today require-timed)
