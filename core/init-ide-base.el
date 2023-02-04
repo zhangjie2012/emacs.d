@@ -44,11 +44,10 @@
 		 )
   :init
   (setq lsp-keymap-prefix "<f9> s")
+  (setenv "LSP_USE_PLISTS" "1")
   :config
   (setq lsp-enable-symbol-highlighting nil
-		lsp-ui-doc-enable t
 		lsp-headerline-breadcrumb-enable nil
-		lsp-ui-sideline-enable nil
 		lsp-signature-render-documentation nil
 		)
   (setq lsp-diagnostic-package :none
@@ -73,8 +72,13 @@
   (setq lsp-ui-doc-enable nil
 		lsp-ui-doc-show-with-mouse nil
 		lsp-ui-sideline-enable nil
+		lsp-ui-doc-enable t
 		)
   )
+
+(use-package lsp-ivy
+  :ensure t
+  :commands lsp-ivy-workspace-symbol)
 
 (use-package company
   :ensure t
