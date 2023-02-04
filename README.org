@@ -1,4 +1,5 @@
 #+TITLE: Emacs config
+#+OPTIONS: ^:nil
 
 Go IDE
 
@@ -151,6 +152,19 @@ alias em="env TERM=xterm-256color emacs -nw"
 - lsp-mode 功能比较完善（重），生态较好。
 - eglot 轻量级一些，用的人也不少，Emacs29 eglot 已经合并到 emacs 核心代码中了[fn:4]。看样子 Emacs 官方会内置一个轻量级的
   IDE 所需要的组件。
+
+LSP 有点慢，参考官方文档中的[[https://emacs-lsp.github.io/lsp-mode/page/performance/][性能设置]]：
+
+1. 增加 =read-process-output-max= 和 =gc-cons-threshold= 的值
+   #+begin_src elisp
+     (setq read-process-output-max (* 1024 1024))  ;; 1mb
+     (setq gc-cons-threshold (* 1024 1024 100))  ;; 100mb
+   #+end_src
+2. 使用 =plists= 反序列化，使用 =lsp-use-plists= 替代默认的 =hash-table=
+   1. 添加环境变量 ~export LSP_USE_PLISTS=true~
+   2. 删除 =lsp-mode= 相关 package
+   3. =lsp-use-plists= 不为 nil
+   4. 重启 Emacs，安装 =lsp-mode=
 
 *** Web
 
