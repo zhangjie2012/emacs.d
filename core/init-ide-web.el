@@ -36,6 +36,7 @@
 
 (use-package rjsx-mode
   :ensure t
+  :hook ((rjsx-mode-hook . company-mode))
   :defer t
   :init
   (add-to-list 'auto-mode-alist '(".*\\.js\\'" . rjsx-mode))
