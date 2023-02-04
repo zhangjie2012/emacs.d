@@ -44,7 +44,6 @@
 		 )
   :init
   (setq lsp-keymap-prefix "<f9> s")
-  (setenv "LSP_USE_PLISTS" "1")
   :config
   (setq lsp-enable-symbol-highlighting nil
 		lsp-headerline-breadcrumb-enable nil
