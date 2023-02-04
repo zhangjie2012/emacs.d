@@ -1,5 +1,4 @@
 (require 'package)
-
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
 		("melpa" . "https://melpa.org/packages/")
@@ -28,16 +27,15 @@
 
 (add-to-list 'load-path "~/.emacs.d/core/")
 
-(require 'init-base)
 (require 'init-ui)
 (require 'init-modernization)
 (require 'init-document)
-(require 'init-config)
 ;; coding IDE
 (require 'init-ide-base)
 (require 'init-ide-go)
 (require 'init-ide-web)
 (require 'init-ide-python)
+(require 'init-config)
 ;; rss feed
 (require 'init-feed)
 

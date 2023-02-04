@@ -1,16 +1,16 @@
 (use-package projectile
   :ensure t
   :bind (:map projectile-mode-map
-              ("<f8>" . projectile-command-map)
-              ("C-c p" . projectile-command-map)
-			  :map projectile-command-map
-			  ("F" . projectile-find-file-other-window)
-			  ("w" . projectile-find-file-in-known-projects)
-			  ("D" . projectile-dired-other-window)
-			  ("k" . projectile-kill-buffers)
-			  ("v" . projectile-vc)
-			  ("b" . projectile-switch-to-buffer)
-			  )
+	      ("<f8>" . projectile-command-map)
+	      ("C-c p" . projectile-command-map)
+	      :map projectile-command-map
+	      ("F" . projectile-find-file-other-window)
+	      ("w" . projectile-find-file-in-known-projects)
+	      ("D" . projectile-dired-other-window)
+	      ("k" . projectile-kill-buffers)
+	      ("v" . projectile-vc)
+	      ("b" . projectile-switch-to-buffer)
+	      )
   :config
   ;; 打开项目缓存, 否则大的项目每次构建会比较慢
   ;; 你可以通过下面两个名称来清除缓存
@@ -34,11 +34,11 @@
   ;; via: https://github.com/bbatsov/projectile/issues/1302
   (setq projectile-git-submodule-command nil)
   (defun project-find-go-module (dir)
-	(when-let ((root (locate-dominating-file dir "go.mod")))
+    (when-let ((root (locate-dominating-file dir "go.mod")))
       (cons 'go-module root)))
 
   (cl-defmethod project-root ((project (head go-module)))
-	(cdr project))
+    (cdr project))
 
   :init
   (use-package counsel-projectile
@@ -62,7 +62,7 @@
 (use-package ivy
   :ensure t
   :bind (("C-x b" . ivy-switch-buffer)
-		 ("<f6>" . ivy-resume))
+	 ("<f6>" . ivy-resume))
   :init
   (setq ivy-use-virtual-buffers nil)
   (setq ivy-count-format "(%d-%d) ")
@@ -86,13 +86,13 @@
 (use-package counsel
   :ensure t
   :bind (("M-s [" . counsel-rg)
-		 ("M-s ]" . counsel-git-grep)
-		 ("M-x" . counsel-M-x)
-		 ("<f9> x" . counsel-M-x)
-		 ("M-y" . counsel-yank-pop)
-		 ("<f9> f" . counsel-find-file)
-		 ("C-x C-f" . counsel-find-file)
-		 )
+	 ("M-s ]" . counsel-git-grep)
+	 ("M-x" . counsel-M-x)
+	 ("<f9> x" . counsel-M-x)
+	 ("M-y" . counsel-yank-pop)
+	 ("<f9> f" . counsel-find-file)
+	 ("C-x C-f" . counsel-find-file)
+	 )
   :config
   (setq counsel-rg-base-command "rg -i --max-columns 240 --no-heading --with-filename --line-number %s")
   )
@@ -100,7 +100,7 @@
 (use-package embark
   :ensure t
   :bind (("C-." . embark-act)
-		 ("C-;" . embark-dwim))
+	 ("C-;" . embark-dwim))
   :init
   (setq prefix-help-command #'embark-prefix-help-command)
   )
@@ -108,7 +108,7 @@
 (use-package ace-window
   :ensure t
   :bind (("M-o" . ace-window)
-		 ("M-s t" . ace-swap-window))
+	 ("M-s t" . ace-swap-window))
   :config
   (setq aw-keys '(?1 ?2 ?3 ?4 ?7 ?8 ?9 ?0))
   (set-face-attribute
@@ -120,13 +120,13 @@
 (use-package expand-region
   :ensure t
   :bind (("M-m" . er/expand-region)
-		 ("M-s s" . er/mark-symbol)
-		 ("M-s p" . er/mark-outside-pairs)
-		 ("M-s P" . er/mark-inside-pairs)
-		 ("M-s q" . er/mark-outside-quotes)
-		 ("M-s m" . er/mark-comment)
-		 ("M-s Q" . er/mark-inside-quotes)
-		 ("M-s f" . er/mark-defun))
+	 ("M-s s" . er/mark-symbol)
+	 ("M-s p" . er/mark-outside-pairs)
+	 ("M-s P" . er/mark-inside-pairs)
+	 ("M-s q" . er/mark-outside-quotes)
+	 ("M-s m" . er/mark-comment)
+	 ("M-s Q" . er/mark-inside-quotes)
+	 ("M-s f" . er/mark-defun))
   )
 
 (use-package multiple-cursors
@@ -137,8 +137,8 @@
 (use-package highlight-symbol
   :ensure t
   :bind (("M--" . highlight-symbol-at-point)
-		 ("M-n" . highlight-symbol-next)
-		 ("M-p" . highlight-symbol-prev))
+	 ("M-n" . highlight-symbol-next)
+	 ("M-p" . highlight-symbol-prev))
   )
 
 (use-package which-key
@@ -161,9 +161,9 @@
 (use-package youdao-dictionary
   :ensure t
   :bind (
-		 ("<f9> f" . youdao-dictionary-search-at-point+)
-		 ("<f9> F" . youdao-dictionary-search-from-input)
-		 )
+	 ("<f9> f" . youdao-dictionary-search-at-point+)
+	 ("<f9> F" . youdao-dictionary-search-from-input)
+	 )
   :config
   (setq url-automatic-caching t)
   (setq youdao-dictionary-use-chinese-word-segmentation t)
@@ -216,8 +216,8 @@ Uses `current-date-time-format' for the formatting the date/time."
   "Go to the matching paren if on a paren; otherwise insert %."
   (interactive "p")
   (cond ((looking-at "\\s(") (forward-list 1) (backward-char 1))
-        ((looking-at "\\s)") (forward-char 1) (backward-list 1))
-        (t (self-insert-command (or arg 1)))))
+	((looking-at "\\s)") (forward-char 1) (backward-list 1))
+	(t (self-insert-command (or arg 1)))))
 
 (global-set-key (kbd "M-*") 'match-paren)
 (global-set-key (kbd "<f9> 1") 'delete-other-windows)

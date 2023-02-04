@@ -1,71 +1,35 @@
-(set-charset-priority 'unicode)
-(setq locale-coding-system   'utf-8-unix)
-(set-terminal-coding-system  'utf-8-unix)
-(set-keyboard-coding-system  'utf-8-unix)
-;; (set-selection-coding-system 'utf-8-unix)
-(prefer-coding-system        'utf-8-unix)
-(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+;; encode
 
-;; make unix lineendings default, 不管 Windows 还 Linux/Mac 文件格式统一为 LF
-(setq default-buffer-file-coding-system 'utf-8-unix)
+;; (add-hook 'text-mode-hook
+;;           '(lambda ()
+;;              (setq indent-tabs-mode nil)
+;;              (setq tab-width 4)))
+;; (setq indent-line-function (quote insert-tab))
 
-(setq system-time-locale "C")
-;; (setq system-time-locale "zh_CN.UTF-8")
+;; (setq-default tab-width 4)
+;; (fset 'yes-or-no-p 'y-or-n-p)
 
-(setq confirm-kill-emacs  'y-or-n-p
-      auto-save-default    nil
-      mouse-yank-at-point  t
-      make-backup-files    nil
-      indent-tabs-mode     nil
-      create-lockfiles     nil)
 
-(add-hook 'text-mode-hook
-          '(lambda ()
-             (setq indent-tabs-mode nil)
-             (setq tab-width 4)))
-(setq indent-line-function (quote insert-tab))
+;; (save-place-mode t)
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(setq-default tab-width 4)
-(fset 'yes-or-no-p 'y-or-n-p)
+;; (setq visible-bell nil)
+;; (setq ring-bell-function 'ignore)
 
-(electric-pair-mode nil)
-(electric-indent-mode 1)
-;; (electric-quote-mode 1)
+;; (global-auto-revert-mode t)
 
-(save-place-mode t)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; (setq frame-title-format
+;;       '((:eval (if (buffer-file-name)
+;;                    (abbreviate-file-name (buffer-file-name))
+;;                  "%b"))))
 
-(setq visible-bell nil)
-(setq ring-bell-function 'ignore)
 
-(global-auto-revert-mode t)
+;; (show-paren-mode t)
 
-(setq frame-title-format
-      '((:eval (if (buffer-file-name)
-                   (abbreviate-file-name (buffer-file-name))
-                 "%b"))))
 
-(setq inhibit-startup-echo-area-message t
-	  inhibit-startup-message t
-	  indicate-empty-lines t
-	  show-trailing-whitespace t
-	  read-file-name-completion-ignore-case t
-      read-buffer-completion-ignore-case t
-      completion-ignore-case t)
-
-(show-paren-mode t)
-(tool-bar-mode -1)
-(set-scroll-bar-mode nil)
-(menu-bar-mode -1)
-(column-number-mode t)
 (blink-cursor-mode -1)
 (setq visible-cursor nil)
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; 启动时自动最大化窗口
 
-(setq display-time-default-load-average nil
-	  display-time-format "%m-%d %H:%M"
-	  )
-;; (display-time-mode t)
-;; (display-battery-mode 1)
 
 (provide 'init-base)

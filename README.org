@@ -61,7 +61,7 @@ Orgmode
 
 * 说明
 
-- Emacs 版本：27.x
+- Emacs 版本：28.2
 - 系统：
   + [X] WSL2 TUI
   + [X] Windows GUI
@@ -480,3 +480,4 @@ lsp-mode 的功能比较多，官方提供了 [[https://emacs-lsp.github.io/lsp-
 [fn:2] https://www.masteringemacs.org/article/converting-tabs-whitespace
 
 [fn:1] https://stackoverflow.com/questions/52722096/build-emacs-and-gnutls-not-found
+

@@ -56,7 +56,6 @@
 		org-agenda-start-on-weekday 1
 		org-agenda-span 28
 		org-deadline-warning-days 7
-		org-use-speed-commands t
 		org-agenda-skip-deadline-prewarning-if-scheduled t
 		org-agenda-skip-scheduled-delay-if-deadline t
 		org-agenda-skip-scheduled-if-done t
