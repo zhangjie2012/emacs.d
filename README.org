@@ -15,17 +15,27 @@ Orgmode
 - [[#说明][说明]]
 - [[#安装][安装]]
   - [[#emacs-安装][Emacs 安装]]
-    - [[#源码][源码]]
-    - [[#ubuntu-2204][Ubuntu 22.04]]
+    - [[#源码][+源码+]]
+    - [[#ubuntu-2204][+Ubuntu 22.04+]]
     - [[#macoswindows][MacOS/Windows]]
   - [[#配置安装][配置安装]]
   - [[#开发环境][开发环境]]
     - [[#web][Web]]
     - [[#go][Go]]
     - [[#python][Python]]
-- [[#文件结构][文件结构]]
+- [[#目录结构][目录结构]]
 - [[#常用快捷键cheat-sheet][常用快捷键（cheat sheet）]]
+  - [[#文本][文本]]
+  - [[#目录][目录]]
+  - [[#高效光标跳转][高效光标跳转]]
+  - [[#ui][UI]]
+  - [[#窗口][窗口]]
+  - [[#搜索][搜索]]
+  - [[#翻译][翻译]]
+  - [[#项目管理projectile][项目管理（projectile）]]
+  - [[#ide][IDE]]
   - [[#org][org]]
+  - [[#其他][其他]]
 - [[#packages][packages]]
   - [[#当前使用的][当前使用的]]
   - [[#以前用过的][以前用过的]]
@@ -55,7 +65,7 @@ Orgmode
 贴近原生的最小化 Emacs 配置，实用、稳定、不花里胡哨、少折腾为核心思路。
 
 - 少用 package
-- 使用 =use-package= 全局管理插件[fn:3]
+- 使用 =use-packageq= 全局管理插件[fn:3]
 - 尽可能使用 package 的 stable 版本
 - 使用大而全的 package，不用一堆的小而美
 
@@ -63,12 +73,12 @@ Orgmode
 
 - Emacs 版本：28.2
 - 系统：
-  + [X] WSL2 TUI
-  + [X] Windows GUI
-  + [X] Ubuntu GUI 22.04
+  + [ ] WSL2 TUI
+  + [ ] Windows GUI
+  + [ ] Ubuntu GUI 22.04
   + [X] MacOS GUI
 
-GUI 通过 [[https://github.com/tumashu/cnfonts][cnfonts]] 实现中英文等宽对齐，当前配置使用字体是 [[https://github.com/adobe-fonts/source-code-pro][Source Code Pro]] + [[https://github.com/lxgw/LxgwWenKai][霞鹜文楷]]。
+GUI 通过 [[https://github.com/tumashu/cnfonts][cnfonts]] 实现中英文等宽对齐，当前配置使用字体是 [[https://github.com/adobe-fonts/source-code-pro][Source Code Pro]] + [[https://github.com/lxgw/LxgwWenKai][霞鹜文楷]] + 15号字体。
 
 =main= 为稳定版本， =unstable= 是实验性版本。
 
@@ -76,9 +86,10 @@ GUI 通过 [[https://github.com/tumashu/cnfonts][cnfonts]] 实现中英文等宽
 
 ** Emacs 安装
 
-推荐使用 Emacs 27，较新又稳定。
+- +推荐使用 Emacs 27，较新又稳定。+
+- Emacs 28 正式版本发布了快一年了，刚开始不稳定，现在挺稳定基本没什么问题
 
-*** 源码
+*** +源码+
 
 下载源码：[[http://mirrors.ustc.edu.cn/gnu/emacs/][http://mirrors.ustc.edu.cn/gnu/emacs/]]
 
@@ -94,7 +105,7 @@ GUI 通过 [[https://github.com/tumashu/cnfonts][cnfonts]] 实现中英文等宽
 *注意* ：如果编译提示 =configure: error: The following required libraries were not found: gnutls= 需要安装 =gnutls= 开发包，
 使用 =apt-cache search 'libgnutls.*-dev'= 找到对应的包，然后安装 [fn:1]
 
-*** Ubuntu 22.04
+*** +Ubuntu 22.04+
 
 #+begin_src sh
 sudo apt install emacs
@@ -155,16 +166,10 @@ alias em="env TERM=xterm-256color emacs -nw"
 
 LSP 有点慢，参考官方文档中的[[https://emacs-lsp.github.io/lsp-mode/page/performance/][性能设置]]：
 
-1. 增加 =read-process-output-max= 和 =gc-cons-threshold= 的值
-   #+begin_src elisp
-     (setq read-process-output-max (* 1024 1024))  ;; 1mb
-     (setq gc-cons-threshold (* 1024 1024 100))  ;; 100mb
-   #+end_src
-2. 使用 =plists= 反序列化，使用 =lsp-use-plists= 替代默认的 =hash-table=
-   1. 添加环境变量 ~export LSP_USE_PLISTS=true~
-   2. 删除 =lsp-mode= 相关 package
-   3. =lsp-use-plists= 不为 nil
-   4. 重启 Emacs，安装 =lsp-mode=
+#+begin_src elisp
+  (setq read-process-output-max (* 1024 1024))  ;; 1mb
+  (setq gc-cons-threshold (* 1024 1024 100))  ;; 100mb
+#+end_src
 
 *** Web
 
@@ -212,13 +217,12 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 
 配置文件：https://github.com/zhangjie2012/dotfiles/blob/master/_flake8
 
-* 文件结构
+* 目录结构
 
-- =init-base= 原生 emacs 的一些基础配置，包含编码，工具栏展示，自动保存等等
-- =init-ui= 主题、mode-line 相关
-- =init-modernization= 去掉原生的一套，让 Emacs 更加现代化
+- =early-init= 基础配置
+- =init-ui= 主题、modeline、字体等
+- =init-modernization= 增强 minibuffer、项目管理、窗口跳转、文本扩展选中、括号匹配等
 - =init-ide-base= 让 Emacs 变成一个 IDE，选型：
-  + =projectile= 工程管理
   + =company-mode= 自动补全
   + =lsp= Language Server Protocol
   + =flycheck= 语法检测
@@ -227,45 +231,129 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 - =init-ide-python= Python
 - =init-config= 常见配置文件
 - =init-document= 文档 mode，markdown + orgmode
+- =init-feed= rss 订阅管理
 
 * 常用快捷键（cheat sheet）
 
-- =C-s= 本文件搜索
-- =<F5>= 切换 dark/light 主题
-- =<f8>= project 操作前缀
-- =<f9> 1= 关闭其他窗口（只保留当前一个）
-- =<f9> 2= 水平切分窗口
-- =<f9> 3= 垂直切分窗口
-- =<f9> c= 打开 eshell
-- =<f9> d= 打开 dired，目录操作
-- =<f9> q= 打开 effeed，按下 =G= 更新
-- =<f9> <f9>= 对当前 buffer 执行语法检测（flycheck buffer）
-- =<f9> g= 打开/关闭 git gutter
-- =<f9> l= 列数当前 buffer 的所有语法错误
-- =<f9> s h= lsp-toggle-symbol-highlight
-- =<f9> s s= 重启 lsp
-- =<f9> t f= org-footnote-new
-- =<f9> t l= org-toggle-link-display
-- =<f9> w= save buffer，取代 =C-x s=
-- =<f12>= 找到光标
-- =M-?= find references
-- =M--= =M-n= =M-p= 当前单词高亮，上下跳转
-- =M-.= =M-,= 跳转到定义、返回
-- =M-m= 选中扩展
-- =M-o= 窗口切换
-- =M-s i= 跳转到单词
-- =M-s j= 跳转到行
-- =M-s k= 拷贝指定行
-- =M-s l= 显示/隐藏行号
-- =M-s [= =M-s ]= 在项目中搜索，前者使用 =rg= ，后者使用 =git-grep=
-- =M-s ;= multiple cursors
-- =M-s r= 显示/隐藏相对行号
-- =M-s s= 选中当前单词
-- =M-*= 匹配括号起始、结束跳转
-- =C-M-j= 变量/函数命名在几种命名之间转换: =underscore->UPCASE->CamelCase->...=
-- =dired-subtree=
-  + =i= 打开子目录
-  + =;= 折叠子目录
+** 文本
+
+|----------+--------------------------------------------+--------|
+| 快捷键   | 说明                                       | 频率   |
+|----------+--------------------------------------------+--------|
+| =<f9> i= | 插入当前日期时间如 =2023-02-05 11:20:01=   |        |
+| =M--=    | 当前单词全部高亮                           | *high* |
+| =M-m=    | 扩展当前文本区域                           | *high* |
+| =M-n/p=  | 相同单词之前切换                           | *high* |
+| =M-s ;=  | 多光标操作                                 | middle |
+| =M-s P=  | 选中当前所在括号范围内的文本（不包含括号） | middle |
+| =M-s f=  | 选中函数                                   | middle |
+| =M-s k=  | 拷贝某行到当前                             | middle |
+| =M-s m=  | 选中注释                                   |        |
+| =M-s p=  | 选中当前所在括号范围内的文本（包含括号）   | middle |
+| =M-s s=  | 选中当前单词                               | *high* |
+| =M-y=    | 剪贴板                                     | *high* |
+|----------+--------------------------------------------+--------|
+
+** 目录
+
+|----------+--------------+--------|
+| 快捷键   | 说明         | 频率   |
+|----------+--------------+--------|
+| =<f9> d= | =dired-jump= | *high* |
+|----------+--------------+--------|
+
+** 高效光标跳转
+
+|---------+----------------------------------------+--------|
+| 快捷键  | 说明                                   | 频率   |
+|---------+----------------------------------------+--------|
+| =M-s i= | 跳转到某单词首部                       | *high* |
+| =M-s j= | 跳转到某行                             | *high* |
+| =C-.=   | 根据光标所在所选文本，推测可以做的事情 |        |
+| =C-;=   | Do What I Mean =embark-dwim=           | *high* |
+|---------+----------------------------------------+--------|
+
+** UI
+
+|---------+-----------------------------+--------|
+| 快捷键  | 说明                        | 频率   |
+| =M-s l= | 显示顺序行号                | middle |
+| =M-s r= | 显示相对行号                |        |
+| =M-s n= | 显示列宽线（120个字符宽度） | middle |
+| =<f6>=  | 显示当前文件路径            |        |
+| =<f5>=  | 切换 dark/light 主题        |        |
+| =C--=   | 减小字体                    |        |
+| =C-+=   | 增大字体                    |        |
+|---------+-----------------------------+--------|
+
+** 窗口
+
+|----------+--------------+--------|
+| 快捷键   | 说明         | 频率   |
+|----------+--------------+--------|
+| =M-o=    | 切换 frame   | *high* |
+| =M-s t=  | 交换 frame   |        |
+| =<f9> 1= | 删除当前窗口 | *high* |
+| =<f9> 2= | 水平切分窗口 | *high* |
+| =<f9> 3= | 垂直切分窗口 | *high* |
+| =<f10>=  | 全屏         | *high* |
+|----------+--------------+--------|
+
+** 搜索
+
+|---------+---------------------------------+--------|
+| 快捷键  | 说明                            | 频率   |
+|---------+---------------------------------+--------|
+| =C-s=   | 当前文件搜索                    | *high* |
+| =M-s [= | 在项目中使用 rg 搜索            | *high* |
+| =M-s ]= | 在 git 项目中使用 git-grep 搜索 |        |
+|---------+---------------------------------+--------|
+
+** 翻译
+
+|----------+--------------+--------|
+| 快捷键   | 说明         | 频率   |
+|----------+--------------+--------|
+| =<f9> f= | 翻译当前单词 | *high* |
+| =<f9> F= | 输入单词翻译 |        |
+|----------+--------------+--------|
+
+** 项目管理（projectile）
+
+ =<f8>= =C-c p= 为 projectile 命令前缀 =projectile-command-map= 。
+ 
+|--------+------------------------------------------+--------|
+| 快捷键 | 说明                                     | 频率   |
+|--------+------------------------------------------+--------|
+| =F=    | 在另外一个窗口打开本项目的文件           | *high* |
+| =w=    | 在所有已知的项目中搜索                   |        |
+| =D=    | 在另外一个窗口打开本项目的目录           |        |
+| =k=    | 关闭所有本项目的 buffer                  | *high* |
+| =v=    | projectile-vc                            |        |
+| =b=    | 在本项目打开的 buffer 中切换             | middle |
+| =i=    | 清除项目缓存 projectile-invalidate-cache | *high* |
+|--------+------------------------------------------+--------|
+
+** IDE
+
+
+|-------------+--------------------------------+--------|
+| 快捷键      | 说明                           | 频率   |
+|-------------+--------------------------------+--------|
+| =C-M-j=     | 变量命名风格转换               |        |
+| =<f9> s s=  | 重启 lsp                       | middle |
+| =<f9> s r=  | 查找所有引用                   |        |
+| =<f9> s d=  | describe thing  at point       |        |
+| =<f9> s i=  | 查找所有实现                   |        |
+| =<f9> s h=  | 变量关联自动高亮               |        |
+| =<f9> s c=  | 静态语法检测错误列表           |        |
+| =<f9> s m=  | =lsp-ui-imenu=                 | middle |
+| =<f9> <f9>= | 手动执行语法检测               |        |
+| =<f9> g=    | git-gitter++，显示当前文件改动 | middle |
+| =M-.=       | 跳转到定义                     | *high* |
+| =M-,=       | 从定义返回                     | *high* |
+| =M-?=       | 查找当前所有引用               | *high* |
+|-------------+--------------------------------+--------|
 
 ** org
 
@@ -278,6 +366,14 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 | =<f9> t f=  | =org-footnote-new=                  |        |
 | =<f9> t i=  | =org-toggle-inline-images=          |        |
 | =M-[= =M-]= | =org-previous/next-visible-heading= | middle |
+|-------------+-------------------------------------+--------|
+
+** 其他
+
+|-------------+-------------------------------------+--------|
+| 快捷键      | 说明                                | 频率   |
+|-------------+-------------------------------------+--------|
+| =<f9> q=    | 查看 rss 订阅更新                   | *high* |
 |-------------+-------------------------------------+--------|
 
 * packages

@@ -32,7 +32,7 @@
 		org-startup-folded t
 		org-startup-with-inline-images t
 		org-image-actual-width '(1024)
-		org-capture-templates nil)
+        )
 
   (setq org-agenda-files '("~/gtd"))
   (setq org-default-notes-file "~/gtd/entry.org")
