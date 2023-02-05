@@ -49,10 +49,6 @@
       inhibit-startup-message t
       indicate-empty-lines t
       )
-
-(setq-default show-trailing-whitespace t)
-(add-hook 'before-save-hook 'whitespace-cleanup)
-
 (blink-cursor-mode -1)
 (setq visible-cursor nil)
 
