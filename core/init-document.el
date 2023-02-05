@@ -41,7 +41,7 @@
   ;; GTD setting
   (require 'org-inlinetask)
   (setq org-todo-keywords
-		'((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "DEPR(r)")))
+		'((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d)" "DEPR(r@/!)")))
   (setq org-todo-keyword-faces
 		'(("TODO" . "orangered")
           ("WAIT" . "darkgoldenrod")

@@ -21,10 +21,9 @@
 
 (use-package ivy-rich
   :ensure t
-  :init
-  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   :config
   (ivy-rich-mode 1)
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   )
 
 (use-package swiper
