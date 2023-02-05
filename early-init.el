@@ -32,15 +32,16 @@
 
 (add-hook 'text-mode-hook
           #'(lambda ()
-             (setq indent-tabs-mode nil)
-             (setq tab-width 4)))
+              (setq indent-tabs-mode nil)
+              (setq tab-width 4)))
 (setq indent-line-function (quote insert-tab))
 
+(save-place-mode t)
 (setq-default tab-width 4)
 
-(electric-pair-mode 1)
+(electric-pair-mode nil)
 (electric-indent-mode 1)
-(electric-quote-mode 1)
+;; (electric-quote-mode 1)
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -51,7 +52,7 @@
       )
 
 (blink-cursor-mode -1)
-;; (setq visible-cursor nil)
+(setq visible-cursor nil)
 
 (setq read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case t
