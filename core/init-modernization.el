@@ -1,4 +1,5 @@
 (use-package whitespace
+  :pin manual
   :ensure t
   :demand
   :init
