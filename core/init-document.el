@@ -80,18 +80,18 @@
                   ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
                    (org-agenda-overriding-header "* LOW-PRIORITY:")))))))
 
-  (setq org-agenda-breadcrumbs-separator " ❱ "
-		org-agenda-current-time-string "⏰ ┈┈┈┈┈┈┈┈┈┈┈ now"
-		org-agenda-time-grid '((weekly today require-timed)
-							   (800 1000 1200 1400 1600 1800 2000)
-							   "---" "┈┈┈┈┈┈┈┈┈┈┈┈┈")
-		org-agenda-prefix-format '((agenda . "%i %-12:c%?-12t%b% s")
-								   (todo . " %i %-12:c")
-								   (tags . " %i %-12:c")
-								   (search . " %i %-12:c")))
+  (setq org-agenda-breadcrumbs-separator " -> "
+    	org-agenda-current-time-string "⏰ ┈┈┈┈┈┈┈┈┈┈┈ now"
+    	org-agenda-time-grid '((weekly today require-timed)
+                               (800 1000 1200 1400 1600 1800 2000)
+                               "---" "┈┈┈┈┈┈┈┈┈┈┈┈┈")
+    	org-agenda-prefix-format '((agenda . "  %b% s")
+    							   (todo . " %i %-12:c")
+    							   (tags . "  %b% s")
+    							   (search . " %i %-12:c")))
   (setq org-agenda-format-date (lambda (date) (concat "\n" (make-string (window-width) 9472)
-													  "\n"
-													  (org-agenda-format-date-aligned date))))
+                                                      "\n"
+                                                      (org-agenda-format-date-aligned date))))
   (setq org-cycle-separator-lines 2)
 
   (add-to-list 'org-capture-templates
