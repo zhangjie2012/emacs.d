@@ -4,12 +4,13 @@
   :demand
   :init
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  :config
-  (defun no-trailing-whitespace ()
-    (setq show-trailing-whitespace nil))
-  (add-hook 'minibuffer-setup-hook 'no-trailing-whitespace)
-  (set-face-attribute 'trailing-whitespace nil :background "indian red")
-  (setq-default show-trailing-whitespace t)
+  ;; :config
+  ;; (defun no-trailing-whitespace ()
+  ;;   (setq show-trailing-whitespace nil))
+  ;; (add-hook 'minibuffer-setup-hook 'no-trailing-whitespace)
+  ;; (add-hook 'calendar-setup-hook 'no-trailing-whitespace)
+  ;; (set-face-attribute 'trailing-whitespace nil :background "indian red")
+  ;; (setq-default show-trailing-whitespace t)
   )
 
 (use-package avy
