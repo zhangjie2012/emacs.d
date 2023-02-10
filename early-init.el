@@ -30,6 +30,8 @@
         (horizontal-scroll-bars)
         (vertical-scroll-bars)))
 
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 (add-hook 'text-mode-hook
           #'(lambda ()
               (setq indent-tabs-mode nil)
@@ -42,8 +44,6 @@
 (electric-pair-mode nil)
 (electric-indent-mode 1)
 ;; (electric-quote-mode 1)
-
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (setq inhibit-startup-echo-area-message t
       inhibit-startup-message t

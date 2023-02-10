@@ -32,9 +32,10 @@
           (underline-link-visited border)
           (underline-link-symbolic border)
 
-          (underline-err yellow-intense)
-          (underline-warning magenta-intense)
-          (underline-note green-intense)))
+          ;; (underline-err red-faint)
+          ;; (underline-warning yellow-faint)
+          ;; (underline-note cyan-faint)
+          ))
   (load-theme 'modus-operandi :no-confirm)
   :bind ("<f5>" . modus-themes-toggle)
   )
