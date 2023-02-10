@@ -158,18 +158,13 @@ alias em="env TERM=xterm-256color emacs -nw"
 
 ** 开发环境
 
-基于 [[https://langserver.org/][LSP]]，客户端使用 [[https://github.com/emacs-lsp/lsp-mode][lsp-mode]]，也有很多人使用 [[https://github.com/joaotavora/eglot][eglot]]。
+基于 [[https://langserver.org/][LSP]]，客户端使用 [[https://github.com/joaotavora/eglot][eglot]]。
 
-- lsp-mode 功能比较完善（重），生态较好。
-- eglot 轻量级一些，用的人也不少，Emacs29 eglot 已经合并到 emacs 核心代码中了[fn:4]。看样子 Emacs 官方会内置一个轻量级的
-  IDE 所需要的组件。
+<2023-02-10 Fri> 从 lsp-mode 换到了 eglot 原因：
 
-LSP 有点慢，参考官方文档中的[[https://emacs-lsp.github.io/lsp-mode/page/performance/][性能设置]]：
-
-#+begin_src elisp
-  (setq read-process-output-max (* 1024 1024))  ;; 1mb
-  (setq gc-cons-threshold (* 1024 1024 100))  ;; 100mb
-#+end_src
+- 从需求上：对我来说，绝大多数时候刚需的时候跳转到定义返回两个功能就够了
+- 从复杂度上：eglot 配置简单（基本上没啥可配置的），lsp-mode 配置复杂（大项目会很慢）
+- 从未来发展上：Emacs 29 之后，eglot 会作为内置组件
 
 *** Web
 
@@ -336,23 +331,17 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 
 ** IDE
 
-
 |-------------+--------------------------------+--------|
 | 快捷键      | 说明                           | 频率   |
 |-------------+--------------------------------+--------|
-| =C-M-j=     | 变量命名风格转换               |        |
-| =<f9> s s=  | 重启 lsp                       | middle |
-| =<f9> s r=  | 查找所有引用                   |        |
-| =<f9> s d=  | describe thing  at point       |        |
-| =<f9> s i=  | 查找所有实现                   |        |
-| =<f9> s h=  | 变量关联自动高亮               |        |
-| =<f9> s c=  | 静态语法检测错误列表           |        |
-| =<f9> s m=  | =lsp-ui-imenu=                 | middle |
-| =<f9> <f9>= | 手动执行语法检测               |        |
-| =<f9> g=    | git-gitter++，显示当前文件改动 | middle |
 | =M-.=       | 跳转到定义                     | *high* |
 | =M-,=       | 从定义返回                     | *high* |
 | =M-?=       | 查找当前所有引用               | *high* |
+| =C-M-j=     | 变量命名风格转换               |        |
+| =<f9> s s=  | 重启 eglot                     | middle |
+| =<f9> s d=  | eldoc                          |        |
+| =<f9> <f9>= | 手动执行语法检测               |        |
+| =<f9> g=    | git-gitter++，显示当前文件改动 | middle |
 |-------------+--------------------------------+--------|
 
 ** org
@@ -398,7 +387,7 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 | [[https://github.com/nonsequitur/git-gutter-plus][git-gutter+]]        | 提示当前 buffer 改动部分             | 用 ~+~ 和 ~=~ 等显示出来                                             |
 | [[https://github.com/nschum/highlight-symbol.el][highlight-symbol]]   | 高亮当前单词                         |                                                                      |
 | [[https://github.com/abo-abo/swiper][ivy]]                | 通用完成前端                         | 一般 ido+smex，ivy，[[https://github.com/emacs-helm/helm][helm]] 三者选一用即可，看个人喜好                  |
-| [[https://github.com/emacs-lsp/lsp-mode][lsp-mode]]           | [[https://langserver.org][LSP]] 的 Emacs 客户端                  | +目前不是特别成熟+                                                   |
+| [[https://github.com/joaotavora/eglot][eglot]]              | [[https://langserver.org][LSP]] 的 Emacs 客户端                  | 以前用 lsp-mode                                                      |
 | [[https://github.com/magnars/multiple-cursors.el][multiple-cursors]]   | 多鼠标操作                           | [[http://emacsrocks.com/e13.html][Emacs Rocks! Episode 13: multiple-cursors]]                            |
 | [[https://orgmode.org][org-mode]]           | 最牛逼的插件，没有之一               |                                                                      |
 | [[https://github.com/bbatsov/projectile][projectile]]         | 项目管理框架                         | 可以与 ivy 一起使用，[[https://github.com/ericdanan/counsel-projectile][counsel-projectile]]                              |
@@ -419,6 +408,7 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 - [[https://github.com/emacs-evil/evil][evil]] The extensible vi layer for Emacs. 从 Vim 转到 Emacs 的用户可以试一下，我的 Vim 太渣了
 - [[https://github.com/emacs-helm/helm][helm]] 一个补全框架，用了四五年，后来用 ivy 替换掉了
 - [[https://github.com/abo-abo/hydra][hydra]] 快捷键编排，尝试了一段时间，基本上用不到。常用的快捷键，我已经编排的很合理了
+- [[https://github.com/emacs-lsp/lsp-mode][lsp-mode]] 用了几年，最后用 eglot 替换
 - [[https://github.com/magit/magit][magit]] 评价非常高的 git package，但是我感觉太慢了，另外是习惯了命令行操作 git，常用的操作用 build-in 的功能足够
 - [[https://github.com/skuro/plantuml-mode][plantuml-mode]]   [[https://plantuml.com/][PlantUML]] 的 Emacs mode，不实用
 - [[https://github.com/milkypostman/powerline][powerline]] 用了一段时间，后来用 doom-modeline 替换掉了
@@ -512,6 +502,8 @@ orgmode 9.2 之后不再直接支持 =<s [Tab]= 的快捷方式插入代码块�
 
 lsp-mode 的功能比较多，官方提供了 [[https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/][开启/关闭 lsp-mode 特性介绍]]，否则真的抓瞎。
 
+<2023-02-10 Fri> 由 lsp-mode 换到了 eglot。
+
 ** 项目管理？
 
 使用 [[https://github.com/bbatsov/projectile][projectile]] 管理项目，非常方便。svn/git 项目会认为是一个 projectile，而且 ignore 的文件和目录也会自动过滤。
@@ -540,12 +532,12 @@ lsp-mode 的功能比较多，官方提供了 [[https://emacs-lsp.github.io/lsp-
 有点乱，参差不齐：
 
 - 开箱即用的配置：
-  - [[https://github.com/purcell/emacs.d][purcell/emacs.d]]：久负盛名
-  - [[https://github.com/redguardtoo/emacs.d][redguardtoo/emacs.d]]
-  - [[https://github.com/hlissner/doom-emacs][hlissner/doom-emacs]]
-  - [[https://protesilaos.com/dotemacs/][Emacs initialisation file (dotemacs)]]: wiki + 配置
-  - [[http://www.emacs-bootstrap.com/][emacs-bootstrap]]: 动态生成 Emacs 配置
-  - [[https://github.com/lujun9972/emacs-document][文章集合]]
+  + [[https://github.com/purcell/emacs.d][purcell/emacs.d]]：久负盛名
+  + [[https://github.com/redguardtoo/emacs.d][redguardtoo/emacs.d]]
+  + [[https://github.com/hlissner/doom-emacs][hlissner/doom-emacs]]
+  + [[https://protesilaos.com/dotemacs/][Emacs initialisation file (dotemacs)]]: wiki + 配置
+  + [[http://www.emacs-bootstrap.com/][emacs-bootstrap]]: 动态生成 Emacs 配置
+  + [[https://github.com/lujun9972/emacs-document][文章集合]]
 - 博客 & Github
   + [[https://github.com/emacs-tw/awesome-emacs][awesome-emacs]]
   + [[https://planet.emacslife.com/][Planet Emacslife]]：Emacs 百科全书，大杂烩

@@ -30,55 +30,6 @@
 	)
   )
 
-(use-package lsp-mode
-  :ensure t
-  :hook ((lsp-mode-hook . lsp-enable-which-key-integration))
-  :bind (("<f9> s s" . lsp-workspace-restart)
-		 ("<f9> s r" . lsp-find-references)
-		 ("<f9> s d" . lsp-describe-thing-at-point)
-		 ("<f9> s i" . lsp-find-implementation)
-		 ("<f9> s h" . lsp-toggle-symbol-highlight)
-		 :map lsp-signature-mode
-		 ("<f9> s p" . lsp-signature-previous)
-		 ("<f9> s n" . lsp-signature-next)
-		 )
-  :init
-  (setq lsp-keymap-prefix "<f9> s")
-  :config
-  (setq lsp-enable-symbol-highlighting nil
-		lsp-headerline-breadcrumb-enable nil
-		lsp-signature-render-documentation nil
-		)
-  (setq lsp-diagnostic-package :none
-		lsp-enable-folding nil
-		lsp-enable-links nil
-		lsp-restart 'auto-restart
-		lsp-enable-snippet nil
-		)
-  ;; (push "[/\\\\]googleapis$" lsp-file-watch-ignored)
-  )
-
-(use-package lsp-ui
-  :ensure t
-  :commands lsp-ui-mode
-  :hook (lsp-mode-hook . lsp-ui-mode)
-  :bind (("<f9> s c" . lsp-ui-flycheck-list)
-		 ("<f9> s m" . lsp-ui-imenu)
-		 :map lsp-mode-map
-		 ("M-." . lsp-ui-peek-find-definitions)
-		 ("M-?" . lsp-ui-peek-find-references))
-  :config
-  (setq lsp-ui-doc-enable nil
-		lsp-ui-doc-show-with-mouse nil
-		lsp-ui-sideline-enable nil
-		lsp-ui-doc-enable t
-		)
-  )
-
-(use-package lsp-ivy
-  :ensure t
-  :commands lsp-ivy-workspace-symbol)
-
 (use-package company
   :ensure t
   :hook ((emacs-lisp-mode-hook . (lambda ()
@@ -136,5 +87,16 @@
             (define-key git-gutter+-mode-map (kbd "C-x p") 'git-gutter+-previous-hunk)
             (define-key git-gutter+-mode-map (kbd "C-x r") 'git-gutter+-revert-hunks))
   :diminish (git-gutter+-mode . "gg"))
+
+(use-package eglot
+  :ensure t
+  :bind (:map eglot-mode-map
+              ("<f9> s s" . eglot-reconnect)
+              ("<f9> s d" . eldoc))
+  :config
+  (setq eldoc-echo-area-use-multiline-p nil
+        eglot-ignored-server-capabilites '(:documentHighlightProvider))
+  (add-to-list 'eglot-stay-out-of 'flymake) ;; disable flymake
+)
 
 (provide 'init-ide-base)
