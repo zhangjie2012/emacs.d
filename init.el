@@ -30,13 +30,8 @@
 (require 'init-ui)
 (require 'init-modernization)
 (require 'init-document)
-;; coding IDE
-(require 'init-ide-base)
-(require 'init-ide-go)
-(require 'init-ide-web)
-(require 'init-ide-python)
+(require 'init-lang)
 (require 'init-config)
-;; rss feed
 (require 'init-feed)
 
 (setq custom-file "~/.emacs.d/custom.el")

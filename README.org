@@ -217,13 +217,10 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 - =early-init= 基础配置
 - =init-ui= 主题、modeline、字体等
 - =init-modernization= 增强 minibuffer、项目管理、窗口跳转、文本扩展选中、括号匹配等
-- =init-ide-base= 让 Emacs 变成一个 IDE，选型：
+- =init-lang= 让 Emacs 变成一个 IDE，选型：
   + =company-mode= 自动补全
   + =lsp= Language Server Protocol
   + =flycheck= 语法检测
-- =init-ide-go= Go
-- =init-ide-web= Web Dev
-- =init-ide-python= Python
 - =init-config= 常见配置文件
 - =init-document= 文档 mode，markdown + orgmode
 - =init-feed= rss 订阅管理
