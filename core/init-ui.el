@@ -4,19 +4,27 @@
   :demand t
   :config
   (setq modus-themes-italic-constructs nil
-        modus-themes-bold-constructs nil
+        modus-themes-bold-constructs t
         modus-themes-org-blocks 'gray-background
+        modus-themes-completions
+        '((matches . (extrabold))
+          (selection . (semibold text-also underline)))
         modus-themes-headings
         '((1 . (1.25))
           (2 . (1.15))
           (3 . (1.05))
           (t . (1.0)))
         )
+
   (setq modus-themes-common-palette-overrides
         '((border-mode-line-active unspecified)
           (border-mode-line-inactive unspecified)
-          (fringe unspecified)
+
+          (fringe bg-blue-nuanced)
           (bg-hover bg-yellow-intense)
+
+          (bg-region bg-lavender)
+          (fg-region unspecified)
 
           (fg-heading-1 blue-warmer)
           (bg-heading-1 bg-blue-nuanced)
@@ -35,6 +43,11 @@
           ;; (underline-err red-faint)
           ;; (underline-warning yellow-faint)
           ;; (underline-note cyan-faint)
+
+          (fg-completion-match-0 blue)
+          (fg-completion-match-1 magenta-warmer)
+          (fg-completion-match-2 cyan)
+          (fg-completion-match-3 red)
           ))
   (load-theme 'modus-operandi :no-confirm)
   :bind ("<f5>" . modus-themes-toggle)
