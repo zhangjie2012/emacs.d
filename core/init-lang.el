@@ -47,11 +47,13 @@
          (python-mode-hook . eglot-ensure))
   :bind (:map eglot-mode-map
               ("<f9> s s" . eglot-reconnect)
-              ("<f9> s d" . eldoc))
+              ("<f9> s d" . eldoc)
+              ("<f9> s i" . eglot-find-implementation)
+              ("<f9> s o" . eglot-organize-imports)
+              )
   :config
   (setq eldoc-echo-area-use-multiline-p nil
         eglot-ignored-server-capabilities '(:documentHighlightProvider))
-
   (add-to-list 'eglot-stay-out-of 'flymake) ;; disable flymake
   )
 

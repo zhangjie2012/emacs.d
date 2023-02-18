@@ -35,7 +35,7 @@
         org-capture-templates nil
         )
 
-  (setq org-agenda-files '("~/gtd"))
+  (setq org-agenda-files '("~/gtd/entry.org"))
   (setq org-default-notes-file "~/gtd/entry.org")
 
   :config

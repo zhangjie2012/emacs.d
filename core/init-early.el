@@ -22,8 +22,6 @@
 
 (setq-default indent-tabs-mode nil)
 
-(global-auto-revert-mode t)
-
 (setq default-frame-alist
       '((menu-bar-lines . 0)
         (tool-bar-lines . 0)
@@ -41,9 +39,11 @@
 (save-place-mode t)
 (setq-default tab-width 4)
 
-(electric-pair-mode nil)
+(global-auto-revert-mode)
+
+(electric-pair-mode 1)
 (electric-indent-mode 1)
-;; (electric-quote-mode 1)
+(electric-quote-mode 1)
 
 (setq inhibit-startup-echo-area-message t
       inhibit-startup-message t
@@ -57,9 +57,9 @@
       completion-ignore-case t)
 
 (setq display-time-default-load-average nil
-      display-time-format "%m-%d %H:%M"
+      display-time-format "[%m-%d %H:%M]"
       )
-;; (display-time-mode t)
+(display-time-mode t)
 ;; (display-battery-mode 1)
 
-(provide 'early-init)
+(provide 'init-early)

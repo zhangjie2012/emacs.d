@@ -16,8 +16,10 @@
 (use-package avy
   :ensure t
   :bind (("M-s i" . avy-goto-word-1)
+         ("M-s c" . avy-goto-char)
          ("M-s j" . avy-goto-line)
-         ("M-s k" . avy-copy-line))
+         ("M-s k" . avy-copy-line)
+         )
   :config
   (setq avy-background t)
   )
@@ -52,6 +54,7 @@
 	     ("M-x" . counsel-M-x)
 	     ("M-y" . counsel-yank-pop)
 	     ("C-x C-f" . counsel-find-file)
+         ("<f9> m" . counsel-semantic-or-imenu)
 	     )
   :config
   (setq counsel-rg-base-command "rg -i --max-columns 240 --no-heading --with-filename --line-number %s")
