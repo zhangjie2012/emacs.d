@@ -24,9 +24,14 @@
   (setq flycheck-indication-mode nil)
 
   :config
-  ;; just mode enable check
-  (setq flycheck-check-syntax-automatically '())
   (flycheck-add-mode 'javascript-eslint 'web-mode)
+
+  ;; 避免卡顿，设定语法检测的时机，延迟 1s
+  ;; 1. 停止修改后
+  ;; 2. 切换 buffer 后
+  (setq flycheck-idle-change-delay 1
+        flycheck-idle-buffer-switch-delay 1)
+  (setq flycheck-check-syntax-automatically '(idle-change idle-buffer-switch))
   )
 
 (use-package flycheck-golangci-lint
@@ -49,8 +54,7 @@
               ("<f9> s s" . eglot-reconnect)
               ("<f9> s d" . eldoc)
               ("<f9> s i" . eglot-find-implementation)
-              ("<f9> s o" . eglot-organize-imports)
-              )
+              )  
   :config
   (setq eldoc-echo-area-use-multiline-p nil
         eglot-ignored-server-capabilities '(:documentHighlightProvider))
@@ -61,53 +65,31 @@
   :ensure t
   :mode "\\.go'"
   :config
-  (use-package go-tag
-    :ensure t
-    :init
-    (setq go-tag-args (list "-transform" "snakecase"))
-    (with-eval-after-load 'go-mode
-      (define-key go-mode-map (kbd "C-c t") #'go-tag-add)
-      (define-key go-mode-map (kbd "C-c T") #'go-tag-remove))
-    )
-  (use-package gotest
-    :ensure t
-    :init
-    (setq go-test-verbose t)
-    :config
-    (define-key go-mode-map (kbd "<f9> t f") 'go-test-current-file)
-    (define-key go-mode-map (kbd "<f9> t t") 'go-test-current-test)
-    (define-key go-mode-map (kbd "<f9> t p") 'go-test-current-project)
-    )
-
-  (defun eglot-organize-imports ()
-    "Offer to execute the source.organizeImports code action."
-    (interactive)
-    (unless (eglot--server-capable :codeActionProvider)
-      (eglot--error "Server can't execute code actions!"))
-    (let* ((server (eglot--current-server-or-lose))
-           (actions (jsonrpc-request
-                     server
-                     :textDocument/codeAction
-                     (list :textDocument (eglot--TextDocumentIdentifier))))
-           (action (cl-find-if
-                    (jsonrpc-lambda (&key kind &allow-other-keys)
-                      (string-equal kind "source.organizeImports" ))
-                    actions)))
-      (when action
-        (eglot--dcase action
-          (((Command) command arguments)
-           (eglot-execute-command server (intern command) arguments))
-          (((CodeAction) edit command)
-           (when edit (eglot--apply-workspace-edit edit))
-           (when command
-             (eglot--dbind ((Command) command arguments) command
-               (eglot-execute-command server (intern command) arguments))))))))
-  (defun eglot-format-buffer-on-save ()
+  (defun my-eglot-organize-imports () (interactive)
+         (eglot-code-actions nil nil "source.organizeImports" t))
+  (defun eglot-buffer-on-save ()
+    (add-hook 'before-save-hook #'my-eglot-organize-imports nil t)
     (add-hook 'before-save-hook #'eglot-format-buffer -10 t)
-    (add-hook 'before-save-hook #'eglot-organize-imports)
-    (add-hook 'before-save-hook #'flycheck-buffer)
     )
-  (add-hook 'go-mode-hook #'eglot-format-buffer-on-save)
+  (add-hook 'go-mode-hook #'eglot-buffer-on-save)
+  )
+
+(use-package go-tag
+  :ensure t
+  :init
+  (setq go-tag-args (list "-transform" "snakecase"))
+  (with-eval-after-load 'go-mode
+    (define-key go-mode-map (kbd "C-c t") #'go-tag-add)
+    (define-key go-mode-map (kbd "C-c T") #'go-tag-remove))
+  )
+(use-package gotest
+  :ensure t
+  :init
+  (setq go-test-verbose t)
+  :config
+  (define-key go-mode-map (kbd "<f9> t f") 'go-test-current-file)
+  (define-key go-mode-map (kbd "<f9> t t") 'go-test-current-test)
+  (define-key go-mode-map (kbd "<f9> t p") 'go-test-current-project)
   )
 
 (use-package python
