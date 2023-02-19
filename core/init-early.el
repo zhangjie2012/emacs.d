@@ -43,7 +43,7 @@
 
 (electric-pair-mode 1)
 (electric-indent-mode 1)
-(electric-quote-mode 1)
+;; (electric-quote-mode 1)
 
 (setq inhibit-startup-echo-area-message t
       inhibit-startup-message t
