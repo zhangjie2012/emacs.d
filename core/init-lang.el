@@ -34,16 +34,18 @@
   (setq flycheck-check-syntax-automatically '(idle-change idle-buffer-switch))
   )
 
+;; https://github.com/weijiangan/flycheck-golangci-lint
 (use-package flycheck-golangci-lint
   :ensure t
   :hook ((go-mode-hook . flycheck-golangci-lint-setup))
-  :defer t
   :init
   (defvar-local flycheck-local-checkers nil)
   (defun +flycheck-checker-get(fn checker property)
     (or (alist-get property (alist-get checker flycheck-local-checkers))
         (funcall fn checker property)))
   (advice-add 'flycheck-checker-get :around '+flycheck-checker-get)
+  :config
+  (setq flycheck-golangci-lint-config "~/.golangci.yaml")
   )
 
 (use-package eglot
@@ -54,7 +56,7 @@
               ("<f9> s s" . eglot-reconnect)
               ("<f9> s d" . eldoc)
               ("<f9> s i" . eglot-find-implementation)
-              )  
+              )
   :config
   (setq eldoc-echo-area-use-multiline-p nil
         eglot-ignored-server-capabilities '(:documentHighlightProvider))
@@ -82,6 +84,7 @@
     (define-key go-mode-map (kbd "C-c t") #'go-tag-add)
     (define-key go-mode-map (kbd "C-c T") #'go-tag-remove))
   )
+
 (use-package gotest
   :ensure t
   :init
