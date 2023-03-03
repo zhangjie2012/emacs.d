@@ -170,7 +170,12 @@
   :config
   (bind-keys :map dired-mode-map
              ("i" . dired-subtree-insert)
-             (";" . dired-subtree-remove))
+             (";" . dired-subtree-remove)
+             ("l" . dired-find-file)
+             ("h" . dired-up-directory)
+             ("j" . dired-next-line)
+             ("k" . dired-previous-line)
+             )
   )
 
 (use-package youdao-dictionary

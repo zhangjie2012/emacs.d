@@ -254,6 +254,20 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 | =<f9> d= | =dired-jump= | *high* |
 |----------+--------------+--------|
 
+=dired=
+
+- =j/k= 下一行/上一行
+- =h/l= 上一个/下一个文件夹
+- =(= 打开/关闭详情
+- =m= mark
+- =t= 反选
+- =U= 全部取消选中
+- =% m= 搜索
+- =C= copy
+- =R= Remove
+- =d= 标记为删除 =x= 执行
+- =D= 直接删除
+
 ** 高效光标跳转
 
 |---------+----------------------------------------+--------|
@@ -261,6 +275,7 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 |---------+----------------------------------------+--------|
 | =M-s i= | 跳转到某单词首部                       | *high* |
 | =M-s j= | 跳转到某行                             | *high* |
+| =M-s c= | 跳转到某个字符                         |        |
 | =C-.=   | 根据光标所在所选文本，推测可以做的事情 |        |
 | =C-;=   | Do What I Mean =embark-dwim=           | *high* |
 |---------+----------------------------------------+--------|
@@ -313,7 +328,7 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 ** 项目管理（projectile）
 
  =<f8>= =C-c p= 为 projectile 命令前缀 =projectile-command-map= 。
- 
+
 |--------+------------------------------------------+--------|
 | 快捷键 | 说明                                     | 频率   |
 |--------+------------------------------------------+--------|
@@ -565,4 +580,3 @@ lsp-mode 的功能比较多，官方提供了 [[https://emacs-lsp.github.io/lsp-
 [fn:2] https://www.masteringemacs.org/article/converting-tabs-whitespace
 
 [fn:1] https://stackoverflow.com/questions/52722096/build-emacs-and-gnutls-not-found
-
