@@ -272,7 +272,9 @@
   (setq company-global-modes '(not markdown-mode gfm-mode eshell-mode)
 		company-echo-delay 0
 		company-idle-delay 0.1
-		company-minimum-prefix-length 1)
+		company-minimum-prefix-length 1
+        company-format-margin-function nil
+        )
   )
 
 ;; -----------------------------------------------------------------------------
