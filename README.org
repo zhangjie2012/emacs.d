@@ -352,6 +352,7 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 | =C-M-j=     | 变量命名风格转换               |        |
 | =<f9> s s=  | 重启 eglot                     | middle |
 | =<f9> s d=  | eldoc                          |        |
+| =<f9> s i=  | eglot-find-implementation      | middle |
 | =<f9> <f9>= | 手动执行语法检测               |        |
 | =<f9> g=    | git-gitter++，显示当前文件改动 | middle |
 |-------------+--------------------------------+--------|
@@ -362,7 +363,7 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 | 快捷键      | 说明                                | 频率   |
 |-------------+-------------------------------------+--------|
 | =<f9> t a=  | =org-agenda=                        | *high* |
-| =<f9> t t=  | =org-capture=                       | middle |
+| =<f9> t c=  | =org-capture=                       | middle |
 | =<f9> t l=  | =org-toggle-link-display=           |        |
 | =<f9> t f=  | =org-footnote-new=                  |        |
 | =<f9> t i=  | =org-toggle-inline-images=          |        |
