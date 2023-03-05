@@ -39,7 +39,10 @@
 (save-place-mode t)
 (setq-default tab-width 4)
 
-(global-auto-revert-mode)
+(global-auto-revert-mode 1)
+(setq global-auto-revert-non-file-buffers t)
+
+(setq use-dialog-box nil)
 
 (electric-pair-mode 1)
 (electric-indent-mode 1)
