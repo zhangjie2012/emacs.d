@@ -17,7 +17,9 @@
         )
 
   (setq modus-themes-common-palette-overrides
-        '((border-mode-line-active unspecified)
+        '((bg-mode-line-active bg-blue-intense)
+          (fg-mode-line-active fg-main)
+          (border-mode-line-active unspecified)
           (border-mode-line-inactive unspecified)
 
           (fringe bg-blue-nuanced)
