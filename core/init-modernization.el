@@ -15,12 +15,14 @@
 
 (use-package avy
   :ensure t
-  :bind (("M-s i" . avy-goto-word-1)
+  :bind (("M-i" . avy-goto-word-1)
+         ("M-j" . avy-goto-line)
          ("M-s c" . avy-goto-char)
-         ("M-s j" . avy-goto-line)
          ("M-s k" . avy-copy-line)
          )
   :config
+  (setq avy-keys (number-sequence ?a ?z))
+  (setq avy-highlight-first t)
   (setq avy-background t)
   )
 
@@ -125,7 +127,7 @@
   :bind (("M-o" . ace-window)
 	     ("M-s t" . ace-swap-window))
   :config
-  (setq aw-keys '(?1 ?2 ?3 ?4 ?7 ?8 ?9 ?0))
+  (setq aw-keys '(?1 ?a ?w ?x ?7 ?8 ?9 ?0))
   (set-face-attribute
    'aw-mode-line-face nil
    :inherit 'mode-line-buffer-id
@@ -302,16 +304,18 @@ Uses `current-date-time-format' for the formatting the date/time."
 	    ((looking-at "\\s)") (forward-char 1) (backward-list 1))
 	    (t (self-insert-command (or arg 1)))))
 
-(global-set-key (kbd "M-*") 'match-paren)
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(global-set-key (kbd "<f10>") 'toggle-frame-fullscreen)
+(global-set-key (kbd "<f6>") 'show-file-name)
 (global-set-key (kbd "<f9> 1") 'delete-other-windows)
 (global-set-key (kbd "<f9> 2") 'split-window-below)
 (global-set-key (kbd "<f9> 3") 'split-window-horizontally)
 (global-set-key (kbd "<f9> c") 'eshell)
-(global-set-key (kbd "<f9> i") 'insert-current-date-time)
 (global-set-key (kbd "<f9> d") 'dired-jump)
+(global-set-key (kbd "<f9> i") 'insert-current-date-time)
 (global-set-key (kbd "<f9> w") 'save-buffer)
-(global-set-key (kbd "<f6>") 'show-file-name)
-(global-set-key (kbd "<f10>") 'toggle-frame-fullscreen)
 (global-set-key (kbd "C-2") 'set-mark-command) ;; actual is C-@
+(global-set-key (kbd "M-*") 'match-paren)
+(global-set-key (kbd "S-<backspace>") 'kill-whole-line)
 
 (provide 'init-modernization)
