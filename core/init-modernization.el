@@ -70,6 +70,21 @@
   (setq prefix-help-command #'embark-prefix-help-command)
   )
 
+(use-package prescient
+  :ensure t
+  :config
+  (setq-default history-length 1000)
+  (setq-default prescient-history-length 1000)
+  (prescient-persist-mode +1)
+  )
+
+(use-package ivy-prescient
+  :ensure t
+  :after ivy
+  :config
+  (ivy-prescient-mode +1) ;; ivy menu
+  )
+
 (use-package projectile
   :ensure t
   :bind (:map projectile-mode-map
@@ -277,6 +292,18 @@
 		company-minimum-prefix-length 1
         company-format-margin-function nil
         )
+  )
+
+(use-package company-prescient
+  :ensure t
+  :defer 2
+  :config
+  (company-prescient-mode +1)
+  )
+
+(use-package magit
+  :ensure t
+  :bind ("M-s ," . magit-status)
   )
 
 ;; -----------------------------------------------------------------------------
