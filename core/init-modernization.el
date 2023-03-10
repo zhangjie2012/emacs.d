@@ -44,10 +44,9 @@
 
 (use-package ivy-rich
   :ensure t
-  :init
-  (setq ivy-rich-path-style 'abbrev)
-  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   :config
+  (setq ivy-rich-path-style 'abbrev)
+  (setcdr (assq t ivy-format-functions-alist) 'ivy-format-function-line)
   (ivy-rich-mode 1)
   )
 
