@@ -21,6 +21,7 @@
          ("M-s k" . avy-copy-line)
          )
   :config
+  (setq avy-case-fold-search nil)
   (setq avy-keys (number-sequence ?a ?z))
   (setq avy-highlight-first t)
   (setq avy-background t)
@@ -30,19 +31,24 @@
   :ensure t
   :bind (("C-x b" . ivy-switch-buffer)
 	     ("<f6>" . ivy-resume))
-  :init
+  ;; :init
+  :config
   (setq ivy-use-virtual-buffers nil)
   (setq ivy-count-format "(%d-%d) ")
   (setq enable-recursive-minibuffers t)
-  :config
+  (setq ivy-extra-directories nil) ;; hide . and .. dire
+  (setq ivy-initial-inputs-alist nil) ;; remove ^ in ivy search
+  (setq ivy-fixed-height-minibuffer t)
   (ivy-mode 1)
   )
 
 (use-package ivy-rich
   :ensure t
+  :init
+  (setq ivy-rich-path-style 'abbrev)
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   :config
   (ivy-rich-mode 1)
-  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   )
 
 (use-package swiper
@@ -59,6 +65,7 @@
          ("<f9> m" . counsel-semantic-or-imenu)
 	     )
   :config
+  (setq counsel-switch-buffer-preview-virtual-buffers nil) ;; remove recentfile/bookmarks from switch-buffer
   (setq counsel-rg-base-command "rg -i --max-columns 240 --no-heading --with-filename --line-number %s")
   )
 
@@ -298,13 +305,7 @@
   :ensure t
   :defer 2
   :config
-  (company-prescient-mode +1)
-  )
-
-(use-package magit
-  :ensure t
-  :bind ("M-s ," . magit-status)
-  )
+  (company-prescient-mode +1))
 
 ;; -----------------------------------------------------------------------------
 
@@ -331,7 +332,6 @@ Uses `current-date-time-format' for the formatting the date/time."
 	    ((looking-at "\\s)") (forward-char 1) (backward-list 1))
 	    (t (self-insert-command (or arg 1)))))
 
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key (kbd "<f10>") 'toggle-frame-fullscreen)
 (global-set-key (kbd "<f6>") 'show-file-name)
 (global-set-key (kbd "<f9> 1") 'delete-other-windows)
@@ -344,5 +344,6 @@ Uses `current-date-time-format' for the formatting the date/time."
 (global-set-key (kbd "C-2") 'set-mark-command) ;; actual is C-@
 (global-set-key (kbd "M-*") 'match-paren)
 (global-set-key (kbd "S-<backspace>") 'kill-whole-line)
+(global-set-key (kbd "C-x k") 'kill-this-buffer) ;; kill-this-buffer replace kill-buffer
 
 (provide 'init-modernization)
