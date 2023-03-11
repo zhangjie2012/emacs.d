@@ -14,7 +14,6 @@
    ((string-equal system-type "darwin")
     (setq flycheck-javascript-eslint-executable "eslint")
     ))
-  (setq flycheck-eslintrc "~/.eslintrc.json") ;; set config file
 
   ;; Python
   (setq flycheck-python-flake8-executable "flake8")

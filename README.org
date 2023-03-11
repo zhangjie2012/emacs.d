@@ -208,7 +208,20 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 
 /适用于 React 开发。/
 
-安装 eslint =npm install -g eslint= 。如果没启动可通过 =flycheck-verify-setup= 和 =flycheck-verify-checker= 两个指令进行调试。
+使用安装 ESLint =npm install -g eslint= 。flycheck 配置 ESLint 经常出现各种奇奇怪怪的问题，从来没有一次性成功过，汇总的自查方法：
+
+1. 全局安装 ESLint，我不使用项目中单独的配置
+2. =(setq flycheck-javascript-eslint-executable "eslint")= 指定 eslint 路径
+3. =flycheck-select-checker= 指定 ESLint
+4. =flycheck-verify-setup= 查看二进制路径和配置文件是否生效
+   + ESLint 全局配置文件在用户目录下，具体可以查看 ESLint 的文档，ESLint 一直更新可能会有变化
+   + 我的配置在 https://github.com/zhangjie2012/dotfiles/blob/master/_eslintrc.json =ln -s dotfiles/_eslintrc.json .eslintrc.json= 添加软连接
+5. 以上 Emacs 都没问题，但是检测不符合预期，要检查下用的是哪里的配置文件，以及配置文件是否有问题
+   + =eslint --print-config file.js= 查看使用的配置文件是什么
+   + =eslint file.js= 查看错误提示与 Emacs 是否相同
+   + 看 eslint 报错，缺什么 *全局* 安装
+
+核心思路是，先保证 eslint 本身运行没问题，再看 Emacs flycheck 配置是否正常。
 
 * 目录结构
 
