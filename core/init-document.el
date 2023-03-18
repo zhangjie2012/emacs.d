@@ -33,8 +33,7 @@
 		org-startup-folded t
 		org-startup-with-inline-images t
 		org-image-actual-width '(1024)
-        org-capture-templates nil
-        )
+        org-capture-templates nil)
 
   (setq org-agenda-files '("~/gtd/entry.org"))
   (setq org-default-notes-file "~/gtd/entry.org")
@@ -48,8 +47,7 @@
 		'(("TODO" . "orangered")
           ("WAIT" . "darkgoldenrod")
           ("DONE" . "lightgreen")
-		  ("DEPR" . "darkgrey"))
-		)
+		  ("DEPR" . "darkgrey")))
   (setq org-agenda-include-deadlines t
 		org-agenda-include-diary nil
 		org-agenda-compact-blocks t
@@ -60,14 +58,11 @@
 		org-agenda-skip-deadline-prewarning-if-scheduled t
 		org-agenda-skip-scheduled-delay-if-deadline t
 		org-agenda-skip-scheduled-if-done t
-		org-agenda-skip-deadline-if-done t
-		)
+		org-agenda-skip-deadline-if-done t)
   (setq org-priority-faces
 		'((?A :foreground "#ff6c6b" :weight bold)
 		  (?B :foreground "#98be65" :weight bold)
-		  (?C :foreground "darkgrey" :weight bold)
-		  )
-		)
+		  (?C :foreground "darkgrey" :weight bold)))
   (setq org-agenda-custom-commands
 		'(("g" "global overview"
            ((tags "PRIORITY=\"A\""
@@ -104,8 +99,7 @@
   (require 'org-indent)
 
   (use-package ob-go
-	:ensure t
-	)
+	:ensure t)
 
   ;; programming languages
   (org-babel-do-load-languages
@@ -127,8 +121,8 @@
 	:ensure t
 	:init
 	(setq org-superstar-special-todo-items nil
-		  org-superstar-prettify-item-bullets nil
-          )
+		  org-superstar-prettify-item-bullets t
+          org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆"))
 	(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 	)
 
