@@ -24,7 +24,8 @@
 		 ("M-]" . org-next-visible-heading)
 		 )
   :init
-  (setq org-adapt-indentation nil
+  (setq org-ellipsis " ▾"
+        org-adapt-indentation nil
 		org-log-done t
 		org-src-tab-acts-natively nil
 		org-pretty-entities t
@@ -49,7 +50,6 @@
           ("DONE" . "lightgreen")
 		  ("DEPR" . "darkgrey"))
 		)
-
   (setq org-agenda-include-deadlines t
 		org-agenda-include-diary nil
 		org-agenda-compact-blocks t
