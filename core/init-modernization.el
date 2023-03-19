@@ -3,14 +3,55 @@
   :ensure t
   :demand
   :init
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  ;; :config
-  ;; (defun no-trailing-whitespace ()
-  ;;   (setq show-trailing-whitespace nil))
-  ;; (add-hook 'minibuffer-setup-hook 'no-trailing-whitespace)
-  ;; (add-hook 'calendar-setup-hook 'no-trailing-whitespace)
-  ;; (set-face-attribute 'trailing-whitespace nil :background "indian red")
-  ;; (setq-default show-trailing-whitespace t)
+  (add-hook 'before-save-hook 'delete-trailing-whitespace))
+
+(use-package marginalia
+  :ensure t
+  :bind (:map minibuffer-local-map
+              ("M-A" . marginalia-cycle))
+  :init
+  (marginalia-mode))
+
+(use-package all-the-icons-completion
+  :ensure t
+  :after (marginalia all-the-icons)
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
+  :init
+  (all-the-icons-completion-mode))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode)
+  ;; (setq vertico-scroll-margin 0)
+  (setq vertico-resize nil)
+  (setq vertico-cycle t))
+
+(use-package consult
+  :after vertico
+  :ensure t
+  :bind (("C-x b" . consult-buffer)
+         ("M-y" . consult-yank-pop)
+         ("C-s" . consult-line)
+         ("<f9> m" . consult-imenu)
+         ("M-s [" . consult-ripgrep)
+         ("M-s ]" . consult-git-grep)
+         )
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+  :init
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
+  :config
+  (setq consult-preview-key "M-.")
+  ;; (setq consult-preview-key 'any)
+  (autoload 'projectile-project-root "projectile")
+  (setq consult-project-function (lambda (_) (projectile-project-root)))
   )
 
 (use-package avy
@@ -24,72 +65,19 @@
   (setq avy-case-fold-search nil)
   (setq avy-keys (number-sequence ?a ?z))
   (setq avy-highlight-first t)
-  (setq avy-background t)
-  )
-
-(use-package ivy
-  :ensure t
-  :bind (("C-x b" . ivy-switch-buffer)
-	     ("<f6>" . ivy-resume))
-  ;; :init
-  :config
-  (setq ivy-use-virtual-buffers nil)
-  (setq ivy-count-format "(%d-%d) ")
-  (setq enable-recursive-minibuffers t)
-  (setq ivy-extra-directories nil) ;; hide . and .. dire
-  (setq ivy-initial-inputs-alist nil) ;; remove ^ in ivy search
-  (setq ivy-fixed-height-minibuffer t)
-  (ivy-mode 1)
-  )
-
-(use-package ivy-rich
-  :ensure t
-  :config
-  (setq ivy-rich-path-style 'abbrev)
-  (setcdr (assq t ivy-format-functions-alist) 'ivy-format-function-line)
-  (ivy-rich-mode 1)
-  )
-
-(use-package swiper
-  :ensure t
-  :bind (("C-s" . swiper)))
-
-(use-package counsel
-  :ensure t
-  :bind (("M-s [" . counsel-rg)
-	     ("M-s ]" . counsel-git-grep)
-	     ("M-x" . counsel-M-x)
-	     ("M-y" . counsel-yank-pop)
-	     ("C-x C-f" . counsel-find-file)
-         ("<f9> m" . counsel-semantic-or-imenu)
-	     )
-  :config
-  (setq counsel-switch-buffer-preview-virtual-buffers nil) ;; remove recentfile/bookmarks from switch-buffer
-  (setq counsel-rg-base-command "rg -i --max-columns 240 --no-heading --with-filename --line-number %s")
-  )
+  (setq avy-background t))
 
 (use-package embark
   :ensure t
   :bind (("C-." . embark-act)
 	     ("C-;" . embark-dwim))
   :init
-  (setq prefix-help-command #'embark-prefix-help-command)
-  )
+  (setq prefix-help-command #'embark-prefix-help-command))
 
-(use-package prescient
+(use-package embark-consult
   :ensure t
-  :config
-  (setq-default history-length 1000)
-  (setq-default prescient-history-length 1000)
-  (prescient-persist-mode +1)
-  )
-
-(use-package ivy-prescient
-  :ensure t
-  :after ivy
-  :config
-  (ivy-prescient-mode +1) ;; ivy menu
-  )
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package projectile
   :ensure t
@@ -120,7 +108,6 @@
   (setq projectile-require-project-root 'prompt)
   ;; 对结果进行排序(active buffer + recently opened)
   (setq projectile-sort-order 'recentf-active)
-  (setq projectile-completion-system 'ivy)
 
   ;; fix windows system "projectile-find-file" throw
   ;; 'tr' is not recognized as an internal or external command ...
@@ -134,13 +121,58 @@
     (cdr project))
 
   :init
-  (use-package counsel-projectile
-    :ensure t
-    :config
-    (counsel-projectile-mode 1)
-    )
+  (projectile-mode +1)
+  )
 
-  ;; (projectile-mode +1)
+(use-package corfu
+  :ensure t
+  :custom
+  (corfu-cycle t)
+  (corfu-auto t)
+  (corfu-auto-prefix 2)
+  (corfu-auto-delay 0.0)
+  (corfu-popupinfo-delay '(0.5 . 0.2))
+  (corfu-preview-current 'insert)
+  (corfu-preselect-first nil)
+  :bind (:map corfu-map
+              ("M-SPC" . corfu-insert-separator)
+              ("C-n" . corfu-next)
+              ("C-p" . corfu-previous))
+  :init
+  (global-corfu-mode)
+  (corfu-history-mode)
+  )
+
+(use-package cape
+  :ensure t
+  :init
+  (defalias 'dabbrev-after-2 (cape-capf-prefix-length #'cape-dabbrev 2))
+  (add-to-list 'completion-at-point-functions 'dabbrev-after-2 t)
+  (cl-pushnew #'cape-file completion-at-point-functions)
+  :config
+  (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-silent)
+  (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-purify))
+
+(use-package prescient
+  :ensure t
+  :config
+  (setq-default history-length 1000)
+  (setq-default prescient-history-length 1000)
+  (prescient-persist-mode +1)
+  )
+
+(use-package corfu-prescient
+  :after corfu
+  :ensure t
+  :config
+  (corfu-prescient-mode +1)
+  )
+
+(use-package vertico-prescient
+  :after vertico
+  :ensure t
+  :config
+  (vertico-prescient-mode +1)
   )
 
 (use-package ace-window
@@ -176,15 +208,13 @@
   :ensure t
   :bind (("M--" . highlight-symbol-at-point)
 	     ("M-n" . highlight-symbol-next)
-	     ("M-p" . highlight-symbol-prev))
-  )
+	     ("M-p" . highlight-symbol-prev)))
 
 (use-package which-key
   :ensure t
   :hook (prog-mode-hook . which-key-mode)
   :init
-  (which-key-setup-minibuffer)
-  )
+  (which-key-setup-minibuffer))
 
 (use-package dired-subtree
   :ensure t
@@ -198,8 +228,7 @@
              ("h" . dired-up-directory)
              ("j" . dired-next-line)
              ("k" . dired-previous-line)
-             )
-  )
+             ))
 
 (use-package youdao-dictionary
   :ensure t
@@ -209,13 +238,11 @@
 	     )
   :config
   (setq url-automatic-caching t)
-  (setq youdao-dictionary-use-chinese-word-segmentation t)
-  )
+  (setq youdao-dictionary-use-chinese-word-segmentation t))
 
 (use-package rainbow-delimiters
   :ensure t
-  :hook (prog-mode-hook . rainbow-delimiters-mode)
-  )
+  :hook (prog-mode-hook . rainbow-delimiters-mode))
 
 ;; line number
 ;; (set-face-foreground 'line-number "darkgrey")
@@ -275,36 +302,7 @@
 	(exec-path-from-shell-copy-env "GOPATH")
 	(progn (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO"))
 			 (add-to-list 'exec-path-from-shell-variables var)))
-	)
-  )
-
-(use-package company
-  :ensure t
-  :hook ((emacs-lisp-mode-hook . (lambda ()
-								   (setq-local company-backends '(company-elisp))))
-         (prog-mode-hook . company-mode)
-         )
-  :bind (:map company-active-map
-			  ("M-n" . nil)
-			  ("M-p" . nil)
-			  ("C-n" . company-select-next)
-			  ("C-p" . company-select-previous)
-			  )
-  :config
-  ;; markdown-mode, eshell-mode ignore complete
-  (setq company-global-modes '(not markdown-mode gfm-mode eshell-mode)
-		company-echo-delay 0
-		company-idle-delay 0.1
-		company-minimum-prefix-length 1
-        company-format-margin-function nil
-        )
-  )
-
-(use-package company-prescient
-  :ensure t
-  :defer 2
-  :config
-  (company-prescient-mode +1))
+	))
 
 ;; -----------------------------------------------------------------------------
 
