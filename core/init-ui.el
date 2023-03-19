@@ -81,18 +81,18 @@
   :init
   (defun toggle-theme ()
     (interactive)
-    (cond ((eq (car custom-enabled-themes) 'doom-solarized-light)
+    (cond ((eq (car custom-enabled-themes) 'doom-palenight)
            (mapc #'disable-theme custom-enabled-themes)
-           (load-theme 'doom-solarized-dark t))
-          ((eq (car custom-enabled-themes) 'doom-solarized-dark)
+           (load-theme 'doom-one-light t))
+          ((eq (car custom-enabled-themes) 'doom-one-light)
            (mapc #'disable-theme custom-enabled-themes)
-           (load-theme 'doom-solarized-light t))))
+           (load-theme 'doom-palenight t))))
 
   ;; day/night use diff theme: via https://github.com/jakebox/jake-emacs
   (let ((hour (string-to-number (substring (current-time-string) 11 13))))
     (if (or (> hour 19) (< hour 7))
-        (load-theme 'doom-solarized-dark t)
-      (load-theme 'doom-solarized-light t)))
+        (load-theme 'doom-palenight t)
+      (load-theme 'doom-one-light t)))
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic nil)
@@ -103,7 +103,7 @@
 (use-package doom-modeline
   :ensure t
   :config
-  (setq doom-modeline-buffer-modification-icon nil
+  (setq doom-modeline-buffer-modification-icon t
         doom-modeline-project-detection 'projectile
         doom-modeline-buffer-file-name-style 'truncate-upto-project)
   (doom-modeline-mode 1))
