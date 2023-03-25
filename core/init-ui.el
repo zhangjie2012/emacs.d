@@ -1,16 +1,3 @@
-(use-package all-the-icons
-  :ensure t
-  :if (display-graphic-p)
-  :config
-  (setq inhibit-compacting-font-caches t))
-
-(use-package all-the-icons-dired
-  :after all-the-icons
-  :ensure t
-  :if (display-graphic-p)
-  :config
-  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
-
 (use-package doom-themes
   :ensure t
   :init
@@ -38,7 +25,7 @@
 (use-package doom-modeline
   :ensure t
   :config
-  (setq doom-modeline-buffer-modification-icon t
+  (setq doom-modeline-buffer-modification-icon nil
         doom-modeline-project-detection 'projectile
         doom-modeline-buffer-file-name-style 'truncate-upto-project)
   (doom-modeline-mode 1))
@@ -63,11 +50,9 @@
   (define-key cnfonts-mode-map (kbd "C-=") #'cnfonts-increase-fontsize)
 
   (custom-set-faces
-   '(org-level-1 ((t (:inherit outline-1 :height 1.4))))
-   '(org-level-2 ((t (:inherit outline-2 :height 1.3))))
-   '(org-level-3 ((t (:inherit outline-3 :height 1.2))))
-   '(org-level-4 ((t (:inherit outline-4 :height 1.1))))
-   '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
+   '(org-level-1 ((t (:inherit outline-1 :height 1.3))))
+   '(org-level-2 ((t (:inherit outline-1 :height 1.1))))
+   '(org-level-3 ((t (:inherit outline-1 :height 1.0))))
    )
   )
 

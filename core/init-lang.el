@@ -62,6 +62,7 @@
 
 (use-package go-mode
   :ensure t
+  :after eglot
   :mode "\\.go'"
   :config
   (defun my-eglot-organize-imports () (interactive)
@@ -145,7 +146,6 @@
 
 (use-package rjsx-mode
   :ensure t
-  :hook ((rjsx-mode-hook . company-mode))
   :defer t
   :init
   (add-to-list 'auto-mode-alist '(".*\\.js\\'" . rjsx-mode))

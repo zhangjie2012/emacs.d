@@ -12,13 +12,6 @@
   :init
   (marginalia-mode))
 
-(use-package all-the-icons-completion
-  :ensure t
-  :after (marginalia all-the-icons)
-  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
-  :init
-  (all-the-icons-completion-mode))
-
 (use-package orderless
   :ensure t
   :custom
@@ -31,7 +24,7 @@
   (vertico-mode)
   ;; (setq vertico-scroll-margin 0)
   (setq vertico-resize nil)
-  (setq vertico-cycle t))
+  (setq vertico-cycle nil))
 
 (use-package consult
   :after vertico
@@ -127,21 +120,18 @@
 (use-package corfu
   :ensure t
   :custom
-  (corfu-cycle t)
   (corfu-auto t)
-  (corfu-auto-prefix 2)
+  (corfu-auto-prefix 1)
   (corfu-auto-delay 0.0)
-  (corfu-popupinfo-delay '(0.5 . 0.2))
-  (corfu-preview-current 'insert)
-  (corfu-preselect-first nil)
+  (corfu-quit-no-match t)
+  (corfu-excluded-modes '(org-mode markdown-mode eshell-mode))
   :bind (:map corfu-map
               ("M-SPC" . corfu-insert-separator)
               ("C-n" . corfu-next)
               ("C-p" . corfu-previous))
   :init
   (global-corfu-mode)
-  (corfu-history-mode)
-  )
+  (corfu-history-mode))
 
 (use-package cape
   :ensure t
@@ -303,6 +293,13 @@
 	(progn (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO"))
 			 (add-to-list 'exec-path-from-shell-variables var)))
 	))
+
+(use-package magit
+  :ensure t
+  :bind (("M-s ," . magit-status))
+  :config
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  )
 
 ;; -----------------------------------------------------------------------------
 

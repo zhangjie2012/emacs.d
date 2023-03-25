@@ -1,3 +1,5 @@
+(setq native-comp-deferred-compilation nil)
+
 (setq read-process-output-max (* 1024 1024))  ;; 1mb
 (setq gc-cons-threshold (* 1024 1024 100))  ;; 100mb
 
@@ -8,8 +10,8 @@
 ;; (set-selection-coding-system 'utf-8-unix)
 (prefer-coding-system        'utf-8-unix)
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix)
-      default-buffer-file-coding-system 'utf-8-unix ; Windows/ Linux/Mac all LF
-      )
+      default-buffer-file-coding-system 'utf-8-unix) ;; Windows/ Linux/Mac all LF
+
 (setq system-time-locale "C")
 ;; (setq system-time-locale "zh_CN.UTF-8")
 
@@ -29,6 +31,11 @@
         (vertical-scroll-bars)))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
 
 (setq frame-resize-pixelwise t)
 (setq window-resize-pixelwise nil)
