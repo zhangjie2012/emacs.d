@@ -17,7 +17,8 @@ Orgmode
   - [[#emacs-安装][Emacs 安装]]
     - [[#源码][+源码+]]
     - [[#ubuntu-2204][+Ubuntu 22.04+]]
-    - [[#macoswindows][MacOS/Windows]]
+    - [[#windows][Windows+]]
+    - [[#macos][MacOS]]
   - [[#配置安装][配置安装]]
   - [[#开发环境][开发环境]]
     - [[#go][Go]]
@@ -81,8 +82,7 @@ Github =main= 为稳定版本， =unstable= 是实验性版本。
 
 ** Emacs 安装
 
-- +推荐使用 Emacs 27，较新又稳定。+
-- Emacs 28 正式版本发布了快一年了，刚开始不稳定，现在挺稳定基本没什么问题
+版本：Emacs 28。
 
 *** +源码+
 
@@ -112,7 +112,7 @@ sudo apt install emacs
 alias em="env TERM=xterm-256color emacs -nw"
 #+END_SRC
 
-*** MacOS/Windows
+*** Windows+
 
 使用 GUI 版本，下载二进制安装：
 
@@ -120,6 +120,19 @@ alias em="env TERM=xterm-256color emacs -nw"
 - Windows https://mirrors.ustc.edu.cn/gnu/emacs/windows/
 
 注意：Windows 下配置文件用户目录下的 =/AppData/Roaming= 下（AppData 是隐藏的）。
+
+*** MacOS
+
+使用 [[https://github.com/d12frosted/homebrew-emacs-plus][emacs-plus]] 的版本：
+
+#+begin_src sh
+  brew reinstall gcc libgccjit
+  brew tap d12frosted/emacs-plus
+  brew install emacs-plus@28 --with-no-titlebar-and-round-corners --with-cacodemon-icon
+  ln -s /usr/local/opt/emacs-plus@28/Emacs.app /Applications
+#+end_src
+
+卸载 =brew uninstall emacs-plus= 。
 
 ** 配置安装
 
@@ -134,7 +147,7 @@ alias em="env TERM=xterm-256color emacs -nw"
 #+begin_src emacs-lisp
   (setq package-archives
         '(
-          ("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+        ("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
           ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
           ("melpa-stable" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/stable-melpa/")
           ("nongnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/")

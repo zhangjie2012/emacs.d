@@ -29,7 +29,7 @@
 		org-log-done t
 		org-src-tab-acts-natively nil
 		org-pretty-entities t
-		;; org-hide-emphasis-markers t
+		org-hide-emphasis-markers t
 		org-startup-folded t
 		org-startup-with-inline-images t
 		org-image-actual-width '(1024)
@@ -43,11 +43,15 @@
   (require 'org-inlinetask)
   (setq org-todo-keywords
 		'((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d@/!)" "DEPR(r@/!)")))
+  (setq org-priority-faces
+   '((?A :foreground "#ff6c6b" :weight bold)
+     (?B :foreground "#98be65" :weight bold)
+     (?C :foreground "#c678dd" :weight bold)))
   (setq org-todo-keyword-faces
-		'(("TODO" . "orangered")
+    	'(;; ("TODO" . "orangered")
           ("WAIT" . "darkgoldenrod")
-          ("DONE" . "lightgreen")
-		  ("DEPR" . "darkgrey")))
+          ("DONE" . "dark")
+    	  ("DEPR" . "darkgrey")))
   (setq org-agenda-include-deadlines t
 		org-agenda-include-diary nil
 		org-agenda-compact-blocks t
@@ -59,10 +63,6 @@
 		org-agenda-skip-scheduled-delay-if-deadline t
 		org-agenda-skip-scheduled-if-done t
 		org-agenda-skip-deadline-if-done t)
-  (setq org-priority-faces
-		'((?A :foreground "#ff6c6b" :weight bold)
-		  (?B :foreground "#98be65" :weight bold)
-		  (?C :foreground "darkgrey" :weight bold)))
   (setq org-agenda-custom-commands
 		'(("g" "global overview"
            ((tags "PRIORITY=\"A\""
@@ -120,18 +120,18 @@
   (use-package org-superstar
 	:ensure t
 	:init
-	(setq org-superstar-special-todo-items nil
+	(setq org-superstar-special-todo-items t
 		  org-superstar-prettify-item-bullets t
-          org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆"))
-	(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
-	)
+          org-superstar-remove-leading-stars nil
+          org-superstar-cycle-headline-bullets nil
+          org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
+          org-superstar-itembullet-alist '((?+ . ?➤) (?- . ?✦)))
+	(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 
   (use-package toc-org
 	:ensure t
 	:init
-	(add-hook 'org-mode-hook 'toc-org-mode)
-	)
-  )
+	(add-hook 'org-mode-hook 'toc-org-mode)))
 
 ;; blog
 (use-package ox-publish

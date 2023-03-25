@@ -30,3 +30,5 @@ org-persist/
 projects
 cnfonts
 var
+eln-cache
+flycheck_*
