@@ -5,72 +5,17 @@
   :init
   (add-hook 'before-save-hook 'delete-trailing-whitespace))
 
-(use-package marginalia
-  :ensure t
-  :bind (:map minibuffer-local-map
-              ("M-A" . marginalia-cycle))
-  :init
-  (marginalia-mode))
-
-(use-package orderless
-  :ensure t
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion)))))
-
-(use-package vertico
-  :ensure t
-  :init
-  (vertico-mode)
-  ;; (setq vertico-scroll-margin 0)
-  (setq vertico-resize nil)
-  (setq vertico-cycle nil))
-
-(use-package consult
-  :after vertico
-  :ensure t
-  :bind (("C-x b" . consult-buffer)
-         ("M-y" . consult-yank-pop)
-         ("C-s" . consult-line)
-         ("<f9> m" . consult-imenu)
-         ("M-s [" . consult-ripgrep)
-         ("M-s ]" . consult-git-grep)
-         )
-  :hook (completion-list-mode . consult-preview-at-point-mode)
-  :init
-  (setq xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref)
-  :config
-  (setq consult-preview-key "M-.")
-  ;; (setq consult-preview-key 'any)
-  (autoload 'projectile-project-root "projectile")
-  (setq consult-project-function (lambda (_) (projectile-project-root)))
-  )
-
 (use-package avy
   :ensure t
   :bind (("M-i" . avy-goto-word-1)
          ("M-j" . avy-goto-line)
          ("M-s c" . avy-goto-char)
-         ("M-s k" . avy-copy-line)
-         )
+         ("M-s k" . avy-copy-line))
   :config
   (setq avy-case-fold-search nil)
   (setq avy-keys (number-sequence ?a ?z))
   (setq avy-highlight-first t)
   (setq avy-background t))
-
-(use-package embark
-  :ensure t
-  :bind (("C-." . embark-act)
-	     ("C-;" . embark-dwim))
-  :init
-  (setq prefix-help-command #'embark-prefix-help-command))
-
-(use-package embark-consult
-  :ensure t
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package projectile
   :ensure t
@@ -83,8 +28,7 @@
 	          ("D" . projectile-dired-other-window)
 	          ("k" . projectile-kill-buffers)
 	          ("v" . projectile-vc)
-	          ("b" . projectile-switch-to-buffer)
-	          )
+	          ("b" . projectile-switch-to-buffer))
   :config
   ;; 打开项目缓存, 否则大的项目每次构建会比较慢
   ;; 你可以通过下面两个名称来清除缓存
@@ -114,68 +58,7 @@
     (cdr project))
 
   :init
-  (projectile-mode +1)
-  )
-
-(use-package cape
-  :ensure t
-  :init
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-history)
-  (add-to-list 'completion-at-point-functions #'cape-keyword)
-  (add-to-list 'completion-at-point-functions #'cape-abbrev)
-  (add-to-list 'completion-at-point-functions #'cape-symbol)
-  )
-
-(use-package corfu
-  :ensure t
-  :custom
-  (corfu-auto t)
-  (corfu-auto-prefix 1)
-  (corfu-auto-delay 0.0)
-  (corfu-quit-no-match t)
-  (corfu-excluded-modes '(org-mode markdown-mode eshell-mode))
-  :bind (:map corfu-map
-              ("M-SPC" . corfu-insert-separator)
-              ("C-n" . corfu-next)
-              ("C-p" . corfu-previous))
-  :init
-  (global-corfu-mode)
-  (corfu-history-mode))
-
-(use-package prescient
-  :ensure t
-  :config
-  (setq-default history-length 1000)
-  (setq-default prescient-history-length 1000)
-  (prescient-persist-mode +1))
-
-(use-package corfu-prescient
-  :after corfu
-  :ensure t
-  :config
-  (corfu-prescient-mode +1)
-  )
-
-(use-package vertico-prescient
-  :after vertico
-  :ensure t
-  :config
-  (vertico-prescient-mode +1)
-  )
-
-(use-package ace-window
-  :ensure t
-  :bind (("M-o" . ace-window)
-	     ("M-s t" . ace-swap-window))
-  :config
-  (setq aw-keys '(?1 ?a ?w ?x ?7 ?8 ?9 ?0))
-  (set-face-attribute
-   'aw-mode-line-face nil
-   :inherit 'mode-line-buffer-id
-   :foreground "chartreuse")
-  )
+  (projectile-mode +1))
 
 (use-package expand-region
   :ensure t
@@ -191,8 +74,7 @@
 
 (use-package multiple-cursors
   :ensure t
-  :bind (("M-s ;" . mc/mark-all-symbols-like-this-in-defun))
-  )
+  :bind (("M-s ;" . mc/mark-all-symbols-like-this-in-defun)))
 
 (use-package highlight-symbol
   :ensure t
@@ -206,20 +88,6 @@
   :init
   (which-key-setup-minibuffer))
 
-(use-package dired-subtree
-  :ensure t
-  :init
-  (setq dired-subtree-use-backgrounds nil)
-  :config
-  (bind-keys :map dired-mode-map
-             ("i" . dired-subtree-insert)
-             (";" . dired-subtree-remove)
-             ("l" . dired-find-file)
-             ("h" . dired-up-directory)
-             ("j" . dired-next-line)
-             ("k" . dired-previous-line)
-             ))
-
 (use-package youdao-dictionary
   :ensure t
   :bind (
@@ -230,10 +98,6 @@
   (setq url-automatic-caching t)
   (setq youdao-dictionary-use-chinese-word-segmentation t))
 
-(use-package rainbow-delimiters
-  :ensure t
-  :hook (prog-mode-hook . rainbow-delimiters-mode))
-
 ;; line number
 ;; (set-face-foreground 'line-number "darkgrey")
 (global-set-key (kbd "M-s l") 'display-line-numbers-mode)
@@ -242,8 +106,7 @@
   :ensure t
   :bind (("M-s r" . linum-relative-toggle))
   :config
-  (setq linum-relative-backend 'display-line-numbers-mode)
-  )
+  (setq linum-relative-backend 'display-line-numbers-mode))
 
 (use-package display-fill-column-indicator
   :pin manual
@@ -251,8 +114,7 @@
   (display-fill-column-indicator-column 120)
   (display-fill-column-indicator-character ?\u2502)
   :config
-  (global-set-key (kbd "M-s n") 'display-fill-column-indicator-mode)
-  )
+  (global-set-key (kbd "M-s n") 'display-fill-column-indicator-mode))
 
 (use-package git-gutter+
   :ensure t
@@ -295,8 +157,13 @@
   :ensure t
   :bind (("M-s ," . magit-status))
   :config
-  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
-  )
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
+
+(use-package writeroom-mode
+  :ensure t
+  :bind (("<f9> <SPC>" . writeroom-mode))
+  :config
+  (setq writeroom-width 121))
 
 ;; -----------------------------------------------------------------------------
 
@@ -337,4 +204,4 @@ Uses `current-date-time-format' for the formatting the date/time."
 (global-set-key (kbd "S-<backspace>") 'kill-whole-line)
 (global-set-key (kbd "C-x k") 'kill-this-buffer) ;; kill-this-buffer replace kill-buffer
 
-(provide 'init-modernization)
+(provide 'init-modern)

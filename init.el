@@ -29,7 +29,8 @@
 
 (require 'init-early)
 (require 'init-ui)
-(require 'init-modernization)
+(require 'init-modern)
+(require 'init-enhance)
 (require 'init-document)
 (require 'init-lang)
 (require 'init-config)

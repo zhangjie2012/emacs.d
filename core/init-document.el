@@ -29,7 +29,7 @@
 		org-log-done t
 		org-src-tab-acts-natively nil
 		org-pretty-entities t
-		org-hide-emphasis-markers t
+		;; org-hide-emphasis-markers t
 		org-startup-folded t
 		org-startup-with-inline-images t
 		org-image-actual-width '(1024)
@@ -171,8 +171,6 @@
 		   :publishing-function org-publish-attachment
 		   )
 		  ;; publish component
-		  ("site" :components ("site-orgs" "site-static"))
-		  ))
-  )
+		  ("site" :components ("site-orgs" "site-static")))))
 
 (provide 'init-document)

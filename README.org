@@ -241,8 +241,9 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 core 目录下：
 
 - =init-early= 基础配置
-- =init-modernization= 增强 minibuffer、项目管理、窗口跳转、文本扩展选中、括号匹配等
 - =init-ui= 主题、modeline、字体等
+- =init-modern= 更加现代化
+- =init-enhance= 对 Emacs 已经具备的能力进行增强
 - =init-lang= 让 Emacs 变成一个 IDE，选型：
   + =eglot= Language Server Protocol
   + =company-mode= 自动补全框架

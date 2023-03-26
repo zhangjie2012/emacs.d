@@ -52,9 +52,7 @@
   (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :height 1.3))))
    '(org-level-2 ((t (:inherit outline-1 :height 1.1))))
-   '(org-level-3 ((t (:inherit outline-1 :height 1.0))))
-   )
-  )
+   '(org-level-3 ((t (:inherit outline-1 :height 1.0))))))
 
 (use-package beacon
   :ensure t
@@ -62,7 +60,11 @@
   :config
   ;; (beacon-mode 1)
   (setq beacon-push-mark 35)
-  (setq beacon-color "#FF8247")
-  )
+  (setq beacon-color "#FF8247"))
+
+(use-package rainbow-delimiters
+  :ensure t
+  :hook (prog-mode-hook . rainbow-delimiters-mode))
+
 
 (provide 'init-ui)
