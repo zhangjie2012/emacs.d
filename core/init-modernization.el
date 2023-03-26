@@ -117,6 +117,17 @@
   (projectile-mode +1)
   )
 
+(use-package cape
+  :ensure t
+  :init
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-history)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)
+  (add-to-list 'completion-at-point-functions #'cape-abbrev)
+  (add-to-list 'completion-at-point-functions #'cape-symbol)
+  )
+
 (use-package corfu
   :ensure t
   :custom
@@ -133,23 +144,12 @@
   (global-corfu-mode)
   (corfu-history-mode))
 
-(use-package cape
-  :ensure t
-  :init
-  (defalias 'dabbrev-after-2 (cape-capf-prefix-length #'cape-dabbrev 2))
-  (add-to-list 'completion-at-point-functions 'dabbrev-after-2 t)
-  (cl-pushnew #'cape-file completion-at-point-functions)
-  :config
-  (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-silent)
-  (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-purify))
-
 (use-package prescient
   :ensure t
   :config
   (setq-default history-length 1000)
   (setq-default prescient-history-length 1000)
-  (prescient-persist-mode +1)
-  )
+  (prescient-persist-mode +1))
 
 (use-package corfu-prescient
   :after corfu
@@ -276,10 +276,7 @@
       (string-inflection-all-cycle))
 	 ((eq major-mode 'python-mode)
       (string-inflection-python-style-cycle))
-	 ((eq major-mode 'go-mode) ;; golang use java style
-      (string-inflection-java-style-cycle))
-	 (t (string-inflection-all-cycle))))  ;; default
-  )
+	 (t (string-inflection-all-cycle)))))
 
 ;; https://github.com/purcell/exec-path-from-shell/issues/36
 (use-package exec-path-from-shell
