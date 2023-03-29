@@ -70,8 +70,8 @@
 
 (setq inhibit-startup-echo-area-message t
       inhibit-startup-message t
-      indicate-empty-lines t
-      )
+      indicate-empty-lines t)
+
 (blink-cursor-mode -1)
 (setq visible-cursor nil)
 
