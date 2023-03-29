@@ -159,12 +159,6 @@
   :config
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
-(use-package writeroom-mode
-  :ensure t
-  :bind (("<f9> <SPC>" . writeroom-mode))
-  :config
-  (setq writeroom-width 121))
-
 ;; -----------------------------------------------------------------------------
 
 (defvar current-date-time-format "%Y-%m-%d %H:%M:%S"
@@ -190,6 +184,17 @@ Uses `current-date-time-format' for the formatting the date/time."
 	    ((looking-at "\\s)") (forward-char 1) (backward-list 1))
 	    (t (self-insert-command (or arg 1)))))
 
+(defun toggle-transparency ()
+   (interactive)
+   (let ((alpha (frame-parameter nil 'alpha)))
+     (set-frame-parameter
+      nil 'alpha
+      (if (eql (cond ((numberp alpha) alpha)
+                     ((numberp (cdr alpha)) (cdr alpha))
+                     ((numberp (cadr alpha)) (cadr alpha)))
+               100)
+          '(80 . 80) '(100 . 100)))))
+
 (global-set-key (kbd "<f10>") 'toggle-frame-fullscreen)
 (global-set-key (kbd "<f6>") 'show-file-name)
 (global-set-key (kbd "<f9> 1") 'delete-other-windows)
@@ -199,6 +204,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 (global-set-key (kbd "<f9> d") 'dired-jump)
 (global-set-key (kbd "<f9> i") 'insert-current-date-time)
 (global-set-key (kbd "<f9> w") 'save-buffer)
+(global-set-key (kbd "<f9> <SPC>") 'toggle-transparency)
 (global-set-key (kbd "C-2") 'set-mark-command) ;; actual is C-@
 (global-set-key (kbd "M-*") 'match-paren)
 (global-set-key (kbd "S-<backspace>") 'kill-whole-line)
