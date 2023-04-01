@@ -15,7 +15,6 @@
   :ensure t
   :init
   (vertico-mode)
-  ;; (setq vertico-scroll-margin 0)
   (setq vertico-resize nil)
   (setq vertico-cycle nil))
 
@@ -37,8 +36,7 @@
   (setq consult-preview-key "M-.")
   ;; (setq consult-preview-key 'any)
   (autoload 'projectile-project-root "projectile")
-  (setq consult-project-function (lambda (_) (projectile-project-root)))
-  )
+  (setq consult-project-function (lambda (_) (projectile-project-root))))
 
 (use-package embark
   :ensure t
@@ -49,35 +47,28 @@
 
 (use-package embark-consult
   :ensure t
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
+  :hook (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package cape
   :ensure t
   :init
-  ;; (add-to-list 'completion-at-point-functions #'cape-abbrev)
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-history)
-  ;; (add-to-list 'completion-at-point-functions #'cape-keyword)
-  ;; (add-to-list 'completion-at-point-functions #'cape-symbol)
-  ;; (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  )
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev))
 
 (use-package corfu
   :ensure t
-  :custom
-  (corfu-auto t)
-  (corfu-auto-prefix 1)
-  (corfu-auto-delay 0.0)
-  (corfu-quit-no-match t)
-  (corfu-excluded-modes '(org-mode markdown-mode eshell-mode))
+  :hook (prog-mode . corfu-mode)
   :bind (:map corfu-map
               ("M-SPC" . corfu-insert-separator)
               ("C-n" . corfu-next)
               ("C-p" . corfu-previous))
-  :init
-  (global-corfu-mode)
-  (corfu-history-mode))
+  :config
+  (setq corfu-auto t
+        corfu-auto-prefix 1
+        corfu-auto-delay 0.1
+        corfu-quit-no-match t
+        corfu-quit-at-boundary t))
 
 (use-package prescient
   :ensure t

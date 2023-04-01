@@ -84,7 +84,7 @@
 
 (use-package which-key
   :ensure t
-  :hook (prog-mode-hook . which-key-mode)
+  :hook (prog-mode . which-key-mode)
   :init
   (which-key-setup-minibuffer))
 

@@ -18,8 +18,8 @@
 (eval-and-compile
   ;; (setq use-package-verbose t)
   ;; (setq use-package-always-pin nil)
-  ;; (setq use-package-compute-statistics nil)
-  (setq use-package-hook-name-suffix nil)
+  (setq use-package-compute-statistics t)
+  ;; (setq use-package-hook-name-suffix nil)
   )
 
 (eval-when-compile

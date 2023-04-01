@@ -1,6 +1,6 @@
 (use-package flycheck
   :ensure t
-  :hook ((prog-mode-hook . flycheck-mode))
+  :hook ((prog-mode . flycheck-mode))
   :bind (("<f9> <f9>" . flycheck-buffer)
 		 ("<f9> l" . flycheck-list-errors))
   :init
@@ -34,7 +34,7 @@
 ;; https://github.com/weijiangan/flycheck-golangci-lint
 (use-package flycheck-golangci-lint
   :ensure t
-  :hook ((go-mode-hook . flycheck-golangci-lint-setup))
+  :hook ((go-mode . flycheck-golangci-lint-setup))
   :init
   (defvar-local flycheck-local-checkers nil)
   (defun +flycheck-checker-get(fn checker property)
@@ -47,8 +47,8 @@
 
 (use-package eglot
   :ensure t
-  :hook ((go-mode-hook . eglot-ensure)
-         (python-mode-hook . eglot-ensure))
+  :hook ((go-mode . eglot-ensure)
+         (python-mode . eglot-ensure))
   :bind (:map eglot-mode-map
               ("<f9> s s" . eglot-reconnect)
               ("<f9> s d" . eldoc)
