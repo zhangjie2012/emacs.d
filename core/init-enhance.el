@@ -68,7 +68,9 @@
         corfu-auto-prefix 1
         corfu-auto-delay 0.1
         corfu-quit-no-match t
-        corfu-quit-at-boundary t))
+        corfu-quit-at-boundary t)
+  (add-hook 'multiple-cursors-mode-enabled-hook (lambda () (corfu-mode -1)))
+  (add-hook 'multiple-cursors-mode-disabled-hook (lambda () (corfu-mode 1))))
 
 (use-package prescient
   :ensure t
