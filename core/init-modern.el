@@ -184,16 +184,14 @@ Uses `current-date-time-format' for the formatting the date/time."
 	    ((looking-at "\\s)") (forward-char 1) (backward-list 1))
 	    (t (self-insert-command (or arg 1)))))
 
-(defun toggle-transparency ()
-   (interactive)
-   (let ((alpha (frame-parameter nil 'alpha)))
-     (set-frame-parameter
-      nil 'alpha
-      (if (eql (cond ((numberp alpha) alpha)
-                     ((numberp (cdr alpha)) (cdr alpha))
-                     ((numberp (cadr alpha)) (cadr alpha)))
-               100)
-          '(80 . 80) '(100 . 100)))))
+(defun toggle-frame-alpha ()
+  (interactive)
+  (let* ((pair (or (frame-parameter nil 'alpha) '(100 100)))
+         (alpha (apply '+ pair)))
+    (set-frame-parameter nil
+                         'alpha
+                         (if (or (null alpha) (eq alpha 200) (eq alpha 2.0))
+                             '(80 60) '(100 100)))))
 
 (global-set-key (kbd "<f10>") 'toggle-frame-fullscreen)
 (global-set-key (kbd "<f6>") 'show-file-name)
@@ -204,7 +202,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 (global-set-key (kbd "<f9> d") 'dired-jump)
 (global-set-key (kbd "<f9> i") 'insert-current-date-time)
 (global-set-key (kbd "<f9> w") 'save-buffer)
-(global-set-key (kbd "<f9> <SPC>") 'toggle-transparency)
+(global-set-key (kbd "<f9> <SPC>") 'toggle-frame-alpha)
 (global-set-key (kbd "C-2") 'set-mark-command) ;; actual is C-@
 (global-set-key (kbd "M-*") 'match-paren)
 (global-set-key (kbd "S-<backspace>") 'kill-whole-line)
