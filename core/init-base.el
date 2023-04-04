@@ -1,20 +1,3 @@
-(setq native-comp-deferred-compilation nil)
-
-(setq read-process-output-max (* 1024 1024))  ;; 1mb
-(setq gc-cons-threshold (* 1024 1024 100))  ;; 100mb
-
-(set-charset-priority 'unicode)
-(setq locale-coding-system   'utf-8-unix)
-(set-terminal-coding-system  'utf-8-unix)
-(set-keyboard-coding-system  'utf-8-unix)
-;; (set-selection-coding-system 'utf-8-unix)
-(prefer-coding-system        'utf-8-unix)
-(setq default-process-coding-system '(utf-8-unix . utf-8-unix)
-      default-buffer-file-coding-system 'utf-8-unix) ;; Windows/ Linux/Mac all LF
-
-(setq system-time-locale "C")
-;; (setq system-time-locale "zh_CN.UTF-8")
-
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq confirm-kill-emacs  'y-or-n-p
       auto-save-default    nil
@@ -31,22 +14,12 @@
         (vertical-scroll-bars)))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(undecorated . t))
 
 (setq frame-title-format
       '((:eval (if (buffer-file-name)
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
-
-(setq frame-resize-pixelwise t)
-(setq window-resize-pixelwise nil)
-
-(setq scroll-conservatively 101)
-(setq mouse-wheel-follow-mouse 't
-      mouse-wheel-progressive-speed nil
-      ;; The most important setting of all! Make each scroll-event move 2 lines at
-      ;; a time (instead of 5 at default). Simply hold down shift to move twice as
-      ;; fast, or hold down control to move 3x as fast. Perfect for trackpads.
-      mouse-wheel-scroll-amount '(1 ((shift) . 3) ((control) . 6)))
 
 (add-hook 'text-mode-hook
           #'(lambda ()
@@ -82,9 +55,15 @@
 (setq confirm-kill-processes nil)
 
 (setq display-time-default-load-average nil
-      display-time-format "[%m-%d %H:%M]"
-      )
+      display-time-format "[%m-%d %H:%M]")
 (display-time-mode t)
 ;; (display-battery-mode 1)
 
-(provide 'init-early)
+;; SmoothScrolling https://www.emacswiki.org/emacs/SmoothScrolling
+(pixel-scroll-precision-mode 1)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+
+(provide 'init-base)

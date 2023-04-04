@@ -18,7 +18,7 @@ Orgmode
     - [[#macos][MacOS]]
     - [[#源码][+源码+]]
     - [[#ubuntu-2204][+Ubuntu 22.04+]]
-    - [[#windows][Windows+]]
+    - [[#windows][+Windows+]]
   - [[#配置安装][配置安装]]
   - [[#开发环境][开发环境]]
     - [[#go][Go]]
@@ -97,6 +97,12 @@ Github =main= 为稳定版本， =unstable= 是实验性版本。
 
 卸载 =brew uninstall emacs-plus= 。
 
+=emacs-plus@28= 的版本，在中文输入时，有时会有错乱问题[fn:5]。换成 =emacs-plus@29= 试试：
+
+#+begin_src
+brew install emacs-plus@29 --with-cacodemon-icon
+#+end_src
+
 *** +源码+
 
 下载源码：[[http://mirrors.ustc.edu.cn/gnu/emacs/][http://mirrors.ustc.edu.cn/gnu/emacs/]]
@@ -125,7 +131,7 @@ sudo apt install emacs
 alias em="env TERM=xterm-256color emacs -nw"
 #+END_SRC
 
-*** Windows+
+*** +Windows+
 
 使用 GUI 版本，下载二进制安装：
 
@@ -400,11 +406,11 @@ core 目录下：
 
 ** 其他
 
-|-------------+-------------------------------------+--------|
-| 快捷键      | 说明                                | 频率   |
-|-------------+-------------------------------------+--------|
-| =<f9> q=    | 查看 rss 订阅更新                   | *high* |
-|-------------+-------------------------------------+--------|
+|----------+-------------------+--------|
+| 快捷键   | 说明              | 频率   |
+|----------+-------------------+--------|
+| =<f9> q= | 查看 rss 订阅更新 | *high* |
+|----------+-------------------+--------|
 
 * packages
 
@@ -605,6 +611,8 @@ lsp-mode 的功能比较多，官方提供了 [[https://emacs-lsp.github.io/lsp-
   - [[https://www.zhangjiee.com/blog/2019/emacs-slide.html][使用 org-mode 搭建网站]]
 
 * Footnotes
+
+[fn:5] https://emacs-china.org/t/homebrew-emacs-plus-28/19106
 
 [fn:4] https://github.com/joaotavora/eglot#emacscore
 

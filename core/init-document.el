@@ -29,7 +29,7 @@
 		org-log-done t
 		org-src-tab-acts-natively nil
 		org-pretty-entities t
-		org-hide-emphasis-markers t
+		org-hide-emphasis-markers nil
 		org-startup-folded t
 		org-startup-with-inline-images t
 		org-image-actual-width '(1024)

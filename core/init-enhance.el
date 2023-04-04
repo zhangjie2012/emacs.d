@@ -96,11 +96,10 @@
   :bind (("M-o" . ace-window)
 	     ("M-s t" . ace-swap-window))
   :config
-  (setq aw-keys '(?1 ?a ?w ?x ?7 ?8 ?9 ?0))
-  (set-face-attribute
-   'aw-mode-line-face nil
-   :inherit 'mode-line-buffer-id
-   :foreground "chartreuse"))
+  (custom-set-faces
+   '(aw-leading-char-face
+     ((t (:foreground "red" :inherit ace-jump-face-foreground :height 2.0)))))
+  (setq aw-keys '(?1 ?a ?w ?x ?7 ?8 ?9 ?0)))
 
 (use-package dired-subtree
   :ensure t

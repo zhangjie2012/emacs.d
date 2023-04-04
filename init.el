@@ -27,7 +27,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/core/")
 
-(require 'init-early)
+(require 'init-base)
 (require 'init-ui)
 (require 'init-modern)
 (require 'init-enhance)
