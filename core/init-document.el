@@ -114,10 +114,7 @@
 	:init
 	(setq org-superstar-special-todo-items t
 		  org-superstar-prettify-item-bullets t
-          org-superstar-remove-leading-stars nil
-          org-superstar-cycle-headline-bullets nil
-          org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
-          org-superstar-itembullet-alist '((?+ . ?➤) (?- . ?✦)))
+          org-superstar-remove-leading-stars nil)
 	(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 
   (use-package toc-org
