@@ -72,25 +72,6 @@
   (add-hook 'multiple-cursors-mode-enabled-hook (lambda () (corfu-mode -1)))
   (add-hook 'multiple-cursors-mode-disabled-hook (lambda () (corfu-mode 1))))
 
-(use-package prescient
-  :ensure t
-  :config
-  (setq-default history-length 1000)
-  (setq-default prescient-history-length 1000)
-  (prescient-persist-mode +1))
-
-(use-package corfu-prescient
-  :after corfu
-  :ensure t
-  :config
-  (corfu-prescient-mode +1))
-
-(use-package vertico-prescient
-  :after vertico
-  :ensure t
-  :config
-  (vertico-prescient-mode +1))
-
 (use-package ace-window
   :ensure t
   :bind (("M-o" . ace-window)
