@@ -28,8 +28,7 @@
   ;; 2. 切换 buffer 后
   (setq flycheck-idle-change-delay 1
         flycheck-idle-buffer-switch-delay 1)
-  (setq flycheck-check-syntax-automatically '(idle-change idle-buffer-switch))
-  )
+  (setq flycheck-check-syntax-automatically '(idle-change idle-buffer-switch)))
 
 ;; https://github.com/weijiangan/flycheck-golangci-lint
 (use-package flycheck-golangci-lint
@@ -42,8 +41,7 @@
         (funcall fn checker property)))
   (advice-add 'flycheck-checker-get :around '+flycheck-checker-get)
   :config
-  (setq flycheck-golangci-lint-config "~/.golangci.yaml")
-  )
+  (setq flycheck-golangci-lint-config "~/.golangci.yaml"))
 
 (use-package eglot
   :ensure t
@@ -71,8 +69,7 @@
     (add-hook 'before-save-hook #'my-eglot-organize-imports nil t)
     (add-hook 'before-save-hook #'eglot-format-buffer -10 t)
     )
-  (add-hook 'go-mode-hook #'eglot-buffer-on-save)
-  )
+  (add-hook 'go-mode-hook #'eglot-buffer-on-save))
 
 (use-package go-tag
   :ensure t
@@ -80,8 +77,7 @@
   (setq go-tag-args (list "-transform" "snakecase"))
   (with-eval-after-load 'go-mode
     (define-key go-mode-map (kbd "C-c t") #'go-tag-add)
-    (define-key go-mode-map (kbd "C-c T") #'go-tag-remove))
-  )
+    (define-key go-mode-map (kbd "C-c T") #'go-tag-remove)))
 
 (use-package gotest
   :ensure t
@@ -90,8 +86,7 @@
   :config
   (define-key go-mode-map (kbd "<f9> t f") 'go-test-current-file)
   (define-key go-mode-map (kbd "<f9> t t") 'go-test-current-test)
-  (define-key go-mode-map (kbd "<f9> t p") 'go-test-current-project)
-  )
+  (define-key go-mode-map (kbd "<f9> t p") 'go-test-current-project))
 
 (use-package python
   :ensure t
@@ -105,8 +100,7 @@
     (add-hook 'before-save-hook #'eglot-format-buffer -10 t)
     (add-hook 'before-save-hook #'flycheck-buffer)
     )
-  (add-hook 'python-mode-hook #'eglot-format-buffer-on-save)
-  )
+  (add-hook 'python-mode-hook #'eglot-format-buffer-on-save))
 
 (use-package web-mode
   :ensure t
@@ -117,7 +111,6 @@
   (add-to-list 'auto-mode-alist '("\\.xml?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.json\\'" . web-mode))
   (defun my-web-mode-hook ()
     "Hooks for Web mode."
     (setq-default indent-tabs-mode nil)
@@ -141,8 +134,7 @@
   (add-to-list 'auto-mode-alist '("\\.less\\'" . css-mode))
   (add-to-list 'auto-mode-alist '("\\.wxss\\'" . css-mode))
   :config
-  (setq css-indent-offset 2)
-  )
+  (setq css-indent-offset 2))
 
 (use-package rjsx-mode
   :ensure t
@@ -161,8 +153,6 @@
     ;; (define-key rjsx-mode-map "<" nil)
     ;; (define-key rjsx-mode-map (kbd "C-d") nil)
     ;; (define-key rjsx-mode-map ">" nil)
-    (define-key rjsx-mode-map (kbd "M-.") nil)
-    )
-  )
+    (define-key rjsx-mode-map (kbd "M-.") nil)))
 
 (provide 'init-lang)
