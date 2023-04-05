@@ -98,7 +98,7 @@
   :config
   (custom-set-faces
    '(aw-leading-char-face
-     ((t (:foreground "red" :inherit ace-jump-face-foreground :height 2.0)))))
+     ((t (:foreground "red" :inherit ace-jump-face-foreground :height 1.4)))))
   (setq aw-keys '(?1 ?a ?w ?x ?7 ?8 ?9 ?0)))
 
 (use-package dired-subtree
