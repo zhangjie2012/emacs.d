@@ -3,13 +3,11 @@
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
 		 ("\\.md\\'" . markdown-mode)
-		 ("\\.markdown\\'" . markdown-mode))
-  )
+		 ("\\.markdown\\'" . markdown-mode)))
 
 (use-package htmlize
   :ensure t
-  :defer t
-  )
+  :defer t)
 
 ;; https://emacs.stackexchange.com/questions/17710/use-package-with-config-to-set-variables
 (use-package org
@@ -21,8 +19,7 @@
 		 ("<f9> t c" . org-capture)
 		 ("<f9> t a" . org-agenda)
 		 ("M-[" . org-previous-visible-heading)
-		 ("M-]" . org-next-visible-heading)
-		 )
+		 ("M-]" . org-next-visible-heading))
   :init
   (setq org-ellipsis " ▾"
         org-adapt-indentation nil
@@ -34,10 +31,8 @@
 		org-startup-with-inline-images t
 		org-image-actual-width '(1024)
         org-capture-templates nil)
-
   (setq org-agenda-files '("~/gtd/entry.org"))
   (setq org-default-notes-file "~/gtd/entry.org")
-
   :config
   ;; GTD setting
   (require 'org-inlinetask)
@@ -99,13 +94,12 @@
   (require 'org-indent)
 
   (use-package ob-go
-	:ensure t)
+    :ensure t)
 
   ;; programming languages
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '(
-	 (emacs-lisp . t)
+   '((emacs-lisp . t)
 	 (css . t)
 	 (js . t)
 	 (org . t)
@@ -113,9 +107,7 @@
 	 (sed . t)
 	 (sql . t)
 	 (R . t)
-	 (go . t)
-	 )
-   )
+	 (go . t)))
 
   (use-package org-superstar
 	:ensure t
@@ -138,19 +130,14 @@
   :defer t
   :init
   (setq org-html-validation-link nil)
-
   ;; nil: do not checking and always publish all file
   ;; Non-nil(t): use timestamp checking, default set 't'
   (setq org-publish-use-timestamps-flag t)
-
   (setq org-html-postamble t
 		org-html-postamble-format
 		'(("en" "<p class=\"postamble\">First created: %d <br />Last updated: %C <br />Power by %c</p>")))
-
   (setq org-publish-project-alist
-		'(
-		  ;; notes component
-		  ("site-orgs"
+		'(("site-orgs"
 		   :base-directory "~/site/org"
 		   :base-extension "org"
 		   :html-link-home "index.html"
@@ -160,16 +147,14 @@
 		   :headline-levels 5
 		   :auto-sitemap t
 		   :sitemap-filename "sitemap.org"
-		   :sitemap-title "Sitemap"
-		   )
+		   :sitemap-title "Sitemap")
 		  ;; static component
 		  ("site-static"
 		   :base-directory "~/site/static"
 		   :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
 		   :publishing-directory "~/site-html/static/"
 		   :recursive t
-		   :publishing-function org-publish-attachment
-		   )
+		   :publishing-function org-publish-attachment)
 		  ;; publish component
 		  ("site" :components ("site-orgs" "site-static")))))
 

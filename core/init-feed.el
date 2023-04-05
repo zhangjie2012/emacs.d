@@ -15,8 +15,7 @@
   (setq elfeed-search-date-format '("%F %R" 16 :left))
   :config
   (setq elfeed-feeds
-        '(
-          ("https://2d2d.io/feed.xml" it)
+        '(("https://2d2d.io/feed.xml" it)
           ("https://blog.codingnow.com/atom.xml" blog_cn)
           ("https://cestlaz.github.io/rss.xml" emacs)
           ("https://cprss.s3.amazonaws.com/golangweekly.com.xml" weekly)

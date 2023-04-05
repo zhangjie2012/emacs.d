@@ -5,7 +5,6 @@
 		 ("<f9> l" . flycheck-list-errors))
   :init
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc javascript-jshint python-pylint))
-
   ;; set flycheck tool
   (cond
    ((string-equal system-type "gnu/linux")
@@ -14,7 +13,6 @@
    ((string-equal system-type "darwin")
     (setq flycheck-javascript-eslint-executable "eslint")
     ))
-
   ;; Python
   (setq flycheck-python-flake8-executable "flake8")
   (setq flycheck-flake8rc "~/.flake8")
@@ -22,7 +20,6 @@
 
   :config
   (flycheck-add-mode 'javascript-eslint 'web-mode)
-
   ;; 避免卡顿，设定语法检测的时机，延迟 1s
   ;; 1. 停止修改后
   ;; 2. 切换 buffer 后
@@ -50,8 +47,7 @@
   :bind (:map eglot-mode-map
               ("<f9> s s" . eglot-reconnect)
               ("<f9> s d" . eldoc)
-              ("<f9> s i" . eglot-find-implementation)
-              )
+              ("<f9> s i" . eglot-find-implementation))
   :config
   (setq eldoc-echo-area-use-multiline-p nil
         eglot-ignored-server-capabilities '(:documentHighlightProvider))

@@ -69,8 +69,7 @@
 	     ("M-s q" . er/mark-outside-quotes)
 	     ("M-s m" . er/mark-comment)
 	     ("M-s Q" . er/mark-inside-quotes)
-	     ("M-s f" . er/mark-defun))
-  )
+	     ("M-s f" . er/mark-defun)))
 
 (use-package multiple-cursors
   :ensure t
@@ -148,8 +147,7 @@
 	(exec-path-from-shell-initialize)
 	(exec-path-from-shell-copy-env "GOPATH")
 	(progn (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO"))
-			 (add-to-list 'exec-path-from-shell-variables var)))
-	))
+			 (add-to-list 'exec-path-from-shell-variables var)))))
 
 (use-package magit
   :ensure t
@@ -196,14 +194,14 @@ Uses `current-date-time-format' for the formatting the date/time."
 (global-set-key (kbd "<f9> 1") 'delete-other-windows)
 (global-set-key (kbd "<f9> 2") 'split-window-below)
 (global-set-key (kbd "<f9> 3") 'split-window-horizontally)
+(global-set-key (kbd "<f9> <SPC>") 'toggle-frame-alpha)
 (global-set-key (kbd "<f9> c") 'eshell)
 (global-set-key (kbd "<f9> d") 'dired-jump)
 (global-set-key (kbd "<f9> i") 'insert-current-date-time)
 (global-set-key (kbd "<f9> w") 'save-buffer)
-(global-set-key (kbd "<f9> <SPC>") 'toggle-frame-alpha)
 (global-set-key (kbd "C-2") 'set-mark-command) ;; actual is C-@
+(global-set-key (kbd "C-x k") 'kill-this-buffer) ;; kill-this-buffer replace kill-buffer
 (global-set-key (kbd "M-*") 'match-paren)
 (global-set-key (kbd "S-<backspace>") 'kill-whole-line)
-(global-set-key (kbd "C-x k") 'kill-this-buffer) ;; kill-this-buffer replace kill-buffer
 
 (provide 'init-modern)

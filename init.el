@@ -1,4 +1,5 @@
 (require 'package)
+
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
 		("melpa" . "https://melpa.org/packages/")
@@ -16,11 +17,7 @@
   (package-install 'use-package))
 
 (eval-and-compile
-  ;; (setq use-package-verbose t)
-  ;; (setq use-package-always-pin nil)
-  (setq use-package-compute-statistics t)
-  ;; (setq use-package-hook-name-suffix nil)
-  )
+  (setq use-package-compute-statistics t))
 
 (eval-when-compile
   (require 'use-package))
