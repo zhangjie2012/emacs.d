@@ -25,9 +25,7 @@
          ("M-y" . consult-yank-pop)
          ("C-s" . consult-line)
          ("<f9> m" . consult-imenu)
-         ("M-s [" . consult-ripgrep)
-         ("M-s ]" . consult-git-grep)
-         )
+         ("M-s [" . consult-ripgrep))
   :hook (completion-list-mode . consult-preview-at-point-mode)
   :init
   (setq xref-show-xrefs-function #'consult-xref
@@ -38,10 +36,13 @@
   (autoload 'projectile-project-root "projectile")
   (setq consult-project-function (lambda (_) (projectile-project-root))))
 
+(use-package rg
+  :ensure t
+  :bind ("M-s ]" . rg))
+
 (use-package embark
   :ensure t
-  :bind (("C-." . embark-act)
-	     ("C-;" . embark-dwim))
+  :bind (("C-;" . embark-act))
   :init
   (setq prefix-help-command #'embark-prefix-help-command))
 
