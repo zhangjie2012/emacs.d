@@ -17,7 +17,7 @@
       (load-theme 'doom-one-light t)))
   :config
   (setq doom-themes-enable-bold t
-        doom-themes-enable-italic nil)
+        doom-themes-enable-italic t)
   (doom-themes-visual-bell-config)
   (doom-themes-org-config)
   (global-set-key (kbd "<f5>") 'toggle-theme))
