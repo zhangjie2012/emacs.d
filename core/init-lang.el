@@ -54,6 +54,11 @@
   (add-to-list 'eglot-stay-out-of 'flymake) ;; disable flymake
   )
 
+(use-package consult-eglot
+  :ensure t
+  :after consult
+  :bind ("<f9> s j" . consult-eglot-symbols))
+
 (use-package go-mode
   :ensure t
   :after eglot
