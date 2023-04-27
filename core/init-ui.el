@@ -13,7 +13,7 @@
   ;; day/night use diff theme: via https://github.com/jakebox/jake-emacs
   (let ((hour (string-to-number (substring (current-time-string) 11 13))))
     (if (or (> hour 17) (< hour 7))
-        (load-theme ' t)
+        (load-theme 'doom-monokai-machine t)
       (load-theme 'doom-one-light t)))
   :config
   (setq doom-themes-enable-bold t
