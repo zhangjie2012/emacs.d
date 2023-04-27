@@ -25,7 +25,10 @@
          ("M-y" . consult-yank-pop)
          ("C-s" . consult-line)
          ("<f9> m" . consult-imenu)
-         ("M-s [" . consult-ripgrep))
+         ("<f9> M" . consult-imenu-menu)
+         ("M-s [" . consult-ripgrep)
+         ("<f9> t o" . consult-outline))
+
   :hook (completion-list-mode . consult-preview-at-point-mode)
   :init
   (setq xref-show-xrefs-function #'consult-xref
