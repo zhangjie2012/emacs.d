@@ -73,7 +73,9 @@
 
 (use-package multiple-cursors
   :ensure t
-  :bind (("M-s ;" . mc/mark-all-symbols-like-this-in-defun)))
+  :bind (("M-s ;" . mc/mark-all-symbols-like-this-in-defun)
+         ("C-M-n" . mc/mark-next-like-this)
+         ("C-M-p" . mc/mark-previous-like-this)))
 
 (use-package highlight-symbol
   :ensure t
