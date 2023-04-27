@@ -3,21 +3,21 @@
   :init
   (defun toggle-theme ()
     (interactive)
-    (cond ((eq (car custom-enabled-themes) 'doom-palenight)
+    (cond ((eq (car custom-enabled-themes) 'doom-monokai-machine)
            (mapc #'disable-theme custom-enabled-themes)
            (load-theme 'doom-one-light t))
           ((eq (car custom-enabled-themes) 'doom-one-light)
            (mapc #'disable-theme custom-enabled-themes)
-           (load-theme 'doom-palenight t))))
+           (load-theme 'doom-monokai-machine t))))
 
   ;; day/night use diff theme: via https://github.com/jakebox/jake-emacs
   (let ((hour (string-to-number (substring (current-time-string) 11 13))))
     (if (or (> hour 17) (< hour 7))
-        (load-theme 'doom-palenight t)
+        (load-theme ' t)
       (load-theme 'doom-one-light t)))
   :config
   (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
+        doom-themes-enable-italic nil)
   (doom-themes-visual-bell-config)
   (doom-themes-org-config)
   (global-set-key (kbd "<f5>") 'toggle-theme))
