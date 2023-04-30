@@ -15,7 +15,6 @@ Orgmode
 - [[#说明][说明]]
 - [[#安装][安装]]
   - [[#emacs-29][Emacs 29]]
-    - [[#macos][MacOS]]
   - [[#配置安装][配置安装]]
   - [[#开发环境][开发环境]]
     - [[#go][Go]]
@@ -71,7 +70,7 @@ Orgmode
 
 *推荐阅读* [[https://www2.lib.uchicago.edu/keith/emacs/#orgc5a18efe][Use GNU Emacs: The Plain Text Computing Environment Emacs]] 堪称百科全书，看完之后不需要看其他文档了。
 
-本配置适用于 Emacs 28.x 版本，MacOS GUI（Linux 大概率没问题）。
+本配置适用于 Emacs 29.x 版本，MacOS GUI（Linux 大概率没问题）。
 
 Github =main= 为稳定版本， =unstable= 是实验性版本。
 
@@ -79,7 +78,7 @@ Github =main= 为稳定版本， =unstable= 是实验性版本。
 
 ** Emacs 29
 
-*** MacOS
+*MacOS*
 
 使用 [[https://github.com/d12frosted/homebrew-emacs-plus][emacs-plus]] 的版本：
 
@@ -97,19 +96,23 @@ Github =main= 为稳定版本， =unstable= 是实验性版本。
   git clone https://github.com/zhangjie2012/emacs.d.git ~/.emacs.d
 #+end_src
 
-直接打开 Emacs 自动安装依赖包。package 源在国内无法访问，需要使用代理 =http_proxy=http://127.0.0.1:7890 emacs= 。
+直接打开 Emacs 自动安装依赖包。我使用[[https://mirrors.ustc.edu.cn/help/elpa.html][中科大的源]]（清华的更新经常出问题）。或者官方源 + 代理：
 
-或者使用清华的源替换掉 =package-archives= ：
-
-#+begin_src emacs-lisp
+#+begin_src elisp
   (setq package-archives
-        '(
-          ("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-          ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-          ("melpa-stable" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/stable-melpa/")
-          ("nongnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/")
+        '(("gnu" . "http://elpa.gnu.org/packages/")
+          ("melpa" . "https://melpa.org/packages/")
+          ("melpa-stable" . "https://stable.melpa.org/packages/")
+          ("nongnu" . "https://elpa.nongnu.org/nongnu/")
           ))
+
+  (setq url-proxy-services
+        '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+          ("http" . "127.0.0.1:1087")
+          ("https" . "127.0.0.1:1087")))
 #+end_src
+
+或者 ~http_proxy=http://127.0.0.1:7890 emacs~ 。
 
 如果遇到安装问题执行 =M-x package-refresh-content= 重启 Emacs。
 
@@ -196,7 +199,7 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 
 core 目录下：
 
-- =init-early= 基础配置
+- =init-base=
 - =init-ui= 主题、modeline、字体等
 - =init-modern= 更加现代化
 - =init-enhance= 对 Emacs 已经具备的能力进行增强

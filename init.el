@@ -1,16 +1,9 @@
 (require 'package)
 
 (setq package-archives
-      '(("gnu" . "http://elpa.gnu.org/packages/")
-		("melpa" . "https://melpa.org/packages/")
-		("melpa-stable" . "https://stable.melpa.org/packages/")
-		("nongnu" . "https://elpa.nongnu.org/nongnu/")
-		))
-
-(setq url-proxy-services
-      '(("no_proxy" . "^\\(localhost\\|10.*\\)")
-        ("http" . "127.0.0.1:1087")
-        ("https" . "127.0.0.1:1087")))
+      '(("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
+        ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")
+        ("nongnu" . "https://mirrors.ustc.edu.cn/elpa/nongnu/")))
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
