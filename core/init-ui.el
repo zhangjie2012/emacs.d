@@ -9,7 +9,6 @@
           ((eq (car custom-enabled-themes) 'doom-one-light)
            (mapc #'disable-theme custom-enabled-themes)
            (load-theme 'doom-monokai-machine t))))
-
   ;; day/night use diff theme: via https://github.com/jakebox/jake-emacs
   (let ((hour (string-to-number (substring (current-time-string) 11 13))))
     (if (or (> hour 17) (< hour 7))
