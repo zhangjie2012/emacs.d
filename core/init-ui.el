@@ -21,13 +21,24 @@
   (doom-themes-org-config)
   (global-set-key (kbd "<f5>") 'toggle-theme))
 
-(use-package doom-modeline
+;; (use-package doom-modeline
+;;   :ensure t
+;;   :config
+;;   (setq doom-modeline-buffer-modification-icon nil
+;;         doom-modeline-project-detection 'projectile
+;;         doom-modeline-buffer-file-name-style 'truncate-upto-project)
+;;   (doom-modeline-mode 1))
+
+(use-package telephone-line
   :ensure t
   :config
-  (setq doom-modeline-buffer-modification-icon nil
-        doom-modeline-project-detection 'projectile
-        doom-modeline-buffer-file-name-style 'truncate-upto-project)
-  (doom-modeline-mode 1))
+  (setq telephone-line-primary-left-separator 'telephone-line-gradient
+        telephone-line-secondary-left-separator 'telephone-line-nil
+        telephone-line-primary-right-separator 'telephone-line-gradient
+        telephone-line-secondary-right-separator 'telephone-line-nil)
+  (setq telephone-line-height 24
+        telephone-line-evil-use-short-tag t)
+  (telephone-line-mode 1))
 
 (use-package cnfonts
   :if window-system
