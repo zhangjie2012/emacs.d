@@ -111,6 +111,10 @@ Github =main= 为稳定版本， =unstable= 是实验性版本。
   - 语法检测 flycheck [[https://www.flycheck.org/en/latest/languages.html#flycheck-languages][Supported languages]]
   - 统一使用 lsp，需要安装对应语言的 [[https://emacs-lsp.github.io/lsp-mode/page/languages/][Languages]]
 
+图标：
+
+=doom-mode-line 4.0.0= 之后不再支持 =all-the-icons= 由 =nerd-icons= 代替：打开 [[https://www.nerdfonts.com/#home][nerdfont]] ，下载 =Symbols Nerd Font= 即可。
+
 ** 开发环境
 
 基于 [[https://langserver.org/][LSP]]，客户端使用 [[https://github.com/joaotavora/eglot][eglot]]。
@@ -406,7 +410,7 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 
 一些尝试过，但是不再使用的 package：
 
-- [[https://github.com/domtronn/all-the-icons.el][all-the-icons]] icon，花里花哨
+- [[https://github.com/domtronn/all-the-icons.el][all-the-icons]] icons =doom-mode-line 4.0= 之后只支持 nerd-icons
 - [[https://github.com/auto-complete/auto-complete][auto-complete]] 自动完成插件，后来用 company 替换了
 - [[https://github.com/Malabarba/beacon][beacon]] 光标提醒，帮你找得到光标，感觉不怎么实用
 - [[https://github.com/technomancy/better-defaults][better-defaults]] 几行代码就可以达到相同的效果

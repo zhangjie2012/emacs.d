@@ -5,6 +5,11 @@
   :init
   (marginalia-mode))
 
+(use-package nerd-icons-completion
+  :ensure t
+  :config
+  (nerd-icons-completion-mode))
+
 (use-package orderless
   :ensure t
   :custom

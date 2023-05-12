@@ -21,18 +21,27 @@
   (doom-themes-org-config)
   (global-set-key (kbd "<f5>") 'toggle-theme))
 
-;; (use-package doom-modeline
-;;   :ensure t
-;;   :config
-;;   (setq doom-modeline-buffer-modification-icon nil
-;;         doom-modeline-project-detection 'projectile
-;;         doom-modeline-buffer-file-name-style 'truncate-upto-project)
-;;   (doom-modeline-mode 1))
-
-(use-package telephone-line
+(use-package nerd-icons
   :ensure t
+  :custom
+  (nerd-icons-font-family "Symbols Nerd Font Mono")
   :config
-  (telephone-line-mode 1))
+  (setq inhibit-compacting-font-caches t))
+
+(use-package nerd-icons-dired
+  :ensure t
+  :after nerd-icons
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+
+(use-package doom-modeline
+  :ensure t
+  :init
+  (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-buffer-modification-icon nil
+        doom-modeline-project-detection 'projectile
+        doom-modeline-buffer-file-name-style 'truncate-upto-project))
 
 (use-package cnfonts
   :if window-system
