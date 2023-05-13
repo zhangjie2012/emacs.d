@@ -39,8 +39,9 @@
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
   :config
-  (setq consult-preview-key "M-.")
-  (setq consult-preview-key 'any))
+  ;; filter go.sum/readme.* files
+  (setq consult-ripgrep-args "rg --null --line-buffered -M=1000 --path-separator / -S --no-heading -H -n -g \"!{README,readme}.{md,org}\" -g \"!go.sum\"")
+  (setq consult-preview-key "M-."))
 
 (use-package rg
   :ensure t
