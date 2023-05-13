@@ -39,9 +39,8 @@
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
   :config
-  (setq consult-preview-key "M-."
-        ;; consult-preview-key 'any
-        consult-project-function #'consult--default-project--function))
+  (setq consult-preview-key "M-.")
+  (setq consult-preview-key 'any))
 
 (use-package rg
   :ensure t
