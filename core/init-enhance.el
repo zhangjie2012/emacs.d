@@ -39,10 +39,9 @@
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
   :config
-  (setq consult-preview-key "M-.")
-  ;; (setq consult-preview-key 'any)
-  (autoload 'projectile-project-root "projectile")
-  (setq consult-project-function (lambda (_) (projectile-project-root))))
+  (setq consult-preview-key "M-."
+        ;; consult-preview-key 'any
+        consult-project-function #'consult--default-project--function))
 
 (use-package rg
   :ensure t

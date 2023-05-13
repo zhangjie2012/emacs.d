@@ -27,7 +27,7 @@ Orgmode
   - [[#窗口][窗口]]
   - [[#搜索][搜索]]
   - [[#翻译][翻译]]
-  - [[#项目管理projectile][项目管理（projectile）]]
+  - [[#项目管理projectel][项目管理（project.el）]]
   - [[#ide][IDE]]
   - [[#git][Git]]
   - [[#org][Org]]
@@ -36,6 +36,7 @@ Orgmode
   - [[#当前使用的][当前使用的]]
   - [[#以前用过的][以前用过的]]
 - [[#faq][FAQ]]
+  - [[#projectile-配置样例][projectile 配置样例]]
   - [[#emacs-启动速度太慢怎么办][Emacs 启动速度太慢怎么办？]]
   - [[#org-_--不被转义成下标和上标][Org =_= =^= 不被转义成下标和上标？]]
   - [[#org-92-后继续使用-s-tab-快捷插入][Org 9.2 后继续使用 =<s [Tab]= 快捷插入？]]
@@ -306,22 +307,9 @@ core 目录下：
 | =<f9> F= | 输入单词翻译 |        |
 |----------+--------------+--------|
 
-** 项目管理（projectile）
+** 项目管理（project.el）
 
- =<f8>= 或者 =C-c p= 为 projectile 命令前缀 =projectile-command-map= 。
-
-|--------+------------------------------------------+--------|
-| 快捷键 | 说明                                     | 频率   |
-|--------+------------------------------------------+--------|
-| =f=    | 本项目中打开文件                         | *high* |
-| =F=    | 在另外一个窗口打开本项目的文件           | *high* |
-| =w=    | 在所有已知的项目中搜索                   |        |
-| =D=    | 在另外一个窗口打开本项目的目录           |        |
-| =k=    | 关闭所有本项目的 buffer                  | middle |
-| =v=    | projectile-vc                            |        |
-| =b=    | 在本项目打开的 buffer 中切换             | middle |
-| =i=    | 清除项目缓存 projectile-invalidate-cache | *high* |
-|--------+------------------------------------------+--------|
+=<f8>= 绑定为 =project.el= 前缀。使用说明见 https://www.gnu.org/software/emacs/manual/html_node/emacs/Projects。
 
 ** IDE
 
@@ -428,6 +416,55 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 
 * FAQ
 
+** projectile 配置样例
+
+<2023-05-13 Sat> 从 =projectile= 切换到了 =project.el= 留一份老的配置备忘：
+
+#+begin_src elisp
+  (use-package projectile
+    :ensure t
+    :bind (:map projectile-mode-map
+                ("<f8>" . projectile-command-map)
+                ("C-c p" . projectile-command-map)
+                :map projectile-command-map
+                ("F" . projectile-find-file-other-window)
+                ("w" . projectile-find-file-in-known-projects)
+                ("D" . projectile-dired-other-window)
+                ("k" . projectile-kill-buffers)
+                ("v" . projectile-vc)
+                ("b" . projectile-switch-to-buffer))
+    :config
+    ;; 打开项目缓存, 否则大的项目每次构建会比较慢
+    ;; 你可以通过下面两个名称来清除缓存
+    ;; - projectile-purge-file-from-cache
+    ;; - projectile-purge-dir-from-cache
+    (setq projectile-enable-caching t)
+    ;; projectile 有三种构建索引的方式: native, hybird, alien
+    ;;   native 使用 Emacs lisp 实现, hybird/alien 使用外部命令类似 find, git 来实现
+    ;;   alien 优化了 hybird 的性能: 它不会对外部命令返回的结果做任何处理和排序, 以获得最好的性能
+    ;;   使用外部命令的话, 类似 .gitignore 会自动生效
+    ;; 注意: alien 会忽略 .projectile 文件
+    (setq projectile-indexing-method 'alien)
+    ;; 在每个目录下都可用(即使没有项目文件)
+    (setq projectile-require-project-root 'prompt)
+    ;; 对结果进行排序(active buffer + recently opened)
+    (setq projectile-sort-order 'recentf-active)
+
+    ;; fix windows system "projectile-find-file" throw
+    ;; 'tr' is not recognized as an internal or external command ...
+    ;; via: https://github.com/bbatsov/projectile/issues/1302
+    (setq projectile-git-submodule-command nil)
+    (defun project-find-go-module (dir)
+      (when-let ((root (locate-dominating-file dir "go.mod")))
+        (cons 'go-module root)))
+
+    (cl-defmethod project-root ((project (head go-module)))
+      (cdr project))
+
+    :init
+    (projectile-mode +1))
+#+end_src
+
 ** Emacs 启动速度太慢怎么办？
 
 ~M-x emacs-init-time~ 可以查看 Emacs 启动耗费时间。
@@ -521,6 +558,8 @@ lsp-mode 的功能比较多，官方提供了 [[https://emacs-lsp.github.io/lsp-
 
 使用 [[https://github.com/bbatsov/projectile][projectile]] 管理项目，非常方便。svn/git 项目会认为是一个 projectile，而且 ignore 的文件和目录也会自动过滤。
 你也可以手动添加 =.projectile= 标识。
+
+已经切换到内置的 =project.el= 。
 
 ** 写 Go 代码时如何禁用注释中自动补全？
 

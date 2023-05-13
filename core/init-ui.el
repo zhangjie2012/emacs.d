@@ -40,7 +40,7 @@
   (doom-modeline-mode 1)
   :config
   (setq doom-modeline-buffer-modification-icon nil
-        doom-modeline-project-detection 'projectile
+        doom-modeline-project-detection 'project
         doom-modeline-buffer-file-name-style 'truncate-upto-project))
 
 (use-package cnfonts
