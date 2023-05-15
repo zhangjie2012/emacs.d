@@ -18,8 +18,9 @@
 
 (use-package vertico
   :ensure t
+  :hook ((after-init . vertico-mode)
+         (minibuffer-setup . vertico-repeat-save))
   :init
-  (vertico-mode)
   (setq vertico-resize nil)
   (setq vertico-cycle nil))
 
@@ -54,6 +55,7 @@
   (setq prefix-help-command #'embark-prefix-help-command))
 
 (use-package embark-consult
+  :after embark consult
   :ensure t
   :hook (embark-collect-mode . consult-preview-at-point-mode))
 

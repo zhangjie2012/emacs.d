@@ -7,14 +7,18 @@
 
 (setq-default indent-tabs-mode nil)
 
-(setq default-frame-alist
-      '((menu-bar-lines . 0)
-        (tool-bar-lines . 0)
-        (horizontal-scroll-bars)
-        (vertical-scroll-bars)))
+(set-charset-priority 'unicode)
+(setq locale-coding-system   'utf-8-unix)
+(set-terminal-coding-system  'utf-8-unix)
+(set-keyboard-coding-system  'utf-8-unix)
+;; (set-selection-coding-system 'utf-8-unix)
+(prefer-coding-system        'utf-8-unix)
+(setq default-process-coding-system '(utf-8-unix . utf-8-unix)
+      default-buffer-file-coding-system 'utf-8-unix) ;; Windows/ Linux/Mac all LF
 
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-(add-to-list 'default-frame-alist '(undecorated . t))
+(setq system-time-locale "C")
+;; (setq system-time-locale "zh_CN.UTF-8")
+
 
 (setq frame-title-format
       '((:eval (if (buffer-file-name)
@@ -45,6 +49,8 @@
       inhibit-startup-message t
       indicate-empty-lines t)
 
+(setq use-short-answers t)
+
 (blink-cursor-mode -1)
 (setq visible-cursor nil)
 
@@ -60,11 +66,20 @@
 ;; (display-battery-mode 1)
 
 ;; SmoothScrolling https://www.emacswiki.org/emacs/SmoothScrolling
-(setq frame-resize-pixelwise t)
-(pixel-scroll-precision-mode 1)
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-(setq scroll-step 1) ;; keyboard scroll one line at a time
+(setq window-resize-pixelwise t
+      frame-resize-pixelwise t)
+
+(setq scroll-step 2
+      scroll-margin 2
+      hscroll-step 2
+      hscroll-margin 2
+      scroll-conservatively 101
+      scroll-preserve-screen-position 'always)
+
+(setq auto-window-vscroll nil)
+
+(setq inhibit-compacting-font-caches t)
+
+(setq load-prefer-newer t)
 
 (provide 'init-base)

@@ -23,10 +23,9 @@
 
 (use-package nerd-icons
   :ensure t
+  :when (display-graphic-p)
   :custom
-  (nerd-icons-font-family "Symbols Nerd Font Mono")
-  :config
-  (setq inhibit-compacting-font-caches t))
+  (nerd-icons-font-family "Symbols Nerd Font Mono"))
 
 (use-package nerd-icons-dired
   :ensure t
@@ -41,7 +40,8 @@
   :config
   (setq doom-modeline-buffer-modification-icon nil
         doom-modeline-project-detection 'project
-        doom-modeline-buffer-file-name-style 'truncate-upto-project))
+        doom-modeline-buffer-file-name-style 'truncate-upto-project
+        doom-modeline-unicode-fallback t))
 
 (use-package cnfonts
   :if window-system
