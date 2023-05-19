@@ -1,6 +1,6 @@
-(setq gc-cons-threshold most-positive-fixnum
+(setq gc-cons-threshold (* 1024 1024 100) ;; 100m
+      read-process-output-max (* 4 1024 1024)
       gc-cons-percentage 0.6)
-(setq read-process-output-max (* 4 1024 1024))
 
 (setq default-frame-alist
       '((menu-bar-lines . 0)
