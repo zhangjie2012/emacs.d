@@ -75,6 +75,7 @@ Github =main= 为稳定版本， =unstable= 是实验性版本。
   brew reinstall gcc libgccjit
   brew tap d12frosted/emacs-plus
   brew install emacs-plus@29 --with-cacodemon-icon
+  ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications
 #+end_src
 
 卸载 =brew uninstall emacs-plus@29= 。
