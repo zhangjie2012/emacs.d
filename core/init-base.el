@@ -66,17 +66,12 @@
 ;; (display-battery-mode 1)
 
 ;; SmoothScrolling https://www.emacswiki.org/emacs/SmoothScrolling
-(setq window-resize-pixelwise t
-      frame-resize-pixelwise t)
-
-(setq scroll-step 2
-      scroll-margin 2
-      hscroll-step 2
-      hscroll-margin 2
-      scroll-conservatively 101
-      scroll-preserve-screen-position 'always)
-
-(setq auto-window-vscroll nil)
+(setq frame-resize-pixelwise t)
+(pixel-scroll-precision-mode 1)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
 
 (setq inhibit-compacting-font-caches t)
 
