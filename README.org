@@ -88,6 +88,7 @@ Github =main= 为稳定版本， =unstable= 是实验性版本。
 
 打开 Emacs 时自动安装依赖包。我使用[[https://mirrors.ustc.edu.cn/help/elpa.html][中科大的源]]（清华源更新经常出问题）。或者官方源 + 代理：
 
+
 #+begin_src elisp
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -332,7 +333,7 @@ core 目录下：
 
 |----------+--------------------------------+--------|
 | 快捷键   | 说明                           | 频率   |
-| =M-s ,=  | magit                          | *high* |
+| =M-s ,=  | magit，[[https://magit.vc/manual/magit-refcard.pdf][Magit Reference Card]]    | *high* |
 | =<f9> g= | git-gitter++，显示当前文件改动 | middle |
 |----------+--------------------------------+--------|
 
