@@ -21,8 +21,9 @@
   :hook ((after-init . vertico-mode)
          (minibuffer-setup . vertico-repeat-save))
   :init
-  (setq vertico-resize nil)
-  (setq vertico-cycle nil))
+  (setq vertico-count 12
+        vertico-resize nil
+        vertico-cycle nil))
 
 (use-package consult
   :after vertico
@@ -50,7 +51,7 @@
 
 (use-package embark
   :ensure t
-  :bind (("C-;" . embark-act))
+  :bind (("C-." . embark-act))
   :init
   (setq prefix-help-command #'embark-prefix-help-command))
 
@@ -62,9 +63,9 @@
 (use-package cape
   :ensure t
   :init
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-history)
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev))
+  (add-to-list 'completion-at-point-functions #'cape-keyword))
 
 (use-package corfu
   :ensure t
