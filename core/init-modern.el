@@ -38,11 +38,11 @@
          ("C-M-n" . mc/mark-next-like-this)
          ("C-M-p" . mc/mark-previous-like-this)))
 
-(use-package highlight-symbol
+(use-package symbol-overlay
   :ensure t
-  :bind (("M--" . highlight-symbol-at-point)
-	     ("M-n" . highlight-symbol-next)
-	     ("M-p" . highlight-symbol-prev)))
+  :bind (("M--" . symbol-overlay-put)
+         ("M-n" . symbol-overlay-jump-next)
+         ("M-p" . symbol-overlay-jump-prev)))
 
 (use-package which-key
   :ensure t

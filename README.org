@@ -370,7 +370,7 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 | [[https://github.com/abo-abo/ace-window][ace-window]]         | 多窗口切换                           | 以前一直用 [[https://github.com/deb0ch/emacs-winum][emacs-winum]]                                               |
 | [[https://github.com/abo-abo/avy][avy]]                | 光标快速定位（按照字符、单词、行等） | 以前用的是 [[https://github.com/winterTTr/ace-jump-mode][ace-jump]]                                                  |
 | [[https://github.com/minad/cape][cape.el]] + [[https://github.com/minad/corfu][corfu]]    | 补全框架                             | 替换 Company，cape 实现了各种 =completion-at-point-functions=        |
-| [[https://github.com/tumashu/cnfonts][cnfonts]]            | GUI 中英文等宽排版                   | [[https://madmalik.github.io/mononoki][mononoki]] + [[https://github.com/lxgw/LxgwWenKai][霞鹜文楷]]                                                  |
+| [[https://github.com/tumashu/cnfonts][cnfonts]]            | GUI 中英文等宽排版                   | Fira code + [[https://github.com/lxgw/LxgwWenKai][霞鹜文楷]]                                                 |
 | [[https://github.com/minad/consult][consult]]            | 通用完成框架                         | 替换 ivy                                                             |
 | [[https://github.com/Fuco1/dired-hacks/blob/master/dired-subtree.el][dired-subtree]]      | 增强下 dired                         |                                                                      |
 | [[https://github.com/seagle0128/doom-modeline][doom-modeline]]      | modeline 看起来漂亮一些，简洁        |                                                                      |
@@ -380,7 +380,6 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 | [[https://github.com/magnars/expand-region.el][expand-region]]      | 快速选中文本                         | 比如我常用 =M-s s= 选中一个单词，用 =M-s p= 选中括号内内容，然后复制 |
 | [[https://www.flycheck.org/en/latest/][flycheck]]           | 强大的语法检查框架                   | 需要编程语言的 lint 工具配合，比如 eslint、golint。编码必备。        |
 | [[https://github.com/nonsequitur/git-gutter-plus][git-gutter+]]        | 提示当前 buffer 改动部分             | 用 ~+~ 和 ~=~ 等显示出来                                             |
-| [[https://github.com/nschum/highlight-symbol.el][highlight-symbol]]   | 高亮当前单词                         |                                                                      |
 | [[https://github.com/magit/magit][magit]]              | git                                  |                                                                      |
 | [[https://github.com/minad/marginalia][marginalia]]         | 备注                                 | 类似 ivy-rich                                                        |
 | [[https://github.com/magnars/multiple-cursors.el][multiple-cursors]]   | 多鼠标操作                           | [[http://emacsrocks.com/e13.html][Emacs Rocks! Episode 13: multiple-cursors]]                            |
@@ -392,6 +391,8 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 | [[https://github.com/jwiegley/use-package][use-package]]        | 包配置隔离                           | 可设置启动时机（延迟加载），加速 Emacs 启动                          |
 | [[https://github.com/minad/vertico][vetico]]             | 垂直交互                             |                                                                      |
 | [[https://github.com/justbur/emacs-which-key][which-key]]          | 快捷键绑定提示                       |                                                                      |
+| [[https://github.com/wolray/symbol-overlay][symbol-overlay]]     | 符号高亮                             | 替换 highlight-symbol                                                |
+| [[https://github.com/domtronn/all-the-icons.el][all-the-icons]]      | icons                                | =doom-mode-line 4.0= 之后只支持 nerd-icons                           |
 |--------------------+--------------------------------------+----------------------------------------------------------------------|
 
 *Vertico & Consult & marginalia & orderless 通常是一起使用的。*
@@ -400,7 +401,6 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 
 一些尝试过，但是不再使用的 package：
 
-- [[https://github.com/domtronn/all-the-icons.el][all-the-icons]] icons =doom-mode-line 4.0= 之后只支持 nerd-icons
 - [[https://github.com/auto-complete/auto-complete][auto-complete]] 自动完成插件，后来用 company 替换了
 - [[https://github.com/Malabarba/beacon][beacon]] 光标提醒，帮你找得到光标，感觉不怎么实用
 - [[https://github.com/technomancy/better-defaults][better-defaults]] 几行代码就可以达到相同的效果
@@ -409,6 +409,7 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 - [[https://github.com/emacsmirror/diminish][diminish]] 减少一些 mode 在 modeline 上的显示，doom-modeline 显示已经很精简了
 - [[https://github.com/emacs-evil/evil][evil]] The extensible vi layer for Emacs. 从 Vim 转到 Emacs 的用户可以试一下，我的 Vim 太渣了
 - [[https://github.com/emacs-helm/helm][helm]] 一个补全框架，用了四五年，后来用 ivy 替换掉了
+- [[https://github.com/nschum/highlight-symbol.el][highlight-symbol]] 高亮当前单词，挺久没人维护了，用 symbol-overlay 可以完全代替
 - [[https://github.com/abo-abo/hydra][hydra]] 快捷键编排，尝试了一段时间，基本上用不到。常用的快捷键，我已经编排的很合理了
 - [[https://github.com/abo-abo/swiper][ivy]] 通用完成前端，用了几年 [[https://github.com/emacs-helm/helm][helm]]，现在换成了 consult
 - [[https://github.com/emacs-lsp/lsp-mode][lsp-mode]] 用了几年，最后用 eglot 替换
