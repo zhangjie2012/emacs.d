@@ -71,4 +71,6 @@
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(global-hl-line-mode +1)
+
 (provide 'init-ui)
