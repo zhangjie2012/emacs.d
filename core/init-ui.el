@@ -71,6 +71,18 @@
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package highlight-indent-guides
+  :ensure t
+  :hook (go-mode . highlight-indent-guides-mode)
+  :init
+  (defun my-highlighter (level responsive display)
+    (if (> 2 level)
+        nil
+      (highlight-indent-guides--highlighter-default level responsive display)))
+  (setq highlight-indent-guides-highlighter-function 'my-highlighter)
+  :config
+  (setq highlight-indent-guides-method 'character))
+
 (global-hl-line-mode +1)
 
 (provide 'init-ui)
