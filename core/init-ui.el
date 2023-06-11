@@ -1,25 +1,46 @@
-(use-package doom-themes
+;; (use-package doom-themes
+;;   :ensure t
+;;   :init
+;;   (defun toggle-theme ()
+;;     (interactive)
+;;     (cond ((eq (car custom-enabled-themes) 'doom-monokai-machine)
+;;            (mapc #'disable-theme custom-enabled-themes)
+;;            (load-theme 'doom-one-light t))
+;;           ((eq (car custom-enabled-themes) 'doom-one-light)
+;;            (mapc #'disable-theme custom-enabled-themes)
+;;            (load-theme 'doom-monokai-machine t))))
+;;   ;; day/night use diff theme: via https://github.com/jakebox/jake-emacs
+;;   (let ((hour (string-to-number (substring (current-time-string) 11 13))))
+;;     (if (or (> hour 17) (< hour 7))
+;;         (load-theme 'doom-monokai-machine t)
+;;       (load-theme 'doom-one-light t)))
+;;   :config
+;;   (setq doom-themes-enable-bold t
+;;         doom-themes-enable-italic nil)
+;;   (doom-themes-visual-bell-config)
+;;   (doom-themes-org-config)
+;;   (global-set-key (kbd "<f5>") 'toggle-theme))
+
+(use-package gruvbox-theme
   :ensure t
   :init
   (defun toggle-theme ()
     (interactive)
-    (cond ((eq (car custom-enabled-themes) 'doom-monokai-machine)
+    (cond ((eq (car custom-enabled-themes) 'gruvbox-dark-hard)
            (mapc #'disable-theme custom-enabled-themes)
-           (load-theme 'doom-one-light t))
-          ((eq (car custom-enabled-themes) 'doom-one-light)
+           (load-theme 'gruvbox-light-hard t))
+          ((eq (car custom-enabled-themes) 'gruvbox-light-hard)
            (mapc #'disable-theme custom-enabled-themes)
-           (load-theme 'doom-monokai-machine t))))
+           (load-theme 'gruvbox-dark-hard t))))
   ;; day/night use diff theme: via https://github.com/jakebox/jake-emacs
-  (let ((hour (string-to-number (substring (current-time-string) 11 13))))
-    (if (or (> hour 17) (< hour 7))
-        (load-theme 'doom-monokai-machine t)
-      (load-theme 'doom-one-light t)))
+  ;; (let ((hour (string-to-number (substring (current-time-string) 11 13))))
+  ;;   (if (or (> hour 17) (< hour 7))
+  ;;       (load-theme 'gruvbox-dark-hard t)
+  ;;     (load-theme 'gruvbox-light-hard t)))
   :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic nil)
-  (doom-themes-visual-bell-config)
-  (doom-themes-org-config)
+  (load-theme 'gruvbox-dark-hard t)
   (global-set-key (kbd "<f5>") 'toggle-theme))
+
 
 (use-package nerd-icons
   :ensure t
@@ -63,8 +84,8 @@
   (define-key cnfonts-mode-map (kbd "C-=") #'cnfonts-increase-fontsize)
 
   (custom-set-faces
-   '(org-level-1 ((t (:inherit outline-1 :height 1.3))))
-   '(org-level-2 ((t (:inherit outline-1 :height 1.1))))
+   '(org-level-1 ((t (:inherit outline-1 :height 1.2))))
+   '(org-level-2 ((t (:inherit outline-1 :height 1.0))))
    '(org-level-3 ((t (:inherit outline-1 :height 1.0))))))
 
 (use-package rainbow-delimiters
