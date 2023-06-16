@@ -3,17 +3,17 @@
 ;;   :init
 ;;   (defun toggle-theme ()
 ;;     (interactive)
-;;     (cond ((eq (car custom-enabled-themes) 'doom-monokai-machine)
+;;     (cond ((eq (car custom-enabled-themes) 'doom-one)
 ;;            (mapc #'disable-theme custom-enabled-themes)
-;;            (load-theme 'doom-one-light t))
-;;           ((eq (car custom-enabled-themes) 'doom-one-light)
+;;            (load-theme 'doom-snazzy t))
+;;           ((eq (car custom-enabled-themes) 'doom-snazzy)
 ;;            (mapc #'disable-theme custom-enabled-themes)
-;;            (load-theme 'doom-monokai-machine t))))
+;;            (load-theme 'doom-one t))))
 ;;   ;; day/night use diff theme: via https://github.com/jakebox/jake-emacs
 ;;   (let ((hour (string-to-number (substring (current-time-string) 11 13))))
 ;;     (if (or (> hour 17) (< hour 7))
-;;         (load-theme 'doom-monokai-machine t)
-;;       (load-theme 'doom-one-light t)))
+;;         (load-theme 'doom-one t)
+;;       (load-theme 'doom-snazzy t)))
 ;;   :config
 ;;   (setq doom-themes-enable-bold t
 ;;         doom-themes-enable-italic nil)
@@ -21,26 +21,13 @@
 ;;   (doom-themes-org-config)
 ;;   (global-set-key (kbd "<f5>") 'toggle-theme))
 
-(use-package gruvbox-theme
+(use-package doom-themes
   :ensure t
-  :init
-  (defun toggle-theme ()
-    (interactive)
-    (cond ((eq (car custom-enabled-themes) 'gruvbox-dark-hard)
-           (mapc #'disable-theme custom-enabled-themes)
-           (load-theme 'gruvbox-light-hard t))
-          ((eq (car custom-enabled-themes) 'gruvbox-light-hard)
-           (mapc #'disable-theme custom-enabled-themes)
-           (load-theme 'gruvbox-dark-hard t))))
-  ;; day/night use diff theme: via https://github.com/jakebox/jake-emacs
-  ;; (let ((hour (string-to-number (substring (current-time-string) 11 13))))
-  ;;   (if (or (> hour 17) (< hour 7))
-  ;;       (load-theme 'gruvbox-dark-hard t)
-  ;;     (load-theme 'gruvbox-light-hard t)))
   :config
-  (load-theme 'gruvbox-dark-hard t)
-  (global-set-key (kbd "<f5>") 'toggle-theme))
-
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic nil)
+  (doom-themes-visual-bell-config)
+  (load-theme 'doom-one-light t))
 
 (use-package nerd-icons
   :ensure t
