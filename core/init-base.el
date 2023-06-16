@@ -19,7 +19,6 @@
 (setq system-time-locale "C")
 ;; (setq system-time-locale "zh_CN.UTF-8")
 
-
 (setq frame-title-format
       '((:eval (if (buffer-file-name)
                    (abbreviate-file-name (buffer-file-name))
@@ -51,7 +50,8 @@
 
 (setq use-short-answers t)
 
-(blink-cursor-mode -1)
+(blink-cursor-mode t)
+(setq-default cursor-type 'bar)
 (setq visible-cursor nil)
 
 (setq read-file-name-completion-ignore-case t
