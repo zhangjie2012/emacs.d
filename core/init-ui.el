@@ -25,7 +25,7 @@
   :ensure t
   :config
   (setq doom-themes-enable-bold t
-        doom-themes-enable-italic nil)
+        doom-themes-enable-italic t)
   (doom-themes-visual-bell-config)
   (load-theme 'doom-one-light t))
 
