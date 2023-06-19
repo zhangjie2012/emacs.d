@@ -26,7 +26,7 @@
 		org-log-done t
 		org-src-tab-acts-natively nil
 		org-pretty-entities t
-		org-hide-emphasis-markers nil
+		org-hide-emphasis-markers t
 		org-startup-folded t
 		org-startup-with-inline-images t
 		org-image-actual-width '(1024)
@@ -120,7 +120,12 @@
   (use-package toc-org
 	:ensure t
 	:init
-	(add-hook 'org-mode-hook 'toc-org-mode)))
+	(add-hook 'org-mode-hook 'toc-org-mode))
+
+  (use-package org-appear
+    :ensure t
+    :hook (org-mode . org-appear-mode))
+  )
 
 ;; blog
 (use-package ox-publish
