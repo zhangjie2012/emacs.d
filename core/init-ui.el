@@ -79,6 +79,13 @@
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package beacon
+  :ensure t
+  :config
+  (setq beacon-push-mark nil)
+  (setq beacon-color "sky blue")
+  (beacon-mode 1))
+
 (global-hl-line-mode +1)
 
 (provide 'init-ui)
