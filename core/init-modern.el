@@ -9,7 +9,7 @@
   :ensure t
   :bind (("M-i" . avy-goto-word-1)
          ("M-j" . avy-goto-line)
-         ("M-s c" . avy-goto-char)
+         ("M-s i" . avy-goto-char)
          ("M-s k" . avy-copy-line))
   :config
   (setq avy-case-fold-search nil)
