@@ -51,7 +51,7 @@
 (setq use-short-answers t)
 
 (blink-cursor-mode t)
-(setq-default cursor-type 'bar)
+(setq-default cursor-type 'box)
 (setq visible-cursor nil)
 
 (setq read-file-name-completion-ignore-case t
@@ -61,9 +61,9 @@
 (setq confirm-kill-processes nil)
 
 (setq display-time-default-load-average nil
-      display-time-format "[%m-%d %H:%M]")
-;; (display-time-mode t)
-;; (display-battery-mode 1)
+      display-time-format "%H:%M") ;;  [%m-%d %H:%M]
+(display-time-mode t)
+(display-battery-mode 1)
 
 ;; SmoothScrolling https://www.emacswiki.org/emacs/SmoothScrolling
 (setq frame-resize-pixelwise t)
