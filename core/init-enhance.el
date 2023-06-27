@@ -21,8 +21,7 @@
   :hook ((after-init . vertico-mode)
          (minibuffer-setup . vertico-repeat-save))
   :init
-  (setq vertico-count 12
-        vertico-resize nil
+  (setq vertico-resize nil
         vertico-cycle nil))
 
 (use-package consult
