@@ -79,12 +79,9 @@
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
-(use-package beacon
+(use-package pulsar
   :ensure t
-  :config
-  (setq beacon-push-mark nil)
-  (setq beacon-color "sky blue")
-  (beacon-mode 1))
+  :bind ("M-h" . pulsar-pulse-line-blue))
 
 (global-hl-line-mode +1)
 
