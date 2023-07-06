@@ -1,7 +1,5 @@
 (use-package marginalia
   :ensure t
-  :bind (:map minibuffer-local-map
-              ("M-A" . marginalia-cycle))
   :init
   (marginalia-mode))
 
@@ -34,7 +32,6 @@
          ("<f9> M" . consult-imenu-menu)
          ("M-s [" . consult-ripgrep)
          ("<f9> t o" . consult-outline))
-
   :hook (completion-list-mode . consult-preview-at-point-mode)
   :init
   (setq xref-show-xrefs-function #'consult-xref
@@ -71,8 +68,7 @@
   :ensure t
   :hook (prog-mode . corfu-mode)
   :bind (:map corfu-map
-              ("M-SPC" . corfu-insert-separator)
-              ("C-n" . corfu-next)
+              ("C-n" . acorfu-next)
               ("C-p" . corfu-previous))
   :config
   (setq corfu-auto t
@@ -85,8 +81,7 @@
 
 (use-package ace-window
   :ensure t
-  :bind (("M-o" . ace-window)
-	     ("M-s t" . ace-swap-window))
+  :bind (("M-o" . ace-window))
   :config
   (custom-set-faces
    '(aw-leading-char-face

@@ -50,21 +50,9 @@
   :init
   (which-key-setup-minibuffer))
 
-(use-package youdao-dictionary
-  :ensure t
-  :bind (("<f9> y" . youdao-dictionary-search-at-point+)
-	     ("<f9> Y" . youdao-dictionary-search-from-input))
-  :config
-  (setq url-automatic-caching t)
-  (setq youdao-dictionary-use-chinese-word-segmentation t))
-
-;; line number
-;; (set-face-foreground 'line-number "darkgrey")
-(global-set-key (kbd "M-s l") 'display-line-numbers-mode)
-
 (use-package linum-relative
   :ensure t
-  :bind (("M-s r" . linum-relative-toggle))
+  :bind (("<f9> n r" . linum-relative-toggle))
   :config
   (setq linum-relative-backend 'display-line-numbers-mode))
 
@@ -74,11 +62,11 @@
   (display-fill-column-indicator-column 120)
   (display-fill-column-indicator-character ?\u2502)
   :config
-  (global-set-key (kbd "M-s n") 'display-fill-column-indicator-mode))
+  (global-set-key (kbd "<f9> n i") 'display-fill-column-indicator-mode))
 
 (use-package git-gutter+
   :ensure t
-  :bind (("<f9> g" . git-gutter+-mode))
+  :bind (("<f9> n g" . git-gutter+-mode))
   :config
   (progn
     (define-key git-gutter+-mode-map (kbd "C-x r") 'git-gutter+-revert-hunks)))
@@ -104,23 +92,25 @@
   :when (eq system-type 'darwin)
   :hook (after-init . exec-path-from-shell-initialize))
 
-;; (use-package exec-path-from-shell
-;;   :ensure t
-;;   :defer 0.5
-;;   :when (eq system-type 'darwin)
-;;   :config
-;;   (when (and window-system
-;;              (memq window-system '(mac ns x)))
-;; 	(exec-path-from-shell-initialize)
-;; 	(exec-path-from-shell-copy-env "GOPATH")
-;; 	(progn (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO"))
-;; 			 (add-to-list 'exec-path-from-shell-variables var)))))
-
 (use-package magit
   :ensure t
   :bind (("M-s ," . magit-status))
   :config
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
+
+(use-package keyfreq
+  :ensure t
+  :config
+  (setq keyfreq-excluded-commands
+      '(self-insert-command
+        forward-char
+        backward-char
+        previous-line
+        next-line
+        execute-extended-command
+        eval-last-sexp))
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1))
 
 (use-package emacs
   :ensure nil
@@ -157,22 +147,22 @@ Uses `current-date-time-format' for the formatting the date/time."
                            (if (or (null alpha) (eq alpha 200) (eq alpha 2.0))
                                '(80 60) '(100 100)))))
 
-  (global-set-key (kbd "<f10>") 'toggle-frame-fullscreen)
   (global-set-key (kbd "<f6>") 'show-file-name)
   (global-set-key (kbd "<f9> 1") 'delete-other-windows)
   (global-set-key (kbd "<f9> 2") 'split-window-below)
   (global-set-key (kbd "<f9> 3") 'split-window-horizontally)
-  (global-set-key (kbd "<f9> f") 'find-file)
-  (global-set-key (kbd "<f9> b") 'consult-buffer)
-
   (global-set-key (kbd "<f9> <SPC>") 'toggle-frame-alpha)
+  (global-set-key (kbd "<f9> b") 'consult-buffer)
   (global-set-key (kbd "<f9> c") 'eshell)
   (global-set-key (kbd "<f9> d") 'dired-jump)
+  (global-set-key (kbd "<f9> f") 'find-file)
   (global-set-key (kbd "<f9> i") 'insert-current-date-time)
+  (global-set-key (kbd "<f9> n n") 'display-line-numbers-mode)
   (global-set-key (kbd "<f9> w") 'save-buffer)
   (global-set-key (kbd "C-2") 'set-mark-command) ;; actual is C-@
   (global-set-key (kbd "C-x k") 'kill-this-buffer) ;; kill-this-buffer replace kill-buffer
   (global-set-key (kbd "M-*") 'match-paren)
-  (global-set-key (kbd "S-<backspace>") 'kill-whole-line))
+  (global-set-key (kbd "S-<backspace>") 'kill-whole-line)
+  (global-set-key (kbd "<f10>") 'toggle-frame-fullscreen))
 
 (provide 'init-modern)
