@@ -43,7 +43,7 @@
      (?B :foreground "#98be65" :weight bold)
      (?C :foreground "#c678dd" :weight bold)))
   (setq org-todo-keyword-faces
-    	'(;; ("TODO" . "orangered")
+    	'(;;("TODO" . "lime green")
           ("WAIT" . "darkgoldenrod")
           ("DONE" . "dark")
     	  ("DEPR" . "darkgrey")))
@@ -112,16 +112,15 @@
   (use-package org-superstar
 	:ensure t
 	:init
-	(setq org-superstar-special-todo-items nil
+	(setq org-superstar-special-todo-items t
 		  org-superstar-prettify-item-bullets t
-          org-superstar-remove-leading-stars nil)
+          org-superstar-remove-leading-stars t)
 	(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 
   (use-package toc-org
 	:ensure t
 	:init
-	(add-hook 'org-mode-hook 'toc-org-mode))
-  )
+	(add-hook 'org-mode-hook 'toc-org-mode)))
 
 ;; blog
 (use-package ox-publish

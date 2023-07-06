@@ -52,8 +52,8 @@
 
 (use-package youdao-dictionary
   :ensure t
-  :bind (("<f9> f" . youdao-dictionary-search-at-point+)
-	     ("<f9> F" . youdao-dictionary-search-from-input))
+  :bind (("<f9> y" . youdao-dictionary-search-at-point+)
+	     ("<f9> Y" . youdao-dictionary-search-from-input))
   :config
   (setq url-automatic-caching t)
   (setq youdao-dictionary-use-chinese-word-segmentation t))
@@ -79,11 +79,9 @@
 (use-package git-gutter+
   :ensure t
   :bind (("<f9> g" . git-gutter+-mode))
-  :config (progn
-            (define-key git-gutter+-mode-map (kbd "C-x n") 'git-gutter+-next-hunk)
-            (define-key git-gutter+-mode-map (kbd "C-x p") 'git-gutter+-previous-hunk)
-            (define-key git-gutter+-mode-map (kbd "C-x r") 'git-gutter+-revert-hunks))
-  :diminish (git-gutter+-mode . "gg"))
+  :config
+  (progn
+    (define-key git-gutter+-mode-map (kbd "C-x r") 'git-gutter+-revert-hunks)))
 
 (use-package string-inflection
   :ensure t
@@ -164,6 +162,9 @@ Uses `current-date-time-format' for the formatting the date/time."
   (global-set-key (kbd "<f9> 1") 'delete-other-windows)
   (global-set-key (kbd "<f9> 2") 'split-window-below)
   (global-set-key (kbd "<f9> 3") 'split-window-horizontally)
+  (global-set-key (kbd "<f9> f") 'find-file)
+  (global-set-key (kbd "<f9> b") 'consult-buffer)
+
   (global-set-key (kbd "<f9> <SPC>") 'toggle-frame-alpha)
   (global-set-key (kbd "<f9> c") 'eshell)
   (global-set-key (kbd "<f9> d") 'dired-jump)
