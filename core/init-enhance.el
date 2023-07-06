@@ -68,7 +68,7 @@
   :ensure t
   :hook (prog-mode . corfu-mode)
   :bind (:map corfu-map
-              ("C-n" . acorfu-next)
+              ("C-n" . corfu-next)
               ("C-p" . corfu-previous))
   :config
   (setq corfu-auto t
