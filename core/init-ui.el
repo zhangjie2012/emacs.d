@@ -85,4 +85,32 @@
 
 (global-hl-line-mode +1)
 
+(use-package dashboard
+  :ensure t
+  :config
+  (setq dashboard-projects-backend 'project-el
+        dashboard-items '((projects . 5)
+                          (agenda . 5))
+        dashboard-banner-logo-title "为天地立心, 为生民立命; 为往圣继绝学, 为万世开太平"
+        dashboard-footer-messages '("https://github.com/zhangjie2012/emacs.d")
+        dashboard-startup-banner (concat user-emacs-directory "logos/cacodemon.svg")
+        dashboard-image-banner-max-height 192
+        dashboard-set-navigator t
+        dashboard-set-footer nil
+        dashboard-center-content t)
+  (setq dashboard-navigator-buttons
+        `((;; homepage
+           (,(nerd-icons-octicon "nf-oct-home" :height 1.0 :v-adjust 0.0)
+            "Homepage"
+            "Go to homepage"
+            (lambda (&rest _) (browse-url "https://www.zhangjiee.com/")))
+           ;; Github
+           (,(nerd-icons-octicon "nf-oct-mark_github" :height 1.0 :v-adjust 0.0)
+            "Github"
+            "Go to github"
+            (lambda (&rest _) (browse-url "https://github.com/zhangjie2012")))
+           )))
+
+  (dashboard-setup-startup-hook))
+
 (provide 'init-ui)

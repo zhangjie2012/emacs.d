@@ -101,4 +101,16 @@
              ("j" . dired-next-line)
              ("k" . dired-previous-line)))
 
+(use-package hydra
+  :ensure t
+  :config
+  (defhydra hydra-jump-file
+    (:color coral1 :hint nil)
+    "Open file"
+    ("a" (find-file "~/gtd/entry.org") "gtd/entry.org")
+    ("s" (find-file "~/.emacs.d/init.el") "emacs.d/init.el")
+    ("d" (find-file "~/personal-area/self-growth/index.org") "self-growth/index.org")
+    ("q" nil "Quit" :color blue))
+  (global-set-key (kbd "<f2>") 'hydra-jump-file/body))
+
 (provide 'init-enhance)
