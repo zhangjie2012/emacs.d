@@ -25,6 +25,7 @@
 (require 'init-lang)
 (require 'init-config)
 (require 'init-feed)
+(require 'init-keymap)
 
 (setq custom-file "~/.emacs.d/custom.el")
 (when (file-exists-p custom-file)
