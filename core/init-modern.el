@@ -102,13 +102,28 @@
   :ensure t
   :config
   (setq keyfreq-excluded-commands
-      '(self-insert-command
-        forward-char
-        backward-char
-        previous-line
-        next-line
-        execute-extended-command
-        eval-last-sexp))
+        '(
+          backward-char
+          backward-delete-char-untabify
+          backward-word
+          delete-backward-char
+          eval-last-sexp
+          execute-extended-command
+          forward-char
+          forward-word
+          mouse-drag-region
+          mouse-set-point
+          move-beginning-of-line
+          newline
+          next-line
+          org-self-insert-command
+          pixel-scroll-precision
+          previous-line
+          save-buffer
+          self-insert-command
+          vertico-exit
+          vertico-next
+          ))
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
 

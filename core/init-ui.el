@@ -96,8 +96,7 @@
         dashboard-startup-banner (concat user-emacs-directory "logos/cacodemon.svg")
         dashboard-image-banner-max-height 192
         dashboard-set-navigator t
-        dashboard-set-footer nil
-        dashboard-center-content t)
+        dashboard-set-footer nil)
   (setq dashboard-navigator-buttons
         `((;; homepage
            (,(nerd-icons-octicon "nf-oct-home" :height 1.0 :v-adjust 0.0)
