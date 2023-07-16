@@ -26,12 +26,7 @@
   :after vertico
   :ensure t
   :bind (("C-x b" . consult-buffer)
-         ("M-y" . consult-yank-pop)
-         ("C-s" . consult-line)
-         ("<f9> m" . consult-imenu)
-         ("<f9> M" . consult-imenu-menu)
-         ("M-s [" . consult-ripgrep)
-         ("<f9> t o" . consult-outline))
+         ("M-y" . consult-yank-pop))
   :hook (completion-list-mode . consult-preview-at-point-mode)
   :init
   (setq xref-show-xrefs-function #'consult-xref
@@ -42,8 +37,7 @@
   (setq consult-preview-key "M-."))
 
 (use-package rg
-  :ensure t
-  :bind ("M-s ]" . rg))
+  :ensure t)
 
 (use-package embark
   :ensure t

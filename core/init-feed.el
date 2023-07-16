@@ -1,5 +1,5 @@
 (use-package elfeed
-  :bind ("<f9> q" . elfeed)
+  :bind ("<f2> e" . elfeed)
   :ensure t
   :init
   (setq elfeed-use-curl t)

@@ -19,7 +19,8 @@
 
 (use-package project
   :ensure nil
-  :bind-keymap ("<f8>" . project-prefix-map))
+  :bind (("<f8> f" . project-find-file)
+         ("<f8> p" . project-switch-project)))
 
 (use-package expand-region
   :ensure t
@@ -47,29 +48,22 @@
 (use-package which-key
   :ensure t
   :hook (prog-mode . which-key-mode)
-  :init
-  (which-key-setup-minibuffer))
-
-(use-package linum-relative
-  :ensure t
-  :bind (("<f9> n r" . linum-relative-toggle))
   :config
-  (setq linum-relative-backend 'display-line-numbers-mode))
+  (which-key-setup-minibuffer))
 
 (use-package display-fill-column-indicator
   :pin manual
   :custom
   (display-fill-column-indicator-column 120)
-  (display-fill-column-indicator-character ?\u2502)
+  (display-fill-column-indicator-character ?\u2502))
+
+(use-package linum-relative
+  :ensure t
   :config
-  (global-set-key (kbd "<f9> n i") 'display-fill-column-indicator-mode))
+  (setq linum-relative-backend 'display-line-numbers-mode))
 
 (use-package git-gutter+
-  :ensure t
-  :bind (("<f9> n g" . git-gutter+-mode))
-  :config
-  (progn
-    (define-key git-gutter+-mode-map (kbd "C-x r") 'git-gutter+-revert-hunks)))
+  :ensure t)
 
 (use-package string-inflection
   :ensure t
@@ -126,58 +120,5 @@
           ))
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
-
-(use-package emacs
-  :ensure nil
-  :init
-  (defvar current-date-time-format "%Y-%m-%d %H:%M:%S"
-    "Format of date to insert with `insert-current-date-time' func
-See help of `format-time-string' for possible replacements")
-
-  (defun insert-current-date-time ()
-    "insert the current date and time into current buffer.
-Uses `current-date-time-format' for the formatting the date/time."
-    (interactive)
-    (insert (format-time-string current-date-time-format (current-time)))
-    )
-
-  (defun show-file-name ()
-    "Show the full path file name in the minibuffer."
-    (interactive)
-    (message (buffer-file-name)))
-
-  (defun match-paren (arg)
-    "Go to the matching paren if on a paren; otherwise insert %."
-    (interactive "p")
-    (cond ((looking-at "\\s(") (forward-list 1) (backward-char 1))
-	      ((looking-at "\\s)") (forward-char 1) (backward-list 1))
-	      (t (self-insert-command (or arg 1)))))
-
-  (defun toggle-frame-alpha ()
-    (interactive)
-    (let* ((pair (or (frame-parameter nil 'alpha) '(100 100)))
-           (alpha (apply '+ pair)))
-      (set-frame-parameter nil
-                           'alpha
-                           (if (or (null alpha) (eq alpha 200) (eq alpha 2.0))
-                               '(80 60) '(100 100)))))
-
-  (global-set-key (kbd "<f6>") 'show-file-name)
-  (global-set-key (kbd "<f9> 1") 'delete-other-windows)
-  (global-set-key (kbd "<f9> 2") 'split-window-below)
-  (global-set-key (kbd "<f9> 3") 'split-window-horizontally)
-  (global-set-key (kbd "<f9> <SPC>") 'toggle-frame-alpha)
-  (global-set-key (kbd "<f9> b") 'consult-buffer)
-  (global-set-key (kbd "<f9> c") 'eshell)
-  (global-set-key (kbd "<f9> d") 'dired-jump)
-  (global-set-key (kbd "<f9> f") 'find-file)
-  (global-set-key (kbd "<f9> i") 'insert-current-date-time)
-  (global-set-key (kbd "<f9> n n") 'display-line-numbers-mode)
-  (global-set-key (kbd "<f9> w") 'save-buffer)
-  (global-set-key (kbd "C-2") 'set-mark-command) ;; actual is C-@
-  (global-set-key (kbd "C-x k") 'kill-this-buffer) ;; kill-this-buffer replace kill-buffer
-  (global-set-key (kbd "M-*") 'match-paren)
-  (global-set-key (kbd "S-<backspace>") 'kill-whole-line)
-  (global-set-key (kbd "<f10>") 'toggle-frame-fullscreen))
 
 (provide 'init-modern)

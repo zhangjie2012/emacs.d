@@ -1,8 +1,6 @@
 (use-package flycheck
   :ensure t
   :hook ((prog-mode . flycheck-mode))
-  :bind (("<f9> <f9>" . flycheck-buffer)
-		 ("<f9> l" . flycheck-list-errors))
   :init
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc javascript-jshint python-pylint))
   ;; set flycheck tool
@@ -45,9 +43,9 @@
   :hook ((go-mode . eglot-ensure)
          (python-mode . eglot-ensure))
   :bind (:map eglot-mode-map
-              ("<f9> s s" . eglot-reconnect)
-              ("<f9> s d" . eldoc)
-              ("<f9> s i" . eglot-find-implementation))
+              ("<f8> s" . eglot-reconnect)
+              ("<f8> d" . eldoc)
+              ("<f8> i" . eglot-find-implementation))
   :config
   (setq eldoc-echo-area-use-multiline-p nil
         eglot-ignored-server-capabilities '(:documentHighlightProvider))
@@ -57,7 +55,7 @@
 (use-package consult-eglot
   :ensure t
   :after consult
-  :bind ("<f9> s j" . consult-eglot-symbols))
+  :bind ("<f8> j" . consult-eglot-symbols))
 
 (use-package go-mode
   :ensure t
@@ -79,15 +77,6 @@
   (with-eval-after-load 'go-mode
     (define-key go-mode-map (kbd "C-c t") #'go-tag-add)
     (define-key go-mode-map (kbd "C-c T") #'go-tag-remove)))
-
-(use-package gotest
-  :ensure t
-  :init
-  (setq go-test-verbose t)
-  :config
-  (define-key go-mode-map (kbd "<f9> t f") 'go-test-current-file)
-  (define-key go-mode-map (kbd "<f9> t t") 'go-test-current-test)
-  (define-key go-mode-map (kbd "<f9> t p") 'go-test-current-project))
 
 (use-package python
   :ensure t

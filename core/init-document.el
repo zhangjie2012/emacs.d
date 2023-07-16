@@ -13,12 +13,7 @@
 (use-package org
   :pin nongnu
   :ensure org-contrib
-  :bind (("<f9> t l" . org-toggle-link-display)
-		 ("<f9> t f" . org-footnote-new)
-		 ("<f9> t i" . org-toggle-inline-images)
-		 ("<f9> t c" . org-capture)
-		 ("<f9> t a" . org-agenda)
-		 ("M-[" . org-previous-visible-heading)
+  :bind (("M-[" . org-previous-visible-heading)
 		 ("M-]" . org-next-visible-heading))
   :init
   (setq org-ellipsis " ▾"
