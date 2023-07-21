@@ -207,18 +207,24 @@ core 目录下：
 
 ** leader key 规范
 
-尽量使用模块快捷键，自定义快捷键每周基于 =keyfreq= 不断优化。[fn:6]
+尽量使用模块快捷键，自定义快捷键每周基于 =keyfreq= 不断优化。
 
-|----------+-------------|
-| 级别     | 前缀        |
-|----------+-------------|
-| 1L       | =C= =M=     |
-| 2L       | =C-c= =M-s= |
-| 3L       | =<f9>=      |
-| org 专用 | =<f9> t=    |
-| lsp 专用 | =<f9> s=    |
-| 项目专用 | =<f8>=      |
-|----------+-------------|
+|--------------+-------------|
+| 级别         | 前缀        |
+|--------------+-------------|
+| 1L           | =C= =M=     |
+| 2L           | =C-c= =M-s= |
+| 3L           | =<f9>=      |
+| org 专用     | =<f9> t=    |
+| lsp 专用     | =<f9> s=    |
+| project 专用 | =<f8>=      |
+| hydra 专用   | =<f9>=      |
+| 4L           | =<f2>=      |
+|--------------+-------------|
+
+说明：
+
+- hydra 如果绑定 use-package 安装 package 的快捷键会让 lazy-load 失效，所以需要权衡一下加载时间和使用效率
 
 ** 文本
 
@@ -587,6 +593,7 @@ lsp-mode 的功能比较多，官方提供了 [[https://emacs-lsp.github.io/lsp-
   - [[https://cestlaz.github.io/stories/emacs/][Using Emacs Series]]：cestlaz 的使用 Emacs 系列，偏向于插件介绍
   - [[http://emacsrocks.com/][emacsrocks]] 很多短视频，偏向于插件介绍
   - [[https://www-users.cs.umn.edu/~kauffman/tooltime/][ToolTime]] 前两节是讲 Emacs 的，理论+实践，有视频还有配套的 PPT，一般的资料都是讲什么用，而这个课程讲了为什么是这样，由浅入深；非常推荐。
+  - [[https://www.youtube.com/watch?v=Vx0bSKF4y78&t=225s][关于 Emacs 的补全]]
 - 我自己写的：
   - <2019-06-17 Mon> [[https://www.zhangjiee.com/blog/2019/emacs-is-fun-1.html][Emacs 心路历程（上）]]、[[https://www.zhangjiee.com/blog/2019/emacs-is-fun-2.html][Emacs 心路历程（下）]] 感悟
   - <2014-12-01 Mon> [[https://www.zhangjiee.com/blog/2014/emacs-simple-tutorial.html][Emacs 简易教程]] 内容比较旧了，已经不再维护
