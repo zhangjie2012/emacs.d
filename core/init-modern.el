@@ -96,28 +96,34 @@
   :ensure t
   :config
   (setq keyfreq-excluded-commands
-        '(
+        '(abort-minibuffers
           backward-char
           backward-delete-char-untabify
           backward-word
+          corfu-next
+          corfu-quit
           delete-backward-char
           eval-last-sexp
           execute-extended-command
           forward-char
           forward-word
+          left-char
           mouse-drag-region
           mouse-set-point
           move-beginning-of-line
+          move-end-of-line
+          mwheel-scroll
           newline
           next-line
           org-self-insert-command
           pixel-scroll-precision
           previous-line
+          right-char
           save-buffer
           self-insert-command
           vertico-exit
           vertico-next
-          ))
+          vertico-previous))
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
 
