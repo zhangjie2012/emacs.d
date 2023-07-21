@@ -33,7 +33,8 @@ Orgmode
   - [[#当前使用的][当前使用的]]
   - [[#以前用过的][以前用过的]]
 - [[#faq][FAQ]]
-  - [[#projectile-配置样例][projectile 配置样例]]
+  - [[#cape--corfu-配置备忘][cape + corfu 配置备忘]]
+  - [[#projectile-配置备忘][projectile 配置备忘]]
   - [[#emacs-启动速度太慢怎么办][Emacs 启动速度太慢怎么办？]]
   - [[#org-_--不被转义成下标和上标][Org =_= =^= 不被转义成下标和上标？]]
   - [[#org-92-后继续使用-s-tab-快捷插入][Org 9.2 后继续使用 =<s [Tab]= 快捷插入？]]
@@ -353,7 +354,7 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 |--------------------+--------------------------------------+----------------------------------------------------------------------|
 | [[https://github.com/abo-abo/ace-window][ace-window]]         | 多窗口切换                           | 以前一直用 [[https://github.com/deb0ch/emacs-winum][emacs-winum]]                                               |
 | [[https://github.com/abo-abo/avy][avy]]                | 光标快速定位（按照字符、单词、行等） | 以前用的是 [[https://github.com/winterTTr/ace-jump-mode][ace-jump]]                                                  |
-| [[https://github.com/minad/cape][cape.el]] + [[https://github.com/minad/corfu][corfu]]    | 补全框架                             | 替换 Company，cape 实现了各种 =completion-at-point-functions=        |
+| [[https://github.com/company-mode/company-mode][company-mode]]       | 补全框架                             | 用了一段时间 cape.el + corfu，又换回去了                             |
 | [[https://github.com/tumashu/cnfonts][cnfonts]]            | GUI 中英文等宽排版                   | Fira code + [[https://github.com/lxgw/LxgwWenKai][霞鹜文楷]]                                                 |
 | [[https://github.com/minad/consult][consult]]            | 通用完成框架                         | 替换 ivy                                                             |
 | [[https://github.com/Fuco1/dired-hacks/blob/master/dired-subtree.el][dired-subtree]]      | 增强下 dired                         |                                                                      |
@@ -388,7 +389,10 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 - [[https://github.com/auto-complete/auto-complete][auto-complete]] 自动完成插件，后来用 company 替换了
 - [[https://github.com/Malabarba/beacon][beacon]] 光标提醒，帮你找得到光标，感觉不怎么实用
 - [[https://github.com/technomancy/better-defaults][better-defaults]] 几行代码就可以达到相同的效果
-- [[https://github.com/company-mode/company-mode][company-mode]] 模块化补全框架（支持各种语言），用了几年 auto-complete，现在用 corfu 替换
+- [[https://github.com/minad/cape][cape.el]] + [[https://github.com/minad/corfu][corfu]] 原生 Emacs 实现的补全方案，相比 company 比较轻量化，社区也比较推崇，但是我使用上有两个问题无法避免就回退了：
+  1. 会有些莫名其妙的补全，比如数字，在写 SQL 的时候，输入 512，会给一堆的备选项。我给提了 issue：https://github.com/minad/corfu/issues/337 当时有 patch 解决了，
+     但是隔了一段时间又复现了。另外在非 lsp 的环境下（React JSX），补全经常卡顿
+  2. 配色，备选项选中和没选中区分度很不明显，眼睛看起来很累
 - [[https://github.com/emacs-dashboard/emacs-dashboard][dashboard]] 启动会显示最近使用过的文件，项目，标签等 *华而不实*
 - [[https://github.com/emacsmirror/diminish][diminish]] 减少一些 mode 在 modeline 上的显示，doom-modeline 显示已经很精简了
 - [[https://github.com/emacs-evil/evil][evil]] The extensible vi layer for Emacs. 从 Vim 转到 Emacs 的用户可以试一下，我的 Vim 太渣了
@@ -403,7 +407,34 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 
 * FAQ
 
-** projectile 配置样例
+** cape + corfu 配置备忘
+
+#+begin_src elisp
+  (use-package cape
+    :ensure t
+    :init
+    (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+    (add-to-list 'completion-at-point-functions #'cape-file)
+    (add-to-list 'completion-at-point-functions #'cape-keyword)
+    (add-to-list 'completion-at-point-functions #'cape-history))
+
+  (use-package corfu
+    :ensure t
+    :hook (prog-mode . corfu-mode)
+    :bind (:map corfu-map
+                ("C-n" . corfu-next)
+                ("C-p" . corfu-previous))
+    :config
+    (setq corfu-auto t
+          corfu-auto-prefix 1
+          corfu-auto-delay 0.1
+          corfu-quit-no-match t
+          corfu-quit-at-boundary t)
+    (add-hook 'multiple-cursors-mode-enabled-hook (lambda () (corfu-mode -1)))
+    (add-hook 'multiple-cursors-mode-disabled-hook (lambda () (corfu-mode 1))))
+#+end_src
+
+** projectile 配置备忘
 
 <2023-05-13 Sat> 从 =projectile= 切换到了 =project.el= 留一份老的配置备忘：
 
