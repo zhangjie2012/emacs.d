@@ -21,15 +21,17 @@ Uses `current-date-time-format' for the formatting the date/time."
   (interactive)
   (message (buffer-file-name)))
 
-(use-package emacs
-  :ensure nil
-  :init
-  (defun match-paren (arg)
+(defun match-paren (arg)
     "Go to the matching paren if on a paren; otherwise insert %."
     (interactive "p")
     (cond ((looking-at "\\s(") (forward-list 1) (backward-char 1))
 	      ((looking-at "\\s)") (forward-char 1) (backward-list 1))
 	      (t (self-insert-command (or arg 1)))))
+
+(use-package emacs
+  :ensure nil
+  :init
+
   (global-set-key (kbd "C-2") 'set-mark-command) ;; actual is C-@
   (global-set-key (kbd "C-x k") 'kill-this-buffer) ;; kill-this-buffer replace kill-buffer
   (global-set-key (kbd "M-*") 'match-paren)
@@ -45,7 +47,7 @@ Uses `current-date-time-format' for the formatting the date/time."
     ("'" show-file-name "file name" :exit t)
     ("n" display-line-numbers-mode "absolute line number")
     ("N" linum-relative-toggle "relative line number")
-    ("i" insert-current-date-time "insert date time")
+    ("i" insert-current-date-time "insert date time" :exit t)
     ("w" save-buffer "save buffer" :exit t)
     ("o" consult-outline "outline" :exit t)
     ("s" consult-line "search buffer" :exit t)
@@ -65,38 +67,13 @@ Uses `current-date-time-format' for the formatting the date/time."
     ("m" consult-imenu "imenu" :exit t)
     ("M" consult-imenu-menu "imenu menu" :exit t)
 
-    (".1" (find-file "~/gtd/entry.org") "gtd/entry.org" :exit t :column "4. open")
-    (".2" (find-file "~/.emacs.d/init.el") "emacs.d/init.el" :exit t)
-    (".3" (find-file "~/personal-area/self-growth/index.org") "self-growth/index.org" :exit t)
+    ("<SPC>1" (find-file "~/gtd/entry.org") "todo" :exit t :column "4. open")
+    ("<SPC>2" (find-file "~/.emacs.d/init.el") "emacs init file" :exit t)
+    ("<SPC>3" (find-file "~/personal-area/self-growth/summary.org") "summary" :exit t)
 
     ("ti" display-fill-column-indicator-mode "toggle column indicator" :column "x. other")
 
-    ("<SPC>" nil "quit" :column nil))
-  (global-set-key (kbd "<f9>") 'hydra-default/body)
-
-  ;; just move cursor, no copy/edit
-  (defhydra hydra-key-fly
-    (:hint nil :idle 1)
-    ;; control
-    ("n" next-line "next line")
-    ("p" previous-line "prev line")
-    ("b" backward-char "backward char")
-    ("f" forward-char "forward char")
-    ("a" move-beginning-of-line "begin line")
-    ("e" move-end-of-line "end line")
-    ("v" scroll-up-command "scroll up")
-    ("h" recenter-top-bottom "recenter")
-
-    ;; meta
-    ("A" backward-sentence "backward sentence")
-    ("F" forward-word "foward word")
-    ("B" backward-word "backward word")
-    ("E" forward-sentence "forward sentence")
-    ("V" scroll-down-command "scroll down")
-    ("," beginning-of-buffer "begin buf")
-    ("." end-of-buffer "end buf")
-
-    ("<SPC>" nil :column nil))
-  (global-set-key (kbd "<escape>") 'hydra-key-fly/body))
+    ("q" nil "quit" :column nil))
+  (global-set-key (kbd "<f9>") 'hydra-default/body))
 
 (provide 'init-keymap)
