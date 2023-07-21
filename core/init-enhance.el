@@ -32,8 +32,8 @@
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
   :config
-  ;; filter go.sum/readme.* files
-  (setq consult-ripgrep-args "rg --null --line-buffered -M=1000 --path-separator / -S --no-heading -H -n -g \"!{README,readme}.{md,org}\" -g \"!go.sum\"")
+  ;; filter go.sum/readme.*/*.svg files
+  (setq consult-ripgrep-args "rg --null --line-buffered -M=1000 --path-separator / -S --no-heading -H -n -g \"!{README,readme}.{md,org}\" -g \"!go.sum\" -g \"!*.svg\"")
   (setq consult-preview-key "M-."))
 
 (use-package rg
@@ -49,29 +49,6 @@
   :after embark consult
   :ensure t
   :hook (embark-collect-mode . consult-preview-at-point-mode))
-
-(use-package cape
-  :ensure t
-  :init
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-keyword)
-  (add-to-list 'completion-at-point-functions #'cape-history))
-
-(use-package corfu
-  :ensure t
-  :hook (prog-mode . corfu-mode)
-  :bind (:map corfu-map
-              ("C-n" . corfu-next)
-              ("C-p" . corfu-previous))
-  :config
-  (setq corfu-auto t
-        corfu-auto-prefix 1
-        corfu-auto-delay 0.1
-        corfu-quit-no-match t
-        corfu-quit-at-boundary t)
-  (add-hook 'multiple-cursors-mode-enabled-hook (lambda () (corfu-mode -1)))
-  (add-hook 'multiple-cursors-mode-disabled-hook (lambda () (corfu-mode 1))))
 
 (use-package ace-window
   :ensure t

@@ -38,6 +38,24 @@
   :config
   (setq flycheck-golangci-lint-config "~/.golangci.yaml"))
 
+(use-package company
+  :pin melpa
+  :ensure t
+  :hook ((prog-mode . company-mode)
+		 (protobuf-mode . company-mode))
+  :bind (:map company-active-map
+			  ("M-n" . company-select-next)
+			  ("M-p" . company-select-previous))
+  :init
+  ;; markdown-mode, eshell-mode ignore complete
+  (setq company-global-modes '(not markdown-mode gfm-mode eshell-mode))
+  (setq company-transformers '(company-sort-by-occurrence))
+  (setq company-echo-delay 0)
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 2)
+  ;; start autocompletion only after typing
+  (setq company-begin-commands '(self-insert-command)))
+
 (use-package eglot
   :ensure t
   :hook ((go-mode . eglot-ensure)

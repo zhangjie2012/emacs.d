@@ -100,8 +100,6 @@
           backward-char
           backward-delete-char-untabify
           backward-word
-          corfu-next
-          corfu-quit
           delete-backward-char
           eval-last-sexp
           execute-extended-command
