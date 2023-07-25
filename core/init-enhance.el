@@ -26,16 +26,17 @@
   :after vertico
   :ensure t
   :bind (("C-x b" . consult-buffer)
+         ("<f8> b" . consult-project-buffer)
          ("M-y" . consult-yank-pop))
   :hook (completion-list-mode . consult-preview-at-point-mode)
   :init
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
+  :config
   ;; hide other buffers
   (dolist (src consult-buffer-sources)
     (unless (eq src 'consult--source-buffer)
       (set src (plist-put (symbol-value src) :hidden t))))
-  :config
   ;; filter go.sum/readme.*/*.svg files
   (setq consult-ripgrep-args "rg --null --line-buffered -M=1000 --path-separator / -S --no-heading -H -n -g \"!{README,readme}.{md,org}\" -g \"!go.sum\" -g \"!*.svg\"")
   (setq consult-preview-key "M-."))
