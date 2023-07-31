@@ -67,9 +67,9 @@ Uses `current-date-time-format' for the formatting the date/time."
     ("m" consult-imenu "imenu" :exit t)
     ("M" consult-imenu-menu "imenu menu" :exit t)
 
-    ("<SPC>1" (find-file "~/gtd/entry.org") "todo" :exit t :column "4. open")
-    ("<SPC>2" (find-file "~/.emacs.d/init.el") "emacs init file" :exit t)
-    ("<SPC>3" (find-file "~/personal-area/self-growth/summary.org") "summary" :exit t)
+    ("<SPC>1" (find-file "~/gtd/entry.org") "GTD entry.org" :exit t :column "4. open")
+    ("<SPC>2" (find-file "~/.emacs.d/init.el") "emacs init.el" :exit t)
+    ("<SPC>3" (find-file "~/personal-area/self-growth/summary.org") "summary.org" :exit t)
 
     ("ti" display-fill-column-indicator-mode "toggle column indicator" :column "x. other")
 

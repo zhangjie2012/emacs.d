@@ -71,9 +71,10 @@
   (define-key cnfonts-mode-map (kbd "C-=") #'cnfonts-increase-fontsize)
 
   (custom-set-faces
-   '(org-level-1 ((t (:inherit outline-1 :height 1.2))))
-   '(org-level-2 ((t (:inherit outline-1 :height 1.0))))
-   '(org-level-3 ((t (:inherit outline-1 :height 1.0))))))
+   '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
+   '(org-level-2 ((t (:inherit outline-1 :height 1.35))))
+   '(org-level-3 ((t (:inherit outline-1 :height 1.25))))
+   '(org-level-4 ((t (:inherit outline-1 :height 1.0))))))
 
 (use-package rainbow-delimiters
   :ensure t
@@ -87,16 +88,27 @@
 
 (use-package dashboard
   :ensure t
+  :after (nerd-icons)
+  :init
+  (setq dashboard-display-icons-p t)
+  (setq dashboard-icon-type 'nerd-icons)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
   :config
   (setq dashboard-projects-backend 'project-el
-        dashboard-items '((projects . 5)
-                          (agenda . 5))
+        dashboard-items '((projects . 8)
+                          (recents . 8)
+                          (agenda . 8))
         dashboard-banner-logo-title "为天地立心, 为生民立命; 为往圣继绝学, 为万世开太平"
         dashboard-footer-messages '("https://github.com/zhangjie2012/emacs.d")
         dashboard-startup-banner (concat user-emacs-directory "logos/cacodemon.svg")
-        dashboard-image-banner-max-height 192
+        dashboard-image-banner-max-height 160
         dashboard-set-navigator t
-        dashboard-set-footer nil)
+        dashboard-set-footer nil
+        dashboard-show-shortcuts nil)
+  (setq dashboard-agenda-tags-format 'ignore
+        dashboard-agenda-sort-strategy '(priority-down)
+        dashboard-week-agenda t)
   (setq dashboard-navigator-buttons
         `((;; homepage
            (,(nerd-icons-octicon "nf-oct-home" :height 1.0 :v-adjust 0.0)
@@ -109,7 +121,6 @@
             "Go to github"
             (lambda (&rest _) (browse-url "https://github.com/zhangjie2012")))
            )))
-
   (dashboard-setup-startup-hook))
 
 (provide 'init-ui)
