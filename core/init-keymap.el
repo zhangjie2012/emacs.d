@@ -31,7 +31,6 @@ Uses `current-date-time-format' for the formatting the date/time."
 (use-package emacs
   :ensure nil
   :init
-
   (global-set-key (kbd "C-2") 'set-mark-command) ;; actual is C-@
   (global-set-key (kbd "C-x k") 'kill-this-buffer) ;; kill-this-buffer replace kill-buffer
   (global-set-key (kbd "M-*") 'match-paren)
@@ -72,7 +71,7 @@ Uses `current-date-time-format' for the formatting the date/time."
     ("<SPC>3" (find-file "~/personal-area/self-growth/summary.org") "summary.org" :exit t)
 
     ("ti" display-fill-column-indicator-mode "toggle column indicator" :column "x. other")
-
+    ("c" eshell "open eshell" :exit t)
     ("q" nil "quit" :column nil))
   (global-set-key (kbd "<f9>") 'hydra-default/body))
 

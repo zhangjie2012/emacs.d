@@ -38,23 +38,28 @@
   :config
   (setq flycheck-golangci-lint-config "~/.golangci.yaml"))
 
-(use-package company
-  :pin melpa
+(use-package corfu
   :ensure t
-  :hook ((prog-mode . company-mode)
-		 (protobuf-mode . company-mode))
-  :bind (:map company-active-map
-			  ("M-n" . company-select-next)
-			  ("M-p" . company-select-previous))
+  :hook (prog-mode . corfu-mode)
+  :bind (:map corfu-map
+              ("C-n" . corfu-next)
+              ("C-p" . corfu-previous))
+  :config
+  (setq corfu-auto t
+        corfu-auto-prefix 1
+        corfu-auto-delay 0.1
+        corfu-quit-no-match t
+        corfu-quit-at-boundary t)
+  (add-hook 'multiple-cursors-mode-enabled-hook (lambda () (corfu-mode -1)))
+  (add-hook 'multiple-cursors-mode-disabled-hook (lambda () (corfu-mode 1))))t
+
+(use-package cape
+  :ensure t
   :init
-  ;; markdown-mode, eshell-mode ignore complete
-  (setq company-global-modes '(not markdown-mode gfm-mode eshell-mode))
-  (setq company-transformers '(company-sort-by-occurrence))
-  (setq company-echo-delay 0)
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 2)
-  ;; start autocompletion only after typing
-  (setq company-begin-commands '(self-insert-command)))
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)
+  (add-to-list 'completion-at-point-functions #'cape-history))
 
 (use-package eglot
   :ensure t

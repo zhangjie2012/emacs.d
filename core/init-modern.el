@@ -20,7 +20,9 @@
 (use-package project
   :ensure nil
   :bind (("<f8> f" . project-find-file)
-         ("<f8> p" . project-switch-project)))
+         ("<f8> p" . project-switch-project)
+         ("<f8> k" . project-kill-buffers)
+         ("<f8> b" . project-switch-to-buffer)))
 
 (use-package expand-region
   :ensure t
@@ -92,6 +94,19 @@
   :config
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
+(use-package fanyi
+  :ensure t
+  :bind (("<f8> y" . fanyi-dwim2))
+  :config
+  (set-fontset-font t 'emoji (font-spec :family "Apple Color Emoji") nil 'prepend)
+  :custom
+  (fanyi-providers '(;; 海词
+                     fanyi-haici-provider
+                     ;; 有道同义词词典
+                     fanyi-youdao-thesaurus-provider
+                     ;; longman
+                     fanyi-longman-provider)))
+
 (use-package keyfreq
   :ensure t
   :config
@@ -121,7 +136,8 @@
           self-insert-command
           vertico-exit
           vertico-next
-          vertico-previous))
+          vertico-previous
+          org-delete-backward-char))
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
 

@@ -51,7 +51,7 @@
 (setq use-short-answers t)
 
 (blink-cursor-mode t)
-(setq-default cursor-type 'box)
+(setq-default cursor-type 'bar)
 (setq visible-cursor nil)
 
 (setq read-file-name-completion-ignore-case t
