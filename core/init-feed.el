@@ -24,6 +24,7 @@
           ("https://github.blog/all.atom" github)
           ("https://jimmysong.io/blog/index.xml" cloudnative)
           ("https://manateelazycat.github.io/feed.xml" emacs)
+          ("https://emacstalk.codeberg.page/index.xml" emacs)
           ("https://moelove.info/index.xml" cloudnative)
           ("https://skyao.io/index.xml" blog_cn)
           ("https://willschenk.com/feed.xml" dev)
