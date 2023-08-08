@@ -33,6 +33,7 @@ Orgmode
   - [[#当前使用的][当前使用的]]
   - [[#以前用过的][以前用过的]]
 - [[#faq][FAQ]]
+  - [[#doom-theme-配置备忘][doom-theme 配置备忘]]
   - [[#cape--corfu-配置备忘][cape + corfu 配置备忘]]
   - [[#projectile-配置备忘][projectile 配置备忘]]
   - [[#emacs-启动速度太慢怎么办][Emacs 启动速度太慢怎么办？]]
@@ -406,6 +407,33 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 - [[https://github.com/joaotavora/yasnippet][yasnippet]] 代码片段，以前写 C++ 的时候常用，现在不咋用了
 
 * FAQ
+
+** doom-theme 配置备忘
+
+#+begin_src elisp
+  (use-package doom-themes
+    :ensure t
+    :init
+    (defun toggle-theme ()
+      (interactive)
+      (cond ((eq (car custom-enabled-themes) 'doom-one)
+             (mapc #'disable-theme custom-enabled-themes)
+             (load-theme 'doom-snazzy t))
+            ((eq (car custom-enabled-themes) 'doom-snazzy)
+             (mapc #'disable-theme custom-enabled-themes)
+             (load-theme 'doom-one t))))
+    ;; day/night use diff theme: via https://github.com/jakebox/jake-emacs
+    (let ((hour (string-to-number (substring (current-time-string) 11 13))))
+      (if (or (> hour 17) (< hour 7))
+          (load-theme 'doom-one t)
+        (load-theme 'doom-snazzy t)))
+    :config
+    (setq doom-themes-enable-bold t
+          doom-themes-enable-italic nil)
+    (doom-themes-visual-bell-config)
+    (doom-themes-org-config)
+    (global-set-key (kbd "<f5>") 'toggle-theme))
+#+end_src
 
 ** cape + corfu 配置备忘
 
