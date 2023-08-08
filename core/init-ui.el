@@ -51,25 +51,13 @@
         doom-modeline-buffer-file-name-style 'truncate-upto-project
         doom-modeline-unicode-fallback t))
 
-(use-package cnfonts
-  :if window-system
-  :ensure t
-  :init
-  ;; https://github.com/tumashu/cnfonts/issues/138
-  (setq cnfonts-use-face-font-rescale t)
-  (setq cnfonts-use-system-type t)
+(use-package emacs
+  :ensure nil
+  :bind (("C--" . text-scale-decrease)
+         ("C-=" . text-scale-increase)
+         ("C-0" . text-scale-adjust))
   :config
-  (cnfonts-mode 1)
-  ;; https://stackoverflow.com/questions/1817257/how-to-determine-operating-system-in-elisp
-  (if (eq system-type 'darwin)
-      (cnfonts--select-profile "profile1"))
-  (if (eq system-type 'windows-nt)
-      (cnfonts--select-profile "profile2"))
-  (if (eq system-type 'gnu/linux)
-      (cnfonts--select-profile "profile3"))
-  (define-key cnfonts-mode-map (kbd "C--") #'cnfonts-decrease-fontsize)
-  (define-key cnfonts-mode-map (kbd "C-=") #'cnfonts-increase-fontsize)
-
+  (set-face-attribute 'default nil :family "Sarasa Term SC Nerd" :height 180)
   (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
    '(org-level-2 ((t (:inherit outline-1 :height 1.35))))
