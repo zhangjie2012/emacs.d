@@ -51,7 +51,6 @@ Uses `current-date-time-format' for the formatting the date/time."
     ("o" consult-outline "outline" :exit t)
     ("s" consult-line "search buffer" :exit t)
     ("e" consult-ripgrep "ripgrep project" :exit t)
-    ("E" rg "repgrep dir" :exit t)
 
     ("1" delete-other-windows "delete other" :exit t :column "2. window management")
     ("2" split-window-below "split below" :exit t )
@@ -59,18 +58,13 @@ Uses `current-date-time-format' for the formatting the date/time."
     ("x" toggle-frame-fullscreen "toggle fullscreen" :exit t)
     ("X" toggle-frame-alpha "toggle alpha" :exit t)
 
-    ("g" git-gutter+-mode "git gutter" :exit t :column "3. coding")
-    ("r" git-gutter+-revert-hunks "revert hucks")
-    ("j" git-gutter+-next-hunk "next huck")
-    ("k" git-gutter+-previous-hunk "previous huck")
-    ("m" consult-imenu "imenu" :exit t)
-    ("M" consult-imenu-menu "imenu menu" :exit t)
-
-    ("<SPC>1" (find-file "~/gtd/entry.org") "GTD entry.org" :exit t :column "4. open")
+    ("<SPC>1" (find-file "~/gtd/entry.org") "GTD entry.org" :exit t :column "3. open")
     ("<SPC>2" (find-file "~/.emacs.d/init.el") "emacs init.el" :exit t)
     ("<SPC>3" (find-file "~/personal-area/self-growth/summary.org") "summary.org" :exit t)
 
     ("ti" display-fill-column-indicator-mode "toggle column indicator" :column "x. other")
+    ("m" consult-imenu "imenu" :exit t)
+    ("M" consult-imenu-menu "imenu menu" :exit t)
     ("c" eshell "open eshell" :exit t)
     ("q" nil "quit" :column nil))
   (global-set-key (kbd "<f9>") 'hydra-default/body))
