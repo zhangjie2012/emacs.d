@@ -1,26 +1,3 @@
-;; (use-package doom-themes
-;;   :ensure t
-;;   :init
-;;   (defun toggle-theme ()
-;;     (interactive)
-;;     (cond ((eq (car custom-enabled-themes) 'doom-one)
-;;            (mapc #'disable-theme custom-enabled-themes)
-;;            (load-theme 'doom-snazzy t))
-;;           ((eq (car custom-enabled-themes) 'doom-snazzy)
-;;            (mapc #'disable-theme custom-enabled-themes)
-;;            (load-theme 'doom-one t))))
-;;   ;; day/night use diff theme: via https://github.com/jakebox/jake-emacs
-;;   (let ((hour (string-to-number (substring (current-time-string) 11 13))))
-;;     (if (or (> hour 17) (< hour 7))
-;;         (load-theme 'doom-one t)
-;;       (load-theme 'doom-snazzy t)))
-;;   :config
-;;   (setq doom-themes-enable-bold t
-;;         doom-themes-enable-italic nil)
-;;   (doom-themes-visual-bell-config)
-;;   (doom-themes-org-config)
-;;   (global-set-key (kbd "<f5>") 'toggle-theme))
-
 (use-package doom-themes
   :ensure t
   :config
@@ -57,7 +34,7 @@
          ("C-=" . text-scale-increase)
          ("C-0" . text-scale-adjust))
   :config
-  (set-face-attribute 'default nil :family "Sarasa Term SC Nerd" :height 180)
+  (set-face-attribute 'default nil :family "Sarasa Term SC Nerd" :height 170)
   (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
    '(org-level-2 ((t (:inherit outline-1 :height 1.35))))
@@ -70,7 +47,11 @@
 
 (use-package pulsar
   :ensure t
-  :bind ("M-h" . pulsar-pulse-line-blue))
+  :bind ("M-h" . pulsar-pulse-line-blue)
+  :init
+  (setq pulsar-face 'pulsar-blue)
+  :config
+  (pulsar-global-mode 1))
 
 (global-hl-line-mode +1)
 
