@@ -169,4 +169,8 @@
     ;; (define-key rjsx-mode-map ">" nil)
     (define-key rjsx-mode-map (kbd "M-.") nil)))
 
+(use-package format-all
+  :ensure t
+  :bind ("<f8> q" . format-all-region-or-buffer))
+
 (provide 'init-lang)
