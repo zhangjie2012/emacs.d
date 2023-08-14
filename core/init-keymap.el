@@ -41,24 +41,28 @@ Uses `current-date-time-format' for the formatting the date/time."
   :config
   (defhydra hydra-default
     (:hint nil :idle 1)
-    ("f" find-file "find file" :exit t :column "1. common")
-    ("b" switch-to-buffer "switch buffer" :exit t)
-    ("'" show-file-name "file name" :exit t)
-    ("n" display-line-numbers-mode "absolute line number")
-    ("N" linum-relative-toggle "relative line number")
-    ("i" insert-current-date-time "insert date time" :exit t)
+
+    ("r" replace-string "replace string" :exit t :column "1. edit")
     ("w" save-buffer "save buffer" :exit t)
     ("o" consult-outline "outline" :exit t)
     ("s" consult-line "search buffer" :exit t)
     ("e" consult-ripgrep "ripgrep project" :exit t)
+    ("i" insert-current-date-time "insert date time" :exit t)
+    ("l" align-regexp "align text" :exit t)
 
-    ("1" delete-other-windows "delete other" :exit t :column "2. window management")
+    ("f" find-file "find file" :exit t :column "2. buffer")
+    ("b" switch-to-buffer "switch buffer" :exit t)
+    ("'" show-file-name "file name" :exit t)
+    ("n" display-line-numbers-mode "absolute line number")
+    ("N" linum-relative-toggle "relative line number")
+
+    ("1" delete-other-windows "delete other" :exit t :column "3. window management")
     ("2" split-window-below "split below" :exit t )
     ("3" split-window-horizontally "split horizontally" :exit t)
     ("x" toggle-frame-fullscreen "toggle fullscreen" :exit t)
     ("X" toggle-frame-alpha "toggle alpha" :exit t)
 
-    ("<SPC>1" (find-file "~/gtd/entry.org") "GTD entry.org" :exit t :column "3. open")
+    ("<SPC>1" (find-file "~/gtd/entry.org") "GTD entry.org" :exit t :column "4. open")
     ("<SPC>2" (find-file "~/.emacs.d/init.el") "emacs init.el" :exit t)
     ("<SPC>3" (find-file "~/personal-area/self-growth/summary.org") "summary.org" :exit t)
 
@@ -66,7 +70,7 @@ Uses `current-date-time-format' for the formatting the date/time."
     ("m" consult-imenu "imenu" :exit t)
     ("M" consult-imenu-menu "imenu menu" :exit t)
     ("c" eshell "open eshell" :exit t)
-    ("q" nil "quit" :column nil))
+    ("q" nil "quit"))
   (global-set-key (kbd "<f9>") 'hydra-default/body))
 
 (provide 'init-keymap)

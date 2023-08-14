@@ -12,6 +12,7 @@
 ;; https://emacs.stackexchange.com/questions/17710/use-package-with-config-to-set-variables
 (use-package org
   :pin nongnu
+  :mode (("\\.org\\'" . org-mode))
   :ensure org-contrib
   :bind (("M-[" . org-previous-visible-heading)
 		 ("M-]" . org-next-visible-heading))
@@ -34,9 +35,9 @@
   (setq org-todo-keywords
 		'((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d@/!)" "DEPR(r@/!)")))
   (setq org-priority-faces
-   '((?A :foreground "#ff6c6b" :weight bold)
-     (?B :foreground "#98be65" :weight bold)
-     (?C :foreground "#c678dd" :weight bold)))
+        '((?A :foreground "#ff6c6b" :weight bold)
+          (?B :foreground "#98be65" :weight bold)
+          (?C :foreground "#c678dd" :weight bold)))
   (setq org-todo-keyword-faces
     	'(;;("TODO" . "lime green")
           ("WAIT" . "darkgoldenrod")
@@ -103,20 +104,20 @@
 	 (sql . t)
 	 (R . t)
 	 (go . t)))
-
-  (use-package org-superstar
-	:ensure t
-	:init
-	(setq org-superstar-special-todo-items t
-		  org-superstar-prettify-item-bullets t
-          org-superstar-remove-leading-stars t)
-	(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
-
-  (use-package toc-org
-	:ensure t
-	:init
-	(add-hook 'org-mode-hook 'toc-org-mode))
   )
+
+(use-package toc-org
+  :ensure t
+  :hook (org-mode . toc-org-mode))
+
+(use-package org-superstar
+  :ensure t
+  :hook (org-mode . org-superstar-mode)
+  :init
+  (setq org-superstar-special-todo-items t
+		org-superstar-prettify-item-bullets t
+        org-superstar-remove-leading-stars t)
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 
 (use-package org-appear
   :ensure t

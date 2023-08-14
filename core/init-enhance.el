@@ -42,6 +42,7 @@
   (setq consult-preview-key "M-."))
 
 (use-package rg
+  :defer t
   :ensure t)
 
 (use-package embark
