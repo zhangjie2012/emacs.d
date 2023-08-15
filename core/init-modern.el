@@ -108,6 +108,10 @@
                      ;; longman
                      fanyi-longman-provider)))
 
+(use-package capf-autosuggest
+  :ensure t
+  :hook (eshell-mode . capf-autosuggest-mode))
+
 (use-package keyfreq
   :ensure t
   :config
