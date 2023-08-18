@@ -5,8 +5,6 @@
       make-backup-files    nil
       create-lockfiles     nil)
 
-(setq-default indent-tabs-mode nil)
-
 (set-charset-priority 'unicode)
 (setq locale-coding-system   'utf-8-unix)
 (set-terminal-coding-system  'utf-8-unix)
@@ -26,7 +24,7 @@
 
 (add-hook 'text-mode-hook
           #'(lambda ()
-              (setq indent-tabs-mode nil)
+              (setq indent-tabs-mode t)
               (setq tab-width 4)))
 (setq indent-line-function (quote insert-tab))
 

@@ -55,6 +55,7 @@ Uses `current-date-time-format' for the formatting the date/time."
     ("'" show-file-name "file name" :exit t)
     ("n" display-line-numbers-mode "absolute line number")
     ("N" linum-relative-toggle "relative line number")
+    ("u" revert-buffer "revert buffer")
 
     ("1" delete-other-windows "delete other" :exit t :column "3. window management")
     ("2" split-window-below "split below" :exit t )
@@ -68,7 +69,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 
     ("ti" display-fill-column-indicator-mode "toggle column indicator" :column "x. other")
     ("m" consult-imenu "imenu" :exit t)
-    ("M" consult-imenu-menu "imenu menu" :exit t)
+    ("M" consult-outline "consult outline" :exit t)
     ("c" eshell "open eshell" :exit t)
     ("q" nil "quit"))
   (global-set-key (kbd "<f9>") 'hydra-default/body))
