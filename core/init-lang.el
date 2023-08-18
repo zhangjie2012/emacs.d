@@ -1,6 +1,7 @@
 (use-package flycheck
   :ensure t
-  :hook ((prog-mode . flycheck-mode))
+  :hook ((go-mode . flycheck-mode)
+         (emacs-lisp-mode . flycheck-mode))
   :init
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc javascript-jshint python-pylint))
   ;; set flycheck tool
@@ -40,7 +41,8 @@
 
 (use-package corfu
   :ensure t
-  :hook (prog-mode . corfu-mode)
+  :hook ((go-mode . corfu-mode)
+         (python-mode . corfu-mode))
   :bind (:map corfu-map
               ("C-n" . corfu-next)
               ("C-p" . corfu-previous))
@@ -51,7 +53,7 @@
         corfu-quit-no-match t
         corfu-quit-at-boundary t)
   (add-hook 'multiple-cursors-mode-enabled-hook (lambda () (corfu-mode -1)))
-  (add-hook 'multiple-cursors-mode-disabled-hook (lambda () (corfu-mode 1))))t
+  (add-hook 'multiple-cursors-mode-disabled-hook (lambda () (corfu-mode 1))))
 
 (use-package cape
   :ensure t
@@ -89,8 +91,7 @@
          (eglot-code-actions nil nil "source.organizeImports" t))
   (defun eglot-buffer-on-save ()
     (add-hook 'before-save-hook #'my-eglot-organize-imports nil t)
-    (add-hook 'before-save-hook #'eglot-format-buffer -10 t)
-    )
+    (add-hook 'before-save-hook #'eglot-format-buffer -10 t))
   (add-hook 'go-mode-hook #'eglot-buffer-on-save))
 
 (use-package go-tag
@@ -110,9 +111,7 @@
   (set-variable 'python-indent-guess-indent-offset nil)
   :config
   (defun eglot-format-buffer-on-save ()
-    (add-hook 'before-save-hook #'eglot-format-buffer -10 t)
-    (add-hook 'before-save-hook #'flycheck-buffer)
-    )
+    (add-hook 'before-save-hook #'eglot-format-buffer -10 t))
   (add-hook 'python-mode-hook #'eglot-format-buffer-on-save))
 
 (use-package web-mode
