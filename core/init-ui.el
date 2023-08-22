@@ -4,7 +4,7 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
   (doom-themes-visual-bell-config)
-  (load-theme 'doom-one-light t))
+  (load-theme 'doom-nord-light t))
 
 (use-package nerd-icons
   :ensure t

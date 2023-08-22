@@ -114,7 +114,7 @@
   :ensure t
   :hook (org-mode . org-superstar-mode)
   :init
-  (setq org-superstar-special-todo-items t
+  (setq org-superstar-special-todo-items nil
 		org-superstar-prettify-item-bullets t
         org-superstar-remove-leading-stars t)
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))

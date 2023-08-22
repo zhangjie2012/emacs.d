@@ -1,7 +1,8 @@
 (use-package flycheck
   :ensure t
   :hook ((go-mode . flycheck-mode)
-         (emacs-lisp-mode . flycheck-mode))
+         (emacs-lisp-mode . flycheck-mode)
+		 (rjsx-mode . flycheck-mode))
   :init
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc javascript-jshint python-pylint))
   ;; set flycheck tool
@@ -42,7 +43,8 @@
 (use-package corfu
   :ensure t
   :hook ((go-mode . corfu-mode)
-         (python-mode . corfu-mode))
+         (python-mode . corfu-mode)
+		 (rjsx-mode . corfu-mode))
   :bind (:map corfu-map
               ("C-n" . corfu-next)
               ("C-p" . corfu-previous))
