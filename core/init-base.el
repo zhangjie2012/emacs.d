@@ -24,7 +24,7 @@
 
 (add-hook 'text-mode-hook
           #'(lambda ()
-              (setq indent-tabs-mode t)
+              (setq indent-tabs-mode nil)
               (setq tab-width 4)))
 (setq indent-line-function (quote insert-tab))
 

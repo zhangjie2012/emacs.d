@@ -44,7 +44,8 @@
   :ensure t
   :hook ((go-mode . corfu-mode)
          (python-mode . corfu-mode)
-		 (rjsx-mode . corfu-mode))
+		 (rjsx-mode . corfu-mode)
+		 (emacs-lisp-mode . corfu-mode))
   :bind (:map corfu-map
               ("C-n" . corfu-next)
               ("C-p" . corfu-previous))

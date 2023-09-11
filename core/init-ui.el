@@ -4,7 +4,7 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
   (doom-themes-visual-bell-config)
-  (load-theme 'doom-nord-light t))
+  (load-theme 'doom-one t))
 
 (use-package nerd-icons
   :ensure t
@@ -47,9 +47,9 @@
 
 (use-package pulsar
   :ensure t
-  :bind ("M-h" . pulsar-pulse-line-blue)
+  :bind ("M-h" . pulsar-pulse-line-magenta)
   :init
-  (setq pulsar-face 'pulsar-blue)
+  (setq pulsar-face 'pulsar-magenta)
   :config
   (pulsar-global-mode 1))
 
