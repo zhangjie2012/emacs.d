@@ -26,7 +26,12 @@
           #'(lambda ()
               (setq indent-tabs-mode nil)
               (setq tab-width 4)))
-(setq indent-line-function (quote insert-tab))
+;; (setq indent-line-function (quote insert-tab))
+(defadvice align-regexp (around align-regexp-with-spaces)
+  "Never use tabs for alignment."
+  (let ((indent-tabs-mode nil))
+    ad-do-it))
+(ad-activate 'align-regexp)
 
 (save-place-mode t)
 (setq-default tab-width 4)
