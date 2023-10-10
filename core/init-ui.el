@@ -37,8 +37,8 @@
   (set-face-attribute 'default nil :family "Sarasa Term SC Nerd" :height 170)
   (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
-   '(org-level-2 ((t (:inherit outline-1 :height 1.35))))
-   '(org-level-3 ((t (:inherit outline-1 :height 1.25))))
+   '(org-level-2 ((t (:inherit outline-1 :height 1.2))))
+   '(org-level-3 ((t (:inherit outline-1 :height 1.0))))
    '(org-level-4 ((t (:inherit outline-1 :height 1.0))))))
 
 (use-package rainbow-delimiters
