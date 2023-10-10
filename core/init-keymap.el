@@ -15,7 +15,7 @@ Uses `current-date-time-format' for the formatting the date/time."
     (set-frame-parameter nil
                          'alpha
                          (if (or (null alpha) (eq alpha 200) (eq alpha 2.0))
-                             '(80 60) '(100 100)))))
+                             '(85 60) '(100 100)))))
 (defun show-file-name ()
   "Show the full path file name in the minibuffer."
   (interactive)
