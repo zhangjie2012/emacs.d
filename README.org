@@ -9,6 +9,9 @@ Orgmode
 
 [[file:screenshots/orgmode.png]]
 
+
+字体：Sarasa Term SC，主题：doom-one。
+
 * Table Of Content                                                      :TOC_3:
 - [[#intro][Intro]]
 - [[#安装][安装]]
