@@ -61,7 +61,7 @@ Orgmode
 
 本配置适用于 *Emacs 29.x* 版本，MacOS GUI（Linux 大概率没问题）。
 
-Github =main= 为稳定版本， =unstable= 是实验性版本。
+分支： =main= 为稳定版本， =unstable= 是实验性版本。
 
 *推荐阅读* [[https://www2.lib.uchicago.edu/keith/emacs/#orgc5a18efe][Use GNU Emacs: The Plain Text Computing Environment Emacs]] 堪称百科全书，看完之后不需要看其他文档了。
 
@@ -90,7 +90,6 @@ Github =main= 为稳定版本， =unstable= 是实验性版本。
 
 打开 Emacs 时自动安装依赖包。我使用[[https://mirrors.ustc.edu.cn/help/elpa.html][中科大的源]]（清华源更新经常出问题）。或者官方源 + 代理：
 
-
 #+begin_src elisp
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -116,9 +115,7 @@ Github =main= 为稳定版本， =unstable= 是实验性版本。
   - 语法检测 flycheck [[https://www.flycheck.org/en/latest/languages.html#flycheck-languages][Supported languages]]
   - 统一使用 lsp，需要安装对应语言的 [[https://emacs-lsp.github.io/lsp-mode/page/languages/][Languages]]
 
-图标：
-
-=doom-mode-line 4.0.0= 之后不再支持 =all-the-icons= 由 =nerd-icons= 代替：打开 [[https://www.nerdfonts.com/#home][nerdfont]] ，下载 =Symbols Nerd Font= 即可。
+图标： =doom-mode-line 4.0.0= 之后不再支持 =all-the-icons= 由 =nerd-icons= 代替：打开 [[https://www.nerdfonts.com/#home][nerdfont]] ，下载 =Symbols Nerd Font= 即可。
 
 ** 开发环境
 
@@ -128,9 +125,9 @@ Github =main= 为稳定版本， =unstable= 是实验性版本。
 
 - 从需求上：对我来说，必须的功能有 4 个，其他功能也基本没用过：
   1. 跳转到定义、反跳转 =M-.= =M-,=
-  2. 查找所有引
+  2. 查找所有引用
   3. 查找所有 interface 实现
-- 从复杂度上：eglot 配置简单（基本上没啥可配置的），lsp-mode 配置复杂（大项目会很慢）
+- 从复杂度上：eglot 配置简单（基本上没啥可配置的），lsp-mode 配置复杂（大项目会慢）
 - 从未来发展上：Emacs 29 之后，eglot 会作为内置组件
 
 *** Go
@@ -190,7 +187,7 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
    + =eslint file.js= 查看错误提示与 Emacs 是否相同
    + 看 eslint 报错，缺什么 *全局* 安装
 
-核心思路是，先保证 eslint 本身运行没问题，再看 Emacs flycheck 配置是否正常。
+核心思路是：先保证 eslint 本身运行没问题，再看 Emacs flycheck 配置是否正常。
 
 * 目录结构
 
@@ -301,51 +298,51 @@ core 目录下：
 
 ** Coding
 
-|-------------+-------------------------------------------------+--------|
-| 快捷键      | 说明                                            | 频率   |
-|-------------+-------------------------------------------------+--------|
-| =M-.=       | 跳转到定义                                      | *high* |
-| =M-,=       | 从定义返回                                      | *high* |
-| =M-?=       | 查找当前所有引用                                | *high* |
-| =C-M-j=     | 变量命名风格转换                                |        |
+|-----------+-------------------------------------------------+--------|
+| 快捷键    | 说明                                            | 频率   |
+|-----------+-------------------------------------------------+--------|
+| =M-.=       | 跳转到定义                                      | *high*   |
+| =M-,=       | 从定义返回                                      | *high*   |
+| =M-?=       | 查找当前所有引用                                | *high*   |
+| =C-M-j=   | 变量命名风格转换                                |        |
 | =<f9> s s=  | 重启 eglot                                      | middle |
 | =<f9> s d=  | eldoc                                           |        |
 | =<f9> s i=  | eglot-find-implementation                       | middle |
 | =<f9> s j=  | consult-eglot-symbols，比直接在项目中搜索中好用 | middle |
 | =<f9> <f9>= | 手动执行语法检测                                |        |
-|-------------+-------------------------------------------------+--------|
+|-----------+-------------------------------------------------+--------|
 
 ** Git
 
-|----------+--------------------------------+--------|
-| 快捷键   | 说明                           | 频率   |
-| =M-s ,=  | magit，[[https://magit.vc/manual/magit-refcard.pdf][Magit Reference Card]]    | *high* |
+|--------+--------------------------------+--------|
+| 快捷键 | 说明                           | 频率   |
+| =M-s ,=  | magit，[[https://magit.vc/manual/magit-refcard.pdf][Magit Reference Card]]    | *high*   |
 | =<f9> g= | git-gitter++，显示当前文件改动 | middle |
-|----------+--------------------------------+--------|
+|--------+--------------------------------+--------|
 
 ** Org
 
 自定义快捷键：
 
-|-------------+-------------------------------------+--------|
-| 快捷键      | 说明                                | 频率   |
-|-------------+-------------------------------------+--------|
-| =<f9> t a=  | =org-agenda=                        | *high* |
-| =<f9> t c=  | =org-capture=                       | middle |
-| =<f9> t l=  | =org-toggle-link-display=           |        |
-| =<f9> t f=  | =org-footnote-new=                  |        |
-| =<f9> t i=  | =org-toggle-inline-images=          |        |
-|-------------+-------------------------------------+--------|
+|----------+--------------------------+--------|
+| 快捷键   | 说明                     | 频率   |
+|----------+--------------------------+--------|
+| =<f9> t a= | =org-agenda=               | *high* |
+| =<f9> t c= | =org-capture=              | middle |
+| =<f9> t l= | =org-toggle-link-display=  |        |
+| =<f9> t f= | =org-footnote-new=         |        |
+| =<f9> t i= | =org-toggle-inline-images= |        |
+|----------+--------------------------+--------|
 
 默认所有快捷键 [[https://orgmode.org/worg/orgcard.html][Org-Mode Reference Card]]。
 
 ** RSS feed
 
-|----------+-------------------+--------|
-| 快捷键   | 说明              | 频率   |
-|----------+-------------------+--------|
+|--------+-------------------+------|
+| 快捷键 | 说明              | 频率 |
+|--------+-------------------+------|
 | =<f9> q= | 查看 rss 订阅更新 | *high* |
-|----------+-------------------+--------|
+|--------+-------------------+------|
 
 * packages
 
@@ -394,7 +391,8 @@ Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/
 
 - [[https://github.com/auto-complete/auto-complete][auto-complete]] 自动完成插件，后来用 company 替换了
 - [[https://github.com/Malabarba/beacon][beacon]] 光标提醒，帮你找得到光标，感觉不怎么实用
-- [[https://github.com/technomancy/better-defaults][better-defaults]] 几行代码就可以达到相同的效果- [[https://github.com/company-mode/company-mode][company-mode]] 补全框架，最终用 cape.el + corfu 替换了
+- [[https://github.com/technomancy/better-defaults][better-defaults]] 几行代码就可以达到相同的效果
+- [[https://github.com/company-mode/company-mode][company-mode]] 补全框架，最终用 cape.el + corfu 替换了
 - [[https://github.com/emacsmirror/diminish][diminish]] 减少一些 mode 在 modeline 上的显示，doom-modeline 显示已经很精简了
 - [[https://github.com/emacs-evil/evil][evil]] The extensible vi layer for Emacs. 从 Vim 转到 Emacs 的用户可以试一下，我的 Vim 太渣了
 - [[https://github.com/emacs-helm/helm][helm]] 一个补全框架，用了四五年，后来用 ivy 替换掉了
