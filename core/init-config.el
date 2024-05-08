@@ -10,13 +10,8 @@
 
 (use-package thrift
   :ensure t
-  :defer t
-  :init
-  (add-hook 'thrift-mode-hook
-			(lambda () (setq tab-width 4
-							 indent-line-function 'insert-tab
-							 indent-tabs-mode nil
-							 ))))
+  :config
+  (setq thrift-indent-level 4))
 
 (use-package yaml-mode
   :ensure t
