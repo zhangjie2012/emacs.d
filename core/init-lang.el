@@ -63,8 +63,9 @@
   :init
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-keyword)
-  (add-to-list 'completion-at-point-functions #'cape-history))
+  ;; (add-to-list 'completion-at-point-functions #'cape-keyword)
+  ;; (add-to-list 'completion-at-point-functions #'cape-history)
+  )
 
 (use-package eglot
   :ensure t
@@ -87,8 +88,6 @@
 
 (use-package go-mode
   :ensure t
-  :after eglot
-  :mode "\\.go'"
   :config
   (defun my-eglot-organize-imports () (interactive)
          (eglot-code-actions nil nil "source.organizeImports" t))
