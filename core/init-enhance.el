@@ -71,7 +71,7 @@
   :ensure t
   :init
   (setq dired-subtree-use-backgrounds nil)
-  :bind ("<F8> d" . dired-jump)
+  :bind ("<f8> d" . dired-jump)
   :config
   (bind-keys :map dired-mode-map
              ("i" . dired-subtree-insert)
