@@ -40,32 +40,16 @@
   :config
   (setq flycheck-golangci-lint-config "~/.golangci.yaml"))
 
-(use-package corfu
+(use-package company
   :ensure t
-  :hook ((go-mode . corfu-mode)
-         (python-mode . corfu-mode)
-		 (rjsx-mode . corfu-mode)
-		 (emacs-lisp-mode . corfu-mode))
-  :bind (:map corfu-map
-              ("C-n" . corfu-next)
-              ("C-p" . corfu-previous))
+  :hook (prog-mode . company-mode)
+  :bind (:map company-active-map
+              ("C-n" . company-select-next)
+              ("C-p" . company-select-previous))
   :config
-  (setq corfu-auto t
-        corfu-auto-prefix 1
-        corfu-auto-delay 0.1
-        corfu-quit-no-match t
-        corfu-quit-at-boundary t)
-  (add-hook 'multiple-cursors-mode-enabled-hook (lambda () (corfu-mode -1)))
-  (add-hook 'multiple-cursors-mode-disabled-hook (lambda () (corfu-mode 1))))
-
-(use-package cape
-  :ensure t
-  :init
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  ;; (add-to-list 'completion-at-point-functions #'cape-keyword)
-  ;; (add-to-list 'completion-at-point-functions #'cape-history)
-  )
+  (setq company-idle-delay 0
+        company-minimum-prefix-length 2
+        company-global-modes '(not org-mode markdown-mode eshell-mode)))
 
 (use-package eglot
   :ensure t
