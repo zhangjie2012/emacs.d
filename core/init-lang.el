@@ -50,9 +50,11 @@
   (setq company-idle-delay 0
         company-minimum-prefix-length 2
         company-global-modes '(not org-mode markdown-mode eshell-mode)
-		company-format-margin-function 'company-dot-icons-margin
-		company-tooltip-maximum-width 60
+		company-format-margin-function nil
+		company-tooltip-maximum-width 72
+		company-tooltip-minimum-width 40
 		company-show-quick-access nil
+		company-tooltip-margin 1
 		company-tooltip-limit 8))
 
 (use-package eglot
