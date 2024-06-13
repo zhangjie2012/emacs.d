@@ -49,7 +49,7 @@
   :config
   (setq company-idle-delay 0
         company-minimum-prefix-length 2
-        company-global-modes '(not org-mode markdown-mode eshell-mode)
+        company-global-modes '(not org-mode markdown-mode eshell-mode thrift-mode)
 		company-format-margin-function nil
 		company-tooltip-maximum-width 72
 		company-tooltip-minimum-width 40
