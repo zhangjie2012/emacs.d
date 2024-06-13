@@ -1,77 +1,22 @@
 #+TITLE: Emacs config
 #+OPTIONS: ^:nil
 
-Go IDE
+Emacs 29.x + Mac GUI。字体：Sarasa Term SC，主题：doom-one。
 
-[[file:screenshots/go-ide.png]]
-
-Orgmode
-
-[[file:screenshots/orgmode.png]]
-
-
-字体：Sarasa Term SC，主题：doom-one。
-
-* Table Of Content                                                      :TOC_3:
-- [[#intro][Intro]]
-- [[#安装][安装]]
-  - [[#emacs-29][Emacs 29]]
-  - [[#配置安装][配置安装]]
-  - [[#开发环境][开发环境]]
-    - [[#go][Go]]
-    - [[#python][Python]]
-    - [[#web][Web]]
-- [[#目录结构][目录结构]]
-- [[#常用快捷键cheat-sheet][常用快捷键（cheat sheet）]]
-  - [[#leader-key-规范][leader key 规范]]
-  - [[#文本][文本]]
-  - [[#窗口][窗口]]
-  - [[#目录][目录]]
-  - [[#项目管理projectel][项目管理（project.el）]]
-  - [[#coding][Coding]]
-  - [[#git][Git]]
-  - [[#org][Org]]
-  - [[#rss-feed][RSS feed]]
-- [[#packages][packages]]
-  - [[#当前使用的][当前使用的]]
-  - [[#以前用过的][以前用过的]]
-- [[#faq][FAQ]]
-  - [[#doom-theme-配置备忘][doom-theme 配置备忘]]
-  - [[#cape--corfu-配置备忘][cape + corfu 配置备忘]]
-  - [[#projectile-配置备忘][projectile 配置备忘]]
-  - [[#emacs-启动速度太慢怎么办][Emacs 启动速度太慢怎么办？]]
-  - [[#org-_--不被转义成下标和上标][Org =_= =^= 不被转义成下标和上标？]]
-  - [[#org-92-后继续使用-s-tab-快捷插入][Org 9.2 后继续使用 =<s [Tab]= 快捷插入？]]
-  - [[#org-todo-如何区分优先级][Org TODO 如何区分优先级？]]
-  - [[#org-控制标题展开][Org 控制标题展开？]]
-  - [[#org-文档如何展示目录][Org 文档如何展示目录？]]
-  - [[#tab-和空格转换fn2][tab 和空格转换？[fn:2]]]
-  - [[#为什么选择-lsp][为什么选择 LSP？]]
-  - [[#项目管理][项目管理？]]
-  - [[#写-go-代码时如何禁用注释中自动补全][写 Go 代码时如何禁用注释中自动补全？]]
-  - [[#英文-ubuntu-下输入法无法切换中文][英文 Ubuntu 下输入法无法切换中文？]]
-- [[#其他资料][其他资料]]
-- [[#footnotes][Footnotes]]
+所有配置以稳定为主、所有配置以稳定为主、所有配置以稳定为主！
 
 * Intro
 
-基于老的配置文件：https://gitlab.com/JerryZhang2012/emacs.d
+适用于 Go/Python/React 等技术栈开发，以及 YAML/JSON/Markdown/Org 等纯本编辑。
 
-10 年+ Emacs 用户，作为唯一编辑器，做过 C++、Python、Web（Javascript/React）、Go 等开发。
-
-本配置适用于 *Emacs 29.x* 版本，MacOS GUI（Linux 大概率没问题）。
-
-分支： =main= 为稳定版本， =unstable= 是实验性版本。
-
-*推荐阅读* [[https://www2.lib.uchicago.edu/keith/emacs/#orgc5a18efe][Use GNU Emacs: The Plain Text Computing Environment Emacs]] 堪称百科全书，看完之后不需要看其他文档了。
+=main= 为稳定版本， =unstable= 是实验性版本。
 
 * 安装
 
-** Emacs 29
 
-*MacOS*
+** 基础环境
 
-使用 [[https://github.com/d12frosted/homebrew-emacs-plus][emacs-plus]] 的版本：
+1、安装 [[https://github.com/d12frosted/homebrew-emacs-plus][emacs-plus]]
 
 #+begin_src sh
   brew reinstall gcc libgccjit
@@ -82,7 +27,7 @@ Orgmode
 
 卸载 =brew uninstall emacs-plus@29= 。
 
-** 配置安装
+2、安装 Emacs package
 
 #+begin_src sh
   git clone https://github.com/zhangjie2012/emacs.d.git ~/.emacs.d
@@ -106,16 +51,16 @@ Orgmode
 
 或者 ~http_proxy=http://127.0.0.1:7890 emacs~ 。
 
-*如果遇到安装问题执行 =M-x package-refresh-content= 重启 Emacs。*
+如果遇到安装问题执行 =M-x package-refresh-content= 然后重启 Emacs。
 
-二进制：
+3、安装依赖二进制
 
-- 搜索使用 [[https://github.com/BurntSushi/ripgrep][ripgrep]]  =brew install ripgrep=
+- [[https://github.com/BurntSushi/ripgrep][ripgrep]]  =brew install ripgrep=
 - 编码，更多见下方 IDE：
   - 语法检测 flycheck [[https://www.flycheck.org/en/latest/languages.html#flycheck-languages][Supported languages]]
   - 统一使用 lsp，需要安装对应语言的 [[https://emacs-lsp.github.io/lsp-mode/page/languages/][Languages]]
 
-图标： =doom-mode-line 4.0.0= 之后不再支持 =all-the-icons= 由 =nerd-icons= 代替：打开 [[https://www.nerdfonts.com/#home][nerdfont]] ，下载 =Symbols Nerd Font= 即可。
+4、安装 nerd-icon：doom-mode-line 4.0.0 之后不再支持 all-the-icons 由 nerd-icons 代替：打开 [[https://www.nerdfonts.com/#home][nerdfont]] ，下载 Symbols Nerd Font 即可。
 
 ** 开发环境
 
@@ -191,218 +136,17 @@ lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
 
 * 目录结构
 
-core 目录下：
+核心在 core 目录下：
 
 - =init-base= 基础设置
 - =init-ui= 主题、modeline、字体等
 - =init-modern= 更加现代化：项目管理、多光标操作等
 - =init-enhance= 对 Emacs 已经具备的能力进行增强
-- =init-lang= 让 Emacs 变成一个 IDE，选型：
-  + =eglot= Language Server Protocol
-  + =corfu-mode= 自动补全框架（用来替换 company-mode）
-  + =flycheck= 语法检测
+- =init-lang= 编码相关
 - =init-config= yaml, protobuf, nginx, thrift 等轻量化语言配置
 - =init-document= 标记语言设置，markdown + orgmode
+- =init-keymap= 额外的快捷键绑定
 - =init-feed= rss 订阅管理
-
-* 常用快捷键（cheat sheet）
-
-** leader key 规范
-
-尽量使用模块快捷键，自定义快捷键每周基于 =keyfreq= 不断优化。
-
-|--------------+---------|
-| 级别         | 前缀    |
-|--------------+---------|
-| 1L           | =C= =M=     |
-| 2L           | =C-c= =M-s= |
-| 3L           | =<f9>=    |
-| org 专用     | =<f9> t=  |
-| lsp 专用     | =<f9> s=  |
-| project 专用 | =<f8>=    |
-| hydra 专用   | =<f9>=    |
-| 4L           | =<f2>=    |
-|--------------+---------|
-
-说明：
-
-- hydra 如果绑定 use-package 安装 package 的快捷键会让 lazy-load 失效，所以需要权衡一下加载时间和使用效率
-
-** 文本
-
-|---------------+--------------------------------------------+--------|
-| 快捷键        | 说明                                       | 频率   |
-|---------------+--------------------------------------------+--------|
-| =<f9> i=        | 插入当前日期时间如 =2023-02-05 11:20:01=     |        |
-| =C-+=           | 增大字体                                   |        |
-| =C--=           | 减小字体                                   |        |
-| =C-.=           | Do What I Mean =embark-act=                  | *high*   |
-| =C-s=           | 当前文件搜索                               | *high*   |
-| =M--=           | 当前单词全部高亮                           | *high*   |
-| =M-i=           | 跳转到某单词首部                           | *high*   |
-| =M-j=           | 跳转到某行                                 | *high*   |
-| =M-m=           | 扩展当前文本区域                           | *high*   |
-| =M-n/p=         | 相同单词之前切换                           | *high*   |
-| =M-s ;=         | 多光标操作 =C-M-n/p= 选中下/上一个           | middle |
-| =M-s P=         | 选中当前所在括号范围内的文本（不包含括号） | middle |
-| =M-s [=         | 在项目中使用 rg 搜索                       | *high*   |
-| =M-s ]=         | rg（手动选择目录不判定 project root）      | middle |
-| =M-s c=         | 跳转到某个字符                             |        |
-| =M-s f=         | 选中函数                                   | middle |
-| =M-s k=         | 拷贝某行到当前                             | middle |
-| =M-s m=         | 选中注释                                   |        |
-| =M-s p=         | 选中当前所在括号范围内的文本（包含括号）   | middle |
-| =M-s s=         | 选中当前单词                               | *high*   |
-| =M-y=           | 剪贴板                                     | *high*   |
-| =S-<backspace>= | 删除整行文本                               | *high*   |
-|---------------+--------------------------------------------+--------|
-
-** 窗口
-
-|------------+--------------+------|
-| 快捷键     | 说明         | 频率 |
-|------------+--------------+------|
-| =M-o=        | 切换 frame   | *high* |
-| =<f9> 1=     | 删除当前窗口 | *high* |
-| =<f9> 2=     | 水平切分窗口 | *high* |
-| =<f9> 3=     | 垂直切分窗口 | *high* |
-| =<f10>=      | 全屏         | *high* |
-| =<f9> <SPC>= | 透明         |      |
-|------------+--------------+------|
-
-** 目录
-
-|--------+------------+------|
-| 快捷键 | 说明       | 频率 |
-|--------+------------+------|
-| =<f9> d= | =dired-jump= | *high* |
-|--------+------------+------|
-
-=dired=
-
-- =j/k= 下一行/上一行
-- =h/l= 上一个/下一个文件夹
-- =(= 打开/关闭详情
-- =m= mark
-- =t= 反选
-- =U= 全部取消选中
-- =% m= 搜索
-- =C= copy
-- =R= Remove
-- =d= 标记为删除 =x= 执行
-- =D= 直接删除
-
-** 项目管理（project.el）
-
-=<f8>= 绑定为 =project.el= 前缀。使用说明见 https://www.gnu.org/software/emacs/manual/html_node/emacs/Projects。
-
-** Coding
-
-|-----------+-------------------------------------------------+--------|
-| 快捷键    | 说明                                            | 频率   |
-|-----------+-------------------------------------------------+--------|
-| =M-.=       | 跳转到定义                                      | *high*   |
-| =M-,=       | 从定义返回                                      | *high*   |
-| =M-?=       | 查找当前所有引用                                | *high*   |
-| =C-M-j=   | 变量命名风格转换                                |        |
-| =<f9> s s=  | 重启 eglot                                      | middle |
-| =<f9> s d=  | eldoc                                           |        |
-| =<f9> s i=  | eglot-find-implementation                       | middle |
-| =<f9> s j=  | consult-eglot-symbols，比直接在项目中搜索中好用 | middle |
-| =<f9> <f9>= | 手动执行语法检测                                |        |
-|-----------+-------------------------------------------------+--------|
-
-** Git
-
-|--------+--------------------------------+--------|
-| 快捷键 | 说明                           | 频率   |
-| =M-s ,=  | magit，[[https://magit.vc/manual/magit-refcard.pdf][Magit Reference Card]]    | *high*   |
-| =<f9> g= | git-gitter++，显示当前文件改动 | middle |
-|--------+--------------------------------+--------|
-
-** Org
-
-自定义快捷键：
-
-|----------+--------------------------+--------|
-| 快捷键   | 说明                     | 频率   |
-|----------+--------------------------+--------|
-| =<f9> t a= | =org-agenda=               | *high* |
-| =<f9> t c= | =org-capture=              | middle |
-| =<f9> t l= | =org-toggle-link-display=  |        |
-| =<f9> t f= | =org-footnote-new=         |        |
-| =<f9> t i= | =org-toggle-inline-images= |        |
-|----------+--------------------------+--------|
-
-默认所有快捷键 [[https://orgmode.org/worg/orgcard.html][Org-Mode Reference Card]]。
-
-** RSS feed
-
-|--------+-------------------+------|
-| 快捷键 | 说明              | 频率 |
-|--------+-------------------+------|
-| =<f9> q= | 查看 rss 订阅更新 | *high* |
-|--------+-------------------+------|
-
-* packages
-
-** 当前使用的
-
-Emacs 有很多的 [[http://melpa.org][插件]]，[[https://github.com/emacs-tw/awesome-emacs][awesome-emacs]] 是按照分类整理的。下面列一下我正在使用的插件以及一些说明：
-
-|--------------------+--------------------------------------+------------------------------------------------------------------|
-| 插件名称           | 插件介绍                             | 备注                                                             |
-|--------------------+--------------------------------------+------------------------------------------------------------------|
-| [[https://github.com/abo-abo/ace-window][ace-window]]         | 多窗口切换                           | 以前一直用 [[https://github.com/deb0ch/emacs-winum][emacs-winum]]                                           |
-| [[https://github.com/abo-abo/avy][avy]]                | 光标快速定位（按照字符、单词、行等） | 以前用的是 [[https://github.com/winterTTr/ace-jump-mode][ace-jump]]                                              |
-| [[https://github.com/minad/cape][cape.el]] + [[https://github.com/minad/corfu][corfu]]    | 补全框架                             | 比 company 要快，丝滑                                            |
-| [[https://github.com/minad/consult][consult]]            | 通用完成框架                         | 替换 ivy                                                         |
-| [[https://github.com/Fuco1/dired-hacks/blob/master/dired-subtree.el][dired-subtree]]      | 增强下 dired                         |                                                                  |
-| [[https://github.com/seagle0128/doom-modeline][doom-modeline]]      | modeline 看起来漂亮一些，简洁        |                                                                  |
-| [[https://github.com/joaotavora/eglot][eglot]]              | [[https://langserver.org][LSP]] 的 Emacs 客户端                  | 以前用 lsp-mode                                                  |
-| [[https://github.com/skeeto/elfeed][elfeed]]             | Web Feed Reader                      |                                                                  |
-| [[https://github.com/oantolin/embark][embark]]             | 难以描述，但真的牛逼                 |                                                                  |
-| [[https://github.com/magnars/expand-region.el][expand-region]]      | 快速选中文本                         | 比如我常用 =M-s s= 选中一个单词，用 =M-s p= 选中括号内内容，然后复制 |
-| [[https://www.flycheck.org/en/latest/][flycheck]]           | 强大的语法检查框架                   | 需要编程语言的 lint 工具配合，比如 eslint、golint。编码必备。    |
-| [[https://github.com/nonsequitur/git-gutter-plus][git-gutter+]]        | 提示当前 buffer 改动部分             | 用 ~+~ 和 ~=~ 等显示出来                                             |
-| [[https://github.com/magit/magit][magit]]              | git                                  |                                                                  |
-| [[https://github.com/minad/marginalia][marginalia]]         | 备注                                 | 类似 ivy-rich                                                    |
-| [[https://github.com/magnars/multiple-cursors.el][multiple-cursors]]   | 多鼠标操作                           | [[http://emacsrocks.com/e13.html][Emacs Rocks! Episode 13: multiple-cursors]]                        |
-| [[https://github.com/oantolin/orderless][orderless]]          | 排序                                 |                                                                  |
-| [[https://orgmode.org][org-mode]]           | 最牛逼的插件，没有之一               |                                                                  |
-| [[https://github.com/bbatsov/projectile][projectile]]         | 项目管理框架                         | 可以与 ivy 一起使用，[[https://github.com/ericdanan/counsel-projectile][counsel-projectile]]                          |
-| [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]] | 彩虹括号                             | 相同层级的括号相同颜色                                           |
-| [[https://github.com/felipeochoa/rjsx-mode][rjsx-mode]]          | JSX mode                             | 比 web-mode 好用很多，而且更新的快                               |
-| [[https://github.com/jwiegley/use-package][use-package]]        | 包配置隔离                           | 可设置启动时机（延迟加载），加速 Emacs 启动                      |
-| [[https://github.com/minad/vertico][vetico]]             | 垂直交互                             |                                                                  |
-| [[https://github.com/justbur/emacs-which-key][which-key]]          | 快捷键绑定提示                       |                                                                  |
-| [[https://github.com/wolray/symbol-overlay][symbol-overlay]]     | 符号高亮                             | 替换 highlight-symbol                                            |
-| [[https://github.com/domtronn/all-the-icons.el][all-the-icons]]      | icons                                | =doom-mode-line 4.0= 之后只支持 nerd-icons                         |
-| [[https://github.com/skeeto/elfeed][elfeed]]             | RSS 订阅                             |                                                                  |
-| [[https://github.com/emacs-dashboard/emacs-dashboard][dashboard]]          | 启动 dashboard                       | 其实没啥用，只是为了好看                                         |
-| [[https://github.com/abo-abo/hydra][hydra]]              | 快捷键编排                           | 我用的比较轻量级                                                 |
-|--------------------+--------------------------------------+------------------------------------------------------------------|
-
-*Vertico & Consult & marginalia & orderless 通常是一起使用的。*
-
-** 以前用过的
-
-一些尝试过，但是不再使用的 package：
-
-- [[https://github.com/auto-complete/auto-complete][auto-complete]] 自动完成插件，后来用 company 替换了
-- [[https://github.com/Malabarba/beacon][beacon]] 光标提醒，帮你找得到光标，感觉不怎么实用
-- [[https://github.com/technomancy/better-defaults][better-defaults]] 几行代码就可以达到相同的效果
-- [[https://github.com/company-mode/company-mode][company-mode]] 补全框架，最终用 cape.el + corfu 替换了
-- [[https://github.com/emacsmirror/diminish][diminish]] 减少一些 mode 在 modeline 上的显示，doom-modeline 显示已经很精简了
-- [[https://github.com/emacs-evil/evil][evil]] The extensible vi layer for Emacs. 从 Vim 转到 Emacs 的用户可以试一下，我的 Vim 太渣了
-- [[https://github.com/emacs-helm/helm][helm]] 一个补全框架，用了四五年，后来用 ivy 替换掉了
-- [[https://github.com/nschum/highlight-symbol.el][highlight-symbol]] 高亮当前单词，挺久没人维护了，用 symbol-overlay 可以完全代替
-- [[https://github.com/abo-abo/swiper][ivy]] 通用完成前端，用了几年 [[https://github.com/emacs-helm/helm][helm]]，现在换成了 consult
-- [[https://github.com/emacs-lsp/lsp-mode][lsp-mode]] 用了几年，最后用 eglot 替换
-- [[https://github.com/skuro/plantuml-mode][plantuml-mode]] [[https://plantuml.com/][PlantUML]] 的 Emacs mode，不实用
-- [[https://github.com/milkypostman/powerline][powerline]] 用了一段时间，后来用 doom-modeline 替换掉了
-- [[https://github.com/joaotavora/yasnippet][yasnippet]] 代码片段，以前写 C++ 的时候常用，现在不咋用了
-- [[https://github.com/tumashu/cnfonts][cnfonts]] GUI 中英文等宽排版，用过一段时间 Fira code + [[https://github.com/lxgw/LxgwWenKai][霞鹜文楷]] 的组合，不等高实在太难受了，最后还是切换回了 =Sarasa Term SC=
 
 * FAQ
 
