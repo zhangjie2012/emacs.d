@@ -13,7 +13,6 @@ Emacs 29.x + Mac GUI。字体：Sarasa Term SC，主题：doom-one。
 
 * 安装
 
-
 ** 基础环境
 
 1、安装 [[https://github.com/d12frosted/homebrew-emacs-plus][emacs-plus]]
@@ -99,21 +98,11 @@ lint 工具：
 
 *** Python
 
-https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/
+lsp-server =python3 -m pip install 'python-lsp-server[all]'=
 
-#+begin_src sh
-  python3 -m pip install 'python-lsp-server[all]'
-#+end_src
+lint =python3 -m pip install flake8= 配置文件：https://github.com/zhangjie2012/dotfiles/blob/master/_flake8
 
-注意：Ubuntu 下不使用 =sudo= 会默认安装至 =~/.local/bin= 下，所以需要将路径添加到环境变量中。
-
-lint 使用 [[https://flake8.pycqa.org/en/latest/][flake8]]，安装：
-
-#+begin_src sh
-  python3 -m pip install flake8
-#+end_src
-
-配置文件：https://github.com/zhangjie2012/dotfiles/blob/master/_flake8
+format =python3 -m pip install black=
 
 *** Web
 

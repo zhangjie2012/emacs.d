@@ -2,7 +2,8 @@
   :ensure t
   :hook ((go-mode . flycheck-mode)
          (emacs-lisp-mode . flycheck-mode)
-		 (rjsx-mode . flycheck-mode))
+		 (rjsx-mode . flycheck-mode)
+		 (python-mode . flycheck-mode))
   :init
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc javascript-jshint python-pylint))
   ;; set flycheck tool
