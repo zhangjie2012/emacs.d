@@ -22,7 +22,8 @@
   :bind (("<f8> f" . project-find-file)
          ("<f8> p" . project-switch-project)
          ("<f8> k" . project-kill-buffers)
-         ("<f8> b" . project-switch-to-buffer)))
+         ("<f8> b" . project-switch-to-buffer)
+		 ("<f8> c" . project-compile)))
 
 (use-package expand-region
   :ensure t
