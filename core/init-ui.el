@@ -92,4 +92,8 @@
            )))
   (dashboard-setup-startup-hook))
 
+(use-package ansi-color
+  :ensure t
+  :hook (compilation-filter . ansi-color-compilation-filter))
+
 (provide 'init-ui)
