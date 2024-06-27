@@ -1,7 +1,7 @@
 #+TITLE: Emacs config
 #+OPTIONS: ^:nil
 
-Emacs 29.x + Mac GUI。字体：Sarasa Term SC，主题：doom-one。
+Emacs 29.x + Mac GUI。字体：Sarasa Term SC Nerd，主题：doom-one。
 
 所有配置以稳定为主、所有配置以稳定为主、所有配置以稳定为主！
 
@@ -58,6 +58,8 @@ Emacs 29.x + Mac GUI。字体：Sarasa Term SC，主题：doom-one。
 - 编码，更多见下方 IDE：
   - 语法检测 flycheck [[https://www.flycheck.org/en/latest/languages.html#flycheck-languages][Supported languages]]
   - 统一使用 lsp，需要安装对应语言的 [[https://emacs-lsp.github.io/lsp-mode/page/languages/][Languages]]
+
+4、安装字体：brew install --cask font-sarasa-nerd[fn:6]
 
 4、安装 nerd-icon：doom-mode-line 4.0.0 之后不再支持 all-the-icons 由 nerd-icons 代替：打开 [[https://www.nerdfonts.com/#home][nerdfont]] ，下载 Symbols Nerd Font 即可。
 
@@ -391,6 +393,8 @@ lsp-mode 的功能比较多，官方提供了 [[https://emacs-lsp.github.io/lsp-
   - [[https://www.zhangjiee.com/blog/2019/emacs-slide.html][使用 org-mode 搭建网站]]
 
 * Footnotes
+
+[fn:6] https://github.com/laishulu/Sarasa-Term-SC-Nerd
 
 [fn:5] https://emacs-china.org/t/homebrew-emacs-plus-28/19106
 
