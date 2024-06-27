@@ -48,7 +48,7 @@
               ("C-n" . company-select-next)
               ("C-p" . company-select-previous))
   :config
-  (setq company-idle-delay 0
+  (setq company-idle-delay 0.2
         company-minimum-prefix-length 2
         company-global-modes '(not org-mode markdown-mode eshell-mode thrift-mode)
 		company-format-margin-function nil
@@ -58,34 +58,40 @@
 		company-tooltip-margin 1
 		company-tooltip-limit 8))
 
-(use-package eglot
+(use-package lsp-mode
   :ensure t
-  :hook ((go-mode . eglot-ensure)
-         (python-mode . eglot-ensure))
-  :bind (:map eglot-mode-map
-              ("<f8> s" . eglot-reconnect)
-              ("<f8> d" . eldoc)
-              ("<f8> i" . eglot-find-implementation))
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook ((go-mode . lsp-deferred)
+		 (elisp-mode . lsp-deferred)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp
   :config
-  (setq eldoc-echo-area-use-multiline-p nil
-        eglot-ignored-server-capabilities '(:documentHighlightProvider))
-  (add-to-list 'eglot-stay-out-of 'flymake) ;; disable flymake
-  )
+  ;; TODO ignore file watchers https://emacs-lsp.github.io/lsp-mode/page/file-watchers/
+  (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols)
+  (setq lsp-idle-delay 0.500
+		lsp-log-io nil
+		lsp-headerline-breadcrumb-enable nil
+		lsp-enable-symbol-highlighting nil))
 
-(use-package consult-eglot
+(use-package lsp-ui
+  :commands lsp-ui-mode
+  :init
   :ensure t
-  :after consult
-  :bind ("<f8> j" . consult-eglot-symbols))
+  :config
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+  (setq lsp-ui-sideline-show-diagnostics nil
+		lsp-ui-sideline-show-hover nil
+		lsp-ui-doc-enable nil))
 
 (use-package go-mode
   :ensure t
   :config
-  (defun my-eglot-organize-imports () (interactive)
-         (eglot-code-actions nil nil "source.organizeImports" t))
-  (defun eglot-buffer-on-save ()
-    (add-hook 'before-save-hook #'my-eglot-organize-imports nil t)
-    (add-hook 'before-save-hook #'eglot-format-buffer -10 t))
-  (add-hook 'go-mode-hook #'eglot-buffer-on-save))
+  (defun lsp-go-install-save-hooks ()
+	(add-hook 'before-save-hook #'lsp-format-buffer t t)
+	(add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
 
 (use-package go-tag
   :ensure t
@@ -101,11 +107,7 @@
   :init
   (setq python-shell-interpreter "python3")
   (set-variable 'py-indent-offset 4)
-  (set-variable 'python-indent-guess-indent-offset nil)
-  :config
-  (defun eglot-format-buffer-on-save ()
-    (add-hook 'before-save-hook #'eglot-format-buffer -10 t))
-  (add-hook 'python-mode-hook #'eglot-format-buffer-on-save))
+  (set-variable 'python-indent-guess-indent-offset nil))
 
 (use-package web-mode
   :ensure t

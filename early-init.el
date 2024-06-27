@@ -13,4 +13,6 @@
 
 (setq frame-inhibit-implied-resize t)
 
+(setenv "LSP_USE_PLISTS" "true")
+
 (provide 'early-init)
