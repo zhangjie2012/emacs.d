@@ -16,10 +16,10 @@
 1、[emacs-plus](https://github.com/d12frosted/homebrew-emacs-plus)
 
 ``` sh
-  brew reinstall gcc libgccjit
-  brew tap d12frosted/emacs-plus
-  brew install emacs-plus@29 --with-cacodemon-icon
-  ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications
+brew reinstall gcc libgccjit
+brew tap d12frosted/emacs-plus
+brew install emacs-plus@29 --with-cacodemon-icon
+ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications
 ```
 
 卸载 `brew uninstall emacs-plus@29`
@@ -29,17 +29,17 @@
 打开 Emacs 时自动安装依赖包。我使用[中科大的源](https://mirrors.ustc.edu.cn/help/elpa.html)[中科大的源]]（清华源更新经常出问题，不建议用）。或者官方源 + 代理：
 
 ``` elisp
-  (setq package-archives
-        '(("gnu" . "http://elpa.gnu.org/packages/")
-          ("melpa" . "https://melpa.org/packages/")
-          ("melpa-stable" . "https://stable.melpa.org/packages/")
-          ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-          ))
+(setq package-archives
+      '(("gnu" . "http://elpa.gnu.org/packages/")
+        ("melpa" . "https://melpa.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+        ))
 
-  (setq url-proxy-services
-        '(("no_proxy" . "^\\(localhost\\|10.*\\)")
-          ("http" . "127.0.0.1:1087")
-          ("https" . "127.0.0.1:1087")))
+(setq url-proxy-services
+      '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+        ("http" . "127.0.0.1:1087")
+        ("https" . "127.0.0.1:1087")))
 ```
 
 或者 `http_proxy=http://127.0.0.1:7890 emacs`。
@@ -64,13 +64,13 @@
 按照 [官方说明](https://golang.org/doc/install) 安装 Go，LSP server 用的是 [gopls](https://github.com/golang/tools/tree/master/gopls)。
 
 ``` sh
-  GO111MODULE=on go install golang.org/x/tools/gopls@latest
+GO111MODULE=on go install golang.org/x/tools/gopls@latest
 ```
 
 lint 工具：
 
 ``` sh
-  curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.50.1
+curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.50.1
 ```
 
 配置文件在：https://github.com/zhangjie2012/dotfiles/blob/master/_golangci.yaml
@@ -78,7 +78,7 @@ lint 工具：
 另外安装 [gomodifytags](https://github.com/fatih/gomodifytags)。
 
 ``` sh
-  go install github.com/fatih/gomodifytags@latest
+go install github.com/fatih/gomodifytags@latest
 ```
 
 ### Python
