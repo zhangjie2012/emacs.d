@@ -3,13 +3,6 @@
 
 Emacs 29.x + Mac GUI。字体：Sarasa Term SC Nerd，主题：doom-one。
 
-所有配置以稳定为主、所有配置以稳定为主、所有配置以稳定为主！
-
-* Intro
-
-适用于 Go/Python/React 等技术栈开发，以及 YAML/JSON/Markdown/Org 等纯本编辑。
-
-=main= 为稳定版本， =unstable= 是实验性版本。
 
 * 安装
 
