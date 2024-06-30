@@ -25,7 +25,7 @@
   :config
   (setq doom-modeline-buffer-modification-icon nil
         doom-modeline-project-detection 'project
-        doom-modeline-buffer-file-name-style 'truncate-upto-project
+        doom-modeline-buffer-file-name-style 'relative-from-project
         doom-modeline-unicode-fallback t))
 
 (use-package emacs
