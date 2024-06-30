@@ -56,7 +56,7 @@ Uses `current-date-time-format' for the formatting the date/time."
     ("n" display-line-numbers-mode "absolute line number")
     ("N" linum-relative-toggle "relative line number")
     ("u" revert-buffer "revert buffer" :exit t)
-	("j" goto-line "goto line" :exit t)
+	("j" consult-goto-line "goto line" :exit t)
 
     ("1" delete-other-windows "delete other" :exit t :column "3. window management")
     ("2" split-window-below "split below" :exit t )
