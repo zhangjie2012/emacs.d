@@ -65,6 +65,7 @@
   :hook ((go-mode . lsp-deferred)
 		 (elisp-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
+  :bind (("<f8> s" . lsp-restart-workspace))
   :commands lsp
   :config
   ;; TODO ignore file watchers https://emacs-lsp.github.io/lsp-mode/page/file-watchers/
@@ -83,7 +84,10 @@
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
   (setq lsp-ui-sideline-show-diagnostics nil
 		lsp-ui-sideline-show-hover nil
-		lsp-ui-doc-enable nil))
+		lsp-ui-doc-enable t
+		lsp-ui-doc-position 'at-point
+		lsp-ui-doc-show-with-mouse t
+		lsp-ui-doc-show-with-cursor nil))
 
 (use-package go-mode
   :ensure t
