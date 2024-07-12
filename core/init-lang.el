@@ -3,7 +3,8 @@
   :hook ((go-mode . flycheck-mode)
          (emacs-lisp-mode . flycheck-mode)
 		 (rjsx-mode . flycheck-mode)
-		 (python-mode . flycheck-mode))
+		 ;; (python-mode . flycheck-mode)
+		 )
   :init
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc javascript-jshint python-pylint))
   ;; set flycheck tool
@@ -15,10 +16,9 @@
     (setq flycheck-javascript-eslint-executable "eslint")
     ))
   ;; Python
-  (setq flycheck-python-flake8-executable "flake8")
-  (setq flycheck-flake8rc "~/.flake8")
+  ;; (setq flycheck-python-flake8-executable "flake8")
+  ;; (setq flycheck-flake8rc "~/.flake8")
   (setq flycheck-indication-mode nil)
-
   :config
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   ;; 避免卡顿，设定语法检测的时机，延迟 1s
@@ -48,6 +48,10 @@
               ("C-n" . company-select-next)
               ("C-p" . company-select-previous))
   :config
+  ;; https://company-mode.github.io/manual/Backends.html#Backends
+  (setq company-backends '((company-capf
+                            company-dabbrev-code
+                            company-files)))
   (setq company-idle-delay 0.2
         company-minimum-prefix-length 2
         company-global-modes '(not org-mode markdown-mode eshell-mode thrift-mode)
@@ -63,26 +67,39 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((go-mode . lsp-deferred)
+		 (python-mode . lsp-deferred)
 		 (elisp-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :bind (("<f8> s" . lsp-restart-workspace))
   :commands lsp
+  :custom
+  (lsp-register-custom-settings
+   '(("pyls.plugins.pyls_mypy.enabled" t t)
+     ("pyls.plugins.pyls_mypy.live_mode" nil t)
+     ("pyls.plugins.pyls_black.enabled" t t)
+     ("pyls.plugins.pyls_isort.enabled" t t)
+     ;; Disable these as they're duplicated by flake8
+     ("pyls.plugins.pycodestyle.enabled" nil t)
+     ("pyls.plugins.mccabe.enabled" nil t)
+     ("pyls.plugins.pyflakes.enabled" nil t)))
   :config
   ;; TODO ignore file watchers https://emacs-lsp.github.io/lsp-mode/page/file-watchers/
   (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols)
   (setq lsp-idle-delay 0.500
 		lsp-log-io nil
 		lsp-headerline-breadcrumb-enable nil
-		lsp-enable-symbol-highlighting nil))
+		lsp-enable-symbol-highlighting nil
+		lsp-pyls-plugins-flake8-enabled t
+		lsp-pylsp-plugins-flake8-config "~/.flake8"))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
-  :init
   :ensure t
   :config
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
   (setq lsp-ui-sideline-show-diagnostics nil
+        lsp-ui-sideline-show-code-actions nil
 		lsp-ui-sideline-show-hover nil
 		lsp-ui-doc-enable t
 		lsp-ui-doc-position 'at-point
