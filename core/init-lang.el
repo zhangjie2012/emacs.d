@@ -186,6 +186,14 @@
 
 (use-package format-all
   :ensure t
-  :bind ("<f8> q" . format-all-region-or-buffer))
+  :bind ("<f8> q" . format-all-region-or-buffer)
+  :config
+  (setq-default format-all-formatters
+                '(("JavaScript"  (prettier))
+                  ("JSON"        (prettier))
+                  ("JSX"         (prettier))
+                  ("TypeScript"  (prettier))
+                  ("TSX"         (prettier))
+                  ("Go"         (goimports)))))
 
 (provide 'init-lang)
