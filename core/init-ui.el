@@ -1,10 +1,21 @@
 (use-package doom-themes
   :ensure t
+  :init
+  (defun toggle-theme ()
+    (interactive)
+    (cond ((eq (car custom-enabled-themes) 'doom-one)
+           (mapc #'disable-theme custom-enabled-themes)
+           (load-theme 'doom-one-light t))
+          ((eq (car custom-enabled-themes) 'doom-one-light)
+           (mapc #'disable-theme custom-enabled-themes)
+           (load-theme 'doom-one t))))
   :config
   (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
+        doom-themes-enable-italic t
+		doom-themes-padded-modeline t)
   (doom-themes-visual-bell-config)
-  (load-theme 'doom-one t))
+  (load-theme 'doom-one-light t)
+  (global-set-key (kbd "<f12>") 'toggle-theme))
 
 (use-package nerd-icons
   :ensure t
