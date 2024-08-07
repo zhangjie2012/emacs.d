@@ -89,6 +89,8 @@
 		lsp-log-io nil
 		lsp-headerline-breadcrumb-enable nil
 		lsp-enable-symbol-highlighting nil
+		lsp-modeline-code-actions-enable nil
+		lsp-modeline-code-actions-segments '(count)
 		lsp-pyls-plugins-flake8-enabled t
 		lsp-pylsp-plugins-flake8-config "~/.flake8"))
 
@@ -104,7 +106,8 @@
 		lsp-ui-doc-enable t
 		lsp-ui-doc-position 'at-point
 		lsp-ui-doc-show-with-mouse t
-		lsp-ui-doc-show-with-cursor nil))
+		lsp-ui-doc-show-with-cursor nil
+		lsp-ui-doc-border "#17153B"))
 
 (use-package go-mode
   :ensure t
