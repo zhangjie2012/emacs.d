@@ -11,13 +11,21 @@
 ;; (use-package thrift
 ;;   :ensure t
 ;;   :config
-;;   (setq thrift-indent-level 4))
+;;   (setq thrift-indent-level 4)
+;;   (add-hook 'thrfit-mode-hook
+;;           #'(lambda ()
+;;               (setq indent-tabs-mode t)))
+;;   )
 
 (use-package semantic-thrift
   :ensure t
   :config
+  (add-hook 'thrift-mode-hook
+			(lambda ()
+			  (semantic-mode 1)
+			  (setq indent-tabs-mode t)
+			  ))
   (setq thrift-indent-level 4)
-  (add-hook 'thrift-mode-hook (lambda () (semantic-mode 1)))
   (add-to-list 'semantic-inhibit-functions (lambda () (not (member major-mode '(thrift-mode)))))
   (define-key thrift-mode-map (kbd "M-.") 'semantic-ia-fast-jump)
   (setq thrift-mode-syntax-table semantic-thrift-syntax-table))
