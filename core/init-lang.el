@@ -2,9 +2,7 @@
   :ensure t
   :hook ((go-mode . flycheck-mode)
          (emacs-lisp-mode . flycheck-mode)
-		 (rjsx-mode . flycheck-mode)
-		 ;; (python-mode . flycheck-mode)
-		 )
+		 (rjsx-mode . flycheck-mode))
   :init
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc javascript-jshint python-pylint))
   ;; set flycheck tool
@@ -15,10 +13,9 @@
    ((string-equal system-type "darwin")
     (setq flycheck-javascript-eslint-executable "eslint")
     ))
-  ;; Python
-  ;; (setq flycheck-python-flake8-executable "flake8")
-  ;; (setq flycheck-flake8rc "~/.flake8")
   (setq flycheck-indication-mode nil)
+  ;; Python
+  ;; lsp 集成了 flake8, 因此 flycheck python-mode disable
   :config
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   ;; 避免卡顿，设定语法检测的时机，延迟 1s
@@ -71,17 +68,6 @@
 		 (elisp-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :bind (("<f8> s" . lsp-restart-workspace))
-  :commands lsp
-  :custom
-  (lsp-register-custom-settings
-   '(("pyls.plugins.pyls_mypy.enabled" t t)
-     ("pyls.plugins.pyls_mypy.live_mode" nil t)
-     ("pyls.plugins.pyls_black.enabled" t t)
-     ("pyls.plugins.pyls_isort.enabled" t t)
-     ;; Disable these as they're duplicated by flake8
-     ("pyls.plugins.pycodestyle.enabled" nil t)
-     ("pyls.plugins.mccabe.enabled" nil t)
-     ("pyls.plugins.pyflakes.enabled" nil t)))
   :config
   ;; TODO ignore file watchers https://emacs-lsp.github.io/lsp-mode/page/file-watchers/
   (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols)
@@ -91,8 +77,10 @@
 		lsp-enable-symbol-highlighting nil
 		lsp-modeline-code-actions-enable nil
 		lsp-modeline-code-actions-segments '(count)
-		lsp-pyls-plugins-flake8-enabled t
-		lsp-pylsp-plugins-flake8-config "~/.flake8"))
+		lsp-pylsp-plugins-flake8-config "~/.flake8"
+		lsp-pylsp-plugins-flake8-enabled t
+		lsp-pylsp-plugins-pydocstyle-enabled nil
+		lsp-pylsp-plugins-mccabe-enabled nil))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
