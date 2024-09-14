@@ -65,9 +65,9 @@
   :config
   (setq linum-relative-backend 'display-line-numbers-mode))
 
-(use-package git-gutter+
-  :ensure t
-  :bind ("<f8> g" . git-gutter+-mode))
+;; (use-package git-gutter+
+;;   :ensure t
+;;   :bind ("<f8> g" . git-gutter+-mode))
 
 (use-package string-inflection
   :ensure t
