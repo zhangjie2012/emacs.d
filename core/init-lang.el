@@ -13,7 +13,7 @@
    ((string-equal system-type "darwin")
     (setq flycheck-javascript-eslint-executable "eslint")
     ))
-  (setq flycheck-indication-mode nil)
+  (setq flycheck-indication-mode t)
   ;; Python
   ;; lsp 集成了 flake8, 因此 flycheck python-mode disable
   :config
@@ -24,19 +24,6 @@
   (setq flycheck-idle-change-delay 1
         flycheck-idle-buffer-switch-delay 1)
   (setq flycheck-check-syntax-automatically '(idle-change idle-buffer-switch)))
-
-;; https://github.com/weijiangan/flycheck-golangci-lint
-(use-package flycheck-golangci-lint
-  :ensure t
-  :hook ((go-mode . flycheck-golangci-lint-setup))
-  :init
-  (defvar-local flycheck-local-checkers nil)
-  (defun +flycheck-checker-get(fn checker property)
-    (or (alist-get property (alist-get checker flycheck-local-checkers))
-        (funcall fn checker property)))
-  (advice-add 'flycheck-checker-get :around '+flycheck-checker-get)
-  :config
-  (setq flycheck-golangci-lint-config "~/.golangci.yaml"))
 
 (use-package company
   :ensure t
@@ -80,7 +67,13 @@
 		lsp-pylsp-plugins-flake8-config "~/.flake8"
 		lsp-pylsp-plugins-flake8-enabled t
 		lsp-pylsp-plugins-pydocstyle-enabled nil
-		lsp-pylsp-plugins-mccabe-enabled nil))
+		lsp-pylsp-plugins-mccabe-enabled nil)
+  ;; for golang, see https://github.com/golang/tools/blob/master/gopls/doc/settings.md
+  (lsp-register-custom-settings
+   '(("gopls.analyses.shadow" t)
+	 ("gopls.usePlaceholders" t)
+	 ))
+  )
 
 (use-package lsp-ui
   :commands lsp-ui-mode

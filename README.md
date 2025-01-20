@@ -67,15 +67,16 @@ ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications
 GO111MODULE=on go install golang.org/x/tools/gopls@latest
 ```
 
-lint 工具：
+lsp-mode go 的 lint 工具无法使用 golangci-lint，只能通过 gopls 支持的参数来定制。具体见：[gopls#setting.md](https://github.com/golang/tools/blob/master/gopls/doc/settings.md)，以如下方式注入：
 
-``` sh
-curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.50.1
+``` emacs-lisp
+(lsp-register-custom-settings
+   '(("gopls.analyses.shadow" t)
+	 ("gopls.usePlaceholders" t)
+	 ))
 ```
 
-配置文件在：https://github.com/zhangjie2012/dotfiles/blob/master/_golangci.yaml
-
-另外安装 [gomodifytags](https://github.com/fatih/gomodifytags)。
+另外安装 [gomodifytags](https://github.com/fatih/gomodifytags)，用于自动生成/取消 json/yaml 上的 struct tag：
 
 ``` sh
 go install github.com/fatih/gomodifytags@latest
