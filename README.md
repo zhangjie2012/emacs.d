@@ -15,7 +15,7 @@
 
 1、[emacs-plus](https://github.com/d12frosted/homebrew-emacs-plus)
 
-``` sh
+```sh
 brew reinstall gcc libgccjit
 brew tap d12frosted/emacs-plus
 brew install emacs-plus@29 --with-cacodemon-icon
@@ -28,7 +28,7 @@ ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications
 
 打开 Emacs 时自动安装依赖包。我使用[中科大的源](https://mirrors.ustc.edu.cn/help/elpa.html)[中科大的源]]（清华源更新经常出问题，不建议用）。或者官方源 + 代理：
 
-``` elisp
+```elisp
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
         ("melpa" . "https://melpa.org/packages/")
@@ -63,21 +63,24 @@ ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications
 
 按照 [官方说明](https://golang.org/doc/install) 安装 Go，LSP server 用的是 [gopls](https://github.com/golang/tools/tree/master/gopls)。
 
-``` sh
+```sh
 go install golang.org/x/tools/gopls@latest
 ```
 
 lint 定制：
+
 1. 通过 gopls 支持的参数来定制。具体见：[gopls#setting.md](https://github.com/golang/tools/blob/master/gopls/doc/settings.md)，以如下方式注入：
-  ``` emacs-lisp
-  (lsp-register-custom-settings
-   '(("gopls.analyses.shadow" t)
+
+```emacs-lisp
+(lsp-register-custom-settings
+ '(("gopls.analyses.shadow" t)
 	 ("gopls.usePlaceholders" t)
 	 ))
-  ```
+```
+
 2. 安装 [golangci-lint-langserver](https://github.com/nametake/golangci-lint-langserver)：`go install github.com/nametake/golangci-lint-langserver@latest` 安装之后 lsp lint 将会自动选择 golangci-lint。
 
-另外安装 [gomodifytags](https://github.com/fatih/gomodifytags)：`go install github.com/fatih/gomodifytags@latest` 用于自动生成/取消 json/yaml 上的 struct tag：
+另外安装 [gomodifytags](https://github.com/fatih/gomodifytags)：`go install github.com/fatih/gomodifytags@latest` 用于自动生成/取消 json/yaml 上的 struct tag。
 
 ### Python
 
@@ -97,11 +100,11 @@ flycheck 配置 ESLint 经常出现各种奇奇怪怪的问题，从来没有一
 2. `(setq flycheck-javascript-eslint-executable "eslint")` 指定 eslint 路径
 3. `flycheck-select-checker` 指定 ESLint
 4. `flycheck-verify-setup` 查看二进制路径和配置文件是否生效
-   + ESLint 全局配置文件在用户目录下，具体可以查看 ESLint 的文档，ESLint 一直更新可能会有变化
-   + 我的配置在 https://github.com/zhangjie2012/dotfiles/blob/master/_eslintrc.json `ln -s dotfiles/_eslintrc.json .eslintrc.json` 添加软连接
+   - ESLint 全局配置文件在用户目录下，具体可以查看 ESLint 的文档，ESLint 一直更新可能会有变化
+   - 我的配置在 https://github.com/zhangjie2012/dotfiles/blob/master/_eslintrc.json `ln -s dotfiles/_eslintrc.json .eslintrc.json` 添加软连接
 5. 以上 Emacs 都没问题，但是检测不符合预期，要检查下用的是哪里的配置文件，以及配置文件是否有问题
-   + `eslint --print-config file.js` 查看使用的配置文件是什么
-   + `eslint file.js` 查看错误提示与 Emacs 是否相同
-   + 看 eslint 报错，缺什么 **全局** 安装
+   - `eslint --print-config file.js` 查看使用的配置文件是什么
+   - `eslint file.js` 查看错误提示与 Emacs 是否相同
+   - 看 eslint 报错，缺什么 **全局** 安装
 
 核心思路是：先保证 eslint 本身运行没问题，再看 Emacs flycheck 配置是否正常。

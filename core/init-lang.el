@@ -173,6 +173,8 @@
                   ("JSX"         (prettier))
                   ("TypeScript"  (prettier))
                   ("TSX"         (prettier))
-                  ("Go"         (goimports)))))
+				  ("YAML"        (prettier))
+				  ("Markdown"    (prettier))
+                  ("Go"          (goimports)))))
 
 (provide 'init-lang)
