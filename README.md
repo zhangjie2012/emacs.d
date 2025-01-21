@@ -78,7 +78,7 @@ lint 定制：
 	 ))
 ```
 
-2. 安装 [golangci-lint-langserver](https://github.com/nametake/golangci-lint-langserver)：`go install github.com/nametake/golangci-lint-langserver@latest` 安装之后 lsp lint 将会自动选择 golangci-lint。
+2. 安装 [golangci-lint-langserver](https://github.com/nametake/golangci-lint-langserver)：`go install github.com/nametake/golangci-lint-langserver@latest` 安装之后 lsp lint 将会自动选择 golangci-lint，[配置文件](https://github.com/zhangjie2012/dotfiles/blob/master/_golangci.yaml)。
 
 另外安装 [gomodifytags](https://github.com/fatih/gomodifytags)：`go install github.com/fatih/gomodifytags@latest` 用于自动生成/取消 json/yaml 上的 struct tag。
 
