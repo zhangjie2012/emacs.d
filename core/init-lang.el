@@ -13,7 +13,7 @@
    ((string-equal system-type "darwin")
     (setq flycheck-javascript-eslint-executable "eslint")
     ))
-  (setq flycheck-indication-mode t)
+  (setq flycheck-indication-mode nil)
   ;; Python
   ;; lsp 集成了 flake8, 因此 flycheck python-mode disable
   :config
@@ -67,13 +67,8 @@
 		lsp-pylsp-plugins-flake8-config "~/.flake8"
 		lsp-pylsp-plugins-flake8-enabled t
 		lsp-pylsp-plugins-pydocstyle-enabled nil
-		lsp-pylsp-plugins-mccabe-enabled nil)
-  ;; for golang, see https://github.com/golang/tools/blob/master/gopls/doc/settings.md
-  (lsp-register-custom-settings
-   '(("gopls.analyses.shadow" t)
-	 ("gopls.usePlaceholders" t)
-	 ))
-  )
+		lsp-pylsp-plugins-mccabe-enabled nil
+		lsp-enable-snippet nil))
 
 (use-package lsp-ui
   :commands lsp-ui-mode

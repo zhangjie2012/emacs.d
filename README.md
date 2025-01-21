@@ -64,23 +64,20 @@ ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications
 按照 [官方说明](https://golang.org/doc/install) 安装 Go，LSP server 用的是 [gopls](https://github.com/golang/tools/tree/master/gopls)。
 
 ``` sh
-GO111MODULE=on go install golang.org/x/tools/gopls@latest
+go install golang.org/x/tools/gopls@latest
 ```
 
-lsp-mode go 的 lint 工具无法使用 golangci-lint，只能通过 gopls 支持的参数来定制。具体见：[gopls#setting.md](https://github.com/golang/tools/blob/master/gopls/doc/settings.md)，以如下方式注入：
-
-``` emacs-lisp
-(lsp-register-custom-settings
+lint 定制：
+1. 通过 gopls 支持的参数来定制。具体见：[gopls#setting.md](https://github.com/golang/tools/blob/master/gopls/doc/settings.md)，以如下方式注入：
+  ``` emacs-lisp
+  (lsp-register-custom-settings
    '(("gopls.analyses.shadow" t)
 	 ("gopls.usePlaceholders" t)
 	 ))
-```
+  ```
+2. 安装 [golangci-lint-langserver](https://github.com/nametake/golangci-lint-langserver)：`go install github.com/nametake/golangci-lint-langserver@latest` 安装之后 lsp lint 将会自动选择 golangci-lint。
 
-另外安装 [gomodifytags](https://github.com/fatih/gomodifytags)，用于自动生成/取消 json/yaml 上的 struct tag：
-
-``` sh
-go install github.com/fatih/gomodifytags@latest
-```
+另外安装 [gomodifytags](https://github.com/fatih/gomodifytags)：`go install github.com/fatih/gomodifytags@latest` 用于自动生成/取消 json/yaml 上的 struct tag：
 
 ### Python
 
