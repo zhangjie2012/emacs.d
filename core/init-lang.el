@@ -83,7 +83,8 @@
 		lsp-ui-doc-position 'at-point
 		lsp-ui-doc-show-with-mouse t
 		lsp-ui-doc-show-with-cursor nil
-		lsp-ui-doc-border "#17153B"))
+		lsp-ui-doc-border "#17153B")
+  )
 
 (use-package go-mode
   :ensure t
