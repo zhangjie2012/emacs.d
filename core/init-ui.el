@@ -45,7 +45,7 @@
          ("C-=" . text-scale-increase)
          ("C-0" . text-scale-adjust))
   :config
-  (set-face-attribute 'default nil :family "Sarasa Term SC Nerd" :height 160)
+  (set-face-attribute 'default nil :family "Sarasa Term SC Nerd" :height 166)
   (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
    '(org-level-2 ((t (:inherit outline-1 :height 1.2))))
@@ -55,14 +55,6 @@
 (use-package rainbow-delimiters
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
-
-(use-package pulsar
-  :ensure t
-  :bind ("M-h" . pulsar-pulse-line-magenta)
-  :init
-  (setq pulsar-face 'pulsar-magenta)
-  :config
-  (pulsar-global-mode 1))
 
 (global-hl-line-mode +1)
 

@@ -69,21 +69,6 @@
 ;;   :ensure t
 ;;   :bind ("<f8> g" . git-gutter+-mode))
 
-(use-package string-inflection
-  :ensure t
-  :bind (:map prog-mode-map
-              ("C-M-j" . my-string-inflection-cycle-auto))
-  :init
-  (defun my-string-inflection-cycle-auto ()
-	"switching by major-mode"
-	(interactive)
-	(cond
-	 ((eq major-mode 'emacs-lisp-mode)
-      (string-inflection-all-cycle))
-	 ((eq major-mode 'python-mode)
-      (string-inflection-python-style-cycle))
-	 (t (string-inflection-all-cycle)))))
-
 ;; https://github.com/purcell/exec-path-from-shell/issues/36
 (use-package exec-path-from-shell
   :ensure t

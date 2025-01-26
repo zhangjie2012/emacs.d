@@ -13,7 +13,7 @@
    ((string-equal system-type "darwin")
     (setq flycheck-javascript-eslint-executable "eslint")
     ))
-  (setq flycheck-indication-mode 'left-fringe)
+  (setq flycheck-indication-mode nil)
   ;; Python
   ;; lsp 集成了 flake8, 因此 flycheck python-mode disable
   :config
@@ -68,8 +68,7 @@
 		lsp-pylsp-plugins-flake8-enabled t
 		lsp-pylsp-plugins-pydocstyle-enabled nil
 		lsp-pylsp-plugins-mccabe-enabled nil
-		lsp-enable-snippet nil
-        lsp-go-use-gofumpt t))
+		lsp-enable-snippet nil))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -169,13 +168,13 @@
   :bind ("<f8> q" . format-all-region-or-buffer)
   :config
   (setq-default format-all-formatters
-                '(("JavaScript"  (prettierd))
+                '(("JavaScript"  (prettier))
                   ("JSON"        (prettier))
-                  ("JSX"         (prettierd))
+                  ("JSX"         (prettier))
                   ("TypeScript"  (prettier))
                   ("TSX"         (prettier))
 				  ("YAML"        (prettier))
 				  ("Markdown"    (prettier))
-                  ("Go"          (gofmt)))))
+                  ("Go"          (goimports)))))
 
 (provide 'init-lang)
