@@ -1,5 +1,7 @@
 * My Emacs Config
 
+UI：kaolin-themes（kaolin-breeze/kaolin-temple 默认亮色主题，可通过 F12 切换） + Sarasa Term SC Nerd（字体）。
+
 ** 适用场景
 
 - MacOS GUI（Linux 大概率也没问题）
