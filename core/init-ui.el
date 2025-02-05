@@ -104,12 +104,11 @@
   :ensure t
   :hook (compilation-filter . ansi-color-compilation-filter))
 
-
 (use-package indent-guide
   :ensure t
   :hook (prog-mode . indent-guide-mode)
   :custom
-  (indent-guide-delay 0.2)
+  (indent-guide-delay 0.1)
   (indent-guide-char "┆")
   (indent-guide-recursive nil)
   :config
