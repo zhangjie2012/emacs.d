@@ -1,24 +1,20 @@
-(use-package kaolin-themes
+(use-package doom-themes
   :ensure t
   :init
   (defun toggle-theme ()
     (interactive)
-    (cond ((eq (car custom-enabled-themes) 'kaolin-breeze)
+    (cond ((eq (car custom-enabled-themes) 'doom-one-light)
            (mapc #'disable-theme custom-enabled-themes)
-           (load-theme 'kaolin-temple t))
-          ((eq (car custom-enabled-themes) 'kaolin-temple)
+           (load-theme 'doom-one t))
+          ((eq (car custom-enabled-themes) 'doom-one)
            (mapc #'disable-theme custom-enabled-themes)
-           (load-theme 'kaolin-breeze t))))
+           (load-theme 'doom-one-light t))))
   :config
-  (setq kaolin-themes-bold t
-		kaolin-themes-italic t
-		kaolin-themes-underline t
-		kaolin-themes-modeline-border t
-		kaolin-themes-underline-wave t
-		kaolin-themes-italic-comments t
-		kaolin-themes-hl-line-colored t
-		kaolin-themes-comments-style 'normal)
-  (load-theme 'kaolin-breeze t)
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (doom-themes-visual-bell-config)
+  (doom-themes-org-config)
+  (load-theme 'doom-one-light t)
   (global-set-key (kbd "<f12>") 'toggle-theme))
 
 (use-package nerd-icons
@@ -50,11 +46,11 @@
          ("C-0" . text-scale-adjust))
   :config
   (set-face-attribute 'default nil :family "Sarasa Term SC Nerd" :height 165)
-  ;; (custom-set-faces
-  ;;  '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
-  ;;  '(org-level-2 ((t (:inherit outline-1 :height 1.2))))
-  ;;  '(org-level-3 ((t (:inherit outline-1 :height 1.0))))
-  ;;  '(org-level-4 ((t (:inherit outline-1 :height 1.0)))))
+  (custom-set-faces
+   '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
+   '(org-level-2 ((t (:inherit outline-1 :height 1.2))))
+   '(org-level-3 ((t (:inherit outline-1 :height 1.0))))
+   '(org-level-4 ((t (:inherit outline-1 :height 1.0)))))
   )
 
 (use-package rainbow-delimiters
@@ -103,15 +99,5 @@
 (use-package ansi-color
   :ensure t
   :hook (compilation-filter . ansi-color-compilation-filter))
-
-(use-package indent-guide
-  :ensure t
-  :hook (prog-mode . indent-guide-mode)
-  :custom
-  (indent-guide-delay 0.1)
-  (indent-guide-char "┆")
-  (indent-guide-recursive nil)
-  :config
-  (set-face-foreground 'indent-guide-face "#C9CDD4"))
 
 (provide 'init-ui)

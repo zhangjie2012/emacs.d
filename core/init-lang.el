@@ -39,7 +39,7 @@
   (setq company-idle-delay 0.2
         company-minimum-prefix-length 2
         company-global-modes '(not org-mode markdown-mode eshell-mode thrift-mode)
-		company-format-margin-function nil
+		company-format-margin-function 'company-detect-icons-margin
 		company-tooltip-maximum-width 72
 		company-tooltip-minimum-width 40
 		company-show-quick-access nil
@@ -83,7 +83,7 @@
 		lsp-ui-doc-position 'at-point
 		lsp-ui-doc-show-with-mouse t
 		lsp-ui-doc-show-with-cursor nil
-		lsp-ui-doc-border "#17153B")
+		lsp-ui-doc-border "#A9AEB8")
   )
 
 (use-package go-mode
