@@ -169,9 +169,9 @@
   :bind ("<f8> q" . format-all-region-or-buffer)
   :config
   (setq-default format-all-formatters
-                '(("JavaScript"  (prettier))
+                '(("JavaScript"  (prettierd))
                   ("JSON"        (prettier))
-                  ("JSX"         (prettier))
+                  ("JSX"         (prettierd))
                   ("TypeScript"  (prettier))
                   ("TSX"         (prettier))
 				  ("YAML"        (prettier))
