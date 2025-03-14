@@ -28,7 +28,7 @@ UI：kaolin-themes（kaolin-breeze/kaolin-temple 默认亮色主题，可通过 
 #+begin_src sh
   brew reinstall gcc libgccjit
   brew tap d12frosted/emacs-plus
-  brew install emacs-plus --with-cacodemon-icon
+  brew install emacs-plus@29--with-cacodemon-icon
   ln -s /usr/local/opt/emacs-plus/Emacs.app /Applications
 #+end_src
 
@@ -56,7 +56,11 @@ UI：kaolin-themes（kaolin-breeze/kaolin-temple 默认亮色主题，可通过 
 其他：
 
 1. rg： =brew install ripgrep=
-2. 字体： =brew install --cask font-sarasa-nerd=
+2. 字体：[fn:2]
+   #+begin_src sh
+     brew tap laishulu/homebrew
+     brew install font-sarasa-nerd
+   #+end_src
 3. icon：打开 [[https://www.nerdfonts.com][nerdfont]] 下载 Symbols Nerd Font 安装即可 [fn:1]
 
 ** 开发环境
@@ -104,5 +108,7 @@ flycheck 配置 ESLint 经常出现各种奇奇怪怪的问题，从来没有一
 核心思路是：先保证 eslint 本身运行没问题，再看 Emacs flycheck 配置是否正常。
 
 ** Footnotes
+
+[fn:2] https://github.com/laishulu/Sarasa-Term-SC-Nerd
 
 [fn:1] doom-mode-line 4.0.0 之后不再支持 all-the-icons 由 nerd-icons 代替
