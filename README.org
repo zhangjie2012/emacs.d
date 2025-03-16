@@ -89,7 +89,7 @@ UI：kaolin-themes（kaolin-breeze/kaolin-temple 默认亮色主题，可通过 
 
 _不用 lsp-mode。_
 
-- eslint =npm install -g eslint=
+- eslint =npm install -g eslint@v8= [fn:3]
 - format =npm install -g prettier=
 
 flycheck 配置 ESLint 经常出现各种奇奇怪怪的问题，从来没有一次性成功过，汇总的自查方法：
@@ -108,6 +108,8 @@ flycheck 配置 ESLint 经常出现各种奇奇怪怪的问题，从来没有一
 核心思路是：先保证 eslint 本身运行没问题，再看 Emacs flycheck 配置是否正常。
 
 ** Footnotes
+
+[fn:3] eslint v9 和 v8 变化较大
 
 [fn:2] https://github.com/laishulu/Sarasa-Term-SC-Nerd
 
