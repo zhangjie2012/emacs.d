@@ -45,7 +45,7 @@
          ("C-=" . text-scale-increase)
          ("C-0" . text-scale-adjust))
   :config
-  (set-face-attribute 'default nil :family "Sarasa Term SC Nerd" :height 170)
+  (set-face-attribute 'default nil :family "Sarasa Term SC Nerd" :height 165)
   (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
    '(org-level-2 ((t (:inherit outline-1 :height 1.2))))

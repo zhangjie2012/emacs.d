@@ -27,8 +27,8 @@
 		org-startup-with-inline-images t
 		org-image-actual-width '(1024)
         org-capture-templates nil)
-  (setq org-agenda-files '("~/gtd/entry.org"))
-  (setq org-default-notes-file "~/gtd/entry.org")
+  ;; (setq org-agenda-files '("~/gtd/entry.org"))
+  ;; (setq org-default-notes-file "~/gtd/entry.org")
   :config
   ;; GTD setting
   (require 'org-inlinetask)

@@ -48,8 +48,8 @@
 (use-package embark
   :ensure t
   :bind
-  (("C-." . embark-act)
-   ("C-;" . embark-dwim))
+  (("<f8> ." . embark-act)
+   ("<f8> ;" . embark-dwim))
   :init
   (setq prefix-help-command #'embark-prefix-help-command))
 
