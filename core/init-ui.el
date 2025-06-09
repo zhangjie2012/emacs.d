@@ -71,8 +71,9 @@
   (setq dashboard-projects-backend 'project-el
         dashboard-items '((projects . 8)
                           (recents . 8)
-                          (agenda . 8))
-        dashboard-banner-logo-title "为天地立心, 为生民立命; 为往圣继绝学, 为万世开太平"
+                          ;; (agenda . 8)
+						  )
+        dashboard-banner-logo-title "士不可以不弘毅，任重而道远"
         dashboard-footer-messages '("https://github.com/zhangjie2012/emacs.d")
         dashboard-startup-banner (concat user-emacs-directory "logos/cacodemon.svg")
         dashboard-image-banner-max-height 160

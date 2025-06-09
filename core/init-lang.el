@@ -13,7 +13,7 @@
    ((string-equal system-type "darwin")
     (setq flycheck-javascript-eslint-executable "eslint")
     ))
-  (setq flycheck-indication-mode nil)
+  (setq flycheck-indication-mode 'left-fringe)
   ;; Python
   ;; lsp 集成了 flake8, 因此 flycheck python-mode disable
   :config
