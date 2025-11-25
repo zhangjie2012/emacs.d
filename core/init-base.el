@@ -1,83 +1,85 @@
 (fset 'yes-or-no-p 'y-or-n-p)
-(setq confirm-kill-emacs  'y-or-n-p
-      auto-save-default    nil
-      ;; mouse-yank-at-point  t
-      make-backup-files    nil
-      create-lockfiles     nil)
+
+(setq
+ confirm-kill-emacs 'y-or-n-p
+ auto-save-default nil
+ make-backup-files nil
+ create-lockfiles nil
+ use-short-answers t
+ use-dialog-box nil
+ inhibit-startup-message t
+ inhibit-startup-echo-area-message t
+ indicate-empty-lines t
+ confirm-kill-processes nil)
 
 (set-charset-priority 'unicode)
-(setq locale-coding-system   'utf-8-unix)
-(set-terminal-coding-system  'utf-8-unix)
-(set-keyboard-coding-system  'utf-8-unix)
-;; (set-selection-coding-system 'utf-8-unix)
-(prefer-coding-system        'utf-8-unix)
-(setq default-process-coding-system '(utf-8-unix . utf-8-unix)
-      default-buffer-file-coding-system 'utf-8-unix) ;; Windows/ Linux/Mac all LF
+(set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8-unix)
+
+(setq
+ locale-coding-system 'utf-8-unix
+ default-buffer-file-coding-system 'utf-8-unix
+ default-process-coding-system '(utf-8-unix . utf-8-unix))
+
+(set-terminal-coding-system 'utf-8-unix)
+(set-keyboard-coding-system 'utf-8-unix)
 
 (setq system-time-locale "C")
-;; (setq system-time-locale "zh_CN.UTF-8")
 
 (setq frame-title-format
-      '((:eval (if (buffer-file-name)
-                   (abbreviate-file-name (buffer-file-name))
+      '((:eval (if buffer-file-name
+                   (abbreviate-file-name buffer-file-name)
                  "%b"))))
 
+
+(setq-default indent-tabs-mode nil
+              tab-width 4)
+
 (add-hook 'text-mode-hook
-          #'(lambda ()
-              (setq indent-tabs-mode nil)
-              (setq tab-width 4)))
-;; (setq indent-line-function (quote insert-tab))
-(defadvice align-regexp (around align-regexp-with-spaces)
-  "Never use tabs for alignment."
+          (lambda ()
+            (setq indent-tabs-mode nil
+                  tab-width 4)))
+
+;; 现代 advice (替代 defadvice/ad-activate)
+(defun my/align-regexp-no-tabs (orig-fun &rest args)
   (let ((indent-tabs-mode nil))
-    ad-do-it))
-(ad-activate 'align-regexp)
+    (apply orig-fun args)))
 
-(save-place-mode t)
-(setq-default tab-width 4)
+(advice-add 'align-regexp :around #'my/align-regexp-no-tabs)
 
+(save-place-mode 1)
 (global-auto-revert-mode 1)
 (setq global-auto-revert-non-file-buffers t)
-
-(setq use-dialog-box nil)
 
 (column-number-mode 1)
 
 (electric-pair-mode 1)
 (electric-indent-mode 1)
-;; (electric-quote-mode 1)
 
-(setq inhibit-startup-echo-area-message t
-      inhibit-startup-message t
-      indicate-empty-lines t)
-
-(setq use-short-answers t)
-
-(blink-cursor-mode t)
+(blink-cursor-mode 1)
 (setq-default cursor-type 'bar)
 (setq visible-cursor nil)
 
-(setq read-file-name-completion-ignore-case t
-      read-buffer-completion-ignore-case t
-      completion-ignore-case t)
-
-(setq confirm-kill-processes nil)
+(setq
+ read-file-name-completion-ignore-case t
+ read-buffer-completion-ignore-case t
+ completion-ignore-case t)
 
 (setq display-time-default-load-average nil
-      display-time-format "%H:%M") ;;  [%m-%d %H:%M]
-(display-time-mode t)
+      display-time-format "%H:%M")
+(display-time-mode 1)
 (display-battery-mode 1)
 
-;; SmoothScrolling https://www.emacswiki.org/emacs/SmoothScrolling
 (setq frame-resize-pixelwise t)
 (pixel-scroll-precision-mode 1)
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-(setq scroll-step 1) ;; keyboard scroll one line at a time
+
+(setq
+ mouse-wheel-scroll-amount '(1 ((shift) . 1))
+ mouse-wheel-progressive-speed nil
+ mouse-wheel-follow-mouse t
+ scroll-step 1)
 
 (setq inhibit-compacting-font-caches t)
-
 (setq load-prefer-newer t)
 
 (provide 'init-base)

@@ -51,40 +51,53 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((go-mode . lsp-deferred)
-		 (python-mode . lsp-deferred)
-		 (elisp-mode . lsp-deferred)
+         (python-mode . lsp-deferred)
+         (elisp-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :bind (("<f8> s" . lsp-restart-workspace))
   :config
-  ;; TODO ignore file watchers https://emacs-lsp.github.io/lsp-mode/page/file-watchers/
   (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols)
-  (setq lsp-idle-delay 0.500
-		lsp-log-io nil
-		lsp-headerline-breadcrumb-enable nil
-		lsp-enable-symbol-highlighting nil
-		lsp-modeline-code-actions-enable nil
-		lsp-modeline-code-actions-segments '(count)
-		lsp-pylsp-plugins-flake8-config "~/.flake8"
-		lsp-pylsp-plugins-flake8-enabled t
-		lsp-pylsp-plugins-pydocstyle-enabled nil
-		lsp-pylsp-plugins-mccabe-enabled nil
-		lsp-enable-snippet nil))
+  (setq lsp-file-watch-ignored
+		'("[/\\\\]\\.git$"
+          "[/\\\\]node_modules$"
+          "[/\\\\]\\.hg$"
+          "[/\\\\]\\.idea$"
+          "[/\\\\]\\.vscode$"
+          "[/\\\\]target$"
+          "[/\\\\]build$"))
+  (setq lsp-use-plists t
+		lsp-idle-delay 0.500
+		lsp-lens-enable nil
+        lsp-log-io nil
+		lsp-completion-no-cache t
+        lsp-headerline-breadcrumb-enable nil
+        lsp-enable-symbol-highlighting nil
+        lsp-modeline-code-actions-enable nil
+		lsp-semantic-tokens-enable nil
+        lsp-pylsp-plugins-flake8-config "~/.flake8"
+        lsp-pylsp-plugins-flake8-enabled t
+        lsp-pylsp-plugins-pydocstyle-enabled nil
+        lsp-pylsp-plugins-mccabe-enabled nil
+		lsp-enable-file-watchers nil
+        lsp-enable-snippet nil))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
   :ensure t
   :config
+  ;; 保持你当前所有交互行为不变
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+  (define-key lsp-ui-mode-map [remap xref-find-references]  #'lsp-ui-peek-find-references)
   (setq lsp-ui-sideline-show-diagnostics nil
         lsp-ui-sideline-show-code-actions nil
-		lsp-ui-sideline-show-hover nil
-		lsp-ui-doc-enable t
-		lsp-ui-doc-position 'at-point
-		lsp-ui-doc-show-with-mouse t
-		lsp-ui-doc-show-with-cursor nil
-		lsp-ui-doc-border "#A9AEB8")
-  )
+        lsp-ui-sideline-show-hover nil
+        lsp-ui-doc-enable t
+		lsp-ui-doc-use-webkit nil
+        lsp-ui-doc-position 'at-point
+        lsp-ui-doc-show-with-mouse t
+        lsp-ui-doc-show-with-cursor nil
+        lsp-ui-doc-border "#A9AEB8"
+		lsp-ui-peek-fontify 'on-demand))
 
 (use-package go-mode
   :ensure t

@@ -1,40 +1,42 @@
-(defvar current-date-time-format "%Y-%m-%d %H:%M:%S"
-  "Format of date to insert with `insert-current-date-time' func
-See help of `format-time-string' for possible replacements")
+(defconst current-date-time-format "%Y-%m-%d %H:%M:%S"
+  "Format used by `insert-current-date-time'.")
 
 (defun insert-current-date-time ()
-  "insert the current date and time into current buffer.
-Uses `current-date-time-format' for the formatting the date/time."
+  "Insert the current date/time using `current-date-time-format'."
   (interactive)
-  (insert (format-time-string current-date-time-format (current-time)))
-  )
+  (insert (format-time-string current-date-time-format)))
+
 (defun toggle-frame-alpha ()
+  "Toggle frame transparency between normal and semi-transparent."
   (interactive)
-  (let* ((pair (or (frame-parameter nil 'alpha) '(100 100)))
-         (alpha (apply '+ pair)))
-    (set-frame-parameter nil
-                         'alpha
-                         (if (or (null alpha) (eq alpha 200) (eq alpha 2.0))
-                             '(85 60) '(100 100)))))
+  (let* ((pair (frame-parameter nil 'alpha))
+         (current (or (car-safe pair) pair 100)))
+    (set-frame-parameter
+     nil 'alpha
+     (if (>= current 100)
+         '(85 . 60)
+       '(100 . 100)))))
+
 (defun show-file-name ()
-  "Show the full path file name in the minibuffer."
+  "Show the full path of the current buffer’s file."
   (interactive)
-  (message (buffer-file-name)))
+  (message (or (buffer-file-name) "No file")))
 
 (defun match-paren (arg)
-    "Go to the matching paren if on a paren; otherwise insert %."
-    (interactive "p")
-    (cond ((looking-at "\\s(") (forward-list 1) (backward-char 1))
-	      ((looking-at "\\s)") (forward-char 1) (backward-list 1))
-	      (t (self-insert-command (or arg 1)))))
+  "Jump to matching paren, otherwise insert the character ARG times."
+  (interactive "p")
+  (cond
+   ((looking-at "\\s(") (forward-list 1) (backward-char))
+   ((looking-at "\\s)") (forward-char) (backward-list 1))
+   (t (self-insert-command (or arg 1)))))
 
 (use-package emacs
   :ensure nil
   :init
-  (global-set-key (kbd "C-2") 'set-mark-command) ;; actual is C-@
-  (global-set-key (kbd "C-x k") 'kill-this-buffer) ;; kill-this-buffer replace kill-buffer
-  (global-set-key (kbd "M-*") 'match-paren)
-  (global-set-key (kbd "S-<backspace>") 'kill-whole-line))
+  (global-set-key (kbd "C-2") #'set-mark-command)
+  (global-set-key (kbd "C-x k") #'kill-this-buffer)
+  (global-set-key (kbd "M-*") #'match-paren)
+  (global-set-key (kbd "S-<backspace>") #'kill-whole-line))
 
 (use-package hydra
   :ensure t
@@ -42,6 +44,7 @@ Uses `current-date-time-format' for the formatting the date/time."
   (defhydra hydra-default
     (:hint nil :idle 1)
 
+    ;; ---- 1. edit ----
     ("r" replace-string "replace string" :exit t :column "1. edit")
     ("w" save-buffer "save buffer" :exit t)
     ("o" consult-outline "outline" :exit t)
@@ -50,25 +53,30 @@ Uses `current-date-time-format' for the formatting the date/time."
     ("i" insert-current-date-time "insert date time" :exit t)
     ("l" align-regexp "align text" :exit t)
 
+    ;; ---- 2. buffer ----
     ("f" find-file "find file" :exit t :column "2. buffer")
     ("b" switch-to-buffer "switch buffer" :exit t)
     ("'" show-file-name "file name" :exit t)
-    ("n" display-line-numbers-mode "absolute line number")
-    ("N" linum-relative-toggle "relative line number")
+    ("n" display-line-numbers-mode "toggle abs numbers")
+    ("N" linum-relative-toggle "toggle rel numbers")
     ("u" revert-buffer "revert buffer" :exit t)
-	("j" consult-goto-line "goto line" :exit t)
+    ("j" consult-goto-line "goto line" :exit t)
 
-    ("1" delete-other-windows "delete other" :exit t :column "3. window management")
-    ("2" split-window-below "split below" :exit t )
+    ;; ---- 3. window mgmt ----
+    ("1" delete-other-windows "delete other" :exit t :column "3. windows")
+    ("2" split-window-below "split below" :exit t)
     ("3" split-window-horizontally "split horizontally" :exit t)
-    ("x" toggle-frame-fullscreen "toggle fullscreen" :exit t)
+    ("x" toggle-frame-fullscreen "fullscreen" :exit t)
     ("X" toggle-frame-alpha "toggle alpha" :exit t)
 
-    ("ti" display-fill-column-indicator-mode "toggle column indicator" :column "x. other")
+    ;; ---- x. other ----
+    ("ti" display-fill-column-indicator-mode "toggle column indicator" :column "other")
     ("m" consult-imenu "imenu" :exit t)
-    ("M" consult-outline "consult outline" :exit t)
-    ("c" eshell "open eshell" :exit t)
+    ("M" consult-outline "outline" :exit t)
+    ("c" eshell "eshell" :exit t)
+
     ("q" nil "quit"))
-  (global-set-key (kbd "<f9>") 'hydra-default/body))
+
+  (global-set-key (kbd "<f9>") #'hydra-default/body))
 
 (provide 'init-keymap)
