@@ -31,73 +31,87 @@
   :bind (:map company-active-map
               ("C-n" . company-select-next)
               ("C-p" . company-select-previous))
+  :init
+  ;; 提升性能：禁用自动排序（由 capf/LSP 决定）
+  (setq company-transformers nil)
+  (setq company-idle-delay 0.15
+        company-minimum-prefix-length 1
+        company-echo-delay 0
+        company-show-quick-access nil)
   :config
-  ;; https://company-mode.github.io/manual/Backends.html#Backends
-  (setq company-backends '((company-capf
-                            company-dabbrev-code
-                            company-files)))
-  (setq company-idle-delay 0.2
-        company-minimum-prefix-length 2
-        company-global-modes '(not org-mode markdown-mode eshell-mode thrift-mode)
-		company-format-margin-function 'company-detect-icons-margin
-		company-tooltip-maximum-width 72
-		company-tooltip-minimum-width 40
-		company-show-quick-access nil
-		company-tooltip-margin 1
-		company-tooltip-limit 8))
+  (setq company-backends
+        '((company-capf
+           :with company-dabbrev-code
+           company-files)))
+  (setq company-dabbrev-code-everywhere nil
+        company-dabbrev-code-other-buffers nil
+        company-dabbrev-other-buffers nil
+        company-dabbrev-ignore-case t
+        company-dabbrev-downcase nil)
+  (setq company-tooltip-limit 10
+        company-tooltip-maximum-width 60
+        company-tooltip-minimum-width 20
+        company-tooltip-margin 1
+        company-tooltip-align-annotations t
+        company-format-margin-function
+        'company-detect-icons-margin)
+  (setq company-require-match nil
+        company-auto-commit nil)
+  (setq company-global-modes
+        '(not org-mode markdown-mode eshell-mode shell-mode thrift-mode)))
 
 (use-package lsp-mode
   :ensure t
   :init
   (setq lsp-keymap-prefix "C-c l")
+  (setq lsp-use-plists t
+        lsp-idle-delay 0.3
+        lsp-log-io nil
+        lsp-enable-symbol-highlighting nil
+        lsp-enable-file-watchers nil
+        lsp-enable-folding nil
+        lsp-enable-snippet nil
+        lsp-lens-enable nil
+        lsp-modeline-code-actions-enable nil
+        lsp-headerline-breadcrumb-enable nil
+        lsp-semantic-tokens-enable nil
+        lsp-completion-no-cache t)
   :hook ((go-mode . lsp-deferred)
          (python-mode . lsp-deferred)
-         (elisp-mode . lsp-deferred)
+         (lisp-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
+
   :bind (("<f8> s" . lsp-restart-workspace))
   :config
-  (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols)
-  (setq lsp-file-watch-ignored
-		'("[/\\\\]\\.git$"
-          "[/\\\\]node_modules$"
-          "[/\\\\]\\.hg$"
-          "[/\\\\]\\.idea$"
-          "[/\\\\]\\.vscode$"
-          "[/\\\\]target$"
-          "[/\\\\]build$"))
-  (setq lsp-use-plists t
-		lsp-idle-delay 0.500
-		lsp-lens-enable nil
-        lsp-log-io nil
-		lsp-completion-no-cache t
-        lsp-headerline-breadcrumb-enable nil
-        lsp-enable-symbol-highlighting nil
-        lsp-modeline-code-actions-enable nil
-		lsp-semantic-tokens-enable nil
+  (setq lsp-file-watch-ignored-directories
+        '("[/\\\\]\\.git\\'"
+          "[/\\\\]node_modules\\'"
+          "[/\\\\]\\.hg\\'"
+          "[/\\\\]\\.idea\\'"
+          "[/\\\\]\\.vscode\\'"
+          "[/\\\\]target\\'"
+          "[/\\\\]build\\'"))
+  ;; Python LSP (pylsp)
+  (setq lsp-pylsp-plugins-flake8-enabled t
         lsp-pylsp-plugins-flake8-config "~/.flake8"
-        lsp-pylsp-plugins-flake8-enabled t
-        lsp-pylsp-plugins-pydocstyle-enabled nil
         lsp-pylsp-plugins-mccabe-enabled nil
-		lsp-enable-file-watchers nil
-        lsp-enable-snippet nil))
+        lsp-pylsp-plugins-pydocstyle-enabled nil))
 
 (use-package lsp-ui
-  :commands lsp-ui-mode
   :ensure t
+  :commands lsp-ui-mode
   :config
-  ;; 保持你当前所有交互行为不变
+
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references]  #'lsp-ui-peek-find-references)
-  (setq lsp-ui-sideline-show-diagnostics nil
-        lsp-ui-sideline-show-code-actions nil
-        lsp-ui-sideline-show-hover nil
-        lsp-ui-doc-enable t
-		lsp-ui-doc-use-webkit nil
+  (setq lsp-ui-sideline-enable nil)
+  (setq lsp-ui-doc-enable t
+        lsp-ui-doc-use-webkit nil
         lsp-ui-doc-position 'at-point
         lsp-ui-doc-show-with-mouse t
         lsp-ui-doc-show-with-cursor nil
-        lsp-ui-doc-border "#A9AEB8"
-		lsp-ui-peek-fontify 'on-demand))
+        lsp-ui-doc-border (face-foreground 'font-lock-comment-face)
+        lsp-ui-peek-fontify 'on-demand))
 
 (use-package go-mode
   :ensure t
@@ -168,9 +182,9 @@
   (add-to-list 'auto-mode-alist '(".*\\.tsx\\'" . rjsx-mode))
   (add-hook 'rjsx-mode-hook
             (lambda ()
-              (setq indent-tabs-mode nil) ;;Use space instead of tab
-              (setq js-indent-level 2) ;;space width is 2 (default is 4)
-              (setq js2-strict-missing-semi-warning nil))) ;;disable the semicolon warning
+              (setq indent-tabs-mode nil)
+              (setq js-indent-level 2)
+              (setq js2-strict-missing-semi-warning nil)))
   (with-eval-after-load 'rjsx-mode
     ;; (define-key rjsx-mode-map "<" nil)
     ;; (define-key rjsx-mode-map (kbd "C-d") nil)

@@ -31,11 +31,15 @@
   :ensure t
   :init
   (doom-modeline-mode 1)
+  (setq doom-modeline-height 25)
   :config
-  (setq doom-modeline-buffer-modification-icon nil
-        doom-modeline-project-detection 'project
-        doom-modeline-buffer-file-name-style 'relative-from-project
-        doom-modeline-unicode-fallback t))
+  (setq doom-modeline-buffer-modification-icon nil)
+  (setq doom-modeline-project-detection 'auto)
+  (setq doom-modeline-buffer-file-name-style 'relative-to-project)
+  (setq doom-modeline-unicode-fallback t)
+  (setq doom-modeline-enable-word-count nil
+        doom-modeline-vcs-max-length 20
+        doom-modeline-buffer-encoding nil))
 
 (use-package emacs
   :ensure nil
@@ -64,31 +68,37 @@
         dashboard-icon-type 'nerd-icons
         dashboard-set-heading-icons t
         dashboard-set-file-icons t)
+  (setq dashboard-startupify-list-delay 0.2)
+  (setq dashboard-week-agenda t
+        dashboard-agenda-tags-format 'ignore
+        dashboard-agenda-sort-strategy '(priority-down))
   :config
+  ;; project.el 的检索缓存，加速项目列表
+  (setq project--list-hidden-projects t)
+  (setq dashboard--banner-cache t)
+  (setq dashboard-items-default-length 8)
   (setq dashboard-projects-backend 'project-el
         dashboard-items '((projects . 8)
                           (recents . 8))
-        dashboard-banner-logo-title "士不可以不弘毅，任重而道远"
+        dashboard-banner-logo-title "不二"
         dashboard-footer-messages '("https://github.com/zhangjie2012/emacs.d")
         dashboard-startup-banner (concat user-emacs-directory "logos/cacodemon.svg")
         dashboard-image-banner-max-height 160
         dashboard-set-navigator t
         dashboard-set-footer nil
         dashboard-show-shortcuts nil)
-
-  (setq dashboard-agenda-tags-format 'ignore
-        dashboard-agenda-sort-strategy '(priority-down)
-        dashboard-week-agenda t)
-
   (setq dashboard-navigator-buttons
         `(((,(nerd-icons-octicon "nf-oct-home" :height 1.0 :v-adjust 0.0)
             "Homepage"
             "Go to homepage"
-            (lambda (&rest _) (browse-url "https://www.zhangjiee.com/")))
+            (lambda (&rest _)
+              (browse-url "https://www.zhangjiee.com/")))
            (,(nerd-icons-octicon "nf-oct-mark_github" :height 1.0 :v-adjust 0.0)
             "Github"
             "Go to github"
-            (lambda (&rest _) (browse-url "https://github.com/zhangjie2012"))))))
+            (lambda (&rest _)
+              (browse-url "https://github.com/zhangjie2012"))))))
+  (add-hook 'emacs-startup-hook #'dashboard-refresh-buffer)
   (dashboard-setup-startup-hook))
 
 (use-package ansi-color
