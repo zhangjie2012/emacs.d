@@ -11,11 +11,11 @@
            (load-theme 'doom-one-light t))))
   :config
   (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
+        doom-themes-enable-italic nil)
   (doom-themes-visual-bell-config)
   (doom-themes-org-config)
   (load-theme 'doom-one-light t)
-  (global-set-key (kbd "<f12>") 'toggle-theme))
+  (global-set-key (kbd "<f5>") 'toggle-theme))
 
 (use-package nerd-icons
   :ensure t
@@ -47,11 +47,16 @@
          ("C-=" . text-scale-increase)
          ("C-0" . text-scale-adjust))
   :config
-  (set-face-attribute 'default nil :family "Maple Mono NF CN" :height 160)
+  (set-face-attribute 'default nil
+                      :family "Maple Mono NF CN"
+                      :height 150)
+  (setq-default line-spacing 0.15)
+  (setq scroll-step 1
+        scroll-conservatively 10000)
   (custom-set-faces
-   '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
-   '(org-level-2 ((t (:inherit outline-1 :height 1.2))))
-   '(org-level-3 ((t (:inherit outline-1 :height 1.0))))
+   '(org-level-1 ((t (:inherit outline-1 :height 1.3))))
+   '(org-level-2 ((t (:inherit outline-1 :height 1.15))))
+   '(org-level-3 ((t (:inherit outline-1 :height 1.05))))
    '(org-level-4 ((t (:inherit outline-1 :height 1.0))))))
 
 (use-package rainbow-delimiters
@@ -104,5 +109,25 @@
 (use-package ansi-color
   :ensure t
   :hook (compilation-filter . ansi-color-compilation-filter))
+
+
+(use-package visual-fill-column
+  :ensure t
+  :commands (visual-fill-column-mode)
+  :init
+  (defvar my/visual-fill-width 120
+    "Width used for visual-fill-column centering.")
+  :config
+  (defun my/toggle-horizontal-center ()
+    "Toggle horizontal centering using visual-fill-column."
+    (interactive)
+    (if (and (boundp 'visual-fill-column-mode)
+             visual-fill-column-mode)
+        (visual-fill-column-mode -1)
+      (setq-local visual-fill-column-width my/visual-fill-width)
+      (setq-local visual-fill-column-center-text t)
+      (visual-fill-column-mode 1)))
+  :bind
+  ("<f12>" . my/toggle-horizontal-center))
 
 (provide 'init-ui)

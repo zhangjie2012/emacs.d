@@ -33,3 +33,4 @@ var
 eln-cache
 flycheck_*
 semanticdb
+.aider*

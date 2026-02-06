@@ -31,34 +31,16 @@
   :bind (:map company-active-map
               ("C-n" . company-select-next)
               ("C-p" . company-select-previous))
-  :init
-  ;; 提升性能：禁用自动排序（由 capf/LSP 决定）
-  (setq company-transformers nil)
-  (setq company-idle-delay 0.15
-        company-minimum-prefix-length 1
-        company-echo-delay 0
-        company-show-quick-access nil)
   :config
-  (setq company-backends
-        '((company-capf
-           :with company-dabbrev-code
-           company-files)))
-  (setq company-dabbrev-code-everywhere nil
-        company-dabbrev-code-other-buffers nil
-        company-dabbrev-other-buffers nil
-        company-dabbrev-ignore-case t
-        company-dabbrev-downcase nil)
-  (setq company-tooltip-limit 10
-        company-tooltip-maximum-width 60
-        company-tooltip-minimum-width 20
-        company-tooltip-margin 1
-        company-tooltip-align-annotations t
-        company-format-margin-function
-        'company-detect-icons-margin)
-  (setq company-require-match nil
-        company-auto-commit nil)
-  (setq company-global-modes
-        '(not org-mode markdown-mode eshell-mode shell-mode thrift-mode)))
+  (setq company-idle-delay 0
+        company-minimum-prefix-length 2
+        company-global-modes '(not org-mode markdown-mode eshell-mode thrift-mode)
+		company-format-margin-function nil
+		company-tooltip-maximum-width 72
+		company-tooltip-minimum-width 40
+		company-show-quick-access nil
+		company-tooltip-margin 1
+		company-tooltip-limit 8))
 
 (use-package lsp-mode
   :ensure t

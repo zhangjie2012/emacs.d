@@ -25,6 +25,7 @@
 			  (semantic-mode 1)
 			  (setq indent-tabs-mode t)
 			  ))
+  (add-hook 'thrift-mode-hook (lambda () (company-mode -1)))
   (setq thrift-indent-level 4)
   (add-to-list 'semantic-inhibit-functions (lambda () (not (member major-mode '(thrift-mode)))))
   (define-key thrift-mode-map (kbd "M-.") 'semantic-ia-fast-jump)

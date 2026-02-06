@@ -24,33 +24,24 @@
   (vertico-resize nil)
   (vertico-cycle nil))
 
-
 (use-package consult
   :ensure t
   :after vertico
   :bind (("C-x b" . consult-buffer)
          ("<f8> b" . consult-project-buffer)
          ("M-y" . consult-yank-pop))
-  :hook (completion-list-mode . consult-preview-at-point-mode)
-  :custom
-
-  (xref-show-xrefs-function #'consult-xref)
-  (xref-show-definitions-function #'consult-xref)
-
-  (consult-buffer-sources
-   '(consult--source-buffer))
-
-  (consult-ripgrep-args
-   "rg --null --line-buffered -M=1000 --path-separator / -S --no-heading -H -n -g \"!{README,readme}.{md,org}\" -g \"!go.sum\" -g \"!*.svg\"")
-
-  ;; M-. 打开预览
-  (consult-preview-key "M-.")
-  )
+  :hook
+  (completion-list-mode . consult-preview-at-point-mode)
+  :config
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
+  (setq consult-preview-key "M-.")
+  (setq consult-ripgrep-args
+        "rg --null --line-buffered -M=1000 --path-separator / -S --no-heading -H -n -g \"!{README,readme}.{md,org}\" -g \"!go.sum\" -g \"!*.svg\""))
 
 (use-package rg
   :ensure t
   :defer t)
-
 
 (use-package embark
   :ensure t
@@ -74,7 +65,6 @@
    '(aw-leading-char-face
      ((t (:foreground "red" :inherit ace-jump-face-foreground :height 1.4))))))
 
-
 (use-package dired-subtree
   :ensure t
   :bind ("<f8> d" . dired-jump)
@@ -88,6 +78,5 @@
              ("h" . dired-up-directory)
              ("j" . dired-next-line)
              ("k" . dired-previous-line)))
-
 
 (provide 'init-enhance)
