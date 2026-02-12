@@ -34,3 +34,4 @@ eln-cache
 flycheck_*
 semanticdb
 .aider*
+tree-sitter

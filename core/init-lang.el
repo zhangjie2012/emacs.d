@@ -42,6 +42,32 @@
 		company-tooltip-margin 1
 		company-tooltip-limit 8))
 
+(use-package treesit-fold
+  :ensure t
+  :after go-ts-mode
+  :bind (:map go-ts-mode-map
+              ("C-'" . treesit-fold-toggle)
+              ("C-:" . treesit-fold-open-all)
+              ("C-;" . treesit-fold-close-all))
+  :config
+  (setq treesit-fold-range-alist
+        (append treesit-fold-range-alist
+                `((go-ts-mode . ,(treesit-fold-parsers-go)))))
+  (global-treesit-fold-mode 1)
+  (setq treesit-fold-summary-show t)
+  (setq treesit-fold-line-count-show t))
+
+(use-package go-ts-mode
+  :ensure nil
+  :mode "\\.go\\'"
+  :hook
+  ((go-ts-mode . lsp-deferred)
+   (go-ts-mode . (lambda ()
+                   (add-hook 'before-save-hook #'lsp-format-buffer nil t)
+                   (add-hook 'before-save-hook #'lsp-organize-imports nil t))))
+  :config
+  (setq go-ts-mode-indent-offset 4))
+
 (use-package lsp-mode
   :ensure t
   :init
@@ -58,11 +84,10 @@
         lsp-headerline-breadcrumb-enable nil
         lsp-semantic-tokens-enable nil
         lsp-completion-no-cache t)
-  :hook ((go-mode . lsp-deferred)
+  :hook ((go-ts-mode . lsp-deferred)   ; 改为 go-ts-mode
          (python-mode . lsp-deferred)
          (lisp-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
-
   :bind (("<f8> s" . lsp-restart-workspace))
   :config
   (setq lsp-file-watch-ignored-directories
@@ -73,7 +98,7 @@
           "[/\\\\]\\.vscode\\'"
           "[/\\\\]target\\'"
           "[/\\\\]build\\'"))
-  ;; Python LSP (pylsp)
+  ;; Python LSP
   (setq lsp-pylsp-plugins-flake8-enabled t
         lsp-pylsp-plugins-flake8-config "~/.flake8"
         lsp-pylsp-plugins-mccabe-enabled nil
@@ -83,7 +108,6 @@
   :ensure t
   :commands lsp-ui-mode
   :config
-
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references]  #'lsp-ui-peek-find-references)
   (setq lsp-ui-sideline-enable nil)
@@ -95,21 +119,79 @@
         lsp-ui-doc-border (face-foreground 'font-lock-comment-face)
         lsp-ui-peek-fontify 'on-demand))
 
-(use-package go-mode
-  :ensure t
-  :config
-  (defun lsp-go-install-save-hooks ()
-	(add-hook 'before-save-hook #'lsp-format-buffer t t)
-	(add-hook 'before-save-hook #'lsp-organize-imports t t))
-  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
-
 (use-package go-tag
   :ensure t
   :init
-  (setq go-tag-args (list "-transform" "snakecase"))
-  (with-eval-after-load 'go-mode
-    (define-key go-mode-map (kbd "C-c t") #'go-tag-add)
-    (define-key go-mode-map (kbd "C-c T") #'go-tag-remove)))
+  (setq go-tag-args (list "-transform" "snakecase")))
+
+;; (use-package lsp-mode
+;;   :ensure t
+;;   :init
+;;   (setq lsp-keymap-prefix "C-c l")
+;;   (setq lsp-use-plists t
+;;         lsp-idle-delay 0.3
+;;         lsp-log-io nil
+;;         lsp-enable-symbol-highlighting nil
+;;         lsp-enable-file-watchers nil
+;;         lsp-enable-folding nil
+;;         lsp-enable-snippet nil
+;;         lsp-lens-enable nil
+;;         lsp-modeline-code-actions-enable nil
+;;         lsp-headerline-breadcrumb-enable nil
+;;         lsp-semantic-tokens-enable nil
+;;         lsp-completion-no-cache t)
+;;   :hook ((go-mode . lsp-deferred)
+;;          (python-mode . lsp-deferred)
+;;          (lisp-mode . lsp-deferred)
+;;          (lsp-mode . lsp-enable-which-key-integration))
+
+;;   :bind (("<f8> s" . lsp-restart-workspace))
+;;   :config
+;;   (setq lsp-file-watch-ignored-directories
+;;         '("[/\\\\]\\.git\\'"
+;;           "[/\\\\]node_modules\\'"
+;;           "[/\\\\]\\.hg\\'"
+;;           "[/\\\\]\\.idea\\'"
+;;           "[/\\\\]\\.vscode\\'"
+;;           "[/\\\\]target\\'"
+;;           "[/\\\\]build\\'"))
+;;   ;; Python LSP (pylsp)
+;;   (setq lsp-pylsp-plugins-flake8-enabled t
+;;         lsp-pylsp-plugins-flake8-config "~/.flake8"
+;;         lsp-pylsp-plugins-mccabe-enabled nil
+;;         lsp-pylsp-plugins-pydocstyle-enabled nil))
+
+;; (use-package lsp-ui
+;;   :ensure t
+;;   :commands lsp-ui-mode
+;;   :config
+
+;;   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+;;   (define-key lsp-ui-mode-map [remap xref-find-references]  #'lsp-ui-peek-find-references)
+;;   (setq lsp-ui-sideline-enable nil)
+;;   (setq lsp-ui-doc-enable t
+;;         lsp-ui-doc-use-webkit nil
+;;         lsp-ui-doc-position 'at-point
+;;         lsp-ui-doc-show-with-mouse t
+;;         lsp-ui-doc-show-with-cursor nil
+;;         lsp-ui-doc-border (face-foreground 'font-lock-comment-face)
+;;         lsp-ui-peek-fontify 'on-demand))
+
+;; (use-package go-mode
+;;   :ensure t
+;;   :config
+;;   (defun lsp-go-install-save-hooks ()
+;; 	(add-hook 'before-save-hook #'lsp-format-buffer t t)
+;; 	(add-hook 'before-save-hook #'lsp-organize-imports t t))
+;;   (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
+
+;; (use-package go-tag
+;;   :ensure t
+;;   :init
+;;   (setq go-tag-args (list "-transform" "snakecase"))
+;;   (with-eval-after-load 'go-mode
+;;     (define-key go-mode-map (kbd "C-c t") #'go-tag-add)
+;;     (define-key go-mode-map (kbd "C-c T") #'go-tag-remove)))
 
 (use-package python
   :ensure t
