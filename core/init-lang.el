@@ -1,3 +1,12 @@
+(use-package treesit
+  :config
+  (setq treesit-language-source-alist
+        '((go "https://github.com/tree-sitter/tree-sitter-go")
+          (gomod "https://github.com/camdencheek/tree-sitter-go-mod")))
+  ;; 如果没有安装，可以使用 M-x treesit-install-language-grammar 安装
+  (add-to-list 'major-mode-remap-alist '(go-mode . go-ts-mode))
+  (setq treesit-font-lock-level 4))
+
 (use-package flycheck
   :ensure t
   :hook ((go-mode . flycheck-mode)
