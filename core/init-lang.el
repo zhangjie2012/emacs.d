@@ -34,23 +34,6 @@
         flycheck-idle-buffer-switch-delay 1)
   (setq flycheck-check-syntax-automatically '(idle-change idle-buffer-switch)))
 
-(use-package company
-  :ensure t
-  :hook (prog-mode . company-mode)
-  :bind (:map company-active-map
-              ("C-n" . company-select-next)
-              ("C-p" . company-select-previous))
-  :config
-  (setq company-idle-delay 0
-        company-minimum-prefix-length 2
-        company-global-modes '(not org-mode markdown-mode eshell-mode thrift-mode)
-		company-format-margin-function nil
-		company-tooltip-maximum-width 72
-		company-tooltip-minimum-width 40
-		company-show-quick-access nil
-		company-tooltip-margin 1
-		company-tooltip-limit 8))
-
 (use-package treesit-fold
   :ensure t
   :after go-ts-mode
@@ -79,6 +62,8 @@
 
 (use-package lsp-mode
   :ensure t
+  :custom
+  (lsp-completion-provider :none) ;; disable company
   :init
   (setq lsp-keymap-prefix "C-c l")
   (setq lsp-use-plists t
@@ -92,7 +77,8 @@
         lsp-modeline-code-actions-enable nil
         lsp-headerline-breadcrumb-enable nil
         lsp-semantic-tokens-enable nil
-        lsp-completion-no-cache t)
+        lsp-completion-no-cache t
+        )
   :hook ((go-ts-mode . lsp-deferred)   ; 改为 go-ts-mode
          (python-mode . lsp-deferred)
          (lisp-mode . lsp-deferred)
