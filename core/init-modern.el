@@ -64,7 +64,6 @@
   :custom
   (linum-relative-backend 'display-line-numbers-mode))
 
-
 (use-package exec-path-from-shell
   :ensure t
   :when (eq system-type 'darwin)

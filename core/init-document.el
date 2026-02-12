@@ -16,6 +16,9 @@
   :ensure org-contrib
   :bind (("M-[" . org-previous-visible-heading)
          ("M-]" . org-next-visible-heading))
+  :hook
+  (org-mode . (lambda ()
+                (setq-local tab-width 8)))
   :init
   (setq org-ellipsis " ▾"
         org-adapt-indentation nil

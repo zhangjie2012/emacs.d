@@ -34,7 +34,7 @@
   :ensure nil
   :init
   (global-set-key (kbd "C-2") #'set-mark-command)
-  (global-set-key (kbd "C-x k") #'kill-this-buffer)
+  (global-set-key (kbd "C-x k") #'kill-current-buffer)
   (global-set-key (kbd "M-*") #'match-paren)
   (global-set-key (kbd "S-<backspace>") #'kill-whole-line))
 

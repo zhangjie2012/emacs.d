@@ -23,16 +23,11 @@ UI：kaolin-themes（kaolin-breeze/kaolin-temple 默认亮色主题，可通过 
 
 ** 安装
 
-使用 [[https://github.com/d12frosted/homebrew-emacs-plus][emacs-plus]] 版本的 Emacs：
-
 #+begin_src sh
-  brew reinstall gcc libgccjit
-  brew tap d12frosted/emacs-plus
-  brew install emacs-plus@29--with-cacodemon-icon
-  ln -s /usr/local/opt/emacs-plus/Emacs.app /Applications
+  brew install --cask emacs
 #+end_src
 
-卸载： =brew uninstall emacs-plus= 。
+卸载： =brew uninstall emacs= 。
 
 设置 package 源，三选一：
 
@@ -56,12 +51,11 @@ UI：kaolin-themes（kaolin-breeze/kaolin-temple 默认亮色主题，可通过 
 其他：
 
 1. rg： =brew install ripgrep=
-2. 字体：[fn:2]
+3. 字体：[fn:2]
    #+begin_src sh
-     brew tap laishulu/homebrew
-     brew install font-sarasa-nerd
+     brew install --cask font-maple-mono-nf-cn
    #+end_src
-3. icon：打开 [[https://www.nerdfonts.com][nerdfont]] 下载 Symbols Nerd Font 安装即可 [fn:1]
+4. icon：打开 [[https://www.nerdfonts.com][nerdfont]] 下载 Symbols Nerd Font 安装即可 [fn:1]
 
 ** 开发环境
 
@@ -113,6 +107,6 @@ flycheck 配置 ESLint 经常出现各种奇奇怪怪的问题，从来没有一
 
 [fn:3] eslint v9 和 v8 变化较大
 
-[fn:2] https://github.com/laishulu/Sarasa-Term-SC-Nerd
+[fn:2] https://github.com/subframe7536/maple-font
 
 [fn:1] doom-mode-line 4.0.0 之后不再支持 all-the-icons 由 nerd-icons 代替

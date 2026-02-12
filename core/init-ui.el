@@ -110,7 +110,6 @@
   :ensure t
   :hook (compilation-filter . ansi-color-compilation-filter))
 
-
 (use-package visual-fill-column
   :ensure t
   :commands (visual-fill-column-mode)
