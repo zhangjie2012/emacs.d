@@ -20,18 +20,14 @@
   ;; 如果没有安装，可以使用 M-x treesit-install-language-grammar 安装
   (setq treesit-font-lock-level 4))
 
-(use-package treesit-auto
-  :ensure t
-  :config
-  (global-treesit-auto-mode))
-
 (use-package flycheck
   :ensure t
   :hook ((go-ts-mode . flycheck-mode)
          (emacs-lisp-mode . flycheck-mode)
          (js-ts-mode . flycheck-mode)
          (tsx-ts-mode . flycheck-mode)
-         (typescript-ts-mode . flycheck-mode))
+         (typescript-ts-mode . flycheck-mode)
+         (python-ts-mode . flycheck-mode))
   :init
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc javascript-jshint python-pylint))
   ;; set flycheck tool
@@ -61,13 +57,19 @@
   :config
   (setq treesit-fold-range-alist
         (append treesit-fold-range-alist
-                `((go-ts-mode . ,(treesit-fold-parsers-go)))))
+                `((go-ts-mode . ,(treesit-fold-parsers-go))
+                  (python-ts-mode . ,(treesit-fold-parsers-python)))))
   (global-treesit-fold-mode 1)
   (setq treesit-fold-summary-show t)
   (setq treesit-fold-line-count-show t)
-  
+
   (with-eval-after-load 'go-ts-mode
     (bind-keys :map go-ts-mode-map
+               ("C-'" . treesit-fold-toggle)
+               ("C-:" . treesit-fold-open-all)
+               ("C-;" . treesit-fold-close-all)))
+  (with-eval-after-load 'python-ts-mode
+    (bind-keys :map python-ts-mode-map
                ("C-'" . treesit-fold-toggle)
                ("C-:" . treesit-fold-open-all)
                ("C-;" . treesit-fold-close-all))))
@@ -109,7 +111,7 @@
         lsp-completion-no-cache t
         )
   :hook ((go-ts-mode . lsp-deferred)
-         (python-mode . lsp-deferred)
+         (python-ts-mode . lsp-deferred)
          (js-ts-mode . lsp-deferred)
          (tsx-ts-mode . lsp-deferred)
          (typescript-ts-mode . lsp-deferred)
@@ -130,7 +132,7 @@
   (setq lsp-javascript-display-return-type-hints nil)
   (setq lsp-javascript-display-variable-type-hints nil)
   (setq lsp-javascript-display-enum-member-value-hints nil)
-  
+
   ;; 强制 JS/TS 缩进为 2 空格
   (setq lsp-javascript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil)
   (setq lsp-typescript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil)
@@ -165,13 +167,13 @@
   :init
   (setq go-tag-args (list "-transform" "snakecase")))
 
-(use-package python
+(use-package python-ts-mode
   :ensure nil
   :mode "\\.py\\'"
-  :init
+  :config
   (setq python-shell-interpreter "python3")
-  (set-variable 'py-indent-offset 4)
-  (set-variable 'python-indent-guess-indent-offset nil))
+  (setq python-indent-offset 4)
+  (setq python-indent-guess-indent-offset nil))
 
 (use-package html-ts-mode
   :ensure nil
@@ -217,7 +219,7 @@
   ;; 强制 Prettier 使用 2 空格缩进
   (setf (alist-get 'prettier apheleia-formatters)
         '("apheleia-npx" "prettier" "--stdin-filepath" filepath "--tab-width" "2"))
-  
+
   (setq apheleia-mode-alist
         (append '((go-ts-mode . goimports)
                   (js-ts-mode . prettier)
@@ -225,7 +227,7 @@
                   (typescript-ts-mode . prettier)
                   (json-ts-mode . prettier)
                   (css-ts-mode . prettier)
-                  (python-mode . black))
+                  (python-ts-mode . black))
                 apheleia-mode-alist)))
 
 (provide 'init-lang)
