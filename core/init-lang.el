@@ -54,10 +54,6 @@
 (use-package go-ts-mode
   :ensure nil
   :mode "\\.go\\'"
-  :hook
-  ((go-ts-mode . (lambda ()
-                   (add-hook 'before-save-hook #'lsp-format-buffer nil t)
-                   (add-hook 'before-save-hook #'lsp-organize-imports nil t))))
   :config
   (setq go-ts-mode-indent-offset 4))
 
@@ -74,23 +70,6 @@
         company-selection-wrap-around t
         company-transformers '(company-sort-by-occurrence)
         company-dabbrev-other-buffers nil))
-
-;; (use-package company
-;;   :ensure t
-;;   :hook (prog-mode . company-mode)
-;;   :bind (:map company-active-map
-;;               ("C-n" . company-select-next)
-;;               ("C-p" . company-select-previous))
-;;   :config
-;;   (setq company-idle-delay 0.1
-;;         company-minimum-prefix-length 1
-;;         company-global-modes '(not org-mode markdown-mode eshell-mode thrift-mode)
-;; 		company-format-margin-function nil
-;; 		company-tooltip-maximum-width 72
-;; 		company-tooltip-minimum-width 40
-;; 		company-show-quick-access nil
-;; 		company-tooltip-margin 1
-;; 		company-tooltip-limit 8))
 
 (use-package lsp-mode
   :ensure t
@@ -212,18 +191,19 @@
     ;; (define-key rjsx-mode-map ">" nil)
     (define-key rjsx-mode-map (kbd "M-.") nil)))
 
-(use-package format-all
+(use-package apheleia
   :ensure t
-  :bind ("<f8> q" . format-all-region-or-buffer)
+  :hook (after-init . apheleia-global-mode)
+  :bind ("<f8> q" . apheleia-format-buffer)
   :config
-  (setq-default format-all-formatters
-                '(("JavaScript"  (prettierd))
-                  ("JSON"        (prettier))
-                  ("JSX"         (prettierd))
-                  ("TypeScript"  (prettier))
-                  ("TSX"         (prettier))
-				  ("YAML"        (prettier))
-				  ("Markdown"    (prettier))
-                  ("Go"          (goimports)))))
+  (setq apheleia-mode-alist
+        (append '((go-ts-mode . goimports)
+                  (rjsx-mode . prettier)
+                  (web-mode . prettier)
+                  (json-mode . prettier)
+                  (css-mode . prettier)
+                  (yaml-mode . prettier)
+                  (python-mode . black))
+                apheleia-mode-alist)))
 
 (provide 'init-lang)
