@@ -1,19 +1,37 @@
 (use-package treesit
   :ensure nil
+  :mode (("\\.tsx\\'" . tsx-ts-mode)
+         ("\\.ts\\'"  . typescript-ts-mode)
+         ("\\.js\\'"  . js-ts-mode)
+         ("\\.jsx\\'" . js-ts-mode)
+         ("\\.json\\'" . json-ts-mode)
+         ("\\.css\\'"  . css-ts-mode)
+         ("\\.go\\'"   . go-ts-mode))
   :config
   (setq treesit-language-source-alist
         '((go "https://github.com/tree-sitter/tree-sitter-go")
-          (gomod "https://github.com/camdencheek/tree-sitter-go-mod")))
+          (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+          (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+          (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+          (json "https://github.com/tree-sitter/tree-sitter-json")
+          (css "https://github.com/tree-sitter/tree-sitter-css")
+          (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
+          (python "https://github.com/tree-sitter/tree-sitter-python")))
   ;; 如果没有安装，可以使用 M-x treesit-install-language-grammar 安装
-  (add-to-list 'major-mode-remap-alist '(go-mode . go-ts-mode))
-  (setq treesit-font-lock-level 3))
+  (setq treesit-font-lock-level 4))
+
+(use-package treesit-auto
+  :ensure t
+  :config
+  (global-treesit-auto-mode))
 
 (use-package flycheck
   :ensure t
   :hook ((go-ts-mode . flycheck-mode)
          (emacs-lisp-mode . flycheck-mode)
-         (rjsx-mode . flycheck-mode)
-         (web-mode . flycheck-mode))
+         (js-ts-mode . flycheck-mode)
+         (tsx-ts-mode . flycheck-mode)
+         (typescript-ts-mode . flycheck-mode))
   :init
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc javascript-jshint python-pylint))
   ;; set flycheck tool
@@ -28,7 +46,9 @@
   ;; Python
   ;; lsp 集成了 flake8, 因此 flycheck python-mode disable
   :config
-  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (flycheck-add-mode 'javascript-eslint 'js-ts-mode)
+  (flycheck-add-mode 'javascript-eslint 'tsx-ts-mode)
+  (flycheck-add-mode 'javascript-eslint 'typescript-ts-mode)
   ;; 避免卡顿，设定语法检测的时机，延迟 1s
   ;; 1. 停止修改后
   ;; 2. 切换 buffer 后
@@ -38,22 +58,22 @@
 
 (use-package treesit-fold
   :ensure t
-  :after go-ts-mode
-  :bind (:map go-ts-mode-map
-              ("C-'" . treesit-fold-toggle)
-              ("C-:" . treesit-fold-open-all)
-              ("C-;" . treesit-fold-close-all))
   :config
   (setq treesit-fold-range-alist
         (append treesit-fold-range-alist
                 `((go-ts-mode . ,(treesit-fold-parsers-go)))))
   (global-treesit-fold-mode 1)
   (setq treesit-fold-summary-show t)
-  (setq treesit-fold-line-count-show t))
+  (setq treesit-fold-line-count-show t)
+  
+  (with-eval-after-load 'go-ts-mode
+    (bind-keys :map go-ts-mode-map
+               ("C-'" . treesit-fold-toggle)
+               ("C-:" . treesit-fold-open-all)
+               ("C-;" . treesit-fold-close-all))))
 
 (use-package go-ts-mode
   :ensure nil
-  :mode "\\.go\\'"
   :config
   (setq go-ts-mode-indent-offset 4))
 
@@ -88,8 +108,11 @@
         lsp-semantic-tokens-enable nil
         lsp-completion-no-cache t
         )
-  :hook ((go-ts-mode . lsp-deferred)   ; 改为 go-ts-mode
+  :hook ((go-ts-mode . lsp-deferred)
          (python-mode . lsp-deferred)
+         (js-ts-mode . lsp-deferred)
+         (tsx-ts-mode . lsp-deferred)
+         (typescript-ts-mode . lsp-deferred)
          (lisp-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :bind (("<f8> s" . lsp-restart-workspace))
@@ -101,7 +124,20 @@
           "[/\\\\]\\.idea\\'"
           "[/\\\\]\\.vscode\\'"
           "[/\\\\]target\\'"
-          "[/\\\\]build\\'"))
+          "[/\\\\]build\\'"
+          "[/\\\\]dist\\'"))
+  ;; 优化 JavaScript/TypeScript 的性能
+  (setq lsp-javascript-display-return-type-hints nil)
+  (setq lsp-javascript-display-variable-type-hints nil)
+  (setq lsp-javascript-display-enum-member-value-hints nil)
+  
+  ;; 强制 JS/TS 缩进为 2 空格
+  (setq lsp-javascript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil)
+  (setq lsp-typescript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil)
+  (setq lsp-javascript-format-indent-size 2)
+  (setq lsp-typescript-format-indent-size 2)
+  (setq lsp-javascript-format-tab-size 2)
+  (setq lsp-typescript-format-tab-size 2)
   ;; Python LSP
   (setq lsp-pylsp-plugins-flake8-enabled t
         lsp-pylsp-plugins-flake8-config "~/.flake8"
@@ -137,72 +173,58 @@
   (set-variable 'py-indent-offset 4)
   (set-variable 'python-indent-guess-indent-offset nil))
 
-(use-package web-mode
-  :ensure t
-  :defer t
-  :init
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.wxml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.xml?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.json\\'" . web-mode))
-  (defun my-web-mode-hook ()
-    "Hooks for Web mode."
-    (setq-default indent-tabs-mode nil)
-    (setq web-mode-markup-indent-offset 2)  ; HTML
-    (setq web-mode-css-indent-offset 2)  ; CSS
-    (setq web-mode-code-indent-offset 2) ; script/code
-    (setq web-mode-script-padding 1)     ; html 内嵌 script 开头缩进
-    )
-  (add-hook 'web-mode-hook 'my-web-mode-hook)
-  :config
-  (setq web-mode-enable-current-element-highlight t)
-  ;; (setq web-mode-content-types-alist
-  ;;       '(("jsx" . "\\.js[x]?\\'")))
-  )
-
-;; for LESS
-(use-package css-mode
+(use-package html-ts-mode
   :ensure nil
-  :defer t
-  :init
-  (add-to-list 'auto-mode-alist '("\\.less\\'" . css-mode))
-  (add-to-list 'auto-mode-alist '("\\.wxss\\'" . css-mode))
+  :mode "\\.html?\\'")
+
+(use-package css-ts-mode
+  :ensure nil
+  :mode "\\.css\\'"
   :config
   (setq css-indent-offset 2))
 
-(use-package rjsx-mode
-  :ensure t
-  :defer t
-  :init
-  (add-to-list 'auto-mode-alist '(".*\\.js\\'" . rjsx-mode))
-  (add-to-list 'auto-mode-alist '(".*\\.jsx\\'" . rjsx-mode))
-  (add-to-list 'auto-mode-alist '(".*\\.ts\\'" . rjsx-mode))
-  (add-to-list 'auto-mode-alist '(".*\\.tsx\\'" . rjsx-mode))
-  (add-hook 'rjsx-mode-hook
-            (lambda ()
-              (setq indent-tabs-mode nil)
-              (setq js-indent-level 2)
-              (setq js2-strict-missing-semi-warning nil)))
-  (with-eval-after-load 'rjsx-mode
-    ;; (define-key rjsx-mode-map "<" nil)
-    ;; (define-key rjsx-mode-map (kbd "C-d") nil)
-    ;; (define-key rjsx-mode-map ">" nil)
-    (define-key rjsx-mode-map (kbd "M-.") nil)))
+(use-package json-ts-mode
+  :ensure nil
+  :mode "\\.json\\'"
+  :config
+  (setq json-ts-mode-indent-offset 2))
+
+(use-package typescript-ts-mode
+  :ensure nil
+  :mode (("\\.ts\\'" . typescript-ts-mode)
+         ("\\.tsx\\'" . tsx-ts-mode))
+  :hook (typescript-ts-base-mode . (lambda ()
+                                     (setq-local indent-tabs-mode nil)
+                                     (setq-local typescript-ts-mode-indent-offset 2)))
+  :config
+  (setq typescript-ts-mode-indent-offset 2))
+
+(use-package js-ts-mode
+  :ensure nil
+  :mode (("\\.js\\'" . js-ts-mode)
+         ("\\.jsx\\'" . js-ts-mode))
+  :hook (js-ts-mode . (lambda ()
+                        (setq-local indent-tabs-mode nil)
+                        (setq-local js-indent-level 2)))
+  :config
+  (setq js-indent-level 2))
 
 (use-package apheleia
   :ensure t
   :hook (after-init . apheleia-global-mode)
   :bind ("<f8> q" . apheleia-format-buffer)
   :config
+  ;; 强制 Prettier 使用 2 空格缩进
+  (setf (alist-get 'prettier apheleia-formatters)
+        '("apheleia-npx" "prettier" "--stdin-filepath" filepath "--tab-width" "2"))
+  
   (setq apheleia-mode-alist
         (append '((go-ts-mode . goimports)
-                  (rjsx-mode . prettier)
-                  (web-mode . prettier)
-                  (json-mode . prettier)
-                  (css-mode . prettier)
-                  (yaml-mode . prettier)
+                  (js-ts-mode . prettier)
+                  (tsx-ts-mode . prettier)
+                  (typescript-ts-mode . prettier)
+                  (json-ts-mode . prettier)
+                  (css-ts-mode . prettier)
                   (python-mode . black))
                 apheleia-mode-alist)))
 
