@@ -18,7 +18,7 @@
           (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
           (python "https://github.com/tree-sitter/tree-sitter-python")))
   ;; 如果没有安装，可以使用 M-x treesit-install-language-grammar 安装
-  (setq treesit-font-lock-level 4))
+  (setq treesit-font-lock-level 3))
 
 (use-package flycheck
   :ensure t
@@ -33,46 +33,20 @@
   ;; set flycheck tool
   (cond
    ((string-equal system-type "gnu/linux")
-    (setq flycheck-javascript-eslint-executable "/usr/bin/eslint")
-    )
+    (setq flycheck-javascript-eslint-executable "/usr/bin/eslint"))
    ((string-equal system-type "darwin")
-    (setq flycheck-javascript-eslint-executable "eslint")
-    ))
+    (setq flycheck-javascript-eslint-executable "eslint")))
   (setq flycheck-indication-mode 'left-fringe)
-  ;; Python
-  ;; lsp 集成了 flake8, 因此 flycheck python-mode disable
+  ;; Python: lsp 集成了 flake8, 因此 flycheck python-mode disable
   :config
-  (flycheck-add-mode 'javascript-eslint 'js-ts-mode)
-  (flycheck-add-mode 'javascript-eslint 'tsx-ts-mode)
-  (flycheck-add-mode 'javascript-eslint 'typescript-ts-mode)
+  ;; Enable eslint for TS/JS modes
+  (dolist (mode '(js-ts-mode tsx-ts-mode typescript-ts-mode))
+    (flycheck-add-mode 'javascript-eslint mode))
+
   ;; 避免卡顿，设定语法检测的时机，延迟 1s
-  ;; 1. 停止修改后
-  ;; 2. 切换 buffer 后
   (setq flycheck-idle-change-delay 1
         flycheck-idle-buffer-switch-delay 1)
   (setq flycheck-check-syntax-automatically '(idle-change idle-buffer-switch)))
-
-(use-package treesit-fold
-  :ensure t
-  :config
-  (setq treesit-fold-range-alist
-        (append treesit-fold-range-alist
-                `((go-ts-mode . ,(treesit-fold-parsers-go))
-                  (python-ts-mode . ,(treesit-fold-parsers-python)))))
-  (global-treesit-fold-mode 1)
-  (setq treesit-fold-summary-show t)
-  (setq treesit-fold-line-count-show t)
-
-  (with-eval-after-load 'go-ts-mode
-    (bind-keys :map go-ts-mode-map
-               ("C-'" . treesit-fold-toggle)
-               ("C-:" . treesit-fold-open-all)
-               ("C-;" . treesit-fold-close-all)))
-  (with-eval-after-load 'python-ts-mode
-    (bind-keys :map python-ts-mode-map
-               ("C-'" . treesit-fold-toggle)
-               ("C-:" . treesit-fold-open-all)
-               ("C-;" . treesit-fold-close-all))))
 
 (use-package go-ts-mode
   :ensure nil
@@ -128,19 +102,26 @@
           "[/\\\\]target\\'"
           "[/\\\\]build\\'"
           "[/\\\\]dist\\'"))
-  ;; 优化 JavaScript/TypeScript 的性能
-  (setq lsp-javascript-display-return-type-hints nil)
-  (setq lsp-javascript-display-variable-type-hints nil)
-  (setq lsp-javascript-display-enum-member-value-hints nil)
 
-  ;; 强制 JS/TS 缩进为 2 空格
-  (setq lsp-javascript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil)
-  (setq lsp-typescript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil)
-  (setq lsp-javascript-format-indent-size 2)
-  (setq lsp-typescript-format-indent-size 2)
-  (setq lsp-javascript-format-tab-size 2)
-  (setq lsp-typescript-format-tab-size 2)
-  ;; Python LSP
+  ;; ---------------------------------------------------------
+  ;; JavaScript / TypeScript Performance & Formatting
+  ;; ---------------------------------------------------------
+  ;; 关闭 JS/TS 特有的 Inlay Hints 以提升性能
+  (setq lsp-javascript-display-return-type-hints nil
+        lsp-javascript-display-variable-type-hints nil
+        lsp-javascript-display-enum-member-value-hints nil)
+
+  ;; 强制 JS/TS 缩进为 2 空格 (覆盖 Server 默认行为)
+  (setq lsp-javascript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil
+        lsp-typescript-format-insert-space-after-opening-and-before-closing-nonempty-braces nil
+        lsp-javascript-format-indent-size 2
+        lsp-typescript-format-indent-size 2
+        lsp-javascript-format-tab-size 2
+        lsp-typescript-format-tab-size 2)
+
+  ;; ---------------------------------------------------------
+  ;; Python LSP Configuration
+  ;; ---------------------------------------------------------
   (setq lsp-pylsp-plugins-flake8-enabled t
         lsp-pylsp-plugins-flake8-config "~/.flake8"
         lsp-pylsp-plugins-mccabe-enabled nil
