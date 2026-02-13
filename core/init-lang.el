@@ -1,4 +1,5 @@
 (use-package treesit
+  :ensure nil
   :config
   (setq treesit-language-source-alist
         '((go "https://github.com/tree-sitter/tree-sitter-go")
@@ -53,8 +54,7 @@
   :ensure nil
   :mode "\\.go\\'"
   :hook
-  ((go-ts-mode . lsp-deferred)
-   (go-ts-mode . (lambda ()
+  ((go-ts-mode . (lambda ()
                    (add-hook 'before-save-hook #'lsp-format-buffer nil t)
                    (add-hook 'before-save-hook #'lsp-organize-imports nil t))))
   :config
@@ -149,7 +149,7 @@
   (setq go-tag-args (list "-transform" "snakecase")))
 
 (use-package python
-  :ensure t
+  :ensure nil
   :mode "\\.py'"
   :init
   (setq python-shell-interpreter "python3")
@@ -183,7 +183,7 @@
 
 ;; for LESS
 (use-package css-mode
-  :ensure t
+  :ensure nil
   :defer t
   :init
   (add-to-list 'auto-mode-alist '("\\.less\\'" . css-mode))

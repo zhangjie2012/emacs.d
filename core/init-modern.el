@@ -1,6 +1,5 @@
 (use-package whitespace
-  :pin manual
-  :ensure t
+  :ensure nil
   :demand
   :hook (before-save . delete-trailing-whitespace))
 
@@ -54,7 +53,7 @@
   (which-key-setup-minibuffer))
 
 (use-package display-fill-column-indicator
-  :pin manual
+  :ensure nil
   :custom
   (display-fill-column-indicator-column 120)
   (display-fill-column-indicator-character ?\u2502))

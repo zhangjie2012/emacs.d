@@ -13,7 +13,7 @@
 (use-package org
   :pin nongnu
   :mode (("\\.org\\'" . org-mode))
-  :ensure org-contrib
+  :ensure t
   :bind (("M-[" . org-previous-visible-heading)
          ("M-]" . org-next-visible-heading))
   :hook
@@ -122,8 +122,12 @@
   :ensure t
   :hook (org-mode . org-appear-mode))
 
+(use-package org-contrib
+  :ensure t)
+
 ;; blog
 (use-package ox-publish
+  :ensure nil
   :defer t
   :init
   (setq org-html-validation-link nil)

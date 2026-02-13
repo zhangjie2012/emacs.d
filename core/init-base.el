@@ -1,5 +1,3 @@
-(fset 'yes-or-no-p 'y-or-n-p)
-
 (setq
  confirm-kill-emacs 'y-or-n-p
  auto-save-default nil
