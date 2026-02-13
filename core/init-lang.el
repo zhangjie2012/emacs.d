@@ -5,7 +5,7 @@
           (gomod "https://github.com/camdencheek/tree-sitter-go-mod")))
   ;; 如果没有安装，可以使用 M-x treesit-install-language-grammar 安装
   (add-to-list 'major-mode-remap-alist '(go-mode . go-ts-mode))
-  (setq treesit-font-lock-level 4))
+  (setq treesit-font-lock-level 3))
 
 (use-package flycheck
   :ensure t
@@ -60,10 +60,39 @@
   :config
   (setq go-ts-mode-indent-offset 4))
 
+(use-package company
+  :ensure t
+  :hook (prog-mode . company-mode)
+  :bind (:map company-active-map
+              ("C-n" . company-select-next)
+              ("C-p" . company-select-previous))
+  :config
+  (setq company-idle-delay 0.1
+        company-minimum-prefix-length 1
+        company-tooltip-align-annotations t
+        company-selection-wrap-around t
+        company-transformers '(company-sort-by-occurrence)
+        company-dabbrev-other-buffers nil))
+
+;; (use-package company
+;;   :ensure t
+;;   :hook (prog-mode . company-mode)
+;;   :bind (:map company-active-map
+;;               ("C-n" . company-select-next)
+;;               ("C-p" . company-select-previous))
+;;   :config
+;;   (setq company-idle-delay 0.1
+;;         company-minimum-prefix-length 1
+;;         company-global-modes '(not org-mode markdown-mode eshell-mode thrift-mode)
+;; 		company-format-margin-function nil
+;; 		company-tooltip-maximum-width 72
+;; 		company-tooltip-minimum-width 40
+;; 		company-show-quick-access nil
+;; 		company-tooltip-margin 1
+;; 		company-tooltip-limit 8))
+
 (use-package lsp-mode
   :ensure t
-  :custom
-  (lsp-completion-provider :none) ;; disable company
   :init
   (setq lsp-keymap-prefix "C-c l")
   (setq lsp-use-plists t
