@@ -58,11 +58,6 @@
   (display-fill-column-indicator-column 120)
   (display-fill-column-indicator-character ?\u2502))
 
-(use-package linum-relative
-  :ensure t
-  :custom
-  (linum-relative-backend 'display-line-numbers-mode))
-
 (use-package exec-path-from-shell
   :ensure t
   :when (eq system-type 'darwin)

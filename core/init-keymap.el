@@ -30,6 +30,22 @@
    ((looking-at "\\s)") (forward-char) (backward-list 1))
    (t (self-insert-command (or arg 1)))))
 
+(defun my/toggle-absolute-line-numbers ()
+  (interactive)
+  (if (and (bound-and-true-p display-line-numbers-mode)
+           (eq display-line-numbers-type t))
+      (display-line-numbers-mode -1)
+    (setq-local display-line-numbers-type t)
+    (display-line-numbers-mode 1)))
+
+(defun my/toggle-relative-line-numbers ()
+  (interactive)
+  (if (and (bound-and-true-p display-line-numbers-mode)
+           (eq display-line-numbers-type 'relative))
+      (display-line-numbers-mode -1)
+    (setq-local display-line-numbers-type 'relative)
+    (display-line-numbers-mode 1)))
+
 (use-package emacs
   :ensure nil
   :init
@@ -57,8 +73,8 @@
     ("f" find-file "find file" :exit t :column "2. buffer")
     ("b" switch-to-buffer "switch buffer" :exit t)
     ("'" show-file-name "file name" :exit t)
-    ("n" display-line-numbers-mode "toggle abs numbers")
-    ("N" linum-relative-toggle "toggle rel numbers")
+    ("n" my/toggle-absolute-line-numbers "toggle abs numbers")
+    ("N" my/toggle-relative-line-numbers "toggle rel numbers")
     ("u" revert-buffer "revert buffer" :exit t)
     ("j" consult-goto-line "goto line" :exit t)
 
