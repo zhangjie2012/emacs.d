@@ -5,6 +5,8 @@
         ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")
         ("nongnu" . "https://mirrors.ustc.edu.cn/elpa/nongnu/")))
 
+(package-initialize)
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))

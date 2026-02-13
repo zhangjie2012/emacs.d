@@ -12,7 +12,7 @@
 - Mini buffer 和基础功能增强：consult + vertico + marginalia + embark + rg + ace-window + which-key
 - 编辑提效：avy + project + expand-region + multiple-cursors + symbol-overlay
 - Git：magit
-- Coding：lsp-mode + Corfu + flycheck + format-all
+- Coding：lsp-mode + company + flycheck + format-all
 - Key binding：hydra
 
 ** 安装

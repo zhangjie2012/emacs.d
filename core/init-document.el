@@ -11,9 +11,8 @@
 
 ;; https://emacs.stackexchange.com/questions/17710/use-package-with-config-to-set-variables
 (use-package org
-  :pin nongnu
   :mode (("\\.org\\'" . org-mode))
-  :ensure t
+  :ensure nil
   :bind (("M-[" . org-previous-visible-heading)
          ("M-]" . org-next-visible-heading))
   :hook

@@ -32,7 +32,7 @@
 
 (use-package yaml-mode
   :ensure t
-  :mode "\\.yml'"
+  :mode "\\.ya?ml\\'"
   :init
   (add-hook 'yaml-mode-hook
 			(lambda ()

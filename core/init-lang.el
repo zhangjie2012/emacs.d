@@ -10,9 +10,10 @@
 
 (use-package flycheck
   :ensure t
-  :hook ((go-mode . flycheck-mode)
+  :hook ((go-ts-mode . flycheck-mode)
          (emacs-lisp-mode . flycheck-mode)
-		 (rjsx-mode . flycheck-mode))
+         (rjsx-mode . flycheck-mode)
+         (web-mode . flycheck-mode))
   :init
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc javascript-jshint python-pylint))
   ;; set flycheck tool
@@ -131,6 +132,7 @@
 (use-package lsp-ui
   :ensure t
   :commands lsp-ui-mode
+  :hook (lsp-mode . lsp-ui-mode)
   :config
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references]  #'lsp-ui-peek-find-references)
@@ -150,7 +152,7 @@
 
 (use-package python
   :ensure nil
-  :mode "\\.py'"
+  :mode "\\.py\\'"
   :init
   (setq python-shell-interpreter "python3")
   (set-variable 'py-indent-offset 4)
