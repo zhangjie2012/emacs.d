@@ -54,6 +54,12 @@
   :after embark consult
   :hook (embark-collect-mode . consult-preview-at-point-mode))
 
+(use-package consult-lsp
+  :ensure t
+  :after (consult lsp)
+  :bind (:map lsp-mode-map
+              ([remap xref-find-apropos] . consult-lsp-symbols)))
+
 (use-package ace-window
   :ensure t
   :bind (("M-o" . ace-window))
