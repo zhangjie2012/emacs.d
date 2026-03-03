@@ -44,8 +44,8 @@
     (flycheck-add-mode 'javascript-eslint mode))
 
   ;; 避免卡顿，设定语法检测的时机，延迟 1s
-  (setq flycheck-idle-change-delay 1
-        flycheck-idle-buffer-switch-delay 1)
+  (setq flycheck-idle-change-delay 2
+        flycheck-idle-buffer-switch-delay 2)
   (setq flycheck-check-syntax-automatically '(idle-change idle-buffer-switch)))
 
 (use-package go-ts-mode
@@ -55,24 +55,27 @@
 
 (use-package company
   :ensure t
-  :hook (prog-mode . company-mode)
+  :hook ((prog-mode . company-mode)
+         (text-mode . (lambda () (company-mode -1)))
+         (thrift-mode . (lambda () (company-mode -1))))
   :bind (:map company-active-map
               ("C-n" . company-select-next)
               ("C-p" . company-select-previous))
   :config
-  (setq company-idle-delay 0.1
+  (setq company-idle-delay 0.2
         company-minimum-prefix-length 1
         company-tooltip-align-annotations t
         company-selection-wrap-around t
-        company-transformers '(company-sort-by-occurrence)
-        company-dabbrev-other-buffers nil))
+        company-transformers '(company-sort-by-backend-importance)
+        company-dabbrev-other-buffers nil
+        company-in-string-or-comment nil))
 
 (use-package lsp-mode
   :ensure t
   :init
   (setq lsp-keymap-prefix "C-c l")
   (setq lsp-use-plists t
-        lsp-idle-delay 0.3
+        lsp-idle-delay 0.5
         lsp-log-io nil
         lsp-enable-symbol-highlighting nil
         lsp-enable-file-watchers nil
